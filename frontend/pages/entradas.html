@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGA LIN - Entradas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/entradas.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">SGA LIN</div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-item">🏠 Inicio</a>
+            <a href="consultas.html" class="nav-item">📊 Ver Tablas</a>
+            <a href="entradas.html" class="nav-item active">📥 Entradas</a>
+            <a href="salidas.html" class="nav-item">📤 Salidas</a>
+            <a href="movimientos.html" class="nav-item">🔄 Movimientos</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-card">
+            <h1>📥 Recepción de Mercancía</h1>
+            <p style="text-align:center; color:#666;">Añada stock al inventario global</p>
+
+            <div class="form-group">
+                <label>Código del Artículo (ARTCOD)</label>
+                <input type="text" id="cod" placeholder="Escriba o escanee el código">
+            </div>
+
+            <div class="form-group">
+                <label>Ubicación de Destino</label>
+                <input type="text" id="ubi" placeholder="Ej: PASILLO-01">
+            </div>
+
+            <div class="form-group">
+                <label>Número de Lote</label>
+                <input type="text" id="lot" value="GENERAL">
+            </div>
+
+            <div class="form-group">
+                <label>Cantidad a sumar</label>
+                <input type="number" id="cant" value="1" min="1">
+            </div>
+
+            <button class="btn-submit" onclick="confirmarEntrada()">CONFIRMAR ENTRADA</button>
+
+            <div id="mensaje"
+                style="margin-top: 20px; padding: 10px; border-radius: 8px; text-align: center; display: none;"></div>
+        </div>
+    </main>
+
+    <script src="../js/entradas.js"></script>
+</body>
+
+</html>

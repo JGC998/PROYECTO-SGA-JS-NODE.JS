@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGA LIN - Salidas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/salidas.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">SGA LIN</div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-item">🏠 Inicio</a>
+            <a href="consultas.html" class="nav-item">📊 Ver Tablas</a>
+            <a href="entradas.html" class="nav-item">📥 Entradas</a>
+            <a href="salidas.html" class="nav-item active">📤 Salidas</a>
+            <a href="movimientos.html" class="nav-item">🔄 Movimientos</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="exit-card">
+            <h1>📤 Salida de Mercancía (Picking)</h1>
+            <p style="text-align:center; color:#666;">Registre la retirada de stock del estante</p>
+
+            <div class="form-group">
+                <label>Código del Artículo</label>
+                <input type="text" id="cod" placeholder="Escanee producto">
+            </div>
+
+            <div class="form-group">
+                <label>Ubicación de Origen</label>
+                <input type="text" id="ubi" placeholder="¿De dónde lo retira?">
+            </div>
+
+            <div class="form-group">
+                <label>Lote</label>
+                <input type="text" id="lot" value="GENERAL">
+            </div>
+
+            <div class="form-group">
+                <label>Cantidad a Sacar</label>
+                <input type="number" id="cant" value="1" min="0.1" step="any">
+            </div>
+
+            <button class="btn-exit" id="btnSalida">CONFIRMAR SALIDA</button>
+            <div id="status" class="status-msg"></div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/salidas.js"></script>
+</body>
+
+</html>

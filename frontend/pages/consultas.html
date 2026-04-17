@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGA LIN - Consultas</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/consultas.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">SGA LIN</div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-item">🏠 Inicio</a>
+            <a href="consultas.html" class="nav-item active">📊 Ver Tablas</a>
+            <a href="entradas.html" class="nav-item">📥 Entradas</a>
+            <a href="salidas.html" class="nav-item">📤 Salidas</a>
+            <a href="movimientos.html" class="nav-item">🔄 Movimientos</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Explorador de Tablas</h1>
+
+        <div class="search-container">
+            <select id="tabla-select">
+                <option value="ARTICULO">ARTICULO (Catálogo)</option>
+                <option value="STOCK">STOCK (Existencias)</option>
+                <option value="UBICACION">UBICACION (Mapa)</option>
+            </select>
+            <input type="text" id="buscador" placeholder="🔍 Buscar en tiempo real...">
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabla-datos">
+                <thead id="thead"></thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/consultas.js"></script>
+</body>
+
+</html>

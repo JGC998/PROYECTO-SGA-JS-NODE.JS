@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SGA LIN - Control de Almacén</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">SGA LIN</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item active">🏠 Inicio</a>
+            <a href="pages/consultas.html" class="nav-item">📊 Ver Tablas</a>
+            <a href="pages/entradas.html" class="nav-item">📥 Entradas</a>
+            <a href="pages/salidas.html" class="nav-item">📤 Salidas</a>
+            <a href="pages/movimientos.html" class="nav-item">🔄 Movimientos</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Estado General</h1>
+        <p>Resumen de la base de datos en tiempo real.</p>
+
+        <div class="grid-stats">
+            <div class="card">
+                <h3>Artículos Registrados</h3>
+                <span class="value" id="total-art">--</span>
+            </div>
+            <div class="card" style="border-top-color: var(--success);">
+                <h3>Stock Global</h3>
+                <span class="value" id="total-stock">--</span>
+            </div>
+            <div class="card" style="border-top-color: var(--danger);">
+                <h3>Alertas Stock Bajo</h3>
+                <span class="value">0</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>
