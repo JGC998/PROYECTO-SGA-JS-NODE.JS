@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Traspaso de Stock</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/ferreteria/traspasos.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="toolbar">
+            <div class="toolbar-title">
+                <h1>🔄 Traspaso entre Ubicaciones</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool" title="Confirmar Traspaso">💾 Confirmar</button>
+                <button class="btn-tool btn-danger" title="Cancelar">🧹 Cancelar</button>
+                <button class="btn-tool btn-help" title="Ayuda">❓</button>
+            </div>
+        </header>
+
+        <form class="transfer-form">
+            <fieldset class="form-section">
+                <legend>Datos del Movimiento</legend>
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Fecha Traspaso</label>
+                        <input type="date" value="2026-04-23">
+                    </div>
+                    <div class="field">
+                        <label>Cód. Operario</label>
+                        <input type="text" placeholder="Escanear tarjeta...">
+                    </div>
+                    <div class="field span-2">
+                        <label>Nombre del Operario</label>
+                        <input type="text" readonly class="readonly-input" placeholder="Nombre del responsable">
+                    </div>
+                    <div class="field span-4">
+                        <label>Motivo del Traspaso</label>
+                        <input type="text" placeholder="Ej: Reubicación de stock por reorganización de almacén">
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="transfer-layout">
+                <fieldset class="form-section highlight-origin">
+                    <legend>Origen</legend>
+                    <div class="form-stack">
+                        <div class="field">
+                            <label>Ubicación Origen</label>
+                            <input type="text" placeholder="Ej: A-12-B">
+                        </div>
+                        <div class="field">
+                            <label>Almacén</label>
+                            <input type="text" readonly class="readonly-input" placeholder="Auto">
+                        </div>
+                        <div class="field">
+                            <label>Cód. Artículo</label>
+                            <input type="text" placeholder="F1-001...">
+                        </div>
+                        <div class="field">
+                            <label>Descripción</label>
+                            <input type="text" readonly class="readonly-input" placeholder="Descripción del artículo">
+                        </div>
+                        <div class="field">
+                            <label>Stock Disponible</label>
+                            <input type="text" readonly class="readonly-input" placeholder="0">
+                        </div>
+                        <div class="field">
+                            <label>Cantidad a Traspasar</label>
+                            <input type="number" placeholder="0" min="1">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="transfer-arrow">→</div>
+
+                <fieldset class="form-section highlight-dest">
+                    <legend>Destino</legend>
+                    <div class="form-stack">
+                        <div class="field">
+                            <label>Ubicación Destino</label>
+                            <input type="text" placeholder="Ej: B-05-A">
+                        </div>
+                        <div class="field">
+                            <label>Almacén</label>
+                            <input type="text" readonly class="readonly-input" placeholder="Auto">
+                        </div>
+                        <div class="field">
+                            <label>Lote Destino</label>
+                            <input type="text" placeholder="Opcional...">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-actions-inner">
+                <button type="button" class="btn-add">+ Añadir línea al traspaso</button>
+            </div>
+
+            <div class="preview-table-wrapper">
+                <h3>Líneas de Traspaso</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Artículo</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Ubic. Origen</th>
+                            <th>Ubic. Destino</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="placeholder-row">
+                            <td colspan="6">No hay líneas añadidas al traspaso.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </main>
+
+    <script src="../../js/navegacion.js"></script>
+</body>
+
+</html>

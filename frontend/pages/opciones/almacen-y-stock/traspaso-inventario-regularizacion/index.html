@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Traspaso de Inventario / Regularización</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/traspaso-inventario-regularizacion/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>Traspaso de Inventario / Regularización</h1>
+            </div>
+        </header>
+
+        <div class="action-panel">
+            <!-- Bloque principal -->
+            <div class="action-block">
+                <button class="btn-primary-action" id="btn-traspasar">Traspasar inventarios</button>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="f-rellenar-ceros" checked>
+                        Rellenar códigos de artículo con ceros por la izquierda
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="f-lote-000000" checked>
+                        Asignar lote 000000 a filas sin lote
+                    </label>
+                </div>
+            </div>
+
+            <!-- Importar stock externo -->
+            <div class="action-block">
+                <div class="action-row">
+                    <button class="btn-secondary-action" id="btn-importar-mysalon">Importar stock Mysalon</button>
+                    <button class="btn-secondary-action" id="btn-importar-azalea">Importar stock Azalea</button>
+                </div>
+            </div>
+
+            <!-- Fecha regularización -->
+            <div class="action-block">
+                <div class="action-row">
+                    <label>Fecha regularización:</label>
+                    <input type="date" class="input-date" id="f-fecha-regularizacion">
+                    <button class="btn-secondary-action" id="btn-importar-regularizaciones">Importar regularizaciones</button>
+                </div>
+            </div>
+
+            <!-- Fecha stock inicial -->
+            <div class="action-block">
+                <div class="action-row">
+                    <label>Fecha stock inicial <span class="hint">(recomendable fin de mes):</span></label>
+                    <input type="time" class="input-time" id="f-hora-stock" value="00:00">
+                    <button class="btn-secondary-action" id="btn-asignar-fecha">Asignar fecha stock inicial</button>
+                </div>
+            </div>
+
+            <!-- Info estructura Excel -->
+            <div class="info-block">
+                <div class="info-title">ESTRUCTURA DEL EXCEL PARA IMPORTAR INVENTARIOS</div>
+                <div class="info-separator"></div>
+                <div class="info-body">
+                    <div class="info-row"><span class="col-letter">A</span> <span class="col-arrow">--&gt;</span> artículo busca por CDDIRE y por código interno</div>
+                    <div class="info-row"><span class="col-letter">B</span> <span class="col-arrow">--&gt;</span> cantidad</div>
+                    <div class="info-row"><span class="col-letter">C</span> <span class="col-arrow">--&gt;</span> ubicación del tipo 00100100111</div>
+                    <div class="info-row"><span class="col-letter">D</span> <span class="col-arrow">--&gt;</span> lote</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('f-fecha-regularizacion').value = today;
+
+        document.getElementById('btn-traspasar').addEventListener('click', async () => {
+            const btn = document.getElementById('btn-traspasar');
+            btn.textContent = 'Traspasando...';
+            btn.disabled = true;
+            try {
+                await fetch('http://localhost:3000/traspasar-inventarios', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        rellenar_ceros: document.getElementById('f-rellenar-ceros').checked,
+                        lote_000000: document.getElementById('f-lote-000000').checked
+                    })
+                });
+                alert('Traspaso de inventarios completado.');
+            } catch {
+                alert('Error al traspasar inventarios.');
+            } finally {
+                btn.textContent = 'Traspasar inventarios';
+                btn.disabled = false;
+            }
+        });
+
+        document.getElementById('btn-importar-regularizaciones').addEventListener('click', async () => {
+            const fecha = document.getElementById('f-fecha-regularizacion').value;
+            if (!fecha) { alert('Seleccione una fecha de regularización.'); return; }
+            try {
+                await fetch('http://localhost:3000/importar-regularizaciones', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fecha })
+                });
+                alert('Regularizaciones importadas correctamente.');
+            } catch {
+                alert('Error al importar regularizaciones.');
+            }
+        });
+
+        document.getElementById('btn-asignar-fecha').addEventListener('click', async () => {
+            const hora = document.getElementById('f-hora-stock').value;
+            try {
+                await fetch('http://localhost:3000/asignar-fecha-stock-inicial', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hora })
+                });
+                alert('Fecha de stock inicial asignada correctamente.');
+            } catch {
+                alert('Error al asignar fecha de stock inicial.');
+            }
+        });
+    </script>
+</body>
+
+</html>
+

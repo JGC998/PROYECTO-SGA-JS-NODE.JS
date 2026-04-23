@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Observaciones por Artículo y Lote</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/observaciones-por-articulo-lote/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>Observaciones por Artículo y Lote</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
+                <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
+            </div>
+        </header>
+
+        <div class="filter-panel">
+            <div class="filter-row">
+                <label>Artículo:</label>
+                <input type="text" class="input-sm" id="f-articulo">
+                <button class="btn-browse">...</button>
+                <input type="text" class="input-desc" readonly id="f-articulo-nombre">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabla-obs">
+                <thead>
+                    <tr>
+                        <th class="col-num">#</th>
+                        <th>Artículo</th>
+                        <th>Nombre de artículo</th>
+                        <th>Lote</th>
+                        <th>Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-obs">
+                    <tr class="edit-row" data-id="new-1">
+                        <td class="col-num">1</td>
+                        <td><input type="text" class="cell-input" placeholder="Artículo"></td>
+                        <td><input type="text" class="cell-input cell-wide" placeholder="Nombre" readonly></td>
+                        <td><input type="text" class="cell-input" placeholder="Lote"></td>
+                        <td><input type="text" class="cell-input cell-obs" placeholder="Observaciones"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+    <script>
+        document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarDatos(); } });
+        document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
+        document.getElementById('btn-nuevo').addEventListener('click', agregarFila);
+        document.getElementById('btn-guardar').addEventListener('click', guardarCambios);
+
+        let rowCount = 1;
+
+        async function cargarDatos() {
+            const articulo = document.getElementById('f-articulo').value.trim();
+            if (!articulo) return;
+            try {
+                const res = await fetch(`http://localhost:3000/observaciones-articulo-lote?articulo=${encodeURIComponent(articulo)}`);
+                const data = await res.json();
+                renderTabla(data);
+            } catch {
+                console.error('Error al cargar observaciones');
+            }
+        }
+
+        function renderTabla(rows) {
+            const tbody = document.getElementById('tbody-obs');
+            rowCount = rows.length;
+            if (!rows.length) {
+                agregarFila();
+                return;
+            }
+            tbody.innerHTML = rows.map((r, i) => `
+                <tr class="edit-row" data-id="${r.id ?? ''}">
+                    <td class="col-num">${i + 1}</td>
+                    <td><input type="text" class="cell-input" value="${r.articulo ?? ''}" placeholder="Artículo"></td>
+                    <td><input type="text" class="cell-input cell-wide" value="${r.nombre ?? ''}" readonly placeholder="Nombre"></td>
+                    <td><input type="text" class="cell-input" value="${r.lote ?? ''}" placeholder="Lote"></td>
+                    <td><input type="text" class="cell-input cell-obs" value="${r.observaciones ?? ''}" placeholder="Observaciones"></td>
+                </tr>`).join('');
+        }
+
+        function agregarFila() {
+            rowCount++;
+            const tbody = document.getElementById('tbody-obs');
+            const tr = document.createElement('tr');
+            tr.className = 'edit-row';
+            tr.dataset.id = `new-${rowCount}`;
+            tr.innerHTML = `
+                <td class="col-num">${rowCount}</td>
+                <td><input type="text" class="cell-input" placeholder="Artículo"></td>
+                <td><input type="text" class="cell-input cell-wide" placeholder="Nombre" readonly></td>
+                <td><input type="text" class="cell-input" placeholder="Lote"></td>
+                <td><input type="text" class="cell-input cell-obs" placeholder="Observaciones"></td>`;
+            tbody.appendChild(tr);
+            tr.querySelector('input').focus();
+        }
+
+        async function guardarCambios() {
+            const filas = [...document.querySelectorAll('#tbody-obs .edit-row')].map(tr => {
+                const inputs = tr.querySelectorAll('input');
+                return { articulo: inputs[0].value, lote: inputs[2].value, observaciones: inputs[3].value };
+            }).filter(f => f.articulo);
+
+            try {
+                await fetch('http://localhost:3000/observaciones-articulo-lote', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(filas)
+                });
+            } catch {
+                console.error('Error al guardar');
+            }
+        }
+    </script>
+</body>
+
+</html>
+

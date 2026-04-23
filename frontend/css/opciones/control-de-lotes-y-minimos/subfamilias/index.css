@@ -1,0 +1,27 @@
+.container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+
+.page-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: white; padding: 15px 25px; border-radius: 10px;
+    margin-bottom: 15px; border-left: 5px solid #1e3a8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.page-toolbar h1 { margin: 0; font-size: 1.3rem; color: #1e3a8a; }
+.toolbar-actions { display: flex; gap: 8px; }
+.btn-tool { padding: 8px 16px; border: none; border-radius: 5px; background: #1e3a8a; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+.btn-tool:hover { background: #3b82f6; }
+.btn-tool.secondary { background: #e5e7eb; color: #374151; }
+
+.table-wrapper { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th { background: #f0f5ff; padding: 10px 14px; text-align: left; color: #1e3a8a; border-bottom: 2px solid #dbeafe; font-size: 0.78rem; text-transform: uppercase; white-space: nowrap; }
+td { padding: 6px 8px; border-bottom: 1px solid #f1f5f9; }
+tr:hover td { background: #f8faff; }
+.col-num { width: 40px; text-align: center; color: #6b7280; font-size: 0.8rem; }
+.col-check { width: 130px; text-align: center; }
+
+.cell-input { width: 100%; padding: 5px 7px; border: 1px solid transparent; border-radius: 3px; font-size: 0.85rem; background: transparent; }
+.cell-input:focus { border-color: #3b82f6; background: white; outline: none; }
+.cell-code { max-width: 120px; }
+.cell-wide { min-width: 280px; }
+.cell-check { width: 16px; height: 16px; cursor: pointer; }

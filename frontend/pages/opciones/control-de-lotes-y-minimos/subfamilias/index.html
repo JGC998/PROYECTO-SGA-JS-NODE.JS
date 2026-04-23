@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Subfamilias</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/subfamilias/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>Subfamilias</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
+                <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
+            </div>
+        </header>
+
+        <div class="table-wrapper">
+            <table id="tabla-subfamilias">
+                <thead>
+                    <tr>
+                        <th class="col-num">#</th>
+                        <th>Subfamilia</th>
+                        <th>Nombre de subfamilia</th>
+                        <th class="col-check">Sin control de lote</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-subfamilias">
+                    <tr class="edit-row" data-id="new-1">
+                        <td class="col-num">1</td>
+                        <td><input type="text" class="cell-input cell-code" placeholder="Código"></td>
+                        <td><input type="text" class="cell-input cell-wide" placeholder="Nombre de subfamilia"></td>
+                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+    <script>
+        document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarDatos(); } });
+        document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
+        document.getElementById('btn-nuevo').addEventListener('click', agregarFila);
+        document.getElementById('btn-guardar').addEventListener('click', guardarCambios);
+
+        let rowCount = 1;
+
+        async function cargarDatos() {
+            try {
+                const res = await fetch('http://localhost:3000/subfamilias');
+                const data = await res.json();
+                renderTabla(data);
+            } catch {
+                console.error('Error al cargar subfamilias');
+            }
+        }
+
+        function renderTabla(rows) {
+            const tbody = document.getElementById('tbody-subfamilias');
+            rowCount = rows.length;
+            tbody.innerHTML = rows.map((r, i) => `
+                <tr class="edit-row" data-id="${r.id ?? ''}">
+                    <td class="col-num">${i + 1}</td>
+                    <td><input type="text" class="cell-input cell-code" value="${r.codigo ?? ''}" placeholder="Código"></td>
+                    <td><input type="text" class="cell-input cell-wide" value="${r.nombre ?? ''}" placeholder="Nombre de subfamilia"></td>
+                    <td class="col-check"><input type="checkbox" class="cell-check" ${r.sin_control_lote ? 'checked' : ''}></td>
+                </tr>`).join('');
+            if (!rows.length) agregarFila();
+        }
+
+        function agregarFila() {
+            rowCount++;
+            const tbody = document.getElementById('tbody-subfamilias');
+            const tr = document.createElement('tr');
+            tr.className = 'edit-row';
+            tr.dataset.id = `new-${rowCount}`;
+            tr.innerHTML = `
+                <td class="col-num">${rowCount}</td>
+                <td><input type="text" class="cell-input cell-code" placeholder="Código"></td>
+                <td><input type="text" class="cell-input cell-wide" placeholder="Nombre de subfamilia"></td>
+                <td class="col-check"><input type="checkbox" class="cell-check"></td>`;
+            tbody.appendChild(tr);
+            tr.querySelector('input').focus();
+        }
+
+        async function guardarCambios() {
+            const filas = [...document.querySelectorAll('#tbody-subfamilias .edit-row')].map(tr => {
+                const inputs = tr.querySelectorAll('input[type="text"]');
+                const check = tr.querySelector('input[type="checkbox"]');
+                return { codigo: inputs[0].value, nombre: inputs[1].value, sin_control_lote: check.checked };
+            }).filter(f => f.codigo);
+
+            try {
+                await fetch('http://localhost:3000/subfamilias', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(filas)
+                });
+            } catch {
+                console.error('Error al guardar subfamilias');
+            }
+        }
+
+        cargarDatos();
+    </script>
+</body>
+
+</html>
+

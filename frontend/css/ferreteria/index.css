@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #f3f4f6;
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 .dashboard-container {
@@ -23,11 +24,11 @@ body {
 
 .menu-card {
     background: white;
-    padding: 30px;
+    padding: 35px;
     border-radius: 12px;
     text-decoration: none;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     border: 1px solid #e5e7eb;
     display: flex;
     flex-direction: column;
@@ -42,11 +43,17 @@ body {
 }
 
 .menu-card .icon {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 15px;
 }
 
 .menu-card h3 {
-    margin: 0;
+    margin: 0 0 10px;
     color: #1e3a8a;
+}
+
+.menu-card p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0;
 }

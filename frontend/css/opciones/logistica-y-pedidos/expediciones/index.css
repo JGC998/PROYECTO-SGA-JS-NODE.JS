@@ -1,0 +1,266 @@
+.container {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ── Toolbar principal ── */
+.page-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-bottom: 0;
+    border-left: 5px solid #1e3a8a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.page-toolbar h1 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #1e3a8a;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-tool {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #1e3a8a;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-tool:hover {
+    background: #3b82f6;
+}
+
+.btn-tool.secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-tool.secondary:hover {
+    background: #d1d5db;
+}
+
+/* ── Pestañas ── */
+.tab-nav {
+    display: flex;
+    background: white;
+    border-bottom: 2px solid #e5e7eb;
+    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 12px 22px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: #1e3a8a;
+    background: #f8faff;
+}
+
+.tab-btn.active {
+    color: #1e3a8a;
+    border-bottom-color: #1e3a8a;
+    background: #f0f5ff;
+}
+
+/* ── Paneles de pestaña ── */
+.tab-panel {
+    display: none;
+    background: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ── Subtoolbar ── */
+.subtoolbar {
+    padding: 12px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subtoolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.subtoolbar-row.filters {
+    padding-top: 4px;
+}
+
+.btn-sub {
+    padding: 6px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-sub:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e3a8a;
+}
+
+.btn-sub.danger {
+    border-color: #fca5a5;
+    color: #dc2626;
+}
+
+.btn-sub.danger:hover {
+    background: #fef2f2;
+    border-color: #dc2626;
+}
+
+.input-sm {
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    width: 180px;
+}
+
+.input-xs {
+    padding: 6px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    width: 80px;
+}
+
+.filter-select {
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background: white;
+    min-width: 160px;
+}
+
+.filter-select-sm {
+    padding: 6px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background: white;
+    min-width: 100px;
+}
+
+.btn-filter {
+    padding: 5px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: #f9fafb;
+    color: #374151;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.btn-filter:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e3a8a;
+}
+
+.year-badge {
+    padding: 5px 12px;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.inline-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #374151;
+}
+
+/* ── Tabla ── */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+th {
+    background: #f0f5ff;
+    padding: 11px 14px;
+    text-align: left;
+    color: #1e3a8a;
+    border-bottom: 2px solid #dbeafe;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #374151;
+    white-space: nowrap;
+}
+
+tr:hover td {
+    background: #f8faff;
+}
+
+.col-check {
+    width: 40px;
+    text-align: center;
+}
+
+.placeholder-row td {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    padding: 30px;
+    white-space: normal;
+}

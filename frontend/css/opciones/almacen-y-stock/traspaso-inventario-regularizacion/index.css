@@ -1,0 +1,53 @@
+.container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+
+.page-toolbar {
+    background: white; padding: 15px 25px; border-radius: 10px;
+    margin-bottom: 20px; border-left: 5px solid #1e3a8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.page-toolbar h1 { margin: 0; font-size: 1.3rem; color: #1e3a8a; }
+
+.action-panel { display: flex; flex-direction: column; gap: 15px; }
+
+.action-block {
+    background: white; padding: 16px 20px; border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    display: flex; flex-direction: column; gap: 12px;
+}
+.action-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.action-row label { font-weight: 600; font-size: 0.85rem; color: #374151; white-space: nowrap; }
+
+.btn-primary-action {
+    padding: 10px 22px; border: none; border-radius: 6px;
+    background: #1e3a8a; color: white; cursor: pointer;
+    font-weight: 700; font-size: 0.9rem; transition: background 0.2s;
+    align-self: flex-start;
+}
+.btn-primary-action:hover { background: #3b82f6; }
+.btn-primary-action:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-secondary-action {
+    padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 5px;
+    background: #f9fafb; color: #374151; cursor: pointer;
+    font-size: 0.85rem; font-weight: 500; transition: all 0.15s;
+}
+.btn-secondary-action:hover { background: #eff6ff; border-color: #3b82f6; color: #1e3a8a; }
+
+.checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #374151; cursor: pointer; }
+.checkbox-label input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; }
+
+.input-date { padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.85rem; }
+.input-time { width: 100px; padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.85rem; }
+.hint { font-weight: 400; color: #6b7280; font-size: 0.8rem; }
+
+.info-block {
+    background: #f8faff; border: 1px solid #dbeafe; border-radius: 8px;
+    padding: 16px 20px;
+}
+.info-title { font-weight: 700; font-size: 0.85rem; color: #1e3a8a; margin-bottom: 8px; letter-spacing: 0.02em; }
+.info-separator { border-top: 1px dashed #93c5fd; margin-bottom: 10px; }
+.info-body { font-family: 'Courier New', monospace; font-size: 0.82rem; color: #374151; display: flex; flex-direction: column; gap: 4px; }
+.info-row { display: flex; gap: 8px; }
+.col-letter { font-weight: 700; color: #1e3a8a; width: 16px; }
+.col-arrow { color: #6b7280; }

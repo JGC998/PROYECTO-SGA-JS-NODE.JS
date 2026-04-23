@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Consulta de Stock</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/consulta-de-stock/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>📊 Consulta de Stock</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool">Actualizar (F5)</button>
+                <button class="btn-tool secondary">Cambiar tipo ubicación</button>
+                <button class="btn-tool secondary">📤 Exportar a CSV</button>
+            </div>
+        </header>
+
+        <div class="filter-panel">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Ubicación:</label>
+                    <input type="text" class="input-sm">
+                    <input type="text" class="input-sm">
+                    <label>P:</label><input type="text" class="input-xs">
+                    <label>L:</label><input type="text" class="input-xs">
+                    <select class="input-xs-sel"><option></option></select>
+                    <label>X:</label><input type="text" class="input-xs">
+                    <label>Y:</label><input type="text" class="input-xs">
+                </div>
+                <div class="filter-group right">
+                    <select class="select-filter">
+                        <option>Solo con existencias</option>
+                        <option>Todas las ubicaciones</option>
+                        <option>Sin existencias</option>
+                    </select>
+                </div>
+                <div class="etiquetas-panel">
+                    <span class="panel-title">Etiquetas</span>
+                    <div class="etiq-row">
+                        <label>Nº et:</label>
+                        <input type="number" class="input-xs" value="1">
+                        <label class="checkbox-label"><input type="checkbox"> Vista previa</label>
+                    </div>
+                    <div class="etiq-row">
+                        <label>Et. inicio:</label>
+                        <input type="number" class="input-xs" value="1">
+                        <button class="btn-sub">Etiquetas</button>
+                    </div>
+                    <div class="etiq-row">
+                        <label>Destino:</label>
+                        <input type="text" class="input-sm">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <label>Artículo:</label>
+                <input type="text" class="input-sm">
+                <button class="btn-browse">...</button>
+                <input type="text" class="input-desc" readonly>
+                <label>Uds/cajas:</label><input type="number" class="input-xs" value="0">
+                <label>Uds/palet:</label><input type="number" class="input-xs" value="0">
+                <label class="checkbox-label">
+                    <input type="checkbox"> Stock por artículo, ubicación y lote
+                </label>
+            </div>
+
+            <div class="filter-row">
+                <label>Lote:</label>
+                <input type="text" class="input-sm">
+                <label class="checkbox-label">
+                    <input type="checkbox"> Solo artículos con stock 0 en posición 1 (Y)
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox"> Solo artículos con menos de un palet en suelo
+                </label>
+                <select class="select-filter-sm"><option></option></select>
+                <select class="select-filter-sm"><option>Todas</option></select>
+            </div>
+
+            <div class="filter-row">
+                <label>Subfamilia:</label>
+                <input type="text" class="input-sm">
+                <button class="btn-browse">...</button>
+                <label class="checkbox-label">
+                    <input type="checkbox"> Mostrar fecha de recepción
+                </label>
+            </div>
+        </div>
+
+        <!-- Pestañas -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="stock">Stock</button>
+            <button class="tab-btn" data-tab="stock-grafico">Stock en modo gráfico</button>
+            <button class="tab-btn" data-tab="informe">Informe de stock</button>
+        </nav>
+
+        <!-- TAB: Stock -->
+        <div class="tab-panel active" id="tab-stock">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="col-star">*</th>
+                            <th>Sel</th>
+                            <th>Empresa</th>
+                            <th>Ubicación</th>
+                            <th>Etiqueta</th>
+                            <th>Artículo</th>
+                            <th>Nombre de artículo</th>
+                            <th>Lote</th>
+                            <th>Stock</th>
+                            <th>Palet</th>
+                            <th>Cajas</th>
+                            <th>Unidades</th>
+                            <th>Ubicación</th>
+                            <th>Exclusiva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="placeholder-row">
+                            <td colspan="14">Introduzca los filtros y pulse Actualizar para cargar el stock.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB: Stock en modo gráfico -->
+        <div class="tab-panel" id="tab-stock-grafico">
+            <div class="empty-tab">
+                <p>Vista gráfica del stock por ubicación.</p>
+            </div>
+        </div>
+
+        <!-- TAB: Informe de stock -->
+        <div class="tab-panel" id="tab-informe">
+            <div class="empty-tab">
+                <p>Informe detallado de stock.</p>
+            </div>
+        </div>
+
+        <!-- Footer de totales -->
+        <footer class="stock-footer">
+            <div class="footer-actions">
+                <button class="btn-foot">Asignar ubic.</button>
+                <button class="btn-foot secondary">Anular selección</button>
+                <button class="btn-foot secondary">Seleccionar todo</button>
+                <label class="checkbox-label">
+                    <input type="checkbox" checked> Cálculo de stock 2024
+                </label>
+            </div>
+            <div class="footer-totals">
+                <div class="total-item">
+                    <span class="total-label">Total stock:</span>
+                    <input type="text" class="total-input" value="0" readonly>
+                </div>
+                <div class="total-item">
+                    <span class="total-label">Cuadre AS400:</span>
+                    <input type="text" class="total-input" value="0" readonly>
+                </div>
+                <div class="total-item">
+                    <span class="total-label">Pte. servir:</span>
+                    <input type="text" class="total-input" value="0" readonly>
+                    <button class="btn-foot">Consultar pendiente de servir</button>
+                </div>
+                <div class="total-item">
+                    <span class="total-label">En picking:</span>
+                    <input type="text" class="total-input" value="0" readonly>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
+

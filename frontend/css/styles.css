@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg);
+    background-color: #f3f4f6;
     color: var(--text);
 }
 
@@ -103,4 +103,77 @@ body {
 .value:empty::before,
 .value:contains('--') {
     color: #ccc;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    border-radius: 15px;
+    padding: 60px 50px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 2rem;
+    margin: 0 0 15px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.hero-content .highlight {
+    color: #93c5fd;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin: 0;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 30px 0;
+}
+
+/* Sección de estadísticas */
+.stats-section {
+    margin-top: 10px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* Variantes de color de tarjeta */
+.card.success {
+    border-top-color: #10b981;
+}
+
+.card.danger {
+    border-top-color: #ef4444;
+}
+
+/* Interior de tarjeta con icono */
+.card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+}
+
+.card-info {
+    flex: 1;
 }

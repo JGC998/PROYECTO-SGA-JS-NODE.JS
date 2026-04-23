@@ -1,0 +1,40 @@
+.container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+
+.page-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: white; padding: 15px 25px; border-radius: 10px;
+    margin-bottom: 20px; border-left: 5px solid #1e3a8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.page-toolbar h1 { margin: 0; font-size: 1.3rem; color: #1e3a8a; }
+.toolbar-actions { display: flex; gap: 8px; }
+
+.btn-tool {
+    padding: 8px 16px; border: none; border-radius: 5px;
+    background: #1e3a8a; color: white; cursor: pointer;
+    font-weight: 600; font-size: 0.85rem; transition: background 0.2s;
+}
+.btn-tool:hover { background: #3b82f6; }
+.btn-tool.secondary { background: #e5e7eb; color: #374151; }
+.btn-tool.secondary:hover { background: #d1d5db; }
+
+.filter-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: white; padding: 15px 20px; border-radius: 8px;
+    margin-bottom: 15px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.filter-bar label { font-weight: 600; font-size: 0.9rem; color: #374151; }
+.input-code { width: 120px; padding: 7px 10px; border: 1px solid #d1d5db; border-radius: 4px; }
+.input-desc { width: 280px; padding: 7px 10px; border: 1px solid #e5e7eb; border-radius: 4px; background: #f9fafb; }
+.btn-browse {
+    padding: 7px 10px; border: 1px solid #d1d5db; border-radius: 4px;
+    background: #f9fafb; cursor: pointer; font-size: 0.85rem;
+}
+
+.table-wrapper { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+th { background: #f0f5ff; padding: 11px 14px; text-align: left; color: #1e3a8a; border-bottom: 2px solid #dbeafe; font-size: 0.82rem; text-transform: uppercase; }
+td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+tr:hover td { background: #f8faff; }
+.col-num { width: 50px; text-align: center; color: #9ca3af; }
+.placeholder-row td { text-align: center; color: #9ca3af; font-style: italic; padding: 30px; }

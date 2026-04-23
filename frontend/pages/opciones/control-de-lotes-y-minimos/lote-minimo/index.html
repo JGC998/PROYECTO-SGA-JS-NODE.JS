@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Lote Mínimo por Cliente</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/lote-minimo/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>🏷️ Lote Mínimo utilizado por Cliente</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool">Actualizar (F5)</button>
+                <button class="btn-tool secondary">Importar</button>
+            </div>
+        </header>
+
+        <div class="filter-bar">
+            <label>Código cliente:</label>
+            <input type="text" class="input-code">
+            <button class="btn-browse">...</button>
+            <input type="text" class="input-desc" readonly>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="col-num">#</th>
+                        <th>Cliente</th>
+                        <th>Nombre de cliente</th>
+                        <th>Días</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-num">1</td>
+                        <td><input type="text" class="cell-input"></td>
+                        <td><input type="text" class="cell-input" readonly></td>
+                        <td><input type="number" class="cell-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+</body>
+
+</html>
+

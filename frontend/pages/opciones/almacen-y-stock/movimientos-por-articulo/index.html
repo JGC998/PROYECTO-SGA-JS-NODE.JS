@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Movimientos por Artículo</title>
+    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/movimientos-por-articulo/index.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>Movimientos por Artículo</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="btn-tool secondary" id="btn-exportar">Exportar a CSV</button>
+            </div>
+        </header>
+
+        <div class="filter-panel">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Ubicación:</label>
+                    <input type="text" class="input-sm" id="f-ubicacion">
+                    <input type="text" class="input-sm">
+                    <label>P:</label><input type="text" class="input-xs" id="f-p">
+                    <label>L:</label><input type="text" class="input-xs" id="f-l">
+                    <select class="input-xs-sel"><option></option></select>
+                    <label>X:</label><input type="text" class="input-xs" id="f-x">
+                    <label>Y:</label><input type="text" class="input-xs" id="f-y">
+                </div>
+                <div class="filter-group right">
+                    <label>Código de cliente:</label>
+                    <input type="text" class="input-sm" id="f-cliente">
+                    <input type="text" class="input-desc" readonly id="f-cliente-nombre">
+                </div>
+            </div>
+
+            <div class="filter-row">
+                <label>Artículo:</label>
+                <input type="text" class="input-sm" id="f-articulo">
+                <button class="btn-browse">...</button>
+                <input type="text" class="input-desc" readonly id="f-articulo-nombre">
+                <label>Uds/cajas:</label><input type="number" class="input-xs" value="0" id="f-uds-cajas">
+                <label>Uds/palet:</label><input type="number" class="input-xs" value="0" id="f-uds-palet">
+                <label class="checkbox-label"><input type="checkbox" id="f-historico"> Histórico</label>
+                <label class="checkbox-label"><input type="checkbox" id="f-agrupado"> Agrupado</label>
+            </div>
+
+            <div class="filter-row">
+                <label>Lote:</label>
+                <input type="text" class="input-sm" id="f-lote">
+                <label>Periodo:</label>
+                <input type="date" class="input-date" id="f-fecha-desde">
+                <input type="date" class="input-date" id="f-fecha-hasta">
+                <label>Movimiento:</label>
+                <select class="select-filter" id="f-movimiento">
+                    <option value="">Todos</option>
+                    <option value="E">Entrada</option>
+                    <option value="S">Salida</option>
+                    <option value="T">Traspaso</option>
+                    <option value="R">Regularización</option>
+                    <option value="P">Picking</option>
+                </select>
+            </div>
+
+            <div class="filter-row">
+                <label>Subfamilia:</label>
+                <input type="text" class="input-sm" id="f-subfamilia">
+                <button class="btn-browse">...</button>
+                <input type="text" class="input-desc" readonly id="f-subfamilia-nombre">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table id="tabla-movimientos">
+                <thead>
+                    <tr>
+                        <th class="col-star">*</th>
+                        <th>Empresa</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Tipo</th>
+                        <th>Serie</th>
+                        <th>Número</th>
+                        <th>Picking / Nº palet</th>
+                        <th>Ubicación</th>
+                        <th>Etiqueta</th>
+                        <th>Cantidad</th>
+                        <th>Stock</th>
+                        <th>Lote</th>
+                        <th>Terminal</th>
+                        <th>Caja</th>
+                        <th>Palet</th>
+                        <th>Tercero</th>
+                        <th>Centro</th>
+                        <th>Nombre de tercero / Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-movimientos">
+                    <tr class="placeholder-row">
+                        <td colspan="19">Introduzca los filtros y pulse Actualizar para cargar los movimientos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="page-footer">
+            <div class="footer-info">
+                <span id="total-registros">0 registros</span>
+            </div>
+        </footer>
+    </main>
+
+    <script src="../../../../js/navegacion.js"></script>
+    <script>
+        const today = new Date();
+        const hace30 = new Date();
+        hace30.setDate(today.getDate() - 30);
+
+        const toISO = d => d.toISOString().split('T')[0];
+        document.getElementById('f-fecha-hasta').value = toISO(today);
+        document.getElementById('f-fecha-desde').value = toISO(hace30);
+
+        document.getElementById('btn-actualizar').addEventListener('click', cargarMovimientos);
+        document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarMovimientos(); } });
+
+        async function cargarMovimientos() {
+            const btn = document.getElementById('btn-actualizar');
+            btn.textContent = 'Cargando...';
+            btn.disabled = true;
+
+            const params = new URLSearchParams({
+                articulo: document.getElementById('f-articulo').value,
+                lote: document.getElementById('f-lote').value,
+                desde: document.getElementById('f-fecha-desde').value,
+                hasta: document.getElementById('f-fecha-hasta').value,
+                movimiento: document.getElementById('f-movimiento').value,
+                ubicacion: document.getElementById('f-ubicacion').value,
+                cliente: document.getElementById('f-cliente').value,
+                subfamilia: document.getElementById('f-subfamilia').value,
+                agrupado: document.getElementById('f-agrupado').checked ? '1' : '0',
+                historico: document.getElementById('f-historico').checked ? '1' : '0',
+            });
+
+            try {
+                const res = await fetch(`http://localhost:3000/movimientos-por-articulo?${params}`);
+                const data = await res.json();
+                renderTabla(data);
+            } catch {
+                renderError();
+            } finally {
+                btn.textContent = 'Actualizar (F5)';
+                btn.disabled = false;
+            }
+        }
+
+        function renderTabla(rows) {
+            const tbody = document.getElementById('tbody-movimientos');
+            document.getElementById('total-registros').textContent = `${rows.length} registros`;
+
+            if (!rows.length) {
+                tbody.innerHTML = '<tr class="placeholder-row"><td colspan="19">No se encontraron movimientos con los filtros indicados.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = rows.map(r => `
+                <tr>
+                    <td class="col-star"></td>
+                    <td>${r.empresa ?? ''}</td>
+                    <td>${r.fecha ? r.fecha.substring(0, 10) : ''}</td>
+                    <td>${r.hora ?? ''}</td>
+                    <td class="badge-tipo tipo-${(r.tipo ?? '').toLowerCase()}">${r.tipo ?? ''}</td>
+                    <td>${r.serie ?? ''}</td>
+                    <td>${r.numero ?? ''}</td>
+                    <td>${r.picking ?? ''}</td>
+                    <td>${r.ubicacion ?? ''}</td>
+                    <td>${r.etiqueta ?? ''}</td>
+                    <td class="col-num">${r.cantidad ?? ''}</td>
+                    <td class="col-num">${r.stock ?? ''}</td>
+                    <td>${r.lote ?? ''}</td>
+                    <td>${r.terminal ?? ''}</td>
+                    <td>${r.caja ?? ''}</td>
+                    <td>${r.palet ?? ''}</td>
+                    <td>${r.tercero ?? ''}</td>
+                    <td>${r.centro ?? ''}</td>
+                    <td>${r.nombre_tercero ?? ''}</td>
+                </tr>`).join('');
+        }
+
+        function renderError() {
+            document.getElementById('tbody-movimientos').innerHTML =
+                '<tr class="placeholder-row error-row"><td colspan="19">Error al conectar con el servidor.</td></tr>';
+        }
+
+        document.getElementById('btn-exportar').addEventListener('click', () => {
+            const rows = [...document.querySelectorAll('#tabla-movimientos tbody tr:not(.placeholder-row)')];
+            if (!rows.length) return;
+            const headers = [...document.querySelectorAll('#tabla-movimientos thead th')].map(th => th.textContent).join(';');
+            const csv = [headers, ...rows.map(tr => [...tr.querySelectorAll('td')].map(td => td.textContent).join(';'))].join('\n');
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+            a.download = `movimientos_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        });
+    </script>
+</body>
+
+</html>
+

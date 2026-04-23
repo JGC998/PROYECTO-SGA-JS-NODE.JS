@@ -4,6 +4,67 @@
     padding: 20px;
 }
 
+/* Cabecera de sección */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 15px;
+}
+
+.header-left h1 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 1.8rem;
+}
+
+.header-left p {
+    margin: 5px 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-new {
+    padding: 10px 20px;
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-new:hover {
+    background: #3b82f6;
+}
+
+/* Buscador */
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* Estado de carga */
+.loading {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    padding: 30px;
+}
+
 .table-wrapper {
     background: white;
     border-radius: 8px;
