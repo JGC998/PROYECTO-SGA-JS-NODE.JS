@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Gestión de Operarios</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/ferreteria/operarios.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="section-header">
+            <div class="header-left">
+                <h1>Maestro de Operarios</h1>
+                <p>Personal autorizado para retiradas y movimientos de almacén</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-tool primary">+ Añadir Operario</button>
+                <button class="btn-tool secondary">📤 Exportar</button>
+            </div>
+        </header>
+
+        <div class="status-summary">
+            <div class="status-item">
+                <span class="label">Total Operarios:</span>
+                <span class="count">24</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Activos hoy:</span>
+                <span class="count success">18</span>
+            </div>
+        </div>
+
+        <section class="table-section">
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Buscar por nombre, código o departamento..." class="search-bar">
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cód. Operario</th>
+                            <th>Nombre Completo</th>
+                            <th>Dirección</th>
+                            <th>Persona de Contacto</th>
+                            <th>Email Corporativo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OP-042</strong></td>
+                            <td>Jose Desiderio Muñoz</td>
+                            <td>Calle Almacén Central, 12</td>
+                            <td>600 000 000</td>
+                            <td>j.garcia@lin.es</td>
+                            <td><span class="badge active">Activo</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>OP-055</strong></td>
+                            <td>Martínez López, Elena</td>
+                            <td>Av. Logística S/N</td>
+                            <td>611 222 333</td>
+                            <td>e.martinez@lin.es</td>
+                            <td><span class="badge active">Activo</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>OP-012</strong></td>
+                            <td>Pérez Gil, Ricardo</td>
+                            <td>Polígono Industrial Sur</td>
+                            <td>655 444 333</td>
+                            <td>r.perez@lin.es</td>
+                            <td><span class="badge inactive">Baja</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/navegacion.js"></script>
+</body>
+
+</html>

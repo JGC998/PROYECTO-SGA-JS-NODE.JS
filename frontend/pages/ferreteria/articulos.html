@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Catálogo de Artículos</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/ferreteria/articulos.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="section-header">
+            <div class="header-left">
+                <h1>Maestro de Artículos</h1>
+                <p>Consulta y gestión del catálogo general de ferretería</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-new" onclick="location.href='../maestros.html'">+ Nuevo Artículo</button>
+            </div>
+        </header>
+
+        <section class="filter-section">
+            <input type="text" id="buscador-articulos" class="search-bar"
+                placeholder="🔍 Buscar por código, nombre, medida o material...">
+        </section>
+
+        <div class="table-wrapper">
+            <table id="tabla-articulos">
+                <thead>
+                    <tr>
+                        <th>Artículo</th>
+                        <th>Nombre de Artículo</th>
+                        <th>Stock Mín.</th>
+                        <th>Stock Máx.</th>
+                        <th>Costo</th>
+                        <th>% Dto.</th>
+                        <th>Color</th>
+                        <th>Medida</th>
+                        <th>Material</th>
+                        <th>Código</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-articulos">
+                    <tr>
+                        <td colspan="10" class="loading">Cargando catálogo...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../../js/navegacion.js"></script>
+    <script src="../../js/ferreteria/articulos.js"></script>
+</body>
+
+</html>

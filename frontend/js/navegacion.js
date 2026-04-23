@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const navbarHTML = `
         <nav class="navbar-global">
             <div class="nav-container">
-                <div class="nav-logo">SGA LIN <span class="version">v1.0</span></div>
+                <div class="nav-logo">SGA</div>
                 <ul class="nav-menu">
                     <li><a href="${root}index.html">Inicio</a></li>
                     <li><a href="#">Archivo</a></li>

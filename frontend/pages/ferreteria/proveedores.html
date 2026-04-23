@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Gestión de Proveedores</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/ferreteria/proveedores.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="section-header">
+            <div class="header-left">
+                <h1>Maestro de Proveedores</h1>
+                <p>Gestión de empresas suministradoras y contactos comerciales</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-tool primary">+ Nuevo Proveedor</button>
+                <button class="btn-tool secondary">📊 Informe Compras</button>
+            </div>
+        </header>
+
+        <section class="table-section">
+            <div class="search-box">
+                <input type="text" placeholder="🔍 Buscar por CIF, nombre, dirección o contacto..." class="search-bar">
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cód. Proveedor</th>
+                            <th>Nombre del Proveedor</th>
+                            <th>Dirección</th>
+                            <th>Persona de Contacto</th>
+                            <th>Email</th>
+                            <th>Calificación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PRV-001</strong></td>
+                            <td>Ferretería Industrial S.A.</td>
+                            <td>Pol. Ind. Oeste, Parcela 4</td>
+                            <td>Antonio Martínez</td>
+                            <td>ventas@ferreind.com</td>
+                            <td><span class="rating">⭐⭐⭐⭐</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Ver Albaranes">📋</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>PRV-002</strong></td>
+                            <td>Suministros Globales SL</td>
+                            <td>Calle de la Forja, 22</td>
+                            <td>Laura Soler</td>
+                            <td>l.soler@sumiglobal.es</td>
+                            <td><span class="rating">⭐⭐⭐⭐⭐</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Ver Albaranes">📋</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>PRV-003</strong></td>
+                            <td>Herramientas de Precisión</td>
+                            <td>Av. de la Técnica, 105</td>
+                            <td>Carlos Ruiz</td>
+                            <td>info@hprecision.com</td>
+                            <td><span class="rating">⭐⭐⭐</span></td>
+                            <td>
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Ver Albaranes">📋</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/navegacion.js"></script>
+</body>
+
+</html>

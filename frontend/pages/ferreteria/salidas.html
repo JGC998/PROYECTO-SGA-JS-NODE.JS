@@ -3,55 +3,100 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SGA LIN - Salidas</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/salidas.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Salida de Mercancía</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/ferreteria/salidas.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-logo">SGA LIN</div>
-        <div class="nav-links">
-            <a href="../index.html" class="nav-item">🏠 Inicio</a>
-            <a href="consultas.html" class="nav-item">📊 Ver Tablas</a>
-            <a href="entradas.html" class="nav-item">📥 Entradas</a>
-            <a href="salidas.html" class="nav-item active">📤 Salidas</a>
-            <a href="movimientos.html" class="nav-item">🔄 Movimientos</a>
-        </div>
-    </nav>
 
     <main class="container">
-        <div class="exit-card">
-            <h1>📤 Salida de Mercancía (Picking)</h1>
-            <p style="text-align:center; color:#666;">Registre la retirada de stock del estante</p>
-
-            <div class="form-group">
-                <label>Código del Artículo</label>
-                <input type="text" id="cod" placeholder="Escanee producto">
+        <header class="toolbar">
+            <div class="toolbar-title">
+                <h1>📤 Salida de Mercancía</h1>
             </div>
-
-            <div class="form-group">
-                <label>Ubicación de Origen</label>
-                <input type="text" id="ubi" placeholder="¿De dónde lo retira?">
+            <div class="toolbar-actions">
+                <button class="btn-tool">💾 Registrar Salida</button>
+                <button class="btn-tool btn-danger">🧹 Cancelar</button>
             </div>
+        </header>
 
-            <div class="form-group">
-                <label>Lote</label>
-                <input type="text" id="lot" value="GENERAL">
+        <form class="exit-form">
+            <fieldset class="form-section">
+                <legend>Información del Movimiento</legend>
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Fecha Salida</label>
+                        <input type="date" value="2026-04-23">
+                    </div>
+                    <div class="field">
+                        <label>Cód. Operario</label>
+                        <input type="text" placeholder="Escanear tarjeta...">
+                    </div>
+                    <div class="field span-2">
+                        <label>Nombre del Operario</label>
+                        <input type="text" readonly class="readonly-input" placeholder="Nombre del trabajador">
+                    </div>
+                    <div class="field span-2">
+                        <label>Destino / Obra</label>
+                        <input type="text" placeholder="Ej: Mantenimiento Planta A">
+                    </div>
+                    <div class="field span-2">
+                        <label>Nº Orden de Trabajo (OT)</label>
+                        <input type="text" placeholder="Opcional...">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section highlight-exit">
+                <legend>Retirada de Material</legend>
+                <div class="form-grid-detail">
+                    <div class="field">
+                        <label>Cód. Artículo</label>
+                        <input type="text" placeholder="Código...">
+                    </div>
+                    <div class="field span-3">
+                        <label>Descripción</label>
+                        <input type="text" readonly class="readonly-input" placeholder="Descripción del producto">
+                    </div>
+                    <div class="field">
+                        <label>Stock Actual</label>
+                        <input type="text" readonly class="readonly-input" placeholder="0">
+                    </div>
+                    <div class="field">
+                        <label>Cantidad Salida</label>
+                        <input type="number" placeholder="0">
+                    </div>
+                </div>
+                <div class="form-actions-inner">
+                    <button type="button" class="btn-add">+ Añadir a la lista</button>
+                </div>
+            </fieldset>
+
+            <div class="preview-table-wrapper">
+                <h3>Materiales a retirar</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Ubicación Origen</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="placeholder-row">
+                            <td colspan="5">No hay materiales seleccionados para la salida.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="form-group">
-                <label>Cantidad a Sacar</label>
-                <input type="number" id="cant" value="1" min="0.1" step="any">
-            </div>
-
-            <button class="btn-exit" id="btnSalida">CONFIRMAR SALIDA</button>
-            <div id="status" class="status-msg"></div>
-        </div>
+        </form>
     </main>
 
-    <script src="../js/api.js"></script>
-    <script src="../js/salidas.js"></script>
+    <script src="../../js/navegacion.js"></script>
 </body>
 
 </html>

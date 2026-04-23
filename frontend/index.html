@@ -3,45 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SGA LIN - Control de Almacén</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA - Control de Almacén</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navegacion.css">
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="nav-logo">SGA LIN</div>
-        <div class="nav-links">
-            <a href="index.html" class="nav-item active">🏠 Inicio</a>
-            <a href="pages/consultas.html" class="nav-item">📊 Ver Tablas</a>
-            <a href="pages/entradas.html" class="nav-item">📥 Entradas</a>
-            <a href="pages/salidas.html" class="nav-item">📤 Salidas</a>
-            <a href="pages/movimientos.html" class="nav-item">🔄 Movimientos</a>
-        </div>
-    </nav>
-
     <main class="container">
-        <h1>Estado General</h1>
-        <p>Resumen de la base de datos en tiempo real.</p>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Bienvenido a <span class="highlight">su sistema de gestión de almacén</span></h1>
+                <p class="tagline">Optimización logística y control de flujo en tiempo real.</p>
 
-        <div class="grid-stats">
-            <div class="card">
-                <h3>Artículos Registrados</h3>
-                <span class="value" id="total-art">--</span>
             </div>
-            <div class="card" style="border-top-color: var(--success);">
-                <h3>Stock Global</h3>
-                <span class="value" id="total-stock">--</span>
+        </section>
+
+        <hr class="separator">
+
+        <section class="stats-section">
+            <div class="section-title">
+                <h2>Estado General</h2>
             </div>
-            <div class="card" style="border-top-color: var(--danger);">
-                <h3>Alertas Stock Bajo</h3>
-                <span class="value">0</span>
+
+            <div class="grid-stats">
+                <div class="card">
+                    <div class="card-icon">📦</div>
+                    <div class="card-info">
+                        <h3>Artículos Registrados</h3>
+                        <span class="value" id="total-art">--</span>
+                    </div>
+                </div>
+                <div class="card success">
+                    <div class="card-icon">📈</div>
+                    <div class="card-info">
+                        <h3>Stock Global</h3>
+                        <span class="value" id="total-stock">--</span>
+                    </div>
+                </div>
+                <div class="card danger">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-info">
+                        <h3>Alertas Stock Bajo</h3>
+                        <span class="value">0</span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
+    <script src="js/navegacion.js"></script>
     <script src="js/index.js"></script>
-
 </body>
 
 </html>
