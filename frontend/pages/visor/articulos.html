@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Visor - Artículos</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/visor/tablas_visor.css">
+</head>
+
+<body>
+    <main class="container">
+        <header class="visor-header">
+            <h1>Consulta General de Artículos</h1>
+            <button class="btn-export">📊 Exportar a Excel</button>
+        </header>
+        <input type="text" class="search-bar" placeholder="Filtrar artículos por cualquier campo...">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Familia</th>
+                        <th>Stock Actual</th>
+                        <th>Ubicación</th>
+                        <th>Últ. Movimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>F1-001</td>
+                        <td>Tornillo Hexagonal 8x40</td>
+                        <td>Tornillería</td>
+                        <td>1.250</td>
+                        <td>A-12-B</td>
+                        <td>23/04/2026</td>
+                    </tr>
+                    <tr>
+                        <td>H2-442</td>
+                        <td>Martillo Percutor 800W</td>
+                        <td>Herramientas</td>
+                        <td>12</td>
+                        <td>B-01-A</td>
+                        <td>20/04/2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script src="../../js/navegacion.js"></script>
+</body>
+
+</html>

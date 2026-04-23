@@ -1,0 +1,70 @@
+.container {
+    max-width: 1300px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.visor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #059669;
+    /* Verde Visor */
+    padding-bottom: 10px;
+}
+
+.visor-header h1 {
+    color: #065f46;
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.btn-export {
+    padding: 8px 15px;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.table-wrapper {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f0fdf4;
+    padding: 12px;
+    text-align: left;
+    color: #065f46;
+    border-bottom: 2px solid #bcf0da;
+    font-size: 0.85rem;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.9rem;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
