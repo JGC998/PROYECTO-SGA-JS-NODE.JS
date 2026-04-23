@@ -1,0 +1,72 @@
+body {
+    background-color: #f3f4f6;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    border-left: 5px solid #1e3a8a;
+    padding-left: 15px;
+}
+
+.section-header h1 {
+    margin: 0;
+    color: #111827;
+}
+
+.section-header p {
+    color: #6b7280;
+    margin: 5px 0 0;
+}
+
+/* El Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* La Tarjeta */
+.menu-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: #3b82f6;
+}
+
+.menu-card .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.menu-card h3 {
+    margin: 0 0 10px;
+    color: #1e3a8a;
+}
+
+.menu-card p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
