@@ -1012,6 +1012,271 @@ app.post('/copia-seguridad', async (req, res) => {
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+// ─── ESTADÍSTICAS E INFORMES ─────────────────────────────────────────────────
+
+app.get('/estadisticas/resumen', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT
+                (SELECT COUNT(*) FROM ARTICULO) AS articulos,
+                (SELECT COUNT(DISTINCT STOUBI) FROM STOCK WHERE STOCAN > 0) AS ubicaciones_activas,
+                (SELECT COUNT(*) FROM ALBARANCS
+                 WHERE CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())) AS movimientos_periodo,
+                (SELECT COUNT(*) FROM ARTICULOSTOMIN m
+                 WHERE m.MINSTOMIN > 0
+                 AND ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=m.MINARTCOD),0) < m.MINSTOMIN
+                ) AS alertas_stock`);
+        res.json(r.recordset[0]);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/movimientos-por-dia', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT CONVERT(varchar, CAST(ACSFEC AS DATE), 23) AS fecha,
+                   COUNT(*) AS total
+            FROM ALBARANCS
+            WHERE CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+            GROUP BY CAST(ACSFEC AS DATE)
+            ORDER BY CAST(ACSFEC AS DATE)`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/top-articulos', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT TOP 10
+                s.ACSARTCOD AS articulo,
+                ISNULL(a.ARTNOM, s.ACSARTCOD) AS nombre,
+                COUNT(*) AS movimientos,
+                SUM(ABS(ISNULL(s.ACSCAN,0))) AS unidades
+            FROM ALBARANCS s
+            LEFT JOIN ARTICULO a ON a.ARTCOD = s.ACSARTCOD
+            WHERE CAST(s.ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+            GROUP BY s.ACSARTCOD, a.ARTNOM
+            ORDER BY movimientos DESC`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/entradas-vs-salidas', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 56, 1), 3650);
+        const semanas = Math.max(Math.ceil(dias / 7), 4);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT TOP ${semanas}
+                CONVERT(varchar,
+                    DATEADD(day, 2 - DATEPART(weekday, MIN(CAST(ACSFEC AS DATE))),
+                    CAST(MIN(ACSFEC) AS DATE)), 23) AS semana,
+                SUM(CASE WHEN ACSMOV='E' THEN 1 ELSE 0 END) AS entradas,
+                SUM(CASE WHEN ACSMOV='S' THEN 1 ELSE 0 END) AS salidas
+            FROM ALBARANCS
+            WHERE CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+            GROUP BY DATEPART(year,ACSFEC), DATEPART(week,ACSFEC)
+            ORDER BY DATEPART(year,ACSFEC), DATEPART(week,ACSFEC)`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/alertas-stock', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const r = await q(pool).query(`
+            SELECT TOP 25
+                m.MINARTCOD AS articulo,
+                ISNULL(a.ARTNOM, m.MINARTCOD) AS nombre,
+                m.MINSTOMIN AS minimo,
+                ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=m.MINARTCOD),0) AS stock_actual,
+                m.MINSTOMIN - ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=m.MINARTCOD),0) AS deficit
+            FROM ARTICULOSTOMIN m
+            LEFT JOIN ARTICULO a ON a.ARTCOD = m.MINARTCOD
+            WHERE m.MINSTOMIN > 0
+              AND ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=m.MINARTCOD),0) < m.MINSTOMIN
+            ORDER BY deficit DESC`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/trabajadores', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT TOP 15
+                s.ACSREPCOD AS terminal,
+                ISNULL(u.USUNOM, s.ACSREPCOD) AS nombre,
+                COUNT(*) AS movimientos,
+                SUM(ABS(ISNULL(s.ACSCAN,0))) AS unidades,
+                SUM(CASE WHEN s.ACSMOV='E' THEN 1 ELSE 0 END) AS entradas,
+                SUM(CASE WHEN s.ACSMOV='S' THEN 1 ELSE 0 END) AS salidas,
+                SUM(CASE WHEN s.ACSMOV='T' THEN 1 ELSE 0 END) AS traspasos,
+                CONVERT(varchar, MAX(CAST(s.ACSFEC AS DATE)), 23) AS ultima_actividad
+            FROM ALBARANCS s
+            LEFT JOIN SGAUSUARIO u ON u.USUCOD = s.ACSREPCOD
+            WHERE CAST(s.ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+              AND s.ACSREPCOD IS NOT NULL AND s.ACSREPCOD != ''
+            GROUP BY s.ACSREPCOD, u.USUNOM
+            ORDER BY movimientos DESC`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/almacen', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const [ocupacion, porAlmacen, masActivas] = await Promise.all([
+            q(pool).query(`
+                SELECT
+                    COUNT(*) AS total_ubicaciones,
+                    SUM(CASE WHEN s.STOUBI IS NOT NULL THEN 1 ELSE 0 END) AS ocupadas,
+                    COUNT(*) - SUM(CASE WHEN s.STOUBI IS NOT NULL THEN 1 ELSE 0 END) AS vacias
+                FROM UBICACION u
+                LEFT JOIN (SELECT DISTINCT STOUBI FROM STOCK WHERE STOCAN > 0) s ON s.STOUBI = u.UBICODUBI`),
+            q(pool).query(`
+                SELECT a.UBIALMCOD AS almacen,
+                    COUNT(DISTINCT s.STOUBI) AS ubicaciones_con_stock,
+                    ISNULL(SUM(s.STOCAN),0) AS stock_total
+                FROM ALMACENES a
+                LEFT JOIN UBICACION u ON u.UBIALMCOD = a.ALMCOD
+                LEFT JOIN STOCK s ON s.STOUBI = u.UBICODUBI AND s.STOCAN > 0
+                GROUP BY a.UBIALMCOD
+                ORDER BY stock_total DESC`),
+            q(pool).input('dias', dias).query(`
+                SELECT TOP 10
+                    s.ACSUBI AS ubicacion,
+                    COUNT(*) AS movimientos
+                FROM ALBARANCS s
+                WHERE CAST(s.ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+                  AND s.ACSUBI IS NOT NULL AND s.ACSUBI != ''
+                GROUP BY s.ACSUBI
+                ORDER BY movimientos DESC`),
+        ]);
+        res.json({
+            ocupacion: ocupacion.recordset[0],
+            por_almacen: porAlmacen.recordset,
+            mas_activas: masActivas.recordset,
+        });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/por-tipo', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const diasSemana = Math.max(dias * 3, 90);
+        const [porTipo, porDiaSemana, ultimos] = await Promise.all([
+            q(pool).input('dias', dias).query(`
+                SELECT ACSMOV AS tipo, COUNT(*) AS total
+                FROM ALBARANCS
+                WHERE CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+                GROUP BY ACSMOV
+                ORDER BY total DESC`),
+            q(pool).input('dias', diasSemana).query(`
+                SELECT DATEPART(weekday, ACSFEC) AS dia_num,
+                    DATENAME(weekday, MIN(ACSFEC)) AS dia_nombre,
+                    COUNT(*) AS total
+                FROM ALBARANCS
+                WHERE CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+                GROUP BY DATEPART(weekday, ACSFEC)
+                ORDER BY DATEPART(weekday, ACSFEC)`),
+            q(pool).query(`
+                SELECT TOP 20
+                    CONVERT(varchar,ACSFEC,23) AS fecha,
+                    CONVERT(varchar,ACSHOR,8) AS hora,
+                    ACSARTCOD AS articulo,
+                    (SELECT TOP 1 ARTNOM FROM ARTICULO WHERE ARTCOD=ACSARTCOD) AS nombre_articulo,
+                    ACSUBI AS ubicacion, ACSLOT AS lote,
+                    ACSCAN AS cantidad, ACSMOV AS tipo,
+                    ACSCLINOM AS tercero
+                FROM ALBARANCS
+                ORDER BY ACSFEC DESC, ACSHOR DESC`),
+        ]);
+        res.json({
+            por_tipo: porTipo.recordset,
+            por_dia_semana: porDiaSemana.recordset,
+            ultimos: ultimos.recordset,
+        });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/proveedores-actividad', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 90, 1), 3650);
+        const r = await q(pool).input('dias', dias).query(`
+            SELECT TOP 15
+                s.ACSCLICOD AS codigo,
+                s.ACSCLINOM AS nombre,
+                COUNT(*) AS movimientos,
+                COUNT(DISTINCT s.ACSARTCOD) AS articulos_distintos,
+                SUM(ABS(ISNULL(s.ACSCAN,0))) AS unidades,
+                CONVERT(varchar, MAX(CAST(s.ACSFEC AS DATE)), 23) AS ultima_entrada
+            FROM ALBARANCS s
+            WHERE s.ACSMOV = 'E'
+              AND s.ACSCLICOD IS NOT NULL AND s.ACSCLICOD != ''
+              AND CAST(s.ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+            GROUP BY s.ACSCLICOD, s.ACSCLINOM
+            ORDER BY movimientos DESC`);
+        res.json(r.recordset);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.get('/estadisticas/articulos-analisis', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const dias = Math.min(Math.max(parseInt(req.query.dias) || 30, 1), 3650);
+        const [sinMovimiento, rotacion, porFamilia] = await Promise.all([
+            q(pool).input('dias', dias).query(`
+                SELECT TOP 20
+                    a.ARTCOD AS articulo, a.ARTNOM AS nombre,
+                    ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=a.ARTCOD),0) AS stock,
+                    ISNULL((SELECT TOP 1 CONVERT(varchar,ACSFEC,23) FROM ALBARANCS
+                             WHERE ACSARTCOD=a.ARTCOD ORDER BY ACSFEC DESC),'Nunca') AS ultimo_mov
+                FROM ARTICULO a
+                WHERE ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=a.ARTCOD),0) > 0
+                  AND NOT EXISTS (
+                    SELECT 1 FROM ALBARANCS
+                    WHERE ACSARTCOD=a.ARTCOD
+                      AND CAST(ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE()))
+                ORDER BY stock DESC`),
+            q(pool).input('dias', dias).query(`
+                SELECT TOP 15
+                    s.ACSARTCOD AS articulo,
+                    ISNULL(a.ARTNOM, s.ACSARTCOD) AS nombre,
+                    COUNT(*) AS movimientos,
+                    SUM(ABS(ISNULL(s.ACSCAN,0))) AS unidades_movidas,
+                    ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=s.ACSARTCOD),0) AS stock_actual
+                FROM ALBARANCS s
+                LEFT JOIN ARTICULO a ON a.ARTCOD = s.ACSARTCOD
+                WHERE CAST(s.ACSFEC AS DATE) >= DATEADD(day,-@dias,GETDATE())
+                GROUP BY s.ACSARTCOD, a.ARTNOM
+                ORDER BY unidades_movidas DESC`),
+            q(pool).query(`
+                SELECT ISNULL(a.ARTGRUCOD,'SIN FAMILIA') AS familia,
+                    COUNT(*) AS articulos,
+                    ISNULL(SUM(s.STOCAN),0) AS stock_total
+                FROM ARTICULO a
+                LEFT JOIN STOCK s ON s.STOARTCOD = a.ARTCOD AND s.STOCAN > 0
+                GROUP BY a.ARTGRUCOD
+                ORDER BY stock_total DESC`),
+        ]);
+        res.json({
+            sin_movimiento: sinMovimiento.recordset,
+            rotacion: rotacion.recordset,
+            por_familia: porFamilia.recordset,
+        });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 // ─── ARRANQUE ─────────────────────────────────────────────────────────────────
 
 const PORT = 3000;

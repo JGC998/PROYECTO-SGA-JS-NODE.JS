@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Informes y Estadísticas</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <style>
+        body { background: #eef2f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        /* ── CABECERA ─────────────────────────────────────────────── */
+        .inf-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563c0 100%);
+            padding: 20px 32px 0;
+            color: white;
+        }
+        .inf-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .inf-title { font-size: 1.25rem; font-weight: 800; margin: 0; }
+        .inf-subtitle { font-size: .78rem; opacity: .7; margin: 3px 0 0; }
+        .btn-refresh {
+            padding: 7px 16px;
+            background: rgba(255,255,255,.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: .83rem;
+            font-weight: 600;
+            transition: background .15s;
+        }
+        .btn-refresh:hover { background: rgba(255,255,255,.3); }
+
+        /* Selector de periodo */
+        .period-pills {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .period-pill {
+            padding: 5px 12px;
+            background: rgba(255,255,255,.12);
+            color: rgba(255,255,255,.7);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: .78rem;
+            font-weight: 600;
+            transition: all .15s;
+            white-space: nowrap;
+        }
+        .period-pill:hover { background: rgba(255,255,255,.22); color: white; }
+        .period-pill.active { background: rgba(255,255,255,.9); color: #1e3a8a; border-color: white; }
+
+        /* KPIs en cabecera */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,.1);
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+        }
+        .kpi-cell {
+            background: rgba(255,255,255,.08);
+            padding: 14px 18px;
+            text-align: center;
+        }
+        .kpi-cell:hover { background: rgba(255,255,255,.14); }
+        .kpi-num   { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+        .kpi-label { font-size: .68rem; opacity: .65; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+        .kpi-cell.danger .kpi-num { color: #fca5a5; }
+        .kpi-cell.success .kpi-num { color: #6ee7b7; }
+        .kpi-cell.amber .kpi-num { color: #fcd34d; }
+
+        /* ── TABS ─────────────────────────────────────────────────── */
+        .tab-nav-inf {
+            display: flex;
+            background: #1a306e;
+            padding: 0 32px;
+            gap: 2px;
+            border-top: 1px solid rgba(255,255,255,.08);
+        }
+        .tab-btn-inf {
+            padding: 11px 18px;
+            font-size: .85rem;
+            font-weight: 600;
+            color: rgba(255,255,255,.6);
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: color .15s, border-color .15s;
+            white-space: nowrap;
+        }
+        .tab-btn-inf:hover { color: rgba(255,255,255,.9); }
+        .tab-btn-inf.active { color: white; border-bottom-color: #60a5fa; }
+
+        /* ── CONTENIDO ────────────────────────────────────────────── */
+        .tab-panel-inf { display: none; padding: 24px 32px; }
+        .tab-panel-inf.active { display: block; }
+
+        /* Grid de gráficos */
+        .charts-2col { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; margin-bottom: 16px; }
+        .charts-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
+        .charts-full { margin-bottom: 16px; }
+
+        .chart-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0,0,0,.07);
+            padding: 18px 20px;
+        }
+        .chart-title {
+            font-size: .85rem;
+            font-weight: 700;
+            color: #374151;
+            margin: 0 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Sub-KPIs dentro de panel */
+        .mini-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+        .mini-kpi {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 16px;
+            box-shadow: 0 1px 5px rgba(0,0,0,.06);
+            border-top: 3px solid #3b82f6;
+        }
+        .mini-kpi.green  { border-top-color: #059669; }
+        .mini-kpi.amber  { border-top-color: #d97706; }
+        .mini-kpi.red    { border-top-color: #dc2626; }
+        .mini-kpi.purple { border-top-color: #7c3aed; }
+        .mk-val   { font-size: 1.5rem; font-weight: 800; color: #111; line-height: 1; }
+        .mk-label { font-size: .72rem; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+
+        /* Tabla común */
+        .data-table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+        th {
+            background: #f8fafc;
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 2px solid #e5e7eb;
+            color: #374151;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            white-space: nowrap;
+        }
+        td { padding: 9px 10px; border-bottom: 1px solid #f3f4f6; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f9fafb; }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:.75rem; font-weight:700; }
+        .badge-red    { background:#fee2e2; color:#dc2626; }
+        .badge-green  { background:#d1fae5; color:#059669; }
+        .badge-blue   { background:#dbeafe; color:#1d4ed8; }
+        .badge-amber  { background:#fef3c7; color:#b45309; }
+        .badge-purple { background:#ede9fe; color:#7c3aed; }
+
+        /* Barra mini */
+        .mini-bar { height:6px; background:#f3f4f6; border-radius:3px; margin-top:4px; }
+        .mini-bar-fill { height:6px; border-radius:3px; background:#2563c0; }
+
+        .placeholder-msg { text-align:center; color:#9ca3af; padding:32px; font-size:.88rem; }
+        .loading-msg { text-align:center; color:#9ca3af; padding:48px; font-size:.88rem; }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABECERA FIJA CON KPIs -->
+    <div class="inf-header">
+        <div class="inf-header-top">
+            <div>
+                <div class="inf-title">📊 Informes y Estadísticas</div>
+                <div class="inf-subtitle">Datos en tiempo real · Base de datos LIN</div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center">
+                <div class="period-pills" id="period-pills">
+                    <button class="period-pill" data-dias="30">30 días</button>
+                    <button class="period-pill" data-dias="90">90 días</button>
+                    <button class="period-pill active" data-dias="365">1 año</button>
+                    <button class="period-pill" data-dias="9999">Todo</button>
+                </div>
+                <button class="btn-refresh" id="btn-refresh">↻ Actualizar</button>
+            </div>
+        </div>
+        <div class="kpi-row">
+            <div class="kpi-cell">
+                <div class="kpi-num" id="kpi-articulos">—</div>
+                <div class="kpi-label">Artículos</div>
+            </div>
+            <div class="kpi-cell success">
+                <div class="kpi-num" id="kpi-ubicaciones">—</div>
+                <div class="kpi-label">Ubicaciones con stock</div>
+            </div>
+            <div class="kpi-cell amber">
+                <div class="kpi-num" id="kpi-movimientos">—</div>
+                <div class="kpi-label" id="kpi-movimientos-label">Movimientos este año</div>
+            </div>
+            <div class="kpi-cell danger">
+                <div class="kpi-num" id="kpi-alertas">—</div>
+                <div class="kpi-label">⚠ Alertas stock</div>
+            </div>
+        </div>
+
+        <!-- SUBMENU PESTAÑAS -->
+        <nav class="tab-nav-inf">
+            <button class="tab-btn-inf active" data-tab="resumen">📈 Resumen</button>
+            <button class="tab-btn-inf" data-tab="trabajadores">👷 Trabajadores</button>
+            <button class="tab-btn-inf" data-tab="almacen">🏗️ Almacén</button>
+            <button class="tab-btn-inf" data-tab="movimientos">🔄 Movimientos</button>
+            <button class="tab-btn-inf" data-tab="proveedores">🏭 Proveedores</button>
+            <button class="tab-btn-inf" data-tab="articulos">📦 Artículos</button>
+        </nav>
+    </div>
+
+    <!-- ── TAB: RESUMEN ────────────────────────────────────────────── -->
+    <div class="tab-panel-inf active" id="tab-resumen">
+        <div class="charts-2col">
+            <div class="chart-card">
+                <div class="chart-title">📈 Movimientos por día — últimos 30 días</div>
+                <canvas id="chart-movimientos" height="200"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🏆 Top 10 artículos más movidos</div>
+                <canvas id="chart-top" height="200"></canvas>
+            </div>
+        </div>
+        <div class="charts-full chart-card">
+            <div class="chart-title">📊 Entradas vs Salidas — últimas 8 semanas</div>
+            <canvas id="chart-evs" height="100"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">⚠️ Artículos con stock por debajo del mínimo</div>
+            <div id="tabla-alertas"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <!-- ── TAB: TRABAJADORES ──────────────────────────────────────── -->
+    <div class="tab-panel-inf" id="tab-trabajadores">
+        <div class="mini-kpi-row" id="mkpi-trabajadores">
+            <div class="loading-msg" style="grid-column:span 3">Cargando...</div>
+        </div>
+        <div class="charts-2col">
+            <div class="chart-card">
+                <div class="chart-title">👷 Movimientos por trabajador — últimos 30 días</div>
+                <canvas id="chart-trabajadores-mov" height="220"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📦 Unidades movidas por trabajador</div>
+                <canvas id="chart-trabajadores-uni" height="220"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">🏅 Ranking de eficiencia — últimos 30 días</div>
+            <div id="tabla-trabajadores"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <!-- ── TAB: ALMACÉN ───────────────────────────────────────────── -->
+    <div class="tab-panel-inf" id="tab-almacen">
+        <div class="mini-kpi-row" id="mkpi-almacen">
+            <div class="loading-msg" style="grid-column:span 3">Cargando...</div>
+        </div>
+        <div class="charts-2col">
+            <div class="chart-card">
+                <div class="chart-title">🏗️ Stock total por almacén</div>
+                <canvas id="chart-almacen-stock" height="220"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📍 Ocupación del almacén</div>
+                <canvas id="chart-almacen-ocu" height="220"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">🔥 Ubicaciones más activas — últimos 30 días</div>
+            <div id="tabla-ubicaciones"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <!-- ── TAB: MOVIMIENTOS ───────────────────────────────────────── -->
+    <div class="tab-panel-inf" id="tab-movimientos">
+        <div class="charts-2col" style="margin-bottom:16px">
+            <div class="chart-card">
+                <div class="chart-title">🔄 Distribución por tipo de movimiento</div>
+                <div style="max-width:340px;margin:0 auto"><canvas id="chart-mov-tipo" height="260"></canvas></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📅 Actividad por día de la semana</div>
+                <canvas id="chart-mov-semana" height="260"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">🕐 Últimos 20 movimientos registrados</div>
+            <div id="tabla-ultimos"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <!-- ── TAB: PROVEEDORES ───────────────────────────────────────── -->
+    <div class="tab-panel-inf" id="tab-proveedores">
+        <div class="charts-full chart-card" style="margin-bottom:16px">
+            <div class="chart-title">🏭 Top proveedores por entradas — últimos 90 días</div>
+            <canvas id="chart-prov-mov" height="110"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">📋 Ranking de proveedores</div>
+            <div id="tabla-proveedores"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <!-- ── TAB: ARTÍCULOS ─────────────────────────────────────────── -->
+    <div class="tab-panel-inf" id="tab-articulos">
+        <div class="charts-2col" style="margin-bottom:16px">
+            <div class="chart-card">
+                <div class="chart-title">🔄 Rotación: top artículos por unidades movidas</div>
+                <canvas id="chart-art-rotacion" height="220"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📂 Stock por familia de artículo</div>
+                <canvas id="chart-art-familia" height="220"></canvas>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">⏸️ Artículos con stock pero sin movimiento en los últimos 30 días</div>
+            <div id="tabla-sin-mov"><div class="loading-msg">Cargando...</div></div>
+        </div>
+    </div>
+
+    <script src="../../js/navegacion.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="../../js/informes/index.js"></script>
+</body>
+</html>

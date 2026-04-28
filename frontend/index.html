@@ -45,7 +45,7 @@
         /* ── CARDS GRID ─────────────────────────────────────────── */
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             padding: 28px 32px 24px;
             max-width: 1080px;
@@ -177,6 +177,21 @@
                 <a href="pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html"><span class="link-dot"></span>Mínimos y máximos</a>
                 <a href="pages/opciones/logistica-y-pedidos/expediciones/index.html"><span class="link-dot"></span>Expediciones desde pedido</a>
                 <a href="pages/opciones/sistema/contadores/index.html"><span class="link-dot"></span>Contadores del sistema</a>
+            </div>
+        </div>
+
+        <!-- Informes -->
+        <div class="section-card">
+            <a class="card-header" href="pages/informes/index.html">
+                <span class="card-icon">📊</span>
+                <span class="card-title">Informes</span>
+                <span class="card-arrow">›</span>
+            </a>
+            <div class="card-links">
+                <a href="pages/informes/index.html"><span class="link-dot"></span>KPIs generales</a>
+                <a href="pages/informes/index.html"><span class="link-dot"></span>Movimientos por día</a>
+                <a href="pages/informes/index.html"><span class="link-dot"></span>Top artículos</a>
+                <a href="pages/informes/index.html"><span class="link-dot"></span>Alertas de stock</a>
             </div>
         </div>
 

@@ -134,6 +134,18 @@ const SGA = {
     copiaSeguridad: {
         crear: () => _post('/copia-seguridad', {}),
     },
+    estadisticas: {
+        resumen:              (p={}) => _get('/estadisticas/resumen?'              + new URLSearchParams(p)),
+        movimientosPorDia:    (p={}) => _get('/estadisticas/movimientos-por-dia?' + new URLSearchParams(p)),
+        topArticulos:         (p={}) => _get('/estadisticas/top-articulos?'       + new URLSearchParams(p)),
+        entradasVsSalidas:    (p={}) => _get('/estadisticas/entradas-vs-salidas?' + new URLSearchParams(p)),
+        alertasStock:         (p={}) => _get('/estadisticas/alertas-stock?'       + new URLSearchParams(p)),
+        trabajadores:         (p={}) => _get('/estadisticas/trabajadores?'        + new URLSearchParams(p)),
+        almacen:              (p={}) => _get('/estadisticas/almacen?'             + new URLSearchParams(p)),
+        porTipo:              (p={}) => _get('/estadisticas/por-tipo?'            + new URLSearchParams(p)),
+        proveedoresActividad: (p={}) => _get('/estadisticas/proveedores-actividad?' + new URLSearchParams(p)),
+        articulosAnalisis:    (p={}) => _get('/estadisticas/articulos-analisis?'  + new URLSearchParams(p)),
+    },
     traspasoInventario: {
         traspasar: data => _post('/traspasar-inventarios', data),
         importarRegularizaciones: data => _post('/importar-regularizaciones', data),
