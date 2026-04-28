@@ -108,59 +108,8 @@
     </main>
 
     <script src="../../../../js/navegacion.js"></script>
-    <script>
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        let terminales = [];
-        let currentIdx = 0;
-
-        async function cargarTerminales() {
-            try {
-                const res = await fetch('http://localhost:3000/terminales-pda');
-                terminales = await res.json();
-                if (terminales.length) mostrarTerminal(0);
-            } catch {
-                console.error('Error al cargar terminales');
-            }
-        }
-
-        function mostrarTerminal(idx) {
-            currentIdx = idx;
-            const t = terminales[idx];
-            document.getElementById('f-codigo').value = t.codigo ?? '';
-            document.getElementById('f-nombre').value = t.nombre ?? '';
-            document.getElementById('f-serie').value = t.serie ?? '';
-            document.getElementById('f-ficheros-com').value = t.ficheros_com ?? '';
-            document.getElementById('f-ruta-sinc').value = t.ruta_sinc ?? '';
-            document.getElementById('f-ruta-wifi').value = t.ruta_wifi ?? '';
-        }
-
-        document.getElementById('btn-prev').addEventListener('click', () => {
-            if (currentIdx > 0) mostrarTerminal(currentIdx - 1);
-        });
-        document.getElementById('btn-next').addEventListener('click', () => {
-            if (currentIdx < terminales.length - 1) mostrarTerminal(currentIdx + 1);
-        });
-
-        document.getElementById('btn-nuevo').addEventListener('click', () => {
-            document.getElementById('f-codigo').value = '';
-            document.getElementById('f-nombre').value = '';
-            document.getElementById('f-serie').value = '';
-            document.getElementById('f-ficheros-com').value = '';
-            document.getElementById('f-ruta-sinc').value = '';
-            document.getElementById('f-ruta-wifi').value = '';
-            document.getElementById('f-codigo').focus();
-        });
-
-        cargarTerminales();
-    </script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/sistema/terminales-pda.js"></script>
 </body>
 
 </html>

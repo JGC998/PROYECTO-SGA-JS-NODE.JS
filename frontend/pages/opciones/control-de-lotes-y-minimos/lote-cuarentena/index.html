@@ -17,8 +17,8 @@
                 <h1>🏷️ Lote en Cuarentena por Artículo</h1>
             </div>
             <div class="toolbar-actions">
-                <button class="btn-tool">💾 Guardar</button>
-                <button class="btn-tool secondary">🧹 Limpiar</button>
+                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
             </div>
         </header>
 
@@ -33,16 +33,9 @@
                         <th>Observaciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-num">1</td>
-                        <td><input type="text" class="cell-input"></td>
-                        <td><input type="text" class="cell-input" readonly></td>
-                        <td><input type="text" class="cell-input"></td>
-                        <td><input type="text" class="cell-input"></td>
-                    </tr>
+                <tbody id="tbody-lcuarentena">
                     <tr class="placeholder-row">
-                        <td colspan="5">Introduzca artículos para gestionar los lotes en cuarentena.</td>
+                        <td colspan="5">Pulse Actualizar para cargar los lotes en cuarentena.</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,6 +43,8 @@
     </main>
 
     <script src="../../../../js/navegacion.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/control-de-lotes-y-minimos/lote-cuarentena.js"></script>
 </body>
 
 </html>

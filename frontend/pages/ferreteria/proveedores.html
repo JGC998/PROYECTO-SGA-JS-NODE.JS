@@ -41,43 +41,8 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>PRV-001</strong></td>
-                            <td>Ferretería Industrial S.A.</td>
-                            <td>Pol. Ind. Oeste, Parcela 4</td>
-                            <td>Antonio Martínez</td>
-                            <td>ventas@ferreind.com</td>
-                            <td><span class="rating">⭐⭐⭐⭐</span></td>
-                            <td>
-                                <button class="btn-icon" title="Editar">✏️</button>
-                                <button class="btn-icon" title="Ver Albaranes">📋</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>PRV-002</strong></td>
-                            <td>Suministros Globales SL</td>
-                            <td>Calle de la Forja, 22</td>
-                            <td>Laura Soler</td>
-                            <td>l.soler@sumiglobal.es</td>
-                            <td><span class="rating">⭐⭐⭐⭐⭐</span></td>
-                            <td>
-                                <button class="btn-icon" title="Editar">✏️</button>
-                                <button class="btn-icon" title="Ver Albaranes">📋</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>PRV-003</strong></td>
-                            <td>Herramientas de Precisión</td>
-                            <td>Av. de la Técnica, 105</td>
-                            <td>Carlos Ruiz</td>
-                            <td>info@hprecision.com</td>
-                            <td><span class="rating">⭐⭐⭐</span></td>
-                            <td>
-                                <button class="btn-icon" title="Editar">✏️</button>
-                                <button class="btn-icon" title="Ver Albaranes">📋</button>
-                            </td>
-                        </tr>
+                    <tbody id="tbody-proveedores">
+                        <tr><td colspan="7" class="loading">Cargando proveedores...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -85,6 +50,8 @@
     </main>
 
     <script src="../../js/navegacion.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/ferreteria/proveedores.js"></script>
 </body>
 
 </html>

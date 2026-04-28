@@ -7,6 +7,27 @@
     <title>SGA LIN - Útil</title>
     <link rel="stylesheet" href="../../css/navegacion.css">
     <link rel="stylesheet" href="../../css/util/index.css">
+    <style>
+        .menu-card.disabled {
+            opacity: .45;
+            cursor: not-allowed;
+            pointer-events: none;
+            position: relative;
+        }
+        .soon-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6c757d;
+            color: white;
+            font-size: .65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,23 +39,26 @@
         </header>
 
         <div class="card-grid">
-            <a href="#" class="menu-card">
+            <div class="menu-card disabled">
+                <span class="soon-badge">Próximamente</span>
                 <div class="icon">🗄️</div>
                 <h3>Adaptación BBDD</h3>
                 <p>Actualización y adaptación de la estructura de base de datos.</p>
-            </a>
+            </div>
 
-            <a href="#" class="menu-card">
+            <div class="menu-card disabled">
+                <span class="soon-badge">Próximamente</span>
                 <div class="icon">📊</div>
                 <h3>Generar información TABLEAU</h3>
                 <p>Exportación de datos para análisis en TABLEAU.</p>
-            </a>
+            </div>
 
-            <a href="#" class="menu-card">
+            <div class="menu-card disabled">
+                <span class="soon-badge">Próximamente</span>
                 <div class="icon">🔧</div>
                 <h3>Reconstruir Stock</h3>
                 <p>Recalcula y reconstruye los valores de stock desde los movimientos.</p>
-            </a>
+            </div>
         </div>
     </main>
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN - Usuarios</title>
+    <link rel="stylesheet" href="../../../../../css/navegacion.css">
+    <style>
+        .page-toolbar { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #ddd; margin-bottom:12px; }
+        .toolbar-left h1 { font-size:1.2rem; margin:0; }
+        .toolbar-actions { display:flex; gap:8px; }
+        .search-bar { width:100%; padding:6px 10px; border:1px solid #ccc; border-radius:3px; margin-bottom:10px; box-sizing:border-box; }
+        .main-layout { display:grid; grid-template-columns:1fr 300px; gap:16px; }
+        .table-wrapper { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; font-size:.85rem; }
+        th { background:#f0f4f8; padding:6px 8px; text-align:left; border-bottom:2px solid #ccc; white-space:nowrap; }
+        td { padding:5px 8px; border-bottom:1px solid #eee; }
+        tr:hover td { background:#f9fafb; }
+        tr.selected td { background:#e8f0fe; }
+        .placeholder-row td { text-align:center; color:#888; padding:20px; }
+        .btn-icon { background:none; border:none; cursor:pointer; font-size:1rem; }
+        .form-panel { background:#fff; border:1px solid #ddd; border-radius:6px; padding:16px; }
+        .form-panel h3 { margin:0 0 12px; font-size:1rem; }
+        .form-row { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
+        .form-row label { font-size:.82rem; color:#555; }
+        .form-row input { padding:5px 7px; border:1px solid #ccc; border-radius:3px; }
+        .btn-tool { padding:5px 12px; background:#0057b7; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:.85rem; }
+        .btn-tool:hover { background:#004499; }
+        .btn-tool.secondary { background:#6c757d; }
+        .btn-tool.secondary:hover { background:#5a6268; }
+        .form-actions { display:flex; gap:8px; margin-top:12px; }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-toolbar">
+            <div class="toolbar-left">
+                <h1>👤 Usuarios del Sistema</h1>
+            </div>
+            <div class="toolbar-actions">
+                <button class="btn-tool secondary" id="btn-nuevo">Nuevo</button>
+                <button class="btn-tool" id="btn-guardar">Guardar</button>
+            </div>
+        </header>
+
+        <input type="text" class="search-bar" placeholder="Buscar usuario...">
+
+        <div class="main-layout">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Nivel</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-usuarios">
+                        <tr class="placeholder-row">
+                            <td colspan="5">Cargando usuarios...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-panel">
+                <h3>Datos del usuario</h3>
+                <div class="form-row">
+                    <label>Código</label>
+                    <input type="text" id="usu-codigo">
+                </div>
+                <div class="form-row">
+                    <label>Nombre</label>
+                    <input type="text" id="usu-nombre">
+                </div>
+                <div class="form-row">
+                    <label>Tipo</label>
+                    <input type="text" id="usu-tipo">
+                </div>
+                <div class="form-row">
+                    <label>Nivel</label>
+                    <input type="text" id="usu-nivel">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../../../js/navegacion.js"></script>
+    <script src="../../../../../js/api.js"></script>
+    <script src="../../../../../js/opciones/sistema/usuarios.js"></script>
+</body>
+
+</html>

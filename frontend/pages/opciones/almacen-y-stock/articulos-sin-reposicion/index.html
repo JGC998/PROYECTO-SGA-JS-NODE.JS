@@ -17,13 +17,13 @@
                 <h1>🔄 Artículos sin Reposición Automática</h1>
             </div>
             <div class="toolbar-actions">
-                <button class="btn-tool">Actualizar (F5)</button>
+                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
             </div>
         </header>
 
         <div class="filter-bar">
             <label>Artículo:</label>
-            <input type="text" class="input-code" placeholder="">
+            <input type="text" class="input-code" id="f-articulo" placeholder="">
             <button class="btn-browse">...</button>
             <input type="text" class="input-desc" placeholder="" readonly>
         </div>
@@ -37,7 +37,7 @@
                         <th>Nombre de artículo</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody-asr">
                     <tr class="placeholder-row">
                         <td colspan="3">No hay artículos sin reposición automática.</td>
                     </tr>
@@ -47,6 +47,8 @@
     </main>
 
     <script src="../../../../js/navegacion.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/articulos-sin-reposicion.js"></script>
 </body>
 
 </html>

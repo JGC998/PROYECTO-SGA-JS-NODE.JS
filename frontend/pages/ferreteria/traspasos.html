@@ -29,19 +29,19 @@
                 <div class="form-grid">
                     <div class="field">
                         <label>Fecha Traspaso</label>
-                        <input type="date" value="2026-04-23">
+                        <input type="date" id="tra-fecha">
                     </div>
                     <div class="field">
                         <label>Cód. Operario</label>
-                        <input type="text" placeholder="Escanear tarjeta...">
+                        <input type="text" id="tra-op-cod" placeholder="Escanear tarjeta...">
                     </div>
                     <div class="field span-2">
                         <label>Nombre del Operario</label>
-                        <input type="text" readonly class="readonly-input" placeholder="Nombre del responsable">
+                        <input type="text" id="tra-op-nombre" readonly class="readonly-input" placeholder="Nombre del responsable">
                     </div>
                     <div class="field span-4">
                         <label>Motivo del Traspaso</label>
-                        <input type="text" placeholder="Ej: Reubicación de stock por reorganización de almacén">
+                        <input type="text" id="tra-motivo" placeholder="Ej: Reubicación de stock por reorganización de almacén">
                     </div>
                 </div>
             </fieldset>
@@ -52,27 +52,27 @@
                     <div class="form-stack">
                         <div class="field">
                             <label>Ubicación Origen</label>
-                            <input type="text" placeholder="Ej: A-12-B">
+                            <input type="text" id="tra-ori-ubi" placeholder="Ej: A-12-B">
                         </div>
                         <div class="field">
                             <label>Almacén</label>
-                            <input type="text" readonly class="readonly-input" placeholder="Auto">
+                            <input type="text" id="tra-ori-alm" readonly class="readonly-input" placeholder="Auto">
                         </div>
                         <div class="field">
                             <label>Cód. Artículo</label>
-                            <input type="text" placeholder="F1-001...">
+                            <input type="text" id="tra-art-cod" placeholder="F1-001...">
                         </div>
                         <div class="field">
                             <label>Descripción</label>
-                            <input type="text" readonly class="readonly-input" placeholder="Descripción del artículo">
+                            <input type="text" id="tra-art-nombre" readonly class="readonly-input" placeholder="Descripción del artículo">
                         </div>
                         <div class="field">
                             <label>Stock Disponible</label>
-                            <input type="text" readonly class="readonly-input" placeholder="0">
+                            <input type="text" id="tra-stock" readonly class="readonly-input" placeholder="0">
                         </div>
                         <div class="field">
                             <label>Cantidad a Traspasar</label>
-                            <input type="number" placeholder="0" min="1">
+                            <input type="number" id="tra-cantidad" placeholder="0" min="1">
                         </div>
                     </div>
                 </fieldset>
@@ -84,15 +84,15 @@
                     <div class="form-stack">
                         <div class="field">
                             <label>Ubicación Destino</label>
-                            <input type="text" placeholder="Ej: B-05-A">
+                            <input type="text" id="tra-des-ubi" placeholder="Ej: B-05-A">
                         </div>
                         <div class="field">
                             <label>Almacén</label>
-                            <input type="text" readonly class="readonly-input" placeholder="Auto">
+                            <input type="text" id="tra-des-alm" readonly class="readonly-input" placeholder="Auto">
                         </div>
                         <div class="field">
                             <label>Lote Destino</label>
-                            <input type="text" placeholder="Opcional...">
+                            <input type="text" id="tra-des-lote" placeholder="Opcional...">
                         </div>
                     </div>
                 </fieldset>
@@ -115,7 +115,7 @@
                             <th>Acción</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody-traspasos">
                         <tr class="placeholder-row">
                             <td colspan="6">No hay líneas añadidas al traspaso.</td>
                         </tr>
@@ -126,6 +126,8 @@
     </main>
 
     <script src="../../js/navegacion.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/ferreteria/traspasos.js"></script>
 </body>
 
 </html>
