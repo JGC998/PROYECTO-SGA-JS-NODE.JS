@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { sql, getPool } = require('./db');
 const healthRoutes = require('./routes/health.routes');
+const systemRoutes = require('./routes/system.routes');
 
 const app = express();
 app.use(helmet());
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200, standardHeaders: true, legacyHeaders: false }));
 app.use(express.json());
 app.use('/', healthRoutes);
+app.use('/', systemRoutes);
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -32,24 +34,6 @@ function normalizeDate(value, fallback) {
 function daysAgo(days) {
     return new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 }
-
-app.get('/schema', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query(`
-            SELECT t.name AS tabla, c.name AS columna, tp.name AS tipo, c.max_length
-            FROM sys.tables t
-            JOIN sys.columns c ON c.object_id = t.object_id
-            JOIN sys.types tp ON tp.user_type_id = c.user_type_id
-            ORDER BY t.name, c.column_id`);
-        const schema = {};
-        for (const row of r.recordset) {
-            if (!schema[row.tabla]) schema[row.tabla] = [];
-            schema[row.tabla].push(`${row.columna} (${row.tipo})`);
-        }
-        res.json(schema);
-    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
 
 // ─── ARTÍCULOS ────────────────────────────────────────────────────────────────
 
@@ -1116,35 +1100,6 @@ app.get('/stats', async (req, res) => {
             ubicaciones: ubi.recordset[0].total
         });
     } catch (err) { serverError(res, err); }
-});
-
-app.get('/tablas', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT name FROM sys.tables ORDER BY name');
-        res.json(r.recordset);
-    } catch (err) { res.status(500).send('Error interno del servidor'); }
-});
-
-// Tablas que el endpoint /datos/:tabla está autorizado a exponer
-const TABLAS_PERMITIDAS = new Set(['ARTICULO', 'STOCK', 'UBICACION', 'PROVEEDOR', 'CLIENTE', 'ALBARANCS', 'ALMACENES']);
-
-app.get('/datos/:tabla', async (req, res) => {
-    try {
-        const tabla = (req.params.tabla || '').toUpperCase();
-
-        if (!/^[a-zA-Z0-9_]+$/.test(tabla)) {
-            return res.status(400).send('Nombre de tabla no válido');
-        }
-
-        if (!TABLAS_PERMITIDAS.has(tabla)) {
-            return res.status(403).json({ error: 'Tabla no permitida' });
-        }
-
-        const pool = await getPool();
-        const r = await q(pool).query(`SELECT TOP 100 * FROM [${tabla}]`);
-        res.json(r.recordset);
-    } catch (err) { res.status(500).send('Error interno del servidor'); }
 });
 
 app.post('/entrada', async (req, res) => {
