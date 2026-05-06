@@ -1194,7 +1194,10 @@ app.post('/traspaso', async (req, res) => {
                 .query('SELECT STOCAN FROM STOCK WHERE STOARTCOD = @cod AND STOUBI = @ubi AND STOLOT = @lot');
 
             if (!origen.recordset.length || origen.recordset[0].STOCAN < cantNum) {
-                throw new Error('Stock insuficiente para realizar el traspaso');
+                const e = new Error('Stock insuficiente para realizar el traspaso');
+                e.isBusinessError = true;
+                e.statusCode = 409;
+                throw e;
             }
 
             await transaction.request().input('cod', cod).input('ubi', ubiOri).input('lot', lot).input('cant', cantNum)
@@ -1213,7 +1216,10 @@ app.post('/traspaso', async (req, res) => {
             await transaction.commit();
             res.json({ success: true, message: 'Traspaso completado' });
         } catch (err) { await transaction.rollback(); throw err; }
-    } catch (err) { res.status(500).json({ success: false, message: err.number !== undefined ? 'Error interno del servidor' : err.message }); }
+    } catch (err) {
+        if (err.isBusinessError) return res.status(err.statusCode).json({ success: false, message: err.message });
+        res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    }
 });
 
 app.post('/salida', async (req, res) => {

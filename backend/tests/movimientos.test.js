@@ -104,3 +104,32 @@ describe("POST /traspaso — validaciones de input (FASE 6)", () => {
     expect(res.body).toHaveProperty("error");
   });
 });
+
+// ─── POST /traspaso — semántica HTTP correcta (FASE 8) ───────────────────────
+
+describe("POST /traspaso — errores de negocio (FASE 8)", () => {
+  test("stock insuficiente debe devolver 409, no 500", async () => {
+    // Artículo inexistente → stock = 0 → stock insuficiente → error de negocio
+    const res = await request(app)
+      .post("/traspaso")
+      .send({ cod: "__TEST_INEXISTENTE__", ubiOri: "UBI1", ubiDes: "UBI2", lot: "LOT1", cant: 9999 });
+    expect(res.statusCode).toBe(409);
+    expect(res.body.success).toBe(false);
+    expect(res.body.message).toMatch(/stock insuficiente/i);
+  });
+
+  test("stock insuficiente NO debe devolver 500", async () => {
+    const res = await request(app)
+      .post("/traspaso")
+      .send({ cod: "__TEST_INEXISTENTE__", ubiOri: "UBI1", ubiDes: "UBI2", lot: "LOT1", cant: 9999 });
+    expect(res.statusCode).not.toBe(500);
+  });
+
+  test("mensaje de stock insuficiente debe seguir siendo visible al cliente", async () => {
+    const res = await request(app)
+      .post("/traspaso")
+      .send({ cod: "__TEST_INEXISTENTE__", ubiOri: "UBI1", ubiDes: "UBI2", lot: "LOT1", cant: 9999 });
+    expect(res.body).toHaveProperty("message");
+    expect(res.body.message).toBeTruthy();
+  });
+});
