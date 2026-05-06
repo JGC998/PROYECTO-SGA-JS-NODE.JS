@@ -82,20 +82,22 @@ app.get('/articulos', async (req, res) => {
 
 app.get('/articulos/:cod', async (req, res) => {
     try {
+        const cod = req.params.cod;
+        if (!cod || cod.length > 50) return res.status(400).json({ error: 'Código no válido' });
         const pool = await getPool();
         const [art, stock] = await Promise.all([
-            q(pool).input('cod', req.params.cod)
+            q(pool).input('cod', cod)
                 .query(`SELECT ARTCOD AS articulo, ARTNOM AS nombre,
                     ARTSTOMIN AS stock_minimo, ARTSTOMAX AS stock_maximo,
                     ARTCOS AS precio_costo, ARTDES1 AS dto, ARTCOL AS color,
                     ARTMEDCOD AS medida, ARTMAT AS material, ARTCOD2 AS codigo
                     FROM ARTICULO WHERE ARTCOD = @cod`),
-            q(pool).input('cod', req.params.cod)
+            q(pool).input('cod', cod)
                 .query('SELECT STOUBI, STOLOT, STOCAN FROM STOCK WHERE STOARTCOD = @cod AND STOCAN > 0 ORDER BY STOUBI')
         ]);
         if (!art.recordset.length) return res.status(404).json({ error: 'Artículo no encontrado' });
         res.json({ ...art.recordset[0], stock: stock.recordset });
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
 });
 
 app.post('/articulos', async (req, res) => {
@@ -211,8 +213,10 @@ app.get('/operarios/:cod', async (req, res) => {
 
 app.get('/stock/:cod', async (req, res) => {
     try {
+        const cod = req.params.cod;
+        if (!cod || cod.length > 50) return res.status(400).json({ error: 'Código no válido' });
         const pool = await getPool();
-        const r = await q(pool).input('cod', req.params.cod)
+        const r = await q(pool).input('cod', cod)
             .query(`SELECT s.STOUBI, s.STOLOT, s.STOCAN,
                 u.UBINOM, u.UBIALMCOD
                 FROM STOCK s
@@ -220,7 +224,7 @@ app.get('/stock/:cod', async (req, res) => {
                 WHERE s.STOARTCOD = @cod AND s.STOCAN > 0
                 ORDER BY s.STOUBI`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
 });
 
 // ─── ALMACENES ────────────────────────────────────────────────────────────────
@@ -414,7 +418,7 @@ app.get('/consulta-de-stock', async (req, res) => {
                 ${cond}
                 ORDER BY s.STOUBI, s.STOARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
 });
 
 // ─── MÍNIMOS Y MÁXIMOS ────────────────────────────────────────────────────────
@@ -1146,7 +1150,7 @@ app.get('/datos/:tabla', async (req, res) => {
 
         const r = await q(pool).query(`SELECT TOP 100 * FROM [${tabla}]`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).send(err.message); }
+    } catch (err) { res.status(500).send('Error interno del servidor'); }
 });
 
 app.post('/entrada', async (req, res) => {
