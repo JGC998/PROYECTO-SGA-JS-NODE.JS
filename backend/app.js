@@ -5,6 +5,8 @@ const rateLimit = require('express-rate-limit');
 const { sql, getPool } = require('./db');
 const healthRoutes = require('./routes/health.routes');
 const systemRoutes = require('./routes/system.routes');
+const tercerosRoutes = require('./routes/terceros.routes');
+const configRoutes = require('./routes/config.routes');
 
 const app = express();
 app.use(helmet());
@@ -13,6 +15,8 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200, standardHeaders: true, l
 app.use(express.json());
 app.use('/', healthRoutes);
 app.use('/', systemRoutes);
+app.use('/', tercerosRoutes);
+app.use('/', configRoutes);
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -99,95 +103,6 @@ app.post('/articulos', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
-// ─── PROVEEDORES ──────────────────────────────────────────────────────────────
-
-app.get('/proveedores', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT TOP 300
-                CLICOD AS codigo, CLIRAZ AS razon_social, CLINOM AS nombre,
-                CLIDIR AS direccion, CLIPOSCIU AS localidad,
-                CLINIF AS cif, CLITEL AS telefono,
-                CLIPERCON AS contacto, CLIEMA AS email
-                FROM PROVEEDOR
-                WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b OR CLINIF LIKE @b
-                ORDER BY CLICOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.get('/proveedores/:cod', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).input('cod', req.params.cod)
-            .query(`SELECT CLICOD AS codigo, CLINOM AS nombre, CLIRAZ AS razon_social,
-                CLIDIR AS direccion, CLINIF AS cif, CLITEL AS telefono,
-                CLIPERCON AS contacto, CLIEMA AS email, CLIPOSCIU AS localidad
-                FROM PROVEEDOR WHERE CLICOD = @cod`);
-        if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
-        res.json(r.recordset[0]);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── CLIENTES ─────────────────────────────────────────────────────────────────
-
-app.get('/clientes', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT TOP 300
-                CLICOD AS codigo, CLICENCOD AS centro, CLIRAZ AS razon_social,
-                CLINOM AS nombre, CLIDIR AS direccion, CLIPOSCIU AS localidad,
-                CLINIF AS cif, CLITEL AS telefono, CLIEMA AS email
-                FROM CLIENTE
-                WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b
-                ORDER BY CLICOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.get('/clientes/:cod', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).input('cod', req.params.cod)
-            .query(`SELECT CLICOD AS codigo, CLINOM AS nombre, CLIRAZ AS razon_social,
-                CLIDIR AS direccion, CLINIF AS cif, CLITEL AS telefono,
-                CLIEMA AS email, CLIPOSCIU AS localidad
-                FROM CLIENTE WHERE CLICOD = @cod`);
-        if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
-        res.json(r.recordset[0]);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── OPERARIOS (usuarios del sistema) ─────────────────────────────────────────
-
-app.get('/operarios', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT USUCOD AS codigo, USUNOM AS nombre,
-                USUTIP AS tipo, USUNIV AS nivel
-                FROM SGAUSUARIO
-                WHERE USUCOD LIKE @b OR USUNOM LIKE @b
-                ORDER BY USUCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.get('/operarios/:cod', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).input('cod', req.params.cod)
-            .query('SELECT USUCOD AS codigo, USUNOM AS nombre, USUTIP AS tipo, USUNIV AS nivel FROM SGAUSUARIO WHERE USUCOD = @cod');
-        if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
-        res.json(r.recordset[0]);
-    } catch (err) { serverError(res, err); }
-});
-
 // ─── STOCK ────────────────────────────────────────────────────────────────────
 
 app.get('/stock/:cod', async (req, res) => {
@@ -204,28 +119,6 @@ app.get('/stock/:cod', async (req, res) => {
                 ORDER BY s.STOUBI`);
         res.json(r.recordset);
     } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
-// ─── ALMACENES ────────────────────────────────────────────────────────────────
-
-app.get('/almacenes', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT ALMCOD AS codigo, ALMNOM AS nombre FROM ALMACENES ORDER BY ALMCOD');
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/almacenes', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { cod, nom } = req.body;
-        await q(pool).input('cod', cod).input('nom', nom)
-            .query(`IF EXISTS (SELECT 1 FROM ALMACENES WHERE ALMCOD=@cod)
-                UPDATE ALMACENES SET ALMNOM=@nom WHERE ALMCOD=@cod
-            ELSE INSERT INTO ALMACENES (ALMCOD,ALMNOM) VALUES (@cod,@nom)`);
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
 });
 
 // ─── UBICACIONES ──────────────────────────────────────────────────────────────
@@ -433,31 +326,6 @@ app.post('/minimos-maximos', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
-// ─── SUBFAMILIAS ──────────────────────────────────────────────────────────────
-
-app.get('/subfamilias', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT SFACOD AS codigo, SFANOM AS nombre, SFANOLOT AS sin_control_lote FROM SUBFAMILIA ORDER BY SFACOD');
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/subfamilias', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            if (!r.codigo) continue;
-            await q(pool).input('cod', r.codigo).input('nom', r.nombre || '').input('nol', r.sin_control_lote ? 1 : 0)
-                .query(`IF EXISTS (SELECT 1 FROM SUBFAMILIA WHERE SFACOD=@cod)
-                    UPDATE SUBFAMILIA SET SFANOM=@nom, SFANOLOT=@nol WHERE SFACOD=@cod
-                ELSE INSERT INTO SUBFAMILIA (SFACOD,SFANOM,SFANOLOT) VALUES (@cod,@nom,@nol)`);
-        }
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
 // ─── OBSERVACIONES POR ARTÍCULO Y LOTE ────────────────────────────────────────
 
 app.get('/observaciones-articulo-lote', async (req, res) => {
@@ -590,32 +458,6 @@ app.get('/lote-cuarentena', async (req, res) => {
                 WHERE o.HISARTCOD LIKE @art
                 ORDER BY o.HISARTCOD, o.HISLOT`);
         res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── TERMINALES PDA ───────────────────────────────────────────────────────────
-
-app.get('/terminales-pda', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT repcod AS codigo, repnom AS nombre, repser AS serie, repdat AS tipo_doc, reprutsin AS ruta_sinc, reprutwifi AS ruta_wifi FROM terminalpda ORDER BY repcod');
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/terminales-pda', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { codigo, nombre, serie = '', tipo_doc = '', ruta_sinc = '', ruta_wifi = '' } = req.body;
-        await q(pool)
-            .input('cod', codigo).input('nom', nombre).input('ser', serie)
-            .input('dat', tipo_doc).input('rsin', ruta_sinc).input('rwifi', ruta_wifi)
-            .query(`IF EXISTS (SELECT 1 FROM terminalpda WHERE repcod=@cod)
-                UPDATE terminalpda SET repnom=@nom, repser=@ser, repdat=@dat, reprutsin=@rsin, reprutwifi=@rwifi
-                WHERE repcod=@cod
-            ELSE INSERT INTO terminalpda (repcod,repnom,repser,repdat,reprutsin,reprutwifi)
-                VALUES (@cod,@nom,@ser,@dat,@rsin,@rwifi)`);
-        res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
 
@@ -1299,51 +1141,6 @@ app.post('/generar-ubicaciones', async (req, res) => {
         }
         res.json({ ok: true, creadas });
     } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
-// ─── USUARIOS ─────────────────────────────────────────────────────────────────
-
-app.get('/usuarios', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT USUCOD AS codigo, USUNOM AS nombre,
-                USUTIP AS tipo, USUNIV AS nivel
-                FROM SGAUSUARIO
-                WHERE USUCOD LIKE @b OR USUNOM LIKE @b
-                ORDER BY USUCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/usuarios', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { codigo, nombre, tipo = '', nivel = '' } = req.body;
-        if (!codigo || !nombre) return res.status(400).json({ error: 'Código y nombre requeridos' });
-        await q(pool).input('cod', codigo).input('nom', nombre).input('tip', tipo).input('niv', nivel)
-            .query(`IF EXISTS (SELECT 1 FROM SGAUSUARIO WHERE USUCOD=@cod)
-                UPDATE SGAUSUARIO SET USUNOM=@nom, USUTIP=@tip, USUNIV=@niv WHERE USUCOD=@cod
-            ELSE INSERT INTO SGAUSUARIO (USUCOD,USUNOM,USUTIP,USUNIV) VALUES (@cod,@nom,@tip,@niv)`);
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── CONFIGURACIÓN DE EMPRESA ─────────────────────────────────────────────────
-
-app.get('/configuracion-empresa', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT TOP 1 * FROM EMPRESA');
-        res.json(r.recordset[0] || {});
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/configuracion-empresa', async (req, res) => {
-    try {
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
 });
 
 // ─── CONTADORES ───────────────────────────────────────────────────────────────
