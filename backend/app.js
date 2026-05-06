@@ -53,7 +53,7 @@ app.get('/schema', async (req, res) => {
             schema[row.tabla].push(`${row.columna} (${row.tipo})`);
         }
         res.json(schema);
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
 });
 
 // ─── ARTÍCULOS ────────────────────────────────────────────────────────────────
@@ -1128,26 +1128,25 @@ app.get('/tablas', async (req, res) => {
         const pool = await getPool();
         const r = await q(pool).query('SELECT name FROM sys.tables ORDER BY name');
         res.json(r.recordset);
-    } catch (err) { res.status(500).send(err.message); }
+    } catch (err) { res.status(500).send('Error interno del servidor'); }
 });
+
+// Tablas que el endpoint /datos/:tabla está autorizado a exponer
+const TABLAS_PERMITIDAS = new Set(['ARTICULO', 'STOCK', 'UBICACION', 'PROVEEDOR', 'CLIENTE', 'ALBARANCS', 'ALMACENES']);
 
 app.get('/datos/:tabla', async (req, res) => {
     try {
-        const pool = await getPool();
-        const tabla = req.params.tabla;
+        const tabla = (req.params.tabla || '').toUpperCase();
 
         if (!/^[a-zA-Z0-9_]+$/.test(tabla)) {
             return res.status(400).send('Nombre de tabla no válido');
         }
 
-        const existe = await q(pool)
-            .input('tabla', tabla)
-            .query('SELECT name FROM sys.tables WHERE name = @tabla');
-
-        if (!existe.recordset.length) {
-            return res.status(404).send('Tabla no encontrada');
+        if (!TABLAS_PERMITIDAS.has(tabla)) {
+            return res.status(403).json({ error: 'Tabla no permitida' });
         }
 
+        const pool = await getPool();
         const r = await q(pool).query(`SELECT TOP 100 * FROM [${tabla}]`);
         res.json(r.recordset);
     } catch (err) { res.status(500).send('Error interno del servidor'); }
@@ -1314,10 +1313,21 @@ app.post('/asignar-fecha-stock-inicial', async (req, res) => {
 
 app.post('/generar-ubicaciones', async (req, res) => {
     try {
-        const pool = await getPool();
         const { desde_pasillo = 1, hasta_pasillo = 1, desde_lateral = 11, hasta_lateral = 11,
                 desde_x = 1, hasta_x = 1, desde_y = 1, hasta_y = 1,
-                ancho = 0, alto = 0, palets = 0, multiple = 0, picking = 'Picking' } = req.body;
+                ancho = 0, alto = 0, palets = 0, multiple = 0, picking = 'Picking' } = req.body || {};
+        const rangos = [desde_pasillo, hasta_pasillo, desde_lateral, hasta_lateral, desde_x, hasta_x, desde_y, hasta_y];
+        if (rangos.some(v => !Number.isFinite(Number(v)))) {
+            return res.status(400).json({ error: 'Todos los campos de rango deben ser números válidos' });
+        }
+        const totalIter = (Math.abs(+hasta_pasillo - +desde_pasillo) + 1) *
+                          (Math.abs(+hasta_lateral - +desde_lateral) + 1) *
+                          (Math.abs(+hasta_x - +desde_x) + 1) *
+                          (Math.abs(+hasta_y - +desde_y) + 1);
+        if (totalIter > 1000) {
+            return res.status(400).json({ error: 'El rango genera demasiadas ubicaciones (máximo 1000 por operación)' });
+        }
+        const pool = await getPool();
         const lib = picking === 'Picking' ? 1 : 0;
         let creadas = 0;
         for (let p = +desde_pasillo; p <= +hasta_pasillo; p++) {
@@ -1337,7 +1347,7 @@ app.post('/generar-ubicaciones', async (req, res) => {
             }
         }
         res.json({ ok: true, creadas });
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
 });
 
 // ─── USUARIOS ─────────────────────────────────────────────────────────────────

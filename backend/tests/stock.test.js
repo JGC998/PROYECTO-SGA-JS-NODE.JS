@@ -49,9 +49,10 @@ describe("GET /datos/:tabla — whitelist y hardening (FASE 7)", () => {
     expect(res.statusCode).toBe(400);
   });
 
-  test("tabla inexistente válida debe devolver 404", async () => {
+  test("tabla válida pero no permitida debe devolver 403 (whitelist FASE 9)", async () => {
+    // TABLA_INEXISTENTE_TEST no está en TABLAS_PERMITIDAS → 403 antes de tocar BD
     const res = await request(app).get("/datos/TABLA_INEXISTENTE_TEST");
-    expect(res.statusCode).toBe(404);
+    expect(res.statusCode).toBe(403);
   });
 
   test("tabla con caracteres especiales debe devolver 400", async () => {
@@ -62,7 +63,7 @@ describe("GET /datos/:tabla — whitelist y hardening (FASE 7)", () => {
 
   test("no debe exponer errores SQL internos en caso de fallo", async () => {
     const res = await request(app).get("/datos/TABLA_INEXISTENTE_TEST");
-    // 404 con texto plano — no debe contener mensajes SQL de SQL Server
+    // 403 — no debe contener mensajes SQL de SQL Server
     const bodyStr = String(res.text || JSON.stringify(res.body));
     expect(bodyStr).not.toMatch(/Microsoft|ODBC|SQL Server|LIN\.dbo/i);
   });
