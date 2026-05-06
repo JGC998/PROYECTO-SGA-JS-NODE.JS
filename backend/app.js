@@ -7,6 +7,9 @@ const healthRoutes = require('./routes/health.routes');
 const systemRoutes = require('./routes/system.routes');
 const tercerosRoutes = require('./routes/terceros.routes');
 const configRoutes = require('./routes/config.routes');
+const articulosRoutes = require('./routes/articulos.routes');
+const ubicacionesRoutes = require('./routes/ubicaciones.routes');
+const lotesRoutes = require('./routes/lotes.routes');
 
 const app = express();
 app.use(helmet());
@@ -17,6 +20,9 @@ app.use('/', healthRoutes);
 app.use('/', systemRoutes);
 app.use('/', tercerosRoutes);
 app.use('/', configRoutes);
+app.use('/', articulosRoutes);
+app.use('/', ubicacionesRoutes);
+app.use('/', lotesRoutes);
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -40,48 +46,6 @@ function daysAgo(days) {
 }
 
 // ─── ARTÍCULOS ────────────────────────────────────────────────────────────────
-
-app.get('/articulos', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '', limite = 200 } = req.query;
-        const safeLimit = Math.min(Math.max(parseInt(limite, 10) || 200, 1), 1000);
-
-        const r = await q(pool)
-            .input('b', `%${buscar}%`)
-            .query(`SELECT TOP ${safeLimit}
-                ARTCOD AS articulo, ARTNOM AS nombre,
-                ARTSTOMIN AS stock_minimo, ARTSTOMAX AS stock_maximo,
-                ARTCOS AS precio_costo, ARTDES1 AS dto,
-                ARTCOL AS color, ARTMEDCOD AS medida,
-                ARTMAT AS material, ARTCOD2 AS codigo,
-                ARTBARCOD AS barcode, ARTGRUCOD AS familia
-                FROM ARTICULO
-                WHERE ARTCOD LIKE @b OR ARTNOM LIKE @b OR ARTCOD2 LIKE @b
-                ORDER BY ARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.get('/articulos/:cod', async (req, res) => {
-    try {
-        const cod = req.params.cod;
-        if (!cod || cod.length > 50) return res.status(400).json({ error: 'Código no válido' });
-        const pool = await getPool();
-        const [art, stock] = await Promise.all([
-            q(pool).input('cod', cod)
-                .query(`SELECT ARTCOD AS articulo, ARTNOM AS nombre,
-                    ARTSTOMIN AS stock_minimo, ARTSTOMAX AS stock_maximo,
-                    ARTCOS AS precio_costo, ARTDES1 AS dto, ARTCOL AS color,
-                    ARTMEDCOD AS medida, ARTMAT AS material, ARTCOD2 AS codigo
-                    FROM ARTICULO WHERE ARTCOD = @cod`),
-            q(pool).input('cod', cod)
-                .query('SELECT STOUBI, STOLOT, STOCAN FROM STOCK WHERE STOARTCOD = @cod AND STOCAN > 0 ORDER BY STOUBI')
-        ]);
-        if (!art.recordset.length) return res.status(404).json({ error: 'Artículo no encontrado' });
-        res.json({ ...art.recordset[0], stock: stock.recordset });
-    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
 
 app.post('/articulos', async (req, res) => {
     try {
@@ -119,50 +83,6 @@ app.get('/stock/:cod', async (req, res) => {
                 ORDER BY s.STOUBI`);
         res.json(r.recordset);
     } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
-// ─── UBICACIONES ──────────────────────────────────────────────────────────────
-
-app.get('/ubicaciones', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '', almacen = '' } = req.query;
-        const r = await q(pool)
-            .input('b', `%${buscar}%`).input('alm', `%${almacen}%`)
-            .query(`SELECT TOP 500
-                UBICODUBI AS ubicacion, UBIETI AS etiqueta, UBINOM AS descripcion,
-                UBIANC AS ancho, UBIALT AS alto, UBINUMPAL AS palets,
-                ISNULL(UBILIB,0) AS picking, ISNULL(UBIMUL,0) AS multiple,
-                UBIALMCOD AS ubicacion_tipo, ISNULL(UBINOROT,0) AS exclusiva,
-                ISNULL(UBINOAVIINV,0) AS no_av_inv, UBICON AS articulo
-                FROM UBICACION
-                WHERE (UBICODUBI LIKE @b OR UBINOM LIKE @b OR UBIETI LIKE @b)
-                AND UBIALMCOD LIKE @alm
-                ORDER BY UBICODUBI`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/ubicaciones', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            await q(pool)
-                .input('cod', r.cod).input('eti', r.eti || '').input('nom', r.nom || '')
-                .input('anc', r.anc || 0).input('alt', r.alt || 0)
-                .input('pal', r.pal || 0).input('mul', r.mul ? 1 : 0)
-                .input('alm', r.alm || '').input('lib', r.lib ? 1 : 0)
-                .query(`IF EXISTS (SELECT 1 FROM UBICACION WHERE UBICODUBI=@cod)
-                    UPDATE UBICACION SET UBIETI=@eti, UBINOM=@nom, UBIANC=@anc,
-                        UBIALT=@alt, UBINUMPAL=@pal, UBIMUL=@mul, UBIALMCOD=@alm, UBILIB=@lib
-                    WHERE UBICODUBI=@cod
-                ELSE
-                    INSERT INTO UBICACION (UBICODUBI,UBIETI,UBINOM,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBIALMCOD,UBILIB)
-                    VALUES (@cod,@eti,@nom,@anc,@alt,@pal,@mul,@alm,@lib)`);
-        }
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
 });
 
 // ─── MOVIMIENTOS POR ARTÍCULO ─────────────────────────────────────────────────
@@ -323,141 +243,6 @@ app.post('/minimos-maximos', async (req, res) => {
                 ELSE INSERT INTO ARTICULOSTOMIN (MINARTCOD,MINSTOMIN,MINSTOMAX) VALUES (@art,@min,@max)`);
         }
         res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── OBSERVACIONES POR ARTÍCULO Y LOTE ────────────────────────────────────────
-
-app.get('/observaciones-articulo-lote', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '' } = req.query;
-        const r = await q(pool).input('art', `%${articulo}%`)
-            .query(`SELECT o.HISCON AS id, o.HISARTCOD AS articulo,
-                a.ARTNOM AS nombre, o.HISLOT AS lote, o.HISOBS AS observaciones
-                FROM ARTICULOLOTOBS o
-                LEFT JOIN ARTICULO a ON a.ARTCOD = o.HISARTCOD
-                WHERE o.HISARTCOD LIKE @art
-                ORDER BY o.HISARTCOD, o.HISLOT`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/observaciones-articulo-lote', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            if (!r.articulo) continue;
-            await q(pool).input('art', r.articulo).input('lot', r.lote || '').input('obs', r.observaciones || '')
-                .query(`IF EXISTS (SELECT 1 FROM ARTICULOLOTOBS WHERE HISARTCOD=@art AND HISLOT=@lot)
-                    UPDATE ARTICULOLOTOBS SET HISOBS=@obs WHERE HISARTCOD=@art AND HISLOT=@lot
-                ELSE INSERT INTO ARTICULOLOTOBS (HISARTCOD,HISLOT,HISOBS) VALUES (@art,@lot,@obs)`);
-        }
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── LOTE EXCLUSIVO ───────────────────────────────────────────────────────────
-
-app.get('/lote-exclusivo', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { cliente = '', articulo = '' } = req.query;
-        const r = await q(pool).input('cli', `%${cliente}%`).input('art', `%${articulo}%`)
-            .query(`SELECT e.HISCON AS id, e.HISCLICOD AS cliente,
-                c.CLINOM AS nombre_cliente, e.HISARTCOD AS articulo,
-                a.ARTNOM AS nombre_articulo, e.HISLOT AS lote_exclusivo
-                FROM ARTICULOEXCLOTCLI e
-                LEFT JOIN CLIENTE c ON c.CLICOD = e.HISCLICOD
-                LEFT JOIN ARTICULO a ON a.ARTCOD = e.HISARTCOD
-                WHERE e.HISCLICOD LIKE @cli AND e.HISARTCOD LIKE @art
-                ORDER BY e.HISCLICOD, e.HISARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/lote-exclusivo', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            if (!r.cliente || !r.articulo) continue;
-            await q(pool).input('cli', r.cliente).input('art', r.articulo).input('lot', r.lote || '')
-                .query(`IF NOT EXISTS (SELECT 1 FROM ARTICULOEXCLOTCLI WHERE HISCLICOD=@cli AND HISARTCOD=@art AND HISLOT=@lot)
-                    INSERT INTO ARTICULOEXCLOTCLI (HISCLICOD,HISARTCOD,HISLOT) VALUES (@cli,@art,@lot)`);
-        }
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── LOTE MÍNIMO POR CLIENTE ──────────────────────────────────────────────────
-
-app.get('/lote-minimo', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { cliente = '' } = req.query;
-        const r = await q(pool).input('cli', `%${cliente}%`)
-            .query(`SELECT h.HISCON AS id, h.HISCLICOD AS cliente,
-                c.CLINOM AS nombre_cliente, h.HISDIA AS dias
-                FROM ARTICULOLOTCLI h
-                LEFT JOIN CLIENTE c ON c.CLICOD = h.HISCLICOD
-                WHERE h.HISCLICOD LIKE @cli
-                ORDER BY h.HISCLICOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-app.post('/lote-minimo', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            if (!r.cliente) continue;
-            await q(pool).input('cli', r.cliente).input('dias', r.dias || 0)
-                .query(`IF EXISTS (SELECT 1 FROM ARTICULOLOTCLI WHERE HISCLICOD=@cli)
-                    UPDATE ARTICULOLOTCLI SET HISDIA=@dias WHERE HISCLICOD=@cli
-                ELSE INSERT INTO ARTICULOLOTCLI (HISCLICOD,HISDIA) VALUES (@cli,@dias)`);
-        }
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── LOTE NO UTILIZADO ────────────────────────────────────────────────────────
-
-app.get('/lote-no-utilizado', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { cliente = '', articulo = '' } = req.query;
-        const r = await q(pool).input('cli', `%${cliente}%`).input('art', `%${articulo}%`)
-            .query(`SELECT e.HISCON AS id, e.HISCLICOD AS cliente,
-                c.CLINOM AS nombre_cliente, e.HISARTCOD AS articulo,
-                a.ARTNOM AS nombre_articulo, e.HISLOT AS lote
-                FROM ARTICULOEXCLOTCLI e
-                LEFT JOIN CLIENTE c ON c.CLICOD = e.HISCLICOD
-                LEFT JOIN ARTICULO a ON a.ARTCOD = e.HISARTCOD
-                WHERE e.HISCLICOD LIKE @cli AND e.HISARTCOD LIKE @art
-                ORDER BY e.HISCLICOD, e.HISARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── LOTE CUARENTENA ──────────────────────────────────────────────────────────
-
-app.get('/lote-cuarentena', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '' } = req.query;
-        const r = await q(pool).input('art', `%${articulo}%`)
-            .query(`SELECT o.HISCON AS id, o.HISARTCOD AS articulo,
-                a.ARTNOM AS nombre, o.HISLOT AS lote,
-                CASE WHEN o.HISOBS LIKE '%CUARENTENA%' THEN 1 ELSE 0 END AS en_cuarentena,
-                o.HISOBS AS observaciones
-                FROM ARTICULOLOTOBS o
-                LEFT JOIN ARTICULO a ON a.ARTCOD = o.HISARTCOD
-                WHERE o.HISARTCOD LIKE @art
-                ORDER BY o.HISARTCOD, o.HISLOT`);
-        res.json(r.recordset);
     } catch (err) { serverError(res, err); }
 });
 
