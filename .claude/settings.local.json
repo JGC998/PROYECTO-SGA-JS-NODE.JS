@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:3000/schema\")"
-    ]
-  }
-}

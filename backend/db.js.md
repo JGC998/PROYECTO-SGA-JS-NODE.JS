@@ -1,26 +1,29 @@
-Ejemplo del archivo db.js que debe ir en este mismo directorio, solamente sería necesario borrar la extensión .md,
-y usar las credenciales correctas en la variable dbConfig.
+Plantilla del archivo db.js que debe colocarse en backend/db.js (sin extensión .md).
+Este archivo NO se versiona. Requiere Windows Authentication y ODBC Driver 17 instalado.
 
-const sql = require('mssql');
+const sql = require('mssql/msnodesqlv8');
 
 const dbConfig = {
-    user: 'usuario',
-    password: 'contraseña',
-    server: 'servidor',
-    port: 1433,
-    database: 'base_de_datos',
-    options: {
-        encrypt: false,
-        trustServerCertificate: true
-    }
+    connectionString: 'Driver={ODBC Driver 17 for SQL Server};Server=localhost;Database=LIN;Trusted_Connection=Yes;'
 };
 
-const poolPromise = new sql.ConnectionPool(dbConfig)
-    .connect()
-    .then(pool => {
-        console.log('✅ Conectado a SQL Server');
-        return pool;
-    })
-    .catch(err => console.log('❌ Error de Conexión: ', err));
+let poolPromise = null;
 
-module.exports = { sql, poolPromise };
+async function getPool() {
+    if (!poolPromise) {
+        poolPromise = new sql.ConnectionPool(dbConfig)
+            .connect()
+            .then(pool => {
+                console.log('✅ Conectado a SQL Server (ODBC Driver 17 for SQL Server)');
+                return pool;
+            })
+            .catch(err => {
+                console.log('❌ Error de Conexión:', err);
+                poolPromise = null;
+                throw err;
+            });
+    }
+    return poolPromise;
+}
+
+module.exports = { sql, getPool };

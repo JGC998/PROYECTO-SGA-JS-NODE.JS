@@ -37,6 +37,8 @@ SGA/
 |---|---|
 | Backend | Node.js + Express 5 |
 | Base de datos | SQL Server (mssql 12) |
+| Driver BD | mssql 12 + msnodesqlv8 + ODBC Driver 17 |
+| Autenticación BD | Windows Authentication (sin credenciales en código) |
 | Frontend | HTML5 + CSS3 + Vanilla JS |
 | Comunicación | REST API + Fetch |
 | Puerto API | 3000 |
@@ -114,11 +116,13 @@ Base URL: `http://localhost:3000`
 
 ## Base de datos
 
-SQL Server local — base de datos `LIN`.
+SQL Server local — base de datos `LIN` — autenticación Windows (sin usuario/contraseña).
 
-Tablas principales: `ARTICULO`, `STOCK`, `UBICACION`, `PROVEEDOR`, `OPERARIO`, `CLIENTE`.
+**Requisito:** ODBC Driver 17 for SQL Server instalado en el equipo.
 
-La configuración de conexión (servidor, usuario, contraseña) se mantiene en `backend/db.js`, que **no está versionado** para no exponer credenciales.
+Tablas principales: `ARTICULO`, `STOCK`, `UBICACION`, `PROVEEDOR`, `CLIENTE`, `ALBARANCS`, `ALMACENES`.
+
+La cadena de conexión se mantiene en `backend/db.js` (no versionado). Usar `backend/db.js.md` como plantilla.
 
 ---
 
