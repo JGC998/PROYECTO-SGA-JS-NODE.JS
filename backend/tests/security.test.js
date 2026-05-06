@@ -55,7 +55,7 @@ describe("GET /ruta-inexistente-de-prueba", () => {
 // ─── 4. PAYLOAD MALFORMADO EN /entrada ───────────────────────────────────────
 
 describe("POST /entrada — body con estructura incorrecta", () => {
-  test("[BUG-VAL] no debe devolver 200 cuando el body no contiene los campos esperados", async () => {
+  test("[OK] debe devolver 400 cuando el body no contiene los campos esperados", async () => {
     // La ruta espera: { cod, ubi, lot, cant }
     // Enviamos campos con nombres distintos y valores inválidos
     const response = await request(app)
@@ -66,13 +66,11 @@ describe("POST /entrada — body con estructura incorrecta", () => {
         ubicacion: ["X"]
       });
 
-    // La ruta desestructura cod/ubi/lot/cant — todos quedan undefined/null
-    // Sin validación de inputs, el comportamiento probable es 500 (error de BD)
-    // Un 200 aquí sería incorrecto — significaría que aceptó una entrada inválida
-    expect(response.statusCode).not.toBe(200);
-
-    // Si devuelve 500, es [BUG-VAL]: falta validación antes de tocar la BD
-    // Si devuelve 400, la ruta ya tiene validación implícita (positivo)
+    // Validación añadida en FASE 6: cod/ubi/lot undefined → 400 antes de tocar BD
+    expect(response.statusCode).toBe(400);
+    // No debe exponer errores internos de SQL Server
+    const bodyStr = JSON.stringify(response.body);
+    expect(bodyStr).not.toMatch(/Microsoft|ODBC|SQL Server|LIN\.dbo/i);
   });
 });
 
