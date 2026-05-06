@@ -1,14 +1,23 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const { sql, getPool } = require('./db');
 
 const app = express();
+app.use(helmet());
 app.use(cors());
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200, standardHeaders: true, legacyHeaders: false }));
 app.use(express.json());
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
 const q = (pool) => pool.request();
+
+function serverError(res, err) {
+    console.error("[ERROR]", err.message || err);
+    return res.status(500).json({ error: "Error interno del servidor" });
+}
 
 
 
@@ -71,7 +80,7 @@ app.get('/articulos', async (req, res) => {
                 WHERE ARTCOD LIKE @b OR ARTNOM LIKE @b OR ARTCOD2 LIKE @b
                 ORDER BY ARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/articulos/:cod', async (req, res) => {
@@ -111,7 +120,7 @@ app.post('/articulos', async (req, res) => {
                 INSERT INTO ARTICULO (ARTCOD,ARTNOM,ARTSTOMIN,ARTSTOMAX,ARTCOS,ARTDES1,ARTCOL,ARTMEDCOD,ARTMAT,ARTCOD2)
                 VALUES (@cod,@nom,@stomin,@stomax,@cos,@des1,@col,@medcod,@mat,@cod2)`);
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── PROVEEDORES ──────────────────────────────────────────────────────────────
@@ -130,7 +139,7 @@ app.get('/proveedores', async (req, res) => {
                 WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b OR CLINIF LIKE @b
                 ORDER BY CLICOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/proveedores/:cod', async (req, res) => {
@@ -143,7 +152,7 @@ app.get('/proveedores/:cod', async (req, res) => {
                 FROM PROVEEDOR WHERE CLICOD = @cod`);
         if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
         res.json(r.recordset[0]);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── CLIENTES ─────────────────────────────────────────────────────────────────
@@ -161,7 +170,7 @@ app.get('/clientes', async (req, res) => {
                 WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b
                 ORDER BY CLICOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/clientes/:cod', async (req, res) => {
@@ -174,7 +183,7 @@ app.get('/clientes/:cod', async (req, res) => {
                 FROM CLIENTE WHERE CLICOD = @cod`);
         if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
         res.json(r.recordset[0]);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── OPERARIOS (usuarios del sistema) ─────────────────────────────────────────
@@ -190,7 +199,7 @@ app.get('/operarios', async (req, res) => {
                 WHERE USUCOD LIKE @b OR USUNOM LIKE @b
                 ORDER BY USUCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/operarios/:cod', async (req, res) => {
@@ -200,7 +209,7 @@ app.get('/operarios/:cod', async (req, res) => {
             .query('SELECT USUCOD AS codigo, USUNOM AS nombre, USUTIP AS tipo, USUNIV AS nivel FROM SGAUSUARIO WHERE USUCOD = @cod');
         if (!r.recordset.length) return res.status(404).json({ error: 'No encontrado' });
         res.json(r.recordset[0]);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── STOCK ────────────────────────────────────────────────────────────────────
@@ -228,7 +237,7 @@ app.get('/almacenes', async (req, res) => {
         const pool = await getPool();
         const r = await q(pool).query('SELECT ALMCOD AS codigo, ALMNOM AS nombre FROM ALMACENES ORDER BY ALMCOD');
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/almacenes', async (req, res) => {
@@ -240,7 +249,7 @@ app.post('/almacenes', async (req, res) => {
                 UPDATE ALMACENES SET ALMNOM=@nom WHERE ALMCOD=@cod
             ELSE INSERT INTO ALMACENES (ALMCOD,ALMNOM) VALUES (@cod,@nom)`);
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── UBICACIONES ──────────────────────────────────────────────────────────────
@@ -262,7 +271,7 @@ app.get('/ubicaciones', async (req, res) => {
                 AND UBIALMCOD LIKE @alm
                 ORDER BY UBICODUBI`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/ubicaciones', async (req, res) => {
@@ -284,7 +293,7 @@ app.post('/ubicaciones', async (req, res) => {
                     VALUES (@cod,@eti,@nom,@anc,@alt,@pal,@mul,@alm,@lib)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── MOVIMIENTOS POR ARTÍCULO ─────────────────────────────────────────────────
@@ -327,7 +336,7 @@ app.get('/movimientos-por-articulo', async (req, res) => {
                 AND s.ACSCLICOD LIKE @cli
                 ORDER BY s.ACSFEC DESC, s.ACSHOR DESC`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── ARTÍCULOS POR UBICACIÓN ──────────────────────────────────────────────────
@@ -354,7 +363,7 @@ app.get('/articulos-por-ubicacion', async (req, res) => {
                 WHERE au.ARTUBICODUBI LIKE @ubi AND au.ARTUBIARTCOD LIKE @art
                 ORDER BY au.ARTUBICODUBI, au.ARTUBIARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── ARTÍCULOS SIN REPOSICIÓN ─────────────────────────────────────────────────
@@ -371,7 +380,7 @@ app.get('/articulos-sin-reposicion', async (req, res) => {
                 WHERE ar.HISARTCOD LIKE @b OR a.ARTNOM LIKE @b
                 ORDER BY ar.HISARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/articulos-sin-reposicion', async (req, res) => {
@@ -385,7 +394,7 @@ app.post('/articulos-sin-reposicion', async (req, res) => {
                     INSERT INTO ARTICULOSINREP (HISARTCOD) VALUES (@art)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── CONSULTA DE STOCK ────────────────────────────────────────────────────────
@@ -430,7 +439,7 @@ app.get('/minimos-maximos', async (req, res) => {
                 WHERE m.MINARTCOD LIKE @art OR a.ARTNOM LIKE @art
                 ORDER BY m.MINARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/minimos-maximos', async (req, res) => {
@@ -445,7 +454,7 @@ app.post('/minimos-maximos', async (req, res) => {
                 ELSE INSERT INTO ARTICULOSTOMIN (MINARTCOD,MINSTOMIN,MINSTOMAX) VALUES (@art,@min,@max)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── SUBFAMILIAS ──────────────────────────────────────────────────────────────
@@ -455,7 +464,7 @@ app.get('/subfamilias', async (req, res) => {
         const pool = await getPool();
         const r = await q(pool).query('SELECT SFACOD AS codigo, SFANOM AS nombre, SFANOLOT AS sin_control_lote FROM SUBFAMILIA ORDER BY SFACOD');
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/subfamilias', async (req, res) => {
@@ -470,7 +479,7 @@ app.post('/subfamilias', async (req, res) => {
                 ELSE INSERT INTO SUBFAMILIA (SFACOD,SFANOM,SFANOLOT) VALUES (@cod,@nom,@nol)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── OBSERVACIONES POR ARTÍCULO Y LOTE ────────────────────────────────────────
@@ -487,7 +496,7 @@ app.get('/observaciones-articulo-lote', async (req, res) => {
                 WHERE o.HISARTCOD LIKE @art
                 ORDER BY o.HISARTCOD, o.HISLOT`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/observaciones-articulo-lote', async (req, res) => {
@@ -502,7 +511,7 @@ app.post('/observaciones-articulo-lote', async (req, res) => {
                 ELSE INSERT INTO ARTICULOLOTOBS (HISARTCOD,HISLOT,HISOBS) VALUES (@art,@lot,@obs)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── LOTE EXCLUSIVO ───────────────────────────────────────────────────────────
@@ -521,7 +530,7 @@ app.get('/lote-exclusivo', async (req, res) => {
                 WHERE e.HISCLICOD LIKE @cli AND e.HISARTCOD LIKE @art
                 ORDER BY e.HISCLICOD, e.HISARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/lote-exclusivo', async (req, res) => {
@@ -535,7 +544,7 @@ app.post('/lote-exclusivo', async (req, res) => {
                     INSERT INTO ARTICULOEXCLOTCLI (HISCLICOD,HISARTCOD,HISLOT) VALUES (@cli,@art,@lot)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── LOTE MÍNIMO POR CLIENTE ──────────────────────────────────────────────────
@@ -552,7 +561,7 @@ app.get('/lote-minimo', async (req, res) => {
                 WHERE h.HISCLICOD LIKE @cli
                 ORDER BY h.HISCLICOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/lote-minimo', async (req, res) => {
@@ -567,7 +576,7 @@ app.post('/lote-minimo', async (req, res) => {
                 ELSE INSERT INTO ARTICULOLOTCLI (HISCLICOD,HISDIA) VALUES (@cli,@dias)`);
         }
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── LOTE NO UTILIZADO ────────────────────────────────────────────────────────
@@ -586,7 +595,7 @@ app.get('/lote-no-utilizado', async (req, res) => {
                 WHERE e.HISCLICOD LIKE @cli AND e.HISARTCOD LIKE @art
                 ORDER BY e.HISCLICOD, e.HISARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── LOTE CUARENTENA ──────────────────────────────────────────────────────────
@@ -605,7 +614,7 @@ app.get('/lote-cuarentena', async (req, res) => {
                 WHERE o.HISARTCOD LIKE @art
                 ORDER BY o.HISARTCOD, o.HISLOT`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── TERMINALES PDA ───────────────────────────────────────────────────────────
@@ -615,7 +624,7 @@ app.get('/terminales-pda', async (req, res) => {
         const pool = await getPool();
         const r = await q(pool).query('SELECT repcod AS codigo, repnom AS nombre, repser AS serie, repdat AS tipo_doc, reprutsin AS ruta_sinc, reprutwifi AS ruta_wifi FROM terminalpda ORDER BY repcod');
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/terminales-pda', async (req, res) => {
@@ -631,7 +640,7 @@ app.post('/terminales-pda', async (req, res) => {
             ELSE INSERT INTO terminalpda (repcod,repnom,repser,repdat,reprutsin,reprutwifi)
                 VALUES (@cod,@nom,@ser,@dat,@rsin,@rwifi)`);
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── VISOR (solo lectura, con JOIN) ───────────────────────────────────────────
@@ -651,7 +660,7 @@ app.get('/visor/articulos', async (req, res) => {
                 WHERE a.ARTCOD LIKE @b OR a.ARTNOM LIKE @b OR a.ARTCOD2 LIKE @b
                 ORDER BY a.ARTCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/visor/proveedores', async (req, res) => {
@@ -666,7 +675,7 @@ app.get('/visor/proveedores', async (req, res) => {
                 WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b
                 ORDER BY CLICOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/visor/clientes', async (req, res) => {
@@ -681,7 +690,7 @@ app.get('/visor/clientes', async (req, res) => {
                 WHERE CLICOD LIKE @b OR CLIRAZ LIKE @b OR CLINOM LIKE @b
                 ORDER BY CLICOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── ESTADÍSTICAS Y PANEL EJECUTIVO ──────────────────────────────────────────
@@ -884,7 +893,7 @@ app.get('/estadisticas/dashboard', async (req, res) => {
             movimientos_recientes: movimientosRecientes.recordset
         });
     } catch (err) {
-        res.status(500).json({ error: "Error interno del servidor" });
+        serverError(res, err);
     }
 });
 
@@ -956,7 +965,7 @@ app.get('/estadisticas/alertas', async (req, res) => {
             sin_movimiento_90_dias: sinMovimiento.recordset
         });
     } catch (err) {
-        res.status(500).json({ error: "Error interno del servidor" });
+        serverError(res, err);
     }
 });
 
@@ -1069,7 +1078,7 @@ app.get('/analitica/log', async (req, res) => {
             actividad_por_dia:      actividadDia.recordset
         });
     } catch (err) {
-        res.status(500).json({ error: "Error interno del servidor" });
+        serverError(res, err);
     }
 });
 
@@ -1095,7 +1104,7 @@ app.get('/analitica/stock-ubicacion', async (req, res) => {
             stock_por_ubicacion: r.recordset
         });
     } catch (err) {
-        res.status(500).json({ error: "Error interno del servidor" });
+        serverError(res, err);
     }
 });
 
@@ -1114,7 +1123,7 @@ app.get('/stats', async (req, res) => {
             stock: stock.recordset[0].total,
             ubicaciones: ubi.recordset[0].total
         });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.get('/tablas', async (req, res) => {
@@ -1166,7 +1175,7 @@ app.post('/entrada', async (req, res) => {
                 .query('INSERT INTO STOCK (STOARTCOD, STOUBI, STOLOT, STOCAN) VALUES (@cod, @ubi, @lot, @cant)');
         }
         res.json({ success: true, message: 'Entrada registrada' });
-    } catch (err) { res.status(500).json({ success: false, message: 'Error interno del servidor' }); }
+    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: 'Error interno del servidor' }); }
 });
 
 app.post('/traspaso', async (req, res) => {
@@ -1211,6 +1220,7 @@ app.post('/traspaso', async (req, res) => {
         } catch (err) { await transaction.rollback(); throw err; }
     } catch (err) {
         if (err.isBusinessError) return res.status(err.statusCode).json({ success: false, message: err.message });
+        console.error("[ERROR]", err.message || err);
         res.status(500).json({ success: false, message: 'Error interno del servidor' });
     }
 });
@@ -1230,7 +1240,7 @@ app.post('/salida', async (req, res) => {
         await q(pool).input('cod', cod).input('ubi', ubi).input('lot', lot).input('cant', cantNum)
             .query('UPDATE STOCK SET STOCAN = STOCAN - @cant WHERE STOARTCOD = @cod AND STOUBI = @ubi AND STOLOT = @lot');
         res.json({ success: true, message: 'Salida confirmada' });
-    } catch (err) { res.status(500).json({ success: false, message: 'Error interno del servidor' }); }
+    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: 'Error interno del servidor' }); }
 });
 
 app.post('/maestro-articulo', async (req, res) => {
@@ -1240,7 +1250,7 @@ app.post('/maestro-articulo', async (req, res) => {
         await q(pool).input('cod', cod).input('nom', nom)
             .query('INSERT INTO ARTICULO (ARTCOD, ARTNOM) VALUES (@cod, @nom)');
         res.json({ success: true, message: 'Artículo creado' });
-    } catch (err) { res.status(500).json({ success: false, message: "Error interno del servidor" }); }
+    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: "Error interno del servidor" }); }
 });
 
 app.post('/maestro-ubicacion', async (req, res) => {
@@ -1250,7 +1260,7 @@ app.post('/maestro-ubicacion', async (req, res) => {
         await q(pool).input('ubi', ubi).input('alm', alm)
             .query('INSERT INTO UBICACION (UBICODUBI, UBIALMCOD) VALUES (@ubi, @alm)');
         res.json({ success: true, message: 'Ubicación creada' });
-    } catch (err) { res.status(500).json({ success: false, message: "Error interno del servidor" }); }
+    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: "Error interno del servidor" }); }
 });
 
 // ─── REGULARIZACIONES ─────────────────────────────────────────────────────────
@@ -1277,7 +1287,7 @@ app.get('/regularizaciones', async (req, res) => {
                 AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY ACSFEC DESC`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── TRASPASO INVENTARIO ───────────────────────────────────────────────────────
@@ -1285,7 +1295,7 @@ app.get('/regularizaciones', async (req, res) => {
 app.post('/traspasar-inventarios', async (req, res) => {
     try {
         res.json({ ok: true, message: 'Traspaso de inventarios procesado correctamente.' });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/importar-regularizaciones', async (req, res) => {
@@ -1293,14 +1303,14 @@ app.post('/importar-regularizaciones', async (req, res) => {
         const { fecha } = req.body;
         if (!fecha) return res.status(400).json({ error: 'Fecha requerida' });
         res.json({ ok: true, message: `Regularizaciones importadas para la fecha ${fecha}.` });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/asignar-fecha-stock-inicial', async (req, res) => {
     try {
         const { hora = '00:00' } = req.body;
         res.json({ ok: true, message: `Fecha de stock inicial asignada con hora ${hora}.` });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── GENERAR UBICACIONES ──────────────────────────────────────────────────────
@@ -1357,7 +1367,7 @@ app.get('/usuarios', async (req, res) => {
                 WHERE USUCOD LIKE @b OR USUNOM LIKE @b
                 ORDER BY USUCOD`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/usuarios', async (req, res) => {
@@ -1370,7 +1380,7 @@ app.post('/usuarios', async (req, res) => {
                 UPDATE SGAUSUARIO SET USUNOM=@nom, USUTIP=@tip, USUNIV=@niv WHERE USUCOD=@cod
             ELSE INSERT INTO SGAUSUARIO (USUCOD,USUNOM,USUTIP,USUNIV) VALUES (@cod,@nom,@tip,@niv)`);
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── CONFIGURACIÓN DE EMPRESA ─────────────────────────────────────────────────
@@ -1380,13 +1390,13 @@ app.get('/configuracion-empresa', async (req, res) => {
         const pool = await getPool();
         const r = await q(pool).query('SELECT TOP 1 * FROM EMPRESA');
         res.json(r.recordset[0] || {});
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 app.post('/configuracion-empresa', async (req, res) => {
     try {
         res.json({ ok: true });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── CONTADORES ───────────────────────────────────────────────────────────────
@@ -1414,7 +1424,7 @@ app.get('/contadores', async (req, res) => {
             stock_activo: stock.recordset[0].total,
             movimientos: mov.recordset[0].total,
         });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── EXPEDICIONES ─────────────────────────────────────────────────────────────
@@ -1434,7 +1444,7 @@ app.get('/expediciones', async (req, res) => {
                 AND (ACSCLICOD LIKE @b OR ACSCLINOM LIKE @b OR CAST(ACSNUM AS varchar) LIKE @b)
                 ORDER BY ACSFEC DESC, ACSNUM DESC`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── SITUACIÓN PEDIDOS DE VENTA ────────────────────────────────────────────────
@@ -1461,7 +1471,7 @@ app.get('/situacion-pedidos-venta', async (req, res) => {
                 AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY ACSFEC DESC`);
         res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── BORRAR PICKING ────────────────────────────────────────────────────────────
@@ -1471,7 +1481,7 @@ app.post('/borrar-picking', async (req, res) => {
         const { albaran } = req.body;
         if (!albaran) return res.status(400).json({ error: 'Número de albarán requerido' });
         res.json({ ok: true, message: `Picking del albarán ${albaran} eliminado correctamente.` });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── PONER A CERO CARRUSEL ─────────────────────────────────────────────────────
@@ -1479,7 +1489,7 @@ app.post('/borrar-picking', async (req, res) => {
 app.post('/poner-cero-carrusel', async (req, res) => {
     try {
         res.json({ ok: true, message: 'Carrusel puesto a cero correctamente.' });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 // ─── COPIA DE SEGURIDAD ────────────────────────────────────────────────────────
@@ -1488,7 +1498,7 @@ app.post('/copia-seguridad', async (req, res) => {
     try {
         const ref = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
         res.json({ ok: true, message: `Copia de seguridad iniciada. Referencia: backup_${ref}` });
-    } catch (err) { res.status(500).json({ error: "Error interno del servidor" }); }
+    } catch (err) { serverError(res, err); }
 });
 
 
