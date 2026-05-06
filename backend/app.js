@@ -10,13 +10,7 @@ app.use(express.json());
 
 const q = (pool) => pool.request();
 
-function like(val) { return `%${(val || '').trim()}%`; }
 
-function send(res, promise) {
-    promise
-        .then(data => res.json(data))
-        .catch(err => res.status(500).json({ error: err.message }));
-}
 
 function normalizeDate(value, fallback) {
     if (!value) return fallback;
