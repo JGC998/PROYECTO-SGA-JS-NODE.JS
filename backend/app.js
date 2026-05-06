@@ -3,12 +3,14 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { sql, getPool } = require('./db');
+const healthRoutes = require('./routes/health.routes');
 
 const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200, standardHeaders: true, legacyHeaders: false }));
 app.use(express.json());
+app.use('/', healthRoutes);
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -30,16 +32,6 @@ function normalizeDate(value, fallback) {
 function daysAgo(days) {
     return new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 }
-
-// ─── DIAGNÓSTICO ──────────────────────────────────────────────────────────────
-
-app.get('/health', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT @@VERSION AS version, DB_NAME() AS db');
-        res.json({ ok: true, db: r.recordset[0].db, version: r.recordset[0].version });
-    } catch (err) { res.status(500).json({ ok: false, error: "Error interno del servidor" }); }
-});
 
 app.get('/schema', async (req, res) => {
     try {
