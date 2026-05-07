@@ -12,6 +12,7 @@ const ubicacionesRoutes = require('./routes/ubicaciones.routes');
 const lotesRoutes = require('./routes/lotes.routes');
 const visorRoutes = require('./routes/visor.routes');
 const analyticsRoutes = require('./routes/analytics.routes');
+const stockRoutes = require('./routes/stock.routes');
 
 const app = express();
 app.use(helmet());
@@ -27,6 +28,7 @@ app.use('/', ubicacionesRoutes);
 app.use('/', lotesRoutes);
 app.use('/', visorRoutes);
 app.use('/', analyticsRoutes);
+app.use('/', stockRoutes);
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -59,110 +61,7 @@ app.post('/articulos', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
-// ─── STOCK ────────────────────────────────────────────────────────────────────
-
-app.get('/stock/:cod', async (req, res) => {
-    try {
-        const cod = req.params.cod;
-        if (!cod || cod.length > 50) return res.status(400).json({ error: 'Código no válido' });
-        const pool = await getPool();
-        const r = await q(pool).input('cod', cod)
-            .query(`SELECT s.STOUBI, s.STOLOT, s.STOCAN,
-                u.UBINOM, u.UBIALMCOD
-                FROM STOCK s
-                LEFT JOIN UBICACION u ON u.UBICODUBI = s.STOUBI
-                WHERE s.STOARTCOD = @cod AND s.STOCAN > 0
-                ORDER BY s.STOUBI`);
-        res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
-// ─── MOVIMIENTOS POR ARTÍCULO ─────────────────────────────────────────────────
-
-app.get('/movimientos-por-articulo', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '', lote = '', desde, hasta, movimiento = '', ubicacion = '', cliente = '' } = req.query;
-        const fechaD = desde || '2000-01-01';
-        const fechaH = hasta || new Date().toISOString().split('T')[0];
-        const r = await q(pool)
-            .input('art', `%${articulo}%`).input('lot', `%${lote}%`)
-            .input('desde', fechaD).input('hasta', fechaH)
-            .input('mov', `%${movimiento}%`).input('ubi', `%${ubicacion}%`)
-            .input('cli', `%${cliente}%`)
-            .query(`SELECT TOP 500
-                s.ACSEMPCOD AS empresa,
-                CONVERT(varchar,s.ACSFEC,23) AS fecha,
-                CONVERT(varchar,s.ACSHOR,8) AS hora,
-                s.ACSMOV AS tipo,
-                s.ACSSER AS serie,
-                s.ACSNUM AS numero,
-                s.ACSNUMPIC AS picking,
-                s.ACSUBI AS ubicacion,
-                s.ACSLOT AS lote,
-                s.ACSCAN AS cantidad,
-                (SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=s.ACSARTCOD) AS stock,
-                s.ACSREPCOD AS terminal,
-                s.ACSNUMCAJ AS caja,
-                s.ACSNUMPAL AS palet,
-                s.ACSCLICOD AS tercero,
-                s.ACSCENCOD AS centro,
-                s.ACSCLINOM AS nombre_tercero
-                FROM ALBARANCS s
-                WHERE s.ACSARTCOD LIKE @art
-                AND s.ACSLOT LIKE @lot
-                AND CAST(s.ACSFEC AS DATE) BETWEEN @desde AND @hasta
-                AND s.ACSMOV LIKE @mov
-                AND s.ACSUBI LIKE @ubi
-                AND s.ACSCLICOD LIKE @cli
-                ORDER BY s.ACSFEC DESC, s.ACSHOR DESC`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── ARTÍCULOS POR UBICACIÓN ──────────────────────────────────────────────────
-
-app.get('/articulos-por-ubicacion', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { ubicacion = '', articulo = '' } = req.query;
-        const r = await q(pool)
-            .input('ubi', `%${ubicacion}%`).input('art', `%${articulo}%`)
-            .query(`SELECT TOP 500
-                au.ARTUBICODUBI AS ubicacion,
-                u.UBIETI AS etiqueta,
-                au.ARTUBIARTCOD AS articulo,
-                a.ARTNOM AS nombre,
-                au.ARTUBIMIN AS stock_minimo,
-                au.ARTUBIMAX AS stock_maximo,
-                au.ARTUBIEXC AS exclusiva,
-                au.ARTUBIALMCOD AS almacen,
-                ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=au.ARTUBIARTCOD AND STOUBI=au.ARTUBICODUBI),0) AS stock
-                FROM ARTICULOUBI au
-                LEFT JOIN ARTICULO a ON a.ARTCOD = au.ARTUBIARTCOD
-                LEFT JOIN UBICACION u ON u.UBICODUBI = au.ARTUBICODUBI
-                WHERE au.ARTUBICODUBI LIKE @ubi AND au.ARTUBIARTCOD LIKE @art
-                ORDER BY au.ARTUBICODUBI, au.ARTUBIARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
 // ─── ARTÍCULOS SIN REPOSICIÓN ─────────────────────────────────────────────────
-
-app.get('/articulos-sin-reposicion', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT ar.HISARTCOD AS articulo, a.ARTNOM AS nombre,
-                ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=ar.HISARTCOD),0) AS stock
-                FROM ARTICULOSINREP ar
-                LEFT JOIN ARTICULO a ON a.ARTCOD = ar.HISARTCOD
-                WHERE ar.HISARTCOD LIKE @b OR a.ARTNOM LIKE @b
-                ORDER BY ar.HISARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
 
 app.post('/articulos-sin-reposicion', async (req, res) => {
     try {
@@ -178,50 +77,7 @@ app.post('/articulos-sin-reposicion', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
-// ─── CONSULTA DE STOCK ────────────────────────────────────────────────────────
-
-app.get('/consulta-de-stock', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '', ubicacion = '', lote = '', solo_existencias = '1' } = req.query;
-        const cond = solo_existencias === '1' ? 'AND s.STOCAN > 0' : '';
-        const r = await q(pool)
-            .input('art', `%${articulo}%`).input('ubi', `%${ubicacion}%`).input('lot', `%${lote}%`)
-            .query(`SELECT TOP 500
-                s.STOARTCOD AS articulo, a.ARTNOM AS nombre,
-                s.STOUBI AS ubicacion, u.UBINOM AS nom_ubicacion,
-                u.UBIALMCOD AS almacen,
-                s.STOLOT AS lote, s.STOCAN AS stock,
-                ISNULL(u.UBINUMPAL,0) AS palets,
-                ISNULL(u.UBIMUL,0) AS multiple,
-                ISNULL(u.UBILIB,0) AS exclusiva
-                FROM STOCK s
-                LEFT JOIN ARTICULO a ON a.ARTCOD = s.STOARTCOD
-                LEFT JOIN UBICACION u ON u.UBICODUBI = s.STOUBI
-                WHERE s.STOARTCOD LIKE @art AND s.STOUBI LIKE @ubi AND s.STOLOT LIKE @lot
-                ${cond}
-                ORDER BY s.STOUBI, s.STOARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
 // ─── MÍNIMOS Y MÁXIMOS ────────────────────────────────────────────────────────
-
-app.get('/minimos-maximos', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '' } = req.query;
-        const r = await q(pool).input('art', `%${articulo}%`)
-            .query(`SELECT m.MINARTCOD AS articulo, a.ARTNOM AS nombre,
-                m.MINSTOMIN AS stock_minimo, m.MINSTOMAX AS stock_maximo,
-                ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOARTCOD=m.MINARTCOD),0) AS stock_actual
-                FROM ARTICULOSTOMIN m
-                LEFT JOIN ARTICULO a ON a.ARTCOD = m.MINARTCOD
-                WHERE m.MINARTCOD LIKE @art OR a.ARTNOM LIKE @art
-                ORDER BY m.MINARTCOD`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
 
 app.post('/minimos-maximos', async (req, res) => {
     try {
@@ -348,33 +204,6 @@ app.post('/maestro-ubicacion', async (req, res) => {
     } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: "Error interno del servidor" }); }
 });
 
-// ─── REGULARIZACIONES ─────────────────────────────────────────────────────────
-
-app.get('/regularizaciones', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { articulo = '', desde, hasta } = req.query;
-        const fechaD = desde || '2000-01-01';
-        const fechaH = hasta || new Date().toISOString().split('T')[0];
-        const r = await q(pool)
-            .input('art', `%${articulo}%`)
-            .input('desde', fechaD).input('hasta', fechaH)
-            .query(`SELECT TOP 500
-                CONVERT(varchar,ACSFEC,23) AS fecha,
-                ACSSER AS serie, ACSNUM AS numero,
-                ACSARTCOD AS articulo,
-                (SELECT TOP 1 ARTNOM FROM ARTICULO WHERE ARTCOD=ACSARTCOD) AS nombre,
-                ACSUBI AS ubicacion, ACSLOT AS lote, ACSCAN AS cantidad,
-                ACSCLICOD AS tercero, ACSCLINOM AS nombre_tercero
-                FROM ALBARANCS
-                WHERE ACSMOV='R'
-                AND ACSARTCOD LIKE @art
-                AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
-                ORDER BY ACSFEC DESC`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
 // ─── TRASPASO INVENTARIO ───────────────────────────────────────────────────────
 
 app.post('/traspasar-inventarios', async (req, res) => {
@@ -437,53 +266,6 @@ app.post('/generar-ubicaciones', async (req, res) => {
         }
         res.json({ ok: true, creadas });
     } catch (err) { res.status(500).json({ error: 'Error interno del servidor' }); }
-});
-
-// ─── EXPEDICIONES ─────────────────────────────────────────────────────────────
-
-app.get('/expediciones', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT TOP 200
-                ACSNUM AS albaran, ACSSER AS serie,
-                ACSCLICOD AS cliente, ACSCLINOM AS nombre_cliente,
-                CONVERT(varchar,ACSFEC,23) AS fecha,
-                ACSNUMPIC AS picking, ACSMOV AS tipo
-                FROM ALBARANCS
-                WHERE ACSMOV='E'
-                AND (ACSCLICOD LIKE @b OR ACSCLINOM LIKE @b OR CAST(ACSNUM AS varchar) LIKE @b)
-                ORDER BY ACSFEC DESC, ACSNUM DESC`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
-});
-
-// ─── SITUACIÓN PEDIDOS DE VENTA ────────────────────────────────────────────────
-
-app.get('/situacion-pedidos-venta', async (req, res) => {
-    try {
-        const pool = await getPool();
-        const { cliente = '', articulo = '', desde, hasta } = req.query;
-        const fechaD = desde || new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
-        const fechaH = hasta || new Date().toISOString().split('T')[0];
-        const r = await q(pool)
-            .input('cli', `%${cliente}%`).input('art', `%${articulo}%`)
-            .input('desde', fechaD).input('hasta', fechaH)
-            .query(`SELECT TOP 300
-                ACSNUM AS albaran, ACSSER AS serie,
-                ACSCLICOD AS cliente, ACSCLINOM AS nombre_cliente,
-                ACSARTCOD AS articulo,
-                (SELECT TOP 1 ARTNOM FROM ARTICULO WHERE ARTCOD=ACSARTCOD) AS nombre_articulo,
-                ACSCAN AS cantidad, ACSUBI AS ubicacion,
-                CONVERT(varchar,ACSFEC,23) AS fecha, ACSMOV AS tipo
-                FROM ALBARANCS
-                WHERE ACSMOV IN ('E','P')
-                AND ACSCLICOD LIKE @cli AND ACSARTCOD LIKE @art
-                AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
-                ORDER BY ACSFEC DESC`);
-        res.json(r.recordset);
-    } catch (err) { serverError(res, err); }
 });
 
 // ─── BORRAR PICKING ────────────────────────────────────────────────────────────
