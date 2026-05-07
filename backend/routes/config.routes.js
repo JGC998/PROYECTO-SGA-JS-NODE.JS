@@ -1,10 +1,9 @@
 "use strict";
 
 const { Router } = require('express');
-const { getPool } = require('../db');
+const configService = require('../services/config.service');
 
 const router = Router();
-const q = (pool) => pool.request();
 
 function serverError(res, err) {
     console.error("[ERROR]", err.message || err);
@@ -15,20 +14,15 @@ function serverError(res, err) {
 
 router.get('/almacenes', async (req, res) => {
     try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT ALMCOD AS codigo, ALMNOM AS nombre FROM ALMACENES ORDER BY ALMCOD');
-        res.json(r.recordset);
+        const data = await configService.getAlmacenes();
+        res.json(data);
     } catch (err) { serverError(res, err); }
 });
 
 router.post('/almacenes', async (req, res) => {
     try {
-        const pool = await getPool();
         const { cod, nom } = req.body;
-        await q(pool).input('cod', cod).input('nom', nom)
-            .query(`IF EXISTS (SELECT 1 FROM ALMACENES WHERE ALMCOD=@cod)
-                UPDATE ALMACENES SET ALMNOM=@nom WHERE ALMCOD=@cod
-            ELSE INSERT INTO ALMACENES (ALMCOD,ALMNOM) VALUES (@cod,@nom)`);
+        await configService.upsertAlmacen(cod, nom);
         res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
@@ -37,23 +31,15 @@ router.post('/almacenes', async (req, res) => {
 
 router.get('/subfamilias', async (req, res) => {
     try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT SFACOD AS codigo, SFANOM AS nombre, SFANOLOT AS sin_control_lote FROM SUBFAMILIA ORDER BY SFACOD');
-        res.json(r.recordset);
+        const data = await configService.getSubfamilias();
+        res.json(data);
     } catch (err) { serverError(res, err); }
 });
 
 router.post('/subfamilias', async (req, res) => {
     try {
-        const pool = await getPool();
         const rows = Array.isArray(req.body) ? req.body : [req.body];
-        for (const r of rows) {
-            if (!r.codigo) continue;
-            await q(pool).input('cod', r.codigo).input('nom', r.nombre || '').input('nol', r.sin_control_lote ? 1 : 0)
-                .query(`IF EXISTS (SELECT 1 FROM SUBFAMILIA WHERE SFACOD=@cod)
-                    UPDATE SUBFAMILIA SET SFANOM=@nom, SFANOLOT=@nol WHERE SFACOD=@cod
-                ELSE INSERT INTO SUBFAMILIA (SFACOD,SFANOM,SFANOLOT) VALUES (@cod,@nom,@nol)`);
-        }
+        await configService.upsertSubfamilias(rows);
         res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
@@ -62,24 +48,15 @@ router.post('/subfamilias', async (req, res) => {
 
 router.get('/terminales-pda', async (req, res) => {
     try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT repcod AS codigo, repnom AS nombre, repser AS serie, repdat AS tipo_doc, reprutsin AS ruta_sinc, reprutwifi AS ruta_wifi FROM terminalpda ORDER BY repcod');
-        res.json(r.recordset);
+        const data = await configService.getTerminalesPda();
+        res.json(data);
     } catch (err) { serverError(res, err); }
 });
 
 router.post('/terminales-pda', async (req, res) => {
     try {
-        const pool = await getPool();
         const { codigo, nombre, serie = '', tipo_doc = '', ruta_sinc = '', ruta_wifi = '' } = req.body;
-        await q(pool)
-            .input('cod', codigo).input('nom', nombre).input('ser', serie)
-            .input('dat', tipo_doc).input('rsin', ruta_sinc).input('rwifi', ruta_wifi)
-            .query(`IF EXISTS (SELECT 1 FROM terminalpda WHERE repcod=@cod)
-                UPDATE terminalpda SET repnom=@nom, repser=@ser, repdat=@dat, reprutsin=@rsin, reprutwifi=@rwifi
-                WHERE repcod=@cod
-            ELSE INSERT INTO terminalpda (repcod,repnom,repser,repdat,reprutsin,reprutwifi)
-                VALUES (@cod,@nom,@ser,@dat,@rsin,@rwifi)`);
+        await configService.upsertTerminalPda(codigo, nombre, serie, tipo_doc, ruta_sinc, ruta_wifi);
         res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
@@ -88,27 +65,17 @@ router.post('/terminales-pda', async (req, res) => {
 
 router.get('/usuarios', async (req, res) => {
     try {
-        const pool = await getPool();
         const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT USUCOD AS codigo, USUNOM AS nombre,
-                USUTIP AS tipo, USUNIV AS nivel
-                FROM SGAUSUARIO
-                WHERE USUCOD LIKE @b OR USUNOM LIKE @b
-                ORDER BY USUCOD`);
-        res.json(r.recordset);
+        const data = await configService.getUsuarios(buscar);
+        res.json(data);
     } catch (err) { serverError(res, err); }
 });
 
 router.post('/usuarios', async (req, res) => {
     try {
-        const pool = await getPool();
         const { codigo, nombre, tipo = '', nivel = '' } = req.body;
         if (!codigo || !nombre) return res.status(400).json({ error: 'Código y nombre requeridos' });
-        await q(pool).input('cod', codigo).input('nom', nombre).input('tip', tipo).input('niv', nivel)
-            .query(`IF EXISTS (SELECT 1 FROM SGAUSUARIO WHERE USUCOD=@cod)
-                UPDATE SGAUSUARIO SET USUNOM=@nom, USUTIP=@tip, USUNIV=@niv WHERE USUCOD=@cod
-            ELSE INSERT INTO SGAUSUARIO (USUCOD,USUNOM,USUTIP,USUNIV) VALUES (@cod,@nom,@tip,@niv)`);
+        await configService.upsertUsuario(codigo, nombre, tipo, nivel);
         res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
@@ -117,9 +84,8 @@ router.post('/usuarios', async (req, res) => {
 
 router.get('/configuracion-empresa', async (req, res) => {
     try {
-        const pool = await getPool();
-        const r = await q(pool).query('SELECT TOP 1 * FROM EMPRESA');
-        res.json(r.recordset[0] || {});
+        const data = await configService.getConfiguracionEmpresa();
+        res.json(data);
     } catch (err) { serverError(res, err); }
 });
 
