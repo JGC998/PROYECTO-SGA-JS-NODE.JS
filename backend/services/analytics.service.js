@@ -418,4 +418,4 @@ async function getContadores() {
     };
 }
 
-module.exports = { getDashboard, getAlertas, getLog, getStockUbicacion, getStats, getContadores };
+module.exports = { getDashboard, getAlertas, getLog, getStockUbicacion, getStats, getContadores, normalizeDate, daysAgo };
