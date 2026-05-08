@@ -1,0 +1,49 @@
+/* ── TABLA CONTENEDOR ────────────────────────────────────────────────────── */
+.sga-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--sga-radius);
+    border: 1px solid var(--sga-border);
+    background: var(--sga-surface);
+}
+
+/* ── TABLA ───────────────────────────────────────────────────────────────── */
+.sga-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+}
+
+.sga-table thead th {
+    background: #f8fafc;
+    color: var(--sga-text-muted);
+    font-weight: 600;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--sga-border);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.sga-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background .1s;
+}
+.sga-table tbody tr:last-child { border-bottom: none; }
+.sga-table tbody tr:hover { background: #f8fafc; }
+
+.sga-table tbody td {
+    padding: 9px 12px;
+    color: var(--sga-text);
+}
+
+.sga-table tbody tr:nth-child(even) { background: #fafbfc; }
+.sga-table tbody tr:nth-child(even):hover { background: #f3f4f6; }
+
+.sga-table tfoot td {
+    padding: 10px 12px;
+    font-weight: 600;
+    background: #f8fafc;
+    border-top: 2px solid var(--sga-border);
+}

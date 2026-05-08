@@ -1,0 +1,54 @@
+/* ── PANEL DE FILTROS ────────────────────────────────────────────────────── */
+.sga-filter-panel {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 14px 20px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--sga-shadow);
+}
+
+.sga-filter-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ── CAMPOS DE FORMULARIO ────────────────────────────────────────────────── */
+.sga-label {
+    font-weight: 600;
+    font-size: .82rem;
+    color: var(--sga-text-muted);
+    white-space: nowrap;
+}
+
+.sga-input,
+.sga-select {
+    padding: 5px 8px;
+    font-size: .875rem;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    font-family: var(--sga-font);
+    transition: border-color .14s, box-shadow .14s;
+}
+.sga-input:focus,
+.sga-select:focus {
+    outline: none;
+    border-color: var(--sga-accent);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+.sga-input[readonly] {
+    background: #f9fafb;
+    color: var(--sga-text-muted);
+}
+
+/* ── TAMAÑOS DE CAMPO ────────────────────────────────────────────────────── */
+.sga-input-sm    { width: 110px; }
+.sga-input-xs    { width: 55px; }
+.sga-input-desc  { flex: 1; min-width: 0; }

@@ -1,0 +1,47 @@
+/* ── BOTONES BASE ────────────────────────────────────────────────────────── */
+.sga-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: .875rem;
+    font-weight: 500;
+    font-family: var(--sga-font);
+    line-height: 1.4;
+    border-radius: var(--sga-radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .14s, border-color .14s, opacity .14s;
+    vertical-align: middle;
+}
+.sga-btn:hover    { text-decoration: none; }
+.sga-btn:active   { opacity: .85; }
+.sga-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ── VARIANTES ───────────────────────────────────────────────────────────── */
+.sga-btn-primary {
+    background: var(--sga-primary-light);
+    color: white;
+    border-color: var(--sga-primary-light);
+}
+.sga-btn-primary:hover { background: var(--sga-primary); border-color: var(--sga-primary); color: white; }
+
+.sga-btn-secondary {
+    background: var(--sga-surface);
+    color: var(--sga-text);
+    border-color: var(--sga-border);
+}
+.sga-btn-secondary:hover { background: var(--sga-bg); color: var(--sga-text); }
+
+.sga-btn-danger {
+    background: var(--sga-danger);
+    color: white;
+    border-color: var(--sga-danger);
+}
+.sga-btn-danger:hover { opacity: .88; color: white; }
+
+/* ── TAMAÑOS ─────────────────────────────────────────────────────────────── */
+.sga-btn-sm { padding: 5px 10px; font-size: .8rem; }
+.sga-btn-lg { padding: 11px 22px; font-size: 1rem; }

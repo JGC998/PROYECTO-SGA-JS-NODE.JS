@@ -1,0 +1,41 @@
+/* ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────── */
+.sga-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* El contenido principal ocupa todo el espacio restante */
+.sga-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sga-sidebar-w);
+    min-height: 100vh;
+}
+
+/* Área de contenido de página — sin padding propio, cada página gestiona el suyo */
+.sga-content {
+    flex: 1;
+}
+
+/* ── TIPOGRAFÍA DE PÁGINA ────────────────────────────────────────────────── */
+.sga-page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+    margin-bottom: 4px;
+}
+
+.sga-page-description {
+    font-size: .875rem;
+    color: var(--sga-text-muted);
+    margin-bottom: 24px;
+}
+
+/* ── GRIDS GENÉRICOS ─────────────────────────────────────────────────────── */
+.sga-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}

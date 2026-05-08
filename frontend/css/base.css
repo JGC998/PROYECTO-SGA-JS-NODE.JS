@@ -1,0 +1,69 @@
+/* ── VARIABLES GLOBALES ──────────────────────────────────────────────────── */
+:root {
+    --sga-primary:        #1e3a8a;
+    --sga-primary-light:  #2563eb;
+    --sga-accent:         #3b82f6;
+    --sga-bg:             #f1f5f9;
+    --sga-surface:        #ffffff;
+    --sga-border:         #e2e8f0;
+    --sga-text:           #1e293b;
+    --sga-text-muted:     #64748b;
+    --sga-success:        #16a34a;
+    --sga-warning:        #d97706;
+    --sga-danger:         #dc2626;
+    --sga-info:           #0284c7;
+    --sga-sidebar-w:      240px;
+    --sga-header-h:       56px;
+    --sga-radius:         8px;
+    --sga-radius-sm:      4px;
+    --sga-shadow:         0 1px 3px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.06);
+    --sga-font:           -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── RESET MÍNIMO ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--sga-font);
+    background: var(--sga-bg);
+    color: var(--sga-text);
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+p { margin: 0; }
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--sga-primary-light); }
+a:hover { opacity: .85; }
+
+button {
+    font-family: var(--sga-font);
+    cursor: pointer;
+}
+
+input, select, textarea {
+    font-family: var(--sga-font);
+    font-size: inherit;
+}
