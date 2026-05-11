@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN — Sistema de Gestión de Almacén</title>
+    <title>SGA LIN — Inicio</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/sidebar.css">
@@ -35,106 +35,175 @@
         </header>
 
         <div class="sga-content">
-            <div class="dashboard-inner">
+            <div class="db-inner">
 
-                <h1 class="sga-page-title">SGA LIN</h1>
-                <p class="sga-page-description">Sistema de Gestión de Almacén · Panel de control</p>
-
-                <!-- KPIs -->
-                <div class="sga-cards-grid kpi-grid">
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Artículos</div>
-                        <div class="sga-kpi-value" id="s-articulos">—</div>
+                <!-- ZONA 1 — Cabecera con filtro de periodo -->
+                <div class="db-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Panel de Control</h1>
+                        <p class="sga-page-description">Centro operativo · SGA LIN</p>
                     </div>
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Líneas de stock</div>
-                        <div class="sga-kpi-value" id="s-stock">—</div>
-                    </div>
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Ubicaciones</div>
-                        <div class="sga-kpi-value" id="s-ubicaciones">—</div>
-                    </div>
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Movimientos</div>
-                        <div class="sga-kpi-value" id="s-movimientos">—</div>
-                    </div>
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Clientes</div>
-                        <div class="sga-kpi-value" id="s-clientes">—</div>
-                    </div>
-                    <div class="sga-kpi-card">
-                        <div class="sga-kpi-label">Proveedores</div>
-                        <div class="sga-kpi-value" id="s-proveedores">—</div>
+                    <div class="db-period">
+                        <label for="db-desde">Desde</label>
+                        <input type="date" id="db-desde">
+                        <label for="db-hasta">Hasta</label>
+                        <input type="date" id="db-hasta">
+                        <button class="sga-btn sga-btn-primary sga-btn-sm" id="db-btn-actualizar">Actualizar</button>
                     </div>
                 </div>
 
-                <!-- Acceso rápido por sección -->
-                <div class="sections-grid">
+                <!-- ZONA 2 — KPIs principales -->
+                <div class="db-kpi-row">
 
-                    <div class="section-card">
-                        <a class="card-header" href="pages/ferreteria/index.html">
-                            <span class="card-icon">🔩</span>
-                            <span class="card-title">Ferretería</span>
-                            <span class="card-arrow">›</span>
-                        </a>
-                        <div class="card-links">
-                            <a href="pages/ferreteria/articulos.html"><span class="link-dot"></span>Artículos</a>
-                            <a href="pages/ferreteria/entradas.html"><span class="link-dot"></span>Entrada de mercancía</a>
-                            <a href="pages/ferreteria/salidas.html"><span class="link-dot"></span>Salida de mercancía</a>
-                            <a href="pages/ferreteria/traspasos.html"><span class="link-dot"></span>Traspasos entre ubicaciones</a>
-                            <a href="pages/ferreteria/proveedores.html"><span class="link-dot"></span>Proveedores</a>
-                            <a href="pages/ferreteria/operarios.html"><span class="link-dot"></span>Operarios</a>
-                        </div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">🔩</span>
+                        <div class="db-kpi-label">Artículos</div>
+                        <div class="db-kpi-value" id="db-v-articulos">—</div>
                     </div>
 
-                    <div class="section-card">
-                        <a class="card-header" href="pages/opciones/index.html">
-                            <span class="card-icon">⚙️</span>
-                            <span class="card-title">Opciones</span>
-                            <span class="card-arrow">›</span>
-                        </a>
-                        <div class="card-links">
-                            <a href="pages/opciones/almacen-y-stock/consulta-de-stock/index.html"><span class="link-dot"></span>Consulta de stock</a>
-                            <a href="pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html"><span class="link-dot"></span>Movimientos por artículo</a>
-                            <a href="pages/opciones/almacen-y-stock/ubicaciones/index.html"><span class="link-dot"></span>Gestión de ubicaciones</a>
-                            <a href="pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html"><span class="link-dot"></span>Mínimos y máximos</a>
-                            <a href="pages/opciones/logistica-y-pedidos/expediciones/index.html"><span class="link-dot"></span>Expediciones desde pedido</a>
-                            <a href="pages/opciones/sistema/contadores/index.html"><span class="link-dot"></span>Contadores del sistema</a>
-                        </div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📦</span>
+                        <div class="db-kpi-label">Líneas de stock</div>
+                        <div class="db-kpi-value" id="db-v-lineas">—</div>
+                        <div class="db-kpi-sub" id="db-v-lineas-sub"></div>
                     </div>
 
-                    <div class="section-card">
-                        <a class="card-header" href="pages/informes/index.html">
-                            <span class="card-icon">📊</span>
-                            <span class="card-title">Informes</span>
-                            <span class="card-arrow">›</span>
-                        </a>
-                        <div class="card-links">
-                            <a href="pages/informes/index.html"><span class="link-dot"></span>KPIs generales</a>
-                            <a href="pages/informes/index.html"><span class="link-dot"></span>Movimientos por día</a>
-                            <a href="pages/informes/index.html"><span class="link-dot"></span>Top artículos</a>
-                            <a href="pages/informes/index.html"><span class="link-dot"></span>Alertas de stock</a>
-                        </div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📍</span>
+                        <div class="db-kpi-label">Ocupación almacén</div>
+                        <div class="db-kpi-value" id="db-v-ocupacion">—</div>
+                        <div class="db-kpi-sub" id="db-v-ocupacion-sub"></div>
                     </div>
 
-                    <div class="section-card">
-                        <a class="card-header" href="pages/visor/index.html">
-                            <span class="card-icon">🔍</span>
-                            <span class="card-title">Visor</span>
-                            <span class="card-arrow">›</span>
-                        </a>
-                        <div class="card-links">
-                            <a href="pages/visor/articulos.html"><span class="link-dot"></span>Visor de artículos</a>
-                            <a href="pages/visor/proveedores.html"><span class="link-dot"></span>Visor de proveedores</a>
-                            <a href="pages/visor/clientes.html"><span class="link-dot"></span>Visor de clientes</a>
-                        </div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📊</span>
+                        <div class="db-kpi-label">Movimientos del periodo</div>
+                        <div class="db-kpi-value" id="db-v-movimientos">—</div>
+                        <div class="db-kpi-sub" id="db-v-movimientos-sub"></div>
                     </div>
 
                 </div>
 
-                <div class="footer-note">SGA LIN · v1.0 · Base de datos SQL Server LIN</div>
+                <!-- ZONA 3 — Alertas operativas -->
+                <div class="db-alert-row">
 
-            </div><!-- /.dashboard-inner -->
+                    <div class="db-kpi db-kpi--zero" id="db-card-stockbajo">
+                        <span class="db-kpi-icon">⚠️</span>
+                        <div class="db-kpi-label">Stock bajo mínimo</div>
+                        <div class="db-kpi-value" id="db-v-stockbajo">—</div>
+                        <div class="db-kpi-sub">artículos por debajo del mínimo</div>
+                    </div>
+
+                    <div class="db-kpi db-kpi--zero" id="db-card-stockneg">
+                        <span class="db-kpi-icon">🔴</span>
+                        <div class="db-kpi-label">Stock negativo</div>
+                        <div class="db-kpi-value" id="db-v-stockneg">—</div>
+                        <div class="db-kpi-sub">líneas con stock &lt; 0</div>
+                    </div>
+
+                    <div class="db-kpi db-kpi--zero" id="db-card-sinmovto">
+                        <span class="db-kpi-icon">💤</span>
+                        <div class="db-kpi-label">Sin movimiento (90 días)</div>
+                        <div class="db-kpi-value" id="db-v-sinmovto">—</div>
+                        <div class="db-kpi-sub">artículos con stock parado</div>
+                    </div>
+
+                </div>
+
+                <!-- ZONA 4 — Movimientos y actividad reciente -->
+                <div class="db-row-2col">
+                    <div class="db-widget">
+                        <div class="db-widget-header">
+                            <span class="db-widget-title">Movimientos por día</span>
+                            <span class="db-widget-meta">últimos 30 días</span>
+                        </div>
+                        <div class="db-widget-body" id="db-sparkline-wrap">
+                            <div class="db-loading">Cargando…</div>
+                        </div>
+                    </div>
+                    <div class="db-widget">
+                        <div class="db-widget-header">
+                            <span class="db-widget-title">Actividad reciente</span>
+                            <span class="db-widget-meta">últimos movimientos registrados</span>
+                        </div>
+                        <div class="db-widget-body" id="db-actividad">
+                            <div class="db-loading">Cargando…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZONA 5 — Análisis operativo -->
+                <div class="db-row-2col">
+                    <div class="db-widget">
+                        <div class="db-widget-header">
+                            <span class="db-widget-title">Alertas de stock</span>
+                            <span class="db-widget-meta">artículos bajo mínimo</span>
+                        </div>
+                        <div class="db-widget-body" id="db-alertas-stock">
+                            <div class="db-loading">Cargando…</div>
+                        </div>
+                    </div>
+                    <div class="db-widget">
+                        <div class="db-widget-header">
+                            <span class="db-widget-title">Top artículos movidos</span>
+                        </div>
+                        <div class="db-widget-body" id="db-top-articulos">
+                            <div class="db-loading">Cargando…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZONA 6 — Stock por almacén -->
+                <div class="db-widget">
+                    <div class="db-widget-header">
+                        <span class="db-widget-title">Stock por almacén</span>
+                    </div>
+                    <div class="db-widget-body" id="db-stock-almacen">
+                        <div class="db-loading">Cargando…</div>
+                    </div>
+                </div>
+
+                <!-- ZONA 7 — Accesos rápidos -->
+                <div>
+                    <p class="db-section-label">Accesos rápidos</p>
+                    <div class="db-quick-row">
+
+                        <a class="db-quick-card" href="pages/opciones/almacen-y-stock/consulta-de-stock/index.html">
+                            <span class="db-quick-icon">📦</span>
+                            <span class="db-quick-label">Stock</span>
+                        </a>
+
+                        <a class="db-quick-card" href="pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html">
+                            <span class="db-quick-icon">📊</span>
+                            <span class="db-quick-label">Movimientos</span>
+                        </a>
+
+                        <a class="db-quick-card" href="pages/opciones/almacen-y-stock/ubicaciones/index.html">
+                            <span class="db-quick-icon">📍</span>
+                            <span class="db-quick-label">Ubicaciones</span>
+                        </a>
+
+                        <a class="db-quick-card" href="pages/opciones/almacen-y-stock/entrada-de-mercancia/index.html">
+                            <span class="db-quick-icon">⬇️</span>
+                            <span class="db-quick-label">Entradas</span>
+                        </a>
+
+                        <a class="db-quick-card" href="pages/opciones/almacen-y-stock/salida-de-mercancia/index.html">
+                            <span class="db-quick-icon">⬆️</span>
+                            <span class="db-quick-label">Salidas</span>
+                        </a>
+
+                        <a class="db-quick-card" href="pages/opciones/logistica-y-pedidos/expediciones/index.html">
+                            <span class="db-quick-icon">🚛</span>
+                            <span class="db-quick-label">Expediciones</span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="db-footer">SGA LIN · v1.0 · Base de datos SQL Server LIN</div>
+
+            </div><!-- /.db-inner -->
         </div><!-- /.sga-content -->
 
     </div><!-- /.sga-main -->
@@ -142,18 +211,7 @@
     <script src="js/api.js"></script>
     <script src="js/ui/sidebar.js"></script>
     <script src="js/ui/layout.js"></script>
-    <script>
-        SGA.contadores.get().then(function (data) {
-            document.getElementById('s-articulos').textContent    = Number(data.articulos    ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-stock').textContent        = Number(data.stock_activo ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-ubicaciones').textContent  = Number(data.ubicaciones  ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-movimientos').textContent  = Number(data.movimientos  ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-clientes').textContent     = Number(data.clientes     ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-proveedores').textContent  = Number(data.proveedores  ?? 0).toLocaleString('es-ES');
-        }).catch(function () {
-            document.querySelectorAll('.sga-kpi-value').forEach(function (el) { el.textContent = '—'; });
-        });
-    </script>
+    <script src="js/pages/dashboard.js"></script>
 
 </body>
 

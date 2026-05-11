@@ -36,172 +36,165 @@
                 </nav>
             </div>
             <div class="sga-header-right">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary">Cambiar tipo ubicación</button>
-                <button class="btn-tool secondary" id="btn-exportar">📤 Exportar a CSV</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">
+                    Actualizar (F5)
+                </button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">
+                    📤 Exportar CSV
+                </button>
             </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <div class="cs-inner">
 
-                <div class="filter-panel">
-                    <div class="filter-row">
-                        <div class="filter-group">
-                            <label>Ubicación:</label>
-                            <input type="text" class="input-sm" id="f-ubicacion">
-                            <input type="text" class="input-sm">
-                            <label>P:</label><input type="text" class="input-xs">
-                            <label>L:</label><input type="text" class="input-xs">
-                            <select class="input-xs-sel"><option></option></select>
-                            <label>X:</label><input type="text" class="input-xs">
-                            <label>Y:</label><input type="text" class="input-xs">
+                <!-- CABECERA DE PÁGINA -->
+                <div class="cs-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Consulta de Stock</h1>
+                        <p class="sga-page-description">Almacén · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- PANEL DE FILTROS -->
+                <div class="cs-filters">
+
+                    <!-- Fila primaria -->
+                    <div class="cs-filters-primary">
+                        <div class="cs-filter-field">
+                            <label for="f-articulo">Artículo</label>
+                            <input type="text" id="f-articulo" class="cs-input" placeholder="Código...">
                         </div>
-                        <div class="filter-group right">
-                            <select class="select-filter">
-                                <option>Solo con existencias</option>
-                                <option>Todas las ubicaciones</option>
-                                <option>Sin existencias</option>
+                        <div class="cs-filter-field">
+                            <label for="f-ubicacion">Ubicación</label>
+                            <input type="text" id="f-ubicacion" class="cs-input" placeholder="Código...">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label for="f-lote">Lote</label>
+                            <input type="text" id="f-lote" class="cs-input cs-input--sm" placeholder="Lote...">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label for="f-existencias">Mostrar</label>
+                            <select id="f-existencias" class="cs-select">
+                                <option value="1">Solo con existencias</option>
+                                <option value="0">Todas las ubicaciones</option>
+                                <option value="-1">Sin existencias</option>
                             </select>
                         </div>
-                        <div class="etiquetas-panel">
-                            <span class="panel-title">Etiquetas</span>
-                            <div class="etiq-row">
-                                <label>Nº et:</label>
-                                <input type="number" class="input-xs" value="1">
-                                <label class="checkbox-label"><input type="checkbox"> Vista previa</label>
-                            </div>
-                            <div class="etiq-row">
-                                <label>Et. inicio:</label>
-                                <input type="number" class="input-xs" value="1">
-                                <button class="btn-sub">Etiquetas</button>
-                            </div>
-                            <div class="etiq-row">
-                                <label>Destino:</label>
-                                <input type="text" class="input-sm">
-                            </div>
+                        <div class="cs-filter-actions">
+                            <button class="sga-btn sga-btn-primary" id="btn-buscar">Buscar</button>
+                            <button class="cs-toggle-secondary" id="btn-toggle-filtros"
+                                    aria-expanded="false" aria-controls="filtros-secundarios">
+                                ▸ Más filtros
+                            </button>
                         </div>
                     </div>
 
-                    <div class="filter-row">
-                        <label>Artículo:</label>
-                        <input type="text" class="input-sm" id="f-articulo">
-                        <button class="btn-browse">...</button>
-                        <input type="text" class="input-desc" readonly>
-                        <label>Uds/cajas:</label><input type="number" class="input-xs" value="0">
-                        <label>Uds/palet:</label><input type="number" class="input-xs" value="0">
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Stock por artículo, ubicación y lote
-                        </label>
+                    <!-- Fila secundaria (colapsable) -->
+                    <div class="cs-filters-secondary" id="filtros-secundarios" hidden>
+                        <div class="cs-filter-field">
+                            <label for="f-almacen">Almacén</label>
+                            <input type="text" id="f-almacen" class="cs-input cs-input--sm"
+                                   placeholder="Filtrar por almacén..."
+                                   title="Filtro local — actúa sobre resultados ya cargados">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label for="f-exclusiva">Exclusiva</label>
+                            <select id="f-exclusiva" class="cs-select cs-select--sm">
+                                <option value="">Todas</option>
+                                <option value="1">Solo exclusivas</option>
+                                <option value="0">Solo no exclusivas</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="filter-row">
-                        <label>Lote:</label>
-                        <input type="text" class="input-sm" id="f-lote">
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Solo artículos con stock 0 en posición 1 (Y)
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Solo artículos con menos de un palet en suelo
-                        </label>
-                        <select class="select-filter-sm"><option></option></select>
-                        <select class="select-filter-sm"><option>Todas</option></select>
-                    </div>
+                </div><!-- /.cs-filters -->
 
-                    <div class="filter-row">
-                        <label>Subfamilia:</label>
-                        <input type="text" class="input-sm">
-                        <button class="btn-browse">...</button>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Mostrar fecha de recepción
-                        </label>
-                    </div>
+                <!-- BARRA DE ESTADO -->
+                <div class="cs-statusbar">
+                    <span id="cs-count" class="cs-count">—</span>
+                    <span id="cs-timestamp" class="cs-timestamp"></span>
+                    <span id="cs-limit-warn" class="cs-limit-warn" hidden>
+                        ⚠ Límite de 500 registros alcanzado — refine los filtros
+                    </span>
                 </div>
 
-                <!-- Pestañas -->
-                <nav class="tab-nav">
-                    <button class="tab-btn active" data-tab="stock">Stock</button>
-                    <button class="tab-btn" data-tab="stock-grafico">Stock en modo gráfico</button>
-                    <button class="tab-btn" data-tab="informe">Informe de stock</button>
-                </nav>
+                <!-- ZONA TABLA + PANEL LATERAL -->
+                <div class="cs-workspace" id="cs-workspace">
 
-                <!-- TAB: Stock -->
-                <div class="tab-panel active" id="tab-stock">
-                    <div class="table-wrapper">
-                        <table id="tabla-stock">
-                            <thead>
-                                <tr>
-                                    <th class="col-star">*</th>
-                                    <th>Sel</th>
-                                    <th>Empresa</th>
-                                    <th>Ubicación</th>
-                                    <th>Etiqueta</th>
-                                    <th>Artículo</th>
-                                    <th>Nombre de artículo</th>
-                                    <th>Lote</th>
-                                    <th>Stock</th>
-                                    <th>Palet</th>
-                                    <th>Cajas</th>
-                                    <th>Unidades</th>
-                                    <th>Ubicación</th>
-                                    <th>Exclusiva</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody-stock">
-                                <tr class="placeholder-row">
-                                    <td colspan="14">Introduzca los filtros y pulse Actualizar para cargar el stock.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <!-- TABLA -->
+                    <div class="cs-table-wrapper" id="cs-table-wrapper">
+                        <div class="cs-table-scroll">
+                            <table class="cs-table" id="tabla-stock">
+                                <thead>
+                                    <tr>
+                                        <th class="cs-th cs-th--check">
+                                            <input type="checkbox" id="chk-all" title="Seleccionar todo">
+                                        </th>
+                                        <th class="cs-th cs-th--ubicacion">Ubicación</th>
+                                        <th class="cs-th cs-th--articulo">Artículo</th>
+                                        <th class="cs-th cs-th--nombre">Nombre</th>
+                                        <th class="cs-th cs-th--lote">Lote</th>
+                                        <th class="cs-th cs-th--num">Stock</th>
+                                        <th class="cs-th cs-th--num">Palets</th>
+                                        <th class="cs-th cs-th--num">Múlt.</th>
+                                        <th class="cs-th cs-th--actions"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-stock">
+                                    <tr class="cs-placeholder">
+                                        <td colspan="9">
+                                            Introduzca los filtros y pulse Buscar para cargar el stock.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                <!-- TAB: Stock en modo gráfico -->
-                <div class="tab-panel" id="tab-stock-grafico">
-                    <div class="empty-tab">
-                        <p>Vista gráfica del stock por ubicación.</p>
-                    </div>
-                </div>
+                        <!-- Cards móvil (ocultas en desktop) -->
+                        <div class="cs-cards" id="cs-cards" hidden></div>
+                    </div><!-- /.cs-table-wrapper -->
 
-                <!-- TAB: Informe de stock -->
-                <div class="tab-panel" id="tab-informe">
-                    <div class="empty-tab">
-                        <p>Informe detallado de stock.</p>
-                    </div>
-                </div>
+                    <!-- PANEL LATERAL DE DETALLE -->
+                    <aside class="cs-detail" id="cs-detail" hidden>
+                        <div class="cs-detail-header">
+                            <span class="cs-detail-title">Detalle</span>
+                            <button class="cs-detail-close" id="cs-detail-close"
+                                    aria-label="Cerrar panel">✕</button>
+                        </div>
+                        <div class="cs-detail-body" id="cs-detail-body">
+                            <!-- Inyectado por JS -->
+                        </div>
+                        <div class="cs-detail-actions">
+                            <a class="sga-btn sga-btn-secondary sga-btn-sm"
+                               id="cs-btn-movimientos" href="#">
+                                Ver movimientos ↗
+                            </a>
+                        </div>
+                    </aside>
 
-                <!-- Footer de totales -->
-                <footer class="stock-footer">
-                    <div class="footer-actions">
-                        <button class="btn-foot">Asignar ubic.</button>
-                        <button class="btn-foot secondary">Anular selección</button>
-                        <button class="btn-foot secondary">Seleccionar todo</button>
-                        <label class="checkbox-label">
-                            <input type="checkbox" checked> Cálculo de stock 2024
-                        </label>
+                    <!-- Backdrop para overlay en tablet/móvil -->
+                    <div class="cs-detail-backdrop" id="cs-detail-backdrop" hidden></div>
+
+                </div><!-- /.cs-workspace -->
+
+                <!-- FOOTER DE TOTALES -->
+                <footer class="cs-footer">
+                    <div class="cs-footer-actions">
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-sel-todo">
+                            Seleccionar todo
+                        </button>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-anular-sel">
+                            Anular selección
+                        </button>
                     </div>
-                    <div class="footer-totals">
-                        <div class="total-item">
-                            <span class="total-label">Total stock:</span>
-                            <input type="text" class="total-input" id="total-stock" value="0" readonly>
-                        </div>
-                        <div class="total-item">
-                            <span class="total-label">Cuadre AS400:</span>
-                            <input type="text" class="total-input" value="0" readonly>
-                        </div>
-                        <div class="total-item">
-                            <span class="total-label">Pte. servir:</span>
-                            <input type="text" class="total-input" value="0" readonly>
-                            <button class="btn-foot">Consultar pendiente de servir</button>
-                        </div>
-                        <div class="total-item">
-                            <span class="total-label">En picking:</span>
-                            <input type="text" class="total-input" value="0" readonly>
-                        </div>
+                    <div class="cs-footer-totals">
+                        <span class="cs-total-label">Total stock:</span>
+                        <span class="cs-total-value" id="total-stock">—</span>
                     </div>
                 </footer>
 
-            </main>
+            </div><!-- /.cs-inner -->
         </div><!-- /.sga-content -->
 
     </div><!-- /.sga-main -->

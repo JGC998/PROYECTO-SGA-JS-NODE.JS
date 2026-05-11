@@ -146,6 +146,15 @@ const SGA = {
         proveedoresActividad: (p={}) => _get('/estadisticas/proveedores-actividad?' + new URLSearchParams(p)),
         articulosAnalisis:    (p={}) => _get('/estadisticas/articulos-analisis?'  + new URLSearchParams(p)),
     },
+    dashboard: {
+        get: (desde, hasta) => {
+            const p = new URLSearchParams();
+            if (desde) p.set('desde', desde);
+            if (hasta) p.set('hasta', hasta);
+            return _get('/estadisticas/dashboard?' + p);
+        },
+        alertas: () => _get('/estadisticas/alertas'),
+    },
     traspasoInventario: {
         traspasar: data => _post('/traspasar-inventarios', data),
         importarRegularizaciones: data => _post('/importar-regularizaciones', data),

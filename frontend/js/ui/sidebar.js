@@ -21,9 +21,9 @@
         {
             label: 'Operaciones',
             links: [
-                { icon: '⬇️', text: 'Entrada de mercancía',  href: 'pages/ferreteria/entradas.html' },
-                { icon: '⬆️', text: 'Salida de mercancía',   href: 'pages/ferreteria/salidas.html' },
-                { icon: '↔️', text: 'Traspasos',             href: 'pages/ferreteria/traspasos.html' }
+                { icon: '⬇️', text: 'Entrada de mercancía',  href: 'pages/opciones/almacen-y-stock/entrada-de-mercancia/index.html' },
+                { icon: '⬆️', text: 'Salida de mercancía',   href: 'pages/opciones/almacen-y-stock/salida-de-mercancia/index.html' },
+                { icon: '↔️', text: 'Traspasos',             href: 'pages/opciones/almacen-y-stock/traspasos/index.html' }
             ]
         },
         {

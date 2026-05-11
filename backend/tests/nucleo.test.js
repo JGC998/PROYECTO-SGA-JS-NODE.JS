@@ -215,17 +215,13 @@ describe("POST /traspaso — campos requeridos (FASE 23)", () => {
 
 // ─── POST /traspaso — mismo origen y destino ─────────────────────────────────
 
-describe("POST /traspaso — origen igual a destino (FASE 23)", () => {
-  test("[RIESGO] ubiOri === ubiDes con cod inexistente devuelve 409 stock insuficiente", async () => {
-    // No hay validación de ubiOri===ubiDes. El flujo llega al SELECT de origen,
-    // no encuentra stock, y lanza el error de negocio → 409.
-    // Si existiera stock, haría subtract+add en la misma ubicación (net 0 correcto).
-    // Registrar comportamiento actual para detectar cambios involuntarios.
+describe("POST /traspaso — origen igual a destino (FASE 4D)", () => {
+  test("ubiOri === ubiDes devuelve 400 con mensaje de validación", async () => {
     const res = await request(app)
       .post("/traspaso")
       .send({ cod: "__NUCLEO_TEST_INEXISTENTE__", ubiOri: "UBI1", ubiDes: "UBI1", lot: "LOT1", cant: 1 });
-    expect(res.statusCode).toBe(409);
-    expect(res.body.success).toBe(false);
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/diferente/i);
   });
 });
 

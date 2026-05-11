@@ -35,6 +35,7 @@ router.post('/traspaso', async (req, res) => {
     try {
         const { cod, ubiOri, ubiDes, lot, cant } = req.body || {};
         if (!cod || !ubiOri || !ubiDes || !lot) return res.status(400).json({ error: 'Los campos cod, ubiOri, ubiDes y lot son obligatorios' });
+        if (ubiOri === ubiDes) return res.status(400).json({ error: 'La ubicación destino debe ser diferente de la ubicación origen' });
         if (cant === undefined || cant === null) return res.status(400).json({ error: 'El campo cant es obligatorio' });
         const cantNum = Number(cant);
         if (!Number.isFinite(cantNum) || cantNum <= 0) return res.status(400).json({ error: 'La cantidad debe ser un número mayor que 0' });
