@@ -251,9 +251,18 @@ router.get('/picking', async (req, res) => {
                       AND STOUBI    = e.ACSUBI
                       AND (ISNULL(e.ACSLOT,'') = '' OR STOLOT = e.ACSLOT)), 0) AS stock_ubi,
                 ISNULL((SELECT SUM(STOCAN) FROM STOCK
-                    WHERE STOARTCOD = e.ACSARTCOD), 0) AS stock_total
+                    WHERE STOARTCOD = e.ACSARTCOD), 0) AS stock_total,
+                CASE WHEN c.ID IS NOT NULL THEN 1 ELSE 0 END AS confirmado_sga,
+                c.FECHA_CONF AS fecha_conf_sga,
+                c.OPERARIO   AS operario_sga
                 FROM ALBARANCS e
                 LEFT JOIN UBICACION u ON u.UBICODUBI = e.ACSUBI
+                LEFT JOIN SGA_PICKING_CONFIRMACION c
+                    ON  c.ALBARAN   = e.ACSNUM
+                    AND c.SERIE     = e.ACSSER
+                    AND c.ARTICULO  = e.ACSARTCOD
+                    AND c.UBICACION = e.ACSUBI
+                    AND ISNULL(c.LOTE,'') = ISNULL(e.ACSLOT,'')
                 WHERE e.ACSMOV = 'E'
                 AND (e.ACSCLICOD LIKE @b OR e.ACSCLINOM LIKE @b
                      OR CAST(e.ACSNUM AS varchar) LIKE @b)
@@ -291,6 +300,75 @@ router.get('/situacion-pedidos-venta', async (req, res) => {
                 AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY ACSFEC DESC`);
         res.json(r.recordset);
+    } catch (err) { serverError(res, err); }
+});
+
+// ─── PICKING — CONFIRMACIÓN SGA ──────────────────────────────────────────────
+
+router.post('/picking/confirmar', async (req, res) => {
+    try {
+        const { albaran, serie, articulo, ubicacion, lote, operario } = req.body;
+        if (!albaran || !serie || !articulo || !ubicacion) {
+            return res.status(400).json({ error: 'Faltan campos: albaran, serie, articulo, ubicacion' });
+        }
+        const pool    = await getPool();
+        const loteVal = lote || '';
+
+        const existe = await q(pool)
+            .input('alb', Number(albaran))
+            .input('ser', String(serie))
+            .input('art', String(articulo))
+            .input('ubi', String(ubicacion))
+            .input('lot', loteVal)
+            .query(`SELECT COUNT(*) AS cnt FROM ALBARANCS
+                WHERE ACSNUM    = @alb
+                  AND ACSSER    = @ser
+                  AND ACSARTCOD = @art
+                  AND ACSUBI    = @ubi
+                  AND ACSMOV    = 'E'
+                  AND ISNULL(ACSLOT,'') = @lot`);
+        if (existe.recordset[0].cnt === 0) {
+            return res.status(404).json({ error: 'Línea no encontrada en ALBARANCS' });
+        }
+
+        await q(pool)
+            .input('alb', Number(albaran))
+            .input('ser', String(serie))
+            .input('art', String(articulo))
+            .input('ubi', String(ubicacion))
+            .input('lot', loteVal)
+            .input('ope', operario ? String(operario) : '')
+            .query(`IF NOT EXISTS (
+                        SELECT 1 FROM SGA_PICKING_CONFIRMACION
+                        WHERE ALBARAN   = @alb AND SERIE     = @ser
+                          AND ARTICULO  = @art AND UBICACION = @ubi
+                          AND ISNULL(LOTE,'') = @lot
+                    )
+                    INSERT INTO SGA_PICKING_CONFIRMACION
+                        (ALBARAN, SERIE, ARTICULO, UBICACION, LOTE, OPERARIO)
+                    VALUES (@alb, @ser, @art, @ubi, @lot, @ope)`);
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
+});
+
+router.post('/picking/desconfirmar', async (req, res) => {
+    try {
+        const { albaran, serie, articulo, ubicacion, lote } = req.body;
+        if (!albaran || !serie || !articulo || !ubicacion) {
+            return res.status(400).json({ error: 'Faltan campos: albaran, serie, articulo, ubicacion' });
+        }
+        const pool = await getPool();
+        await q(pool)
+            .input('alb', Number(albaran))
+            .input('ser', String(serie))
+            .input('art', String(articulo))
+            .input('ubi', String(ubicacion))
+            .input('lot', lote || '')
+            .query(`DELETE FROM SGA_PICKING_CONFIRMACION
+                WHERE ALBARAN   = @alb AND SERIE     = @ser
+                  AND ARTICULO  = @art AND UBICACION = @ubi
+                  AND ISNULL(LOTE,'') = @lot`);
+        res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
 

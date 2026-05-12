@@ -55,13 +55,15 @@
     /* ── ESTADO DE LÍNEA ─────────────────────────────────────────────────── */
 
     function estadoLinea(linea) {
-        if (linea.picking) return 'recogida';
+        if (linea.confirmado_sga) return 'confirmada';
+        if (linea.picking)        return 'recogida';
         if (linea.stock_ubi === 0 && linea.stock_total === 0) return 'faltante';
-        if (linea.stock_ubi < linea.cantidad_pedida) return 'stock-bajo';
+        if (linea.stock_ubi < linea.cantidad_pedida)          return 'stock-bajo';
         return 'pendiente';
     }
 
     var ICONOS = {
+        confirmada  : '✓',
         recogida    : '✓',
         pendiente   : '○',
         'stock-bajo': '⚠',
@@ -97,7 +99,10 @@
                     lote            : r.lote || '',
                     picking         : r.picking || '',
                     stock_ubi       : r.stock_ubi   != null ? Number(r.stock_ubi)   : 0,
-                    stock_total     : r.stock_total != null ? Number(r.stock_total) : 0
+                    stock_total     : r.stock_total != null ? Number(r.stock_total) : 0,
+                    confirmado_sga  : !!r.confirmado_sga,
+                    _albaran        : r.albaran,
+                    _serie          : r.serie || ''
                 });
             }
         });
@@ -105,9 +110,11 @@
         Object.keys(map).forEach(function (k) {
             var alb      = map[k];
             var total    = alb.lineas.length;
-            var conPick  = alb.lineas.filter(function (l) { return !!l.picking; }).length;
+            var conPick  = alb.lineas.filter(function (l) {
+                return !!l.picking || !!l.confirmado_sga;
+            }).length;
             var faltantes = alb.lineas.filter(function (l) {
-                return !l.picking && l.stock_ubi === 0 && l.stock_total === 0;
+                return !l.picking && !l.confirmado_sga && l.stock_ubi === 0 && l.stock_total === 0;
             }).length;
 
             alb.numPicking = conPick
@@ -311,7 +318,7 @@
         } else {
             /* Orden operativo: faltantes → stock-bajo → pendientes → recogidas
                Dentro de cada grupo, ordenar por ubicación física              */
-            var ordenEstado = { faltante: 0, 'stock-bajo': 1, pendiente: 2, recogida: 3 };
+            var ordenEstado = { faltante: 0, 'stock-bajo': 1, pendiente: 2, recogida: 3, confirmada: 4 };
             var sorted = alb.lineas.slice().sort(function (a, b) {
                 var ea = estadoLinea(a), eb = estadoLinea(b);
                 var oa = ordenEstado[ea] !== undefined ? ordenEstado[ea] : 99;
@@ -406,29 +413,124 @@
 
         row.appendChild(content);
         div.appendChild(row);
-        div.appendChild(buildAcciones(linea.articulo));
+        div.appendChild(buildAcciones(linea));
         return div;
     }
 
-    function buildAcciones(articulo) {
-        var wrap = document.createElement('div');
+    function buildAcciones(linea) {
+        var wrap   = document.createElement('div');
         wrap.className = 'pk-linea-actions';
+
+        var estado = estadoLinea(linea);
+        if (estado === 'confirmada') {
+            var btnDes = document.createElement('button');
+            btnDes.className = 'pk-linea-link pk-linea-link--desconfirmar';
+            btnDes.textContent = '↩ Deshacer';
+            btnDes.addEventListener('click', function (e) {
+                e.stopPropagation();
+                desconfirmarLinea(linea, btnDes);
+            });
+            wrap.appendChild(btnDes);
+        } else if (estado === 'pendiente' || estado === 'stock-bajo') {
+            var btnConf = document.createElement('button');
+            btnConf.className = 'pk-linea-link pk-linea-link--confirmar';
+            btnConf.textContent = '✓ Confirmar';
+            btnConf.addEventListener('click', function (e) {
+                e.stopPropagation();
+                confirmarLinea(linea, btnConf);
+            });
+            wrap.appendChild(btnConf);
+        }
 
         var aMov = document.createElement('a');
         aMov.className = 'pk-linea-link';
         aMov.textContent = '→ Movimientos';
         aMov.href = '../../almacen-y-stock/movimientos-por-articulo/index.html?articulo='
-            + encodeURIComponent(articulo);
+            + encodeURIComponent(linea.articulo);
         wrap.appendChild(aMov);
 
         var aStock = document.createElement('a');
         aStock.className = 'pk-linea-link';
         aStock.textContent = '→ Stock';
         aStock.href = '../../almacen-y-stock/consulta-de-stock/index.html?articulo='
-            + encodeURIComponent(articulo);
+            + encodeURIComponent(linea.articulo);
         wrap.appendChild(aStock);
 
         return wrap;
+    }
+
+    /* ── CONFIRMACIÓN DE LÍNEA ───────────────────────────────────────────────── */
+
+    function recalcProgreso(alb) {
+        var total    = alb.lineas.length;
+        var conPick  = alb.lineas.filter(function (l) {
+            return !!l.picking || !!l.confirmado_sga;
+        }).length;
+        var faltantes = alb.lineas.filter(function (l) {
+            return !l.picking && !l.confirmado_sga
+                && l.stock_ubi === 0 && l.stock_total === 0;
+        }).length;
+        alb.faltantes = faltantes;
+        alb.progreso  = { total: total, conPicking: conPick, faltantes: faltantes };
+        if (total === 0 || conPick === 0) alb.status = 'pendiente';
+        else if (conPick === total)        alb.status = 'preparado';
+        else                               alb.status = 'parcial';
+    }
+
+    function updateCard(key) {
+        var alb  = _albaranes[key];
+        var card = document.querySelector('.pk-task[data-key="' + key + '"]');
+        if (!card) return;
+        var newCard = buildCard(alb);
+        card.parentNode.replaceChild(newCard, card);
+    }
+
+    function confirmarLinea(linea, btn) {
+        btn.disabled    = true;
+        btn.textContent = '…';
+        SGA.picking.confirmar({
+            albaran  : linea._albaran,
+            serie    : linea._serie,
+            articulo : linea.articulo,
+            ubicacion: linea.ubicacion,
+            lote     : linea.lote || null
+        }).then(function () {
+            linea.confirmado_sga = true;
+            if (_selected && _albaranes[_selected]) {
+                recalcProgreso(_albaranes[_selected]);
+                renderDetalle(_albaranes[_selected]);
+                updateCard(_selected);
+                updateCounters();
+            }
+        }).catch(function (err) {
+            console.error('[PK] error al confirmar:', err);
+            btn.disabled    = false;
+            btn.textContent = '✓ Confirmar';
+        });
+    }
+
+    function desconfirmarLinea(linea, btn) {
+        btn.disabled    = true;
+        btn.textContent = '…';
+        SGA.picking.desconfirmar({
+            albaran  : linea._albaran,
+            serie    : linea._serie,
+            articulo : linea.articulo,
+            ubicacion: linea.ubicacion,
+            lote     : linea.lote || null
+        }).then(function () {
+            linea.confirmado_sga = false;
+            if (_selected && _albaranes[_selected]) {
+                recalcProgreso(_albaranes[_selected]);
+                renderDetalle(_albaranes[_selected]);
+                updateCard(_selected);
+                updateCounters();
+            }
+        }).catch(function (err) {
+            console.error('[PK] error al desconfirmar:', err);
+            btn.disabled    = false;
+            btn.textContent = '↩ Deshacer';
+        });
     }
 
     /* ── CONTADORES ──────────────────────────────────────────────────────── */

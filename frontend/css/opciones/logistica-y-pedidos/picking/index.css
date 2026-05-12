@@ -518,6 +518,16 @@
     font-style: italic;
 }
 
+/* Estado confirmada (SGA): azul — distingue de recogida (LIN) */
+.pk-linea--confirmada .pk-linea-icon { color: #0284c7; }
+
+.pk-linea--confirmada .pk-linea-art,
+.pk-linea--confirmada .pk-linea-codigo,
+.pk-linea--confirmada .pk-linea-data,
+.pk-linea--confirmada .pk-linea-ubi {
+    opacity: 0.55;
+}
+
 /* Estado recogida: tono apagado */
 .pk-linea--recogida .pk-linea-art,
 .pk-linea--recogida .pk-linea-codigo,
@@ -538,6 +548,37 @@
     border-left: 3px solid #ca8a04;
     padding-left: 13px;
     background: #fefce8;
+}
+
+.pk-linea-link--confirmar {
+    background: #f0fdf4;
+    border-color: #16a34a;
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.pk-linea-link--confirmar:hover {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #fff;
+}
+
+.pk-linea-link--confirmar:disabled,
+.pk-linea-link--desconfirmar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pk-linea-link--desconfirmar {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #6b7280;
+}
+
+.pk-linea-link--desconfirmar:hover {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
 }
 
 .pk-linea-actions {
