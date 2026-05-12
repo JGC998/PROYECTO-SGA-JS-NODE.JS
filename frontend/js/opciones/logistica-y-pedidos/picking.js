@@ -33,6 +33,7 @@
     var elCntPend     = null;
     var elCntParcial  = null;
     var elCntPrep     = null;
+    var elKpiStrip    = null;
 
     /* ── FECHAS ──────────────────────────────────────────────────────────── */
 
@@ -50,6 +51,18 @@
         var parts = isoStr.split('-');
         if (parts.length !== 3) return isoStr;
         return parts[2] + '/' + parts[1] + '/' + parts[0];
+    }
+
+    function formatFechaHora(isoStr) {
+        if (!isoStr) return '';
+        var d = new Date(isoStr);
+        if (isNaN(d.getTime())) return '';
+        var dd = String(d.getDate()).padStart(2, '0');
+        var mm = String(d.getMonth() + 1).padStart(2, '0');
+        var yy = d.getFullYear();
+        var hh = String(d.getHours()).padStart(2, '0');
+        var mi = String(d.getMinutes()).padStart(2, '0');
+        return dd + '/' + mm + '/' + yy + ' ' + hh + ':' + mi;
     }
 
     /* ── ESTADO DE LÍNEA ─────────────────────────────────────────────────── */
@@ -101,6 +114,8 @@
                     stock_ubi       : r.stock_ubi   != null ? Number(r.stock_ubi)   : 0,
                     stock_total     : r.stock_total != null ? Number(r.stock_total) : 0,
                     confirmado_sga  : !!r.confirmado_sga,
+                    fecha_conf_sga  : r.fecha_conf_sga  || null,
+                    operario_sga    : r.operario_sga    || '',
                     _albaran        : r.albaran,
                     _serie          : r.serie || ''
                 });
@@ -121,7 +136,12 @@
                 ? alb.lineas.find(function (l) { return !!l.picking; }).picking
                 : null;
             alb.faltantes = faltantes;
-            alb.progreso  = { total: total, conPicking: conPick, faltantes: faltantes };
+            alb.progreso  = {
+                total     : total,
+                conPicking: conPick,
+                faltantes : faltantes,
+                pct       : total > 0 ? Math.round(conPick / total * 100) : 0
+            };
 
             if (total === 0 || conPick === 0) alb.status = 'pendiente';
             else if (conPick === total)        alb.status = 'preparado';
@@ -169,6 +189,7 @@
         var lista = filterAlbaranes();
         renderList(lista);
         updateCounters();
+        updateKpiStrip();
     }
 
     function renderList(lista) {
@@ -215,7 +236,8 @@
         var p = alb.progreso;
         var progresoTxt = document.createElement('span');
         progresoTxt.textContent = p.conPicking + '/' + p.total
-            + ' línea' + (p.total !== 1 ? 's' : '');
+            + ' línea' + (p.total !== 1 ? 's' : '')
+            + (p.total > 0 ? ' · ' + p.pct + '%' : '');
         footer.appendChild(progresoTxt);
 
         if (alb.faltantes > 0) {
@@ -296,7 +318,8 @@
         var mProg = document.createElement('div');
         mProg.className = 'pk-panel-meta-progress';
         var progTxt = p.conPicking + '/' + p.total
-            + ' línea' + (p.total !== 1 ? 's' : '');
+            + ' línea' + (p.total !== 1 ? 's' : '')
+            + (p.total > 0 ? ' · ' + p.pct + '%' : '');
         if (p.faltantes > 0) {
             progTxt += ' · ⚠ ' + p.faltantes + ' faltante'
                 + (p.faltantes !== 1 ? 's' : '');
@@ -411,6 +434,19 @@
             content.appendChild(hint);
         }
 
+        /* 7 — Trazabilidad en confirmada */
+        if (estado === 'confirmada') {
+            var confParts = [];
+            if (linea.operario_sga) confParts.push('por ' + linea.operario_sga);
+            if (linea.fecha_conf_sga) confParts.push(formatFechaHora(linea.fecha_conf_sga));
+            if (confParts.length) {
+                var confEl = document.createElement('div');
+                confEl.className = 'pk-linea-conf-info';
+                confEl.textContent = '✓ Confirmada ' + confParts.join(' · ');
+                content.appendChild(confEl);
+            }
+        }
+
         row.appendChild(content);
         div.appendChild(row);
         div.appendChild(buildAcciones(linea));
@@ -471,7 +507,12 @@
                 && l.stock_ubi === 0 && l.stock_total === 0;
         }).length;
         alb.faltantes = faltantes;
-        alb.progreso  = { total: total, conPicking: conPick, faltantes: faltantes };
+        alb.progreso  = {
+            total     : total,
+            conPicking: conPick,
+            faltantes : faltantes,
+            pct       : total > 0 ? Math.round(conPick / total * 100) : 0
+        };
         if (total === 0 || conPick === 0) alb.status = 'pendiente';
         else if (conPick === total)        alb.status = 'preparado';
         else                               alb.status = 'parcial';
@@ -492,6 +533,7 @@
         recalcProgreso(alb);
         updateCard(lineaKey);
         updateCounters();
+        updateKpiStrip();
         if (_selected === lineaKey) renderDetalle(alb);
     }
 
@@ -541,6 +583,76 @@
                 }
             }, 2000);
         });
+    }
+
+    /* ── KPI STRIP (líneas) ──────────────────────────────────────────────── */
+
+    function updateKpiStrip() {
+        if (!elKpiStrip) return;
+        elKpiStrip.innerHTML = '';
+
+        var todasLineas = [];
+        Object.values(_albaranes).forEach(function (alb) {
+            alb.lineas.forEach(function (l) { todasLineas.push(l); });
+        });
+
+        var total      = todasLineas.length;
+        if (total === 0) { elKpiStrip.hidden = true; return; }
+        elKpiStrip.hidden = false;
+
+        var preparadas = todasLineas.filter(function (l) {
+            return !!l.picking || !!l.confirmado_sga;
+        }).length;
+        var faltantes  = todasLineas.filter(function (l) {
+            return !l.picking && !l.confirmado_sga
+                && l.stock_ubi === 0 && l.stock_total === 0;
+        }).length;
+        var pct = Math.round(preparadas / total * 100);
+        var pctClass = pct >= 80 ? 'pk-kpi-val--verde'
+                     : pct >= 40 ? 'pk-kpi-val--ambar'
+                     :             'pk-kpi-val--rojo';
+
+        /* % global */
+        var g1 = document.createElement('span');
+        g1.className = 'pk-kpi-grp';
+        var v1 = document.createElement('span');
+        v1.className = 'pk-kpi-val ' + pctClass;
+        v1.textContent = pct + '%';
+        g1.appendChild(v1);
+        g1.appendChild(document.createTextNode(' preparado'));
+        elKpiStrip.appendChild(g1);
+
+        var s1 = document.createElement('span');
+        s1.className = 'pk-kpi-sep';
+        s1.textContent = '·';
+        elKpiStrip.appendChild(s1);
+
+        /* N/M líneas */
+        var g2 = document.createElement('span');
+        g2.className = 'pk-kpi-grp';
+        var v2 = document.createElement('span');
+        v2.className = 'pk-kpi-val';
+        v2.textContent = preparadas + ' / ' + total;
+        g2.appendChild(v2);
+        g2.appendChild(document.createTextNode(' líneas'));
+        elKpiStrip.appendChild(g2);
+
+        /* faltantes (solo si hay) */
+        if (faltantes > 0) {
+            var s2 = document.createElement('span');
+            s2.className = 'pk-kpi-sep';
+            s2.textContent = '·';
+            elKpiStrip.appendChild(s2);
+
+            var g3 = document.createElement('span');
+            g3.className = 'pk-kpi-grp';
+            var v3 = document.createElement('span');
+            v3.className = 'pk-kpi-val pk-kpi-val--rojo';
+            v3.textContent = '⚠ ' + faltantes;
+            g3.appendChild(v3);
+            g3.appendChild(document.createTextNode(' faltante' + (faltantes !== 1 ? 's' : '')));
+            elKpiStrip.appendChild(g3);
+        }
     }
 
     /* ── CONTADORES ──────────────────────────────────────────────────────── */
@@ -630,6 +742,7 @@
         elCntPend.textContent    = '—';
         elCntParcial.textContent = '—';
         elCntPrep.textContent    = '—';
+        if (elKpiStrip) { elKpiStrip.innerHTML = ''; elKpiStrip.hidden = true; }
     }
 
     /* ── DEBOUNCE ────────────────────────────────────────────────────────── */
@@ -703,6 +816,7 @@
         elCntPend     = document.getElementById('pk-cnt-pend');
         elCntParcial  = document.getElementById('pk-cnt-parcial');
         elCntPrep     = document.getElementById('pk-cnt-prep');
+        elKpiStrip    = document.getElementById('pk-kpi-strip');
 
         initFiltros();
         wireEvents();
