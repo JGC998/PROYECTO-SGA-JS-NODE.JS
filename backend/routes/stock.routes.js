@@ -305,17 +305,35 @@ router.get('/situacion-pedidos-venta', async (req, res) => {
 
 // ─── PICKING — CONFIRMACIÓN SGA ──────────────────────────────────────────────
 
+function validarCamposPicking(albaran, serie, articulo, ubicacion, lote, operario) {
+    const albNum = Number(albaran);
+    if (!Number.isInteger(albNum) || albNum <= 0)
+        return 'albaran debe ser un entero positivo';
+    if (!serie || String(serie).length > 10)
+        return 'serie inválida (máx 10 caracteres)';
+    if (!articulo || String(articulo).length > 30)
+        return 'articulo inválido (máx 30 caracteres)';
+    if (!ubicacion || String(ubicacion).length > 20)
+        return 'ubicacion inválida (máx 20 caracteres)';
+    if (lote && String(lote).length > 30)
+        return 'lote inválido (máx 30 caracteres)';
+    if (operario && String(operario).length > 50)
+        return 'operario inválido (máx 50 caracteres)';
+    return null;
+}
+
 router.post('/picking/confirmar', async (req, res) => {
     try {
-        const { albaran, serie, articulo, ubicacion, lote, operario } = req.body;
-        if (!albaran || !serie || !articulo || !ubicacion) {
-            return res.status(400).json({ error: 'Faltan campos: albaran, serie, articulo, ubicacion' });
-        }
+        const { albaran, serie, articulo, ubicacion, lote, operario } = req.body || {};
+        const err400 = validarCamposPicking(albaran, serie, articulo, ubicacion, lote, operario);
+        if (err400) return res.status(400).json({ error: err400 });
+
         const pool    = await getPool();
-        const loteVal = lote || '';
+        const albNum  = Number(albaran);
+        const loteVal = lote ? String(lote) : '';
 
         const existe = await q(pool)
-            .input('alb', Number(albaran))
+            .input('alb', albNum)
             .input('ser', String(serie))
             .input('art', String(articulo))
             .input('ubi', String(ubicacion))
@@ -332,7 +350,7 @@ router.post('/picking/confirmar', async (req, res) => {
         }
 
         await q(pool)
-            .input('alb', Number(albaran))
+            .input('alb', albNum)
             .input('ser', String(serie))
             .input('art', String(articulo))
             .input('ubi', String(ubicacion))
@@ -353,17 +371,20 @@ router.post('/picking/confirmar', async (req, res) => {
 
 router.post('/picking/desconfirmar', async (req, res) => {
     try {
-        const { albaran, serie, articulo, ubicacion, lote } = req.body;
-        if (!albaran || !serie || !articulo || !ubicacion) {
-            return res.status(400).json({ error: 'Faltan campos: albaran, serie, articulo, ubicacion' });
-        }
-        const pool = await getPool();
+        const { albaran, serie, articulo, ubicacion, lote } = req.body || {};
+        const err400 = validarCamposPicking(albaran, serie, articulo, ubicacion, lote);
+        if (err400) return res.status(400).json({ error: err400 });
+
+        const pool    = await getPool();
+        const albNum  = Number(albaran);
+        const loteVal = lote ? String(lote) : '';
+
         await q(pool)
-            .input('alb', Number(albaran))
+            .input('alb', albNum)
             .input('ser', String(serie))
             .input('art', String(articulo))
             .input('ubi', String(ubicacion))
-            .input('lot', lote || '')
+            .input('lot', loteVal)
             .query(`DELETE FROM SGA_PICKING_CONFIRMACION
                 WHERE ALBARAN   = @alb AND SERIE     = @ser
                   AND ARTICULO  = @art AND UBICACION = @ubi

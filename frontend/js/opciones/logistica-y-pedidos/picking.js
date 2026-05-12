@@ -485,6 +485,16 @@
         card.parentNode.replaceChild(newCard, card);
     }
 
+    function _actualizarTrasConfirm(linea) {
+        var lineaKey = String(linea._albaran) + '|' + linea._serie;
+        var alb      = _albaranes[lineaKey];
+        if (!alb) return;
+        recalcProgreso(alb);
+        updateCard(lineaKey);
+        updateCounters();
+        if (_selected === lineaKey) renderDetalle(alb);
+    }
+
     function confirmarLinea(linea, btn) {
         btn.disabled    = true;
         btn.textContent = '…';
@@ -496,16 +506,16 @@
             lote     : linea.lote || null
         }).then(function () {
             linea.confirmado_sga = true;
-            if (_selected && _albaranes[_selected]) {
-                recalcProgreso(_albaranes[_selected]);
-                renderDetalle(_albaranes[_selected]);
-                updateCard(_selected);
-                updateCounters();
-            }
+            _actualizarTrasConfirm(linea);
         }).catch(function (err) {
             console.error('[PK] error al confirmar:', err);
-            btn.disabled    = false;
-            btn.textContent = '✓ Confirmar';
+            btn.textContent = '⚠ Error';
+            setTimeout(function () {
+                if (!linea.confirmado_sga) {
+                    btn.disabled    = false;
+                    btn.textContent = '✓ Confirmar';
+                }
+            }, 2000);
         });
     }
 
@@ -520,16 +530,16 @@
             lote     : linea.lote || null
         }).then(function () {
             linea.confirmado_sga = false;
-            if (_selected && _albaranes[_selected]) {
-                recalcProgreso(_albaranes[_selected]);
-                renderDetalle(_albaranes[_selected]);
-                updateCard(_selected);
-                updateCounters();
-            }
+            _actualizarTrasConfirm(linea);
         }).catch(function (err) {
             console.error('[PK] error al desconfirmar:', err);
-            btn.disabled    = false;
-            btn.textContent = '↩ Deshacer';
+            btn.textContent = '⚠ Error';
+            setTimeout(function () {
+                if (linea.confirmado_sga) {
+                    btn.disabled    = false;
+                    btn.textContent = '↩ Deshacer';
+                }
+            }, 2000);
         });
     }
 
