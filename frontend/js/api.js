@@ -108,6 +108,9 @@ const SGA = {
     expediciones: {
         list: (params = {}) => _get('/expediciones?' + new URLSearchParams(params)),
     },
+    picking: {
+        list: (params = {}) => _get('/picking?' + new URLSearchParams(params)),
+    },
     situacionPedidos: {
         list: (params = {}) => _get('/situacion-pedidos-venta?' + new URLSearchParams(params)),
     },

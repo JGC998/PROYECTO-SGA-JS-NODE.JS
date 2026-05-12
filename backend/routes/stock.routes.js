@@ -193,17 +193,76 @@ router.get('/regularizaciones', async (req, res) => {
 router.get('/expediciones', async (req, res) => {
     try {
         const pool = await getPool();
-        const { buscar = '' } = req.query;
-        const r = await q(pool).input('b', `%${buscar}%`)
-            .query(`SELECT TOP 200
+        const { buscar = '', desde, hasta } = req.query;
+        const fechaD = desde || new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
+        const fechaH = hasta || new Date().toISOString().split('T')[0];
+        const r = await q(pool)
+            .input('b', `%${buscar}%`)
+            .input('desde', fechaD)
+            .input('hasta', fechaH)
+            .query(`SELECT TOP 500
                 ACSNUM AS albaran, ACSSER AS serie,
                 ACSCLICOD AS cliente, ACSCLINOM AS nombre_cliente,
                 CONVERT(varchar,ACSFEC,23) AS fecha,
-                ACSNUMPIC AS picking, ACSMOV AS tipo
+                ACSNUMPIC AS picking, ACSMOV AS tipo,
+                ACSARTCOD AS articulo,
+                (SELECT TOP 1 ARTNOM FROM ARTICULO WHERE ARTCOD=ACSARTCOD) AS nombre_articulo,
+                ACSCAN AS cantidad,
+                ACSUBI AS ubicacion,
+                ACSLOT AS lote
                 FROM ALBARANCS
                 WHERE ACSMOV='E'
                 AND (ACSCLICOD LIKE @b OR ACSCLINOM LIKE @b OR CAST(ACSNUM AS varchar) LIKE @b)
+                AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY ACSFEC DESC, ACSNUM DESC`);
+        res.json(r.recordset);
+    } catch (err) { serverError(res, err); }
+});
+
+// ─── PICKING / PREPARACIÓN ────────────────────────────────────────────────────
+
+router.get('/picking', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const { buscar = '', desde, hasta } = req.query;
+        const fechaD = desde || new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
+        const fechaH = hasta || new Date().toISOString().split('T')[0];
+        const r = await q(pool)
+            .input('b', `%${buscar}%`)
+            .input('desde', fechaD)
+            .input('hasta', fechaH)
+            .query(`SELECT TOP 500
+                e.ACSNUM    AS albaran,
+                e.ACSSER    AS serie,
+                e.ACSCLICOD AS cliente,
+                e.ACSCLINOM AS nombre_cliente,
+                CONVERT(varchar, e.ACSFEC, 23) AS fecha,
+                e.ACSNUMPIC AS picking,
+                e.ACSARTCOD AS articulo,
+                (SELECT TOP 1 ARTNOM FROM ARTICULO WHERE ARTCOD = e.ACSARTCOD) AS nombre_articulo,
+                e.ACSCAN    AS cantidad_pedida,
+                e.ACSUBI    AS ubicacion,
+                u.UBINOM    AS nom_ubicacion,
+                u.UBIALMCOD AS almacen,
+                u.UBIETI    AS ubi_etiqueta,
+                e.ACSLOT    AS lote,
+                ISNULL((SELECT SUM(STOCAN) FROM STOCK
+                    WHERE STOARTCOD = e.ACSARTCOD
+                      AND STOUBI    = e.ACSUBI
+                      AND (ISNULL(e.ACSLOT,'') = '' OR STOLOT = e.ACSLOT)), 0) AS stock_ubi,
+                ISNULL((SELECT SUM(STOCAN) FROM STOCK
+                    WHERE STOARTCOD = e.ACSARTCOD), 0) AS stock_total
+                FROM ALBARANCS e
+                LEFT JOIN UBICACION u ON u.UBICODUBI = e.ACSUBI
+                WHERE e.ACSMOV = 'E'
+                AND (e.ACSCLICOD LIKE @b OR e.ACSCLINOM LIKE @b
+                     OR CAST(e.ACSNUM AS varchar) LIKE @b)
+                AND CAST(e.ACSFEC AS DATE) BETWEEN @desde AND @hasta
+                ORDER BY
+                    CASE WHEN e.ACSNUMPIC IS NULL THEN 0 ELSE 1 END ASC,
+                    e.ACSFEC DESC,
+                    e.ACSNUM DESC,
+                    e.ACSUBI ASC`);
         res.json(r.recordset);
     } catch (err) { serverError(res, err); }
 });

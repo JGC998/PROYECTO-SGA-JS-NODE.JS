@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Preparación / Picking</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/picking/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Preparación / Picking</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <div class="pk-inner">
+
+                <!-- CABECERA -->
+                <div class="pk-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Preparación / Picking</h1>
+                        <p class="sga-page-description">Tablero operativo de preparación · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="pk-filters">
+                    <div class="pk-filters-row">
+                        <span class="pk-date-label">Desde</span>
+                        <input type="date" id="pk-f-desde" class="pk-date-input" aria-label="Fecha desde">
+                        <span class="pk-date-label">Hasta</span>
+                        <input type="date" id="pk-f-hasta" class="pk-date-input" aria-label="Fecha hasta">
+                        <input type="text" id="pk-f-buscar" class="pk-search-input"
+                               placeholder="Albarán, cliente…" autocomplete="off" aria-label="Buscar tarea de picking">
+                        <select id="pk-f-status" class="pk-status-select" aria-label="Estado">
+                            <option value="todos">Todos los estados</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="parcial">Parcial</option>
+                            <option value="preparado">Preparado</option>
+                        </select>
+                        <div class="pk-quick-btns">
+                            <button class="pk-quick-btn" data-days="0" aria-label="Hoy">Hoy</button>
+                            <button class="pk-quick-btn" data-days="7" aria-label="Últimos 7 días">7d</button>
+                            <button class="pk-quick-btn pk-quick-btn--active" data-days="30" aria-label="Últimos 30 días">30d</button>
+                            <button class="pk-quick-btn" data-days="90" aria-label="Últimos 90 días">90d</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTADORES -->
+                <div class="pk-counters">
+                    <div class="pk-counter pk-counter--total">
+                        <span class="pk-counter__val" id="pk-cnt-total">—</span>
+                        <span class="pk-counter__label">Total</span>
+                    </div>
+                    <div class="pk-counter pk-counter--pend">
+                        <span class="pk-counter__val" id="pk-cnt-pend">—</span>
+                        <span class="pk-counter__label">Pendientes</span>
+                    </div>
+                    <div class="pk-counter pk-counter--parcial">
+                        <span class="pk-counter__val" id="pk-cnt-parcial">—</span>
+                        <span class="pk-counter__label">Parciales</span>
+                    </div>
+                    <div class="pk-counter pk-counter--prep">
+                        <span class="pk-counter__val" id="pk-cnt-prep">—</span>
+                        <span class="pk-counter__label">Preparados</span>
+                    </div>
+                </div>
+
+                <!-- WORKSPACE -->
+                <div class="pk-workspace">
+
+                    <!-- LISTA DE TAREAS -->
+                    <div class="pk-list-col">
+                        <div class="pk-list" id="pk-list">
+                            <div class="pk-placeholder" id="pk-placeholder">
+                                <span class="pk-placeholder-icon">📋</span>
+                                Cargando tareas de picking…
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL DETALLE -->
+                    <aside class="pk-panel" id="pk-panel" aria-label="Detalle de preparación">
+
+                        <div class="pk-panel-header">
+                            <span class="pk-panel-title" id="pk-panel-title">Detalle</span>
+                            <button class="pk-panel-close" id="pk-panel-close" aria-label="Cerrar panel">×</button>
+                        </div>
+
+                        <div class="pk-panel-empty" id="pk-panel-empty">
+                            <span class="pk-panel-empty-icon">📦</span>
+                            Selecciona un albarán para ver las líneas de preparación.
+                        </div>
+
+                        <div class="pk-panel-meta" id="pk-panel-meta" hidden></div>
+
+                        <div class="pk-panel-body" id="pk-panel-body" hidden></div>
+
+                    </aside>
+
+                </div><!-- /.pk-workspace -->
+
+            </div><!-- /.pk-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <!-- Backdrop overlay tablet/móvil -->
+    <div class="pk-panel-backdrop" id="pk-panel-backdrop"></div>
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/logistica-y-pedidos/picking.js"></script>
+
+</body>
+
+</html>

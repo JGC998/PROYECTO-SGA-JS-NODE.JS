@@ -30,6 +30,7 @@
             label: 'Expediciones',
             links: [
                 { icon: '🚛', text: 'Expediciones desde pedido', href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
+                { icon: '📋', text: 'Preparación / Picking',    href: 'pages/opciones/logistica-y-pedidos/picking/index.html' },
                 { icon: '🗺️', text: 'Hojas de ruta',            href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' }
             ]
         },
