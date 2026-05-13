@@ -1,0 +1,4365 @@
+{
+  "descripcion": "Datos de demostracion - Almacen de piezas industriales SGA LIN",
+  "ubicaciones": [
+    {
+      "etiqueta": "P001 I X001 Y01",
+      "ubicacion": "P001 I X001 Y01"
+    },
+    {
+      "etiqueta": "P001 I X001 Y02",
+      "ubicacion": "P001 I X001 Y02"
+    },
+    {
+      "etiqueta": "P001 I X001 Y03",
+      "ubicacion": "P001 I X001 Y03"
+    },
+    {
+      "etiqueta": "P001 I X001 Y04",
+      "ubicacion": "P001 I X001 Y04"
+    },
+    {
+      "etiqueta": "P001 I X001 Y05",
+      "ubicacion": "P001 I X001 Y05"
+    },
+    {
+      "etiqueta": "P001 I X002 Y01",
+      "ubicacion": "P001 I X002 Y01"
+    },
+    {
+      "etiqueta": "P001 I X002 Y02",
+      "ubicacion": "P001 I X002 Y02"
+    },
+    {
+      "etiqueta": "P001 I X002 Y03",
+      "ubicacion": "P001 I X002 Y03"
+    },
+    {
+      "etiqueta": "P001 I X002 Y04",
+      "ubicacion": "P001 I X002 Y04"
+    },
+    {
+      "etiqueta": "P001 I X002 Y05",
+      "ubicacion": "P001 I X002 Y05"
+    },
+    {
+      "etiqueta": "P001 I X003 Y01",
+      "ubicacion": "P001 I X003 Y01"
+    },
+    {
+      "etiqueta": "P001 I X003 Y02",
+      "ubicacion": "P001 I X003 Y02"
+    },
+    {
+      "etiqueta": "P001 I X003 Y03",
+      "ubicacion": "P001 I X003 Y03"
+    },
+    {
+      "etiqueta": "P001 I X003 Y04",
+      "ubicacion": "P001 I X003 Y04"
+    },
+    {
+      "etiqueta": "P001 I X003 Y05",
+      "ubicacion": "P001 I X003 Y05"
+    },
+    {
+      "etiqueta": "P001 I X004 Y01",
+      "ubicacion": "P001 I X004 Y01"
+    },
+    {
+      "etiqueta": "P001 I X004 Y02",
+      "ubicacion": "P001 I X004 Y02"
+    },
+    {
+      "etiqueta": "P001 I X004 Y03",
+      "ubicacion": "P001 I X004 Y03"
+    },
+    {
+      "etiqueta": "P001 I X004 Y04",
+      "ubicacion": "P001 I X004 Y04"
+    },
+    {
+      "etiqueta": "P001 I X004 Y05",
+      "ubicacion": "P001 I X004 Y05"
+    },
+    {
+      "etiqueta": "P001 I X005 Y01",
+      "ubicacion": "P001 I X005 Y01"
+    },
+    {
+      "etiqueta": "P001 I X005 Y02",
+      "ubicacion": "P001 I X005 Y02"
+    },
+    {
+      "etiqueta": "P001 I X005 Y03",
+      "ubicacion": "P001 I X005 Y03"
+    },
+    {
+      "etiqueta": "P001 I X005 Y04",
+      "ubicacion": "P001 I X005 Y04"
+    },
+    {
+      "etiqueta": "P001 I X005 Y05",
+      "ubicacion": "P001 I X005 Y05"
+    },
+    {
+      "etiqueta": "P001 I X006 Y01",
+      "ubicacion": "P001 I X006 Y01"
+    },
+    {
+      "etiqueta": "P001 I X006 Y02",
+      "ubicacion": "P001 I X006 Y02"
+    },
+    {
+      "etiqueta": "P001 I X006 Y03",
+      "ubicacion": "P001 I X006 Y03"
+    },
+    {
+      "etiqueta": "P001 I X006 Y04",
+      "ubicacion": "P001 I X006 Y04"
+    },
+    {
+      "etiqueta": "P001 I X006 Y05",
+      "ubicacion": "P001 I X006 Y05"
+    },
+    {
+      "etiqueta": "P001 I X007 Y01",
+      "ubicacion": "P001 I X007 Y01"
+    },
+    {
+      "etiqueta": "P001 I X007 Y02",
+      "ubicacion": "P001 I X007 Y02"
+    },
+    {
+      "etiqueta": "P001 I X007 Y03",
+      "ubicacion": "P001 I X007 Y03"
+    },
+    {
+      "etiqueta": "P001 I X007 Y04",
+      "ubicacion": "P001 I X007 Y04"
+    },
+    {
+      "etiqueta": "P001 I X007 Y05",
+      "ubicacion": "P001 I X007 Y05"
+    },
+    {
+      "etiqueta": "P001 I X008 Y01",
+      "ubicacion": "P001 I X008 Y01"
+    },
+    {
+      "etiqueta": "P001 I X008 Y02",
+      "ubicacion": "P001 I X008 Y02"
+    },
+    {
+      "etiqueta": "P001 I X008 Y03",
+      "ubicacion": "P001 I X008 Y03"
+    },
+    {
+      "etiqueta": "P001 I X008 Y04",
+      "ubicacion": "P001 I X008 Y04"
+    },
+    {
+      "etiqueta": "P001 I X008 Y05",
+      "ubicacion": "P001 I X008 Y05"
+    },
+    {
+      "etiqueta": "P001 I X009 Y01",
+      "ubicacion": "P001 I X009 Y01"
+    },
+    {
+      "etiqueta": "P001 I X009 Y02",
+      "ubicacion": "P001 I X009 Y02"
+    },
+    {
+      "etiqueta": "P001 I X009 Y03",
+      "ubicacion": "P001 I X009 Y03"
+    },
+    {
+      "etiqueta": "P001 I X009 Y04",
+      "ubicacion": "P001 I X009 Y04"
+    },
+    {
+      "etiqueta": "P001 I X009 Y05",
+      "ubicacion": "P001 I X009 Y05"
+    },
+    {
+      "etiqueta": "P001 I X010 Y01",
+      "ubicacion": "P001 I X010 Y01"
+    },
+    {
+      "etiqueta": "P001 I X010 Y02",
+      "ubicacion": "P001 I X010 Y02"
+    },
+    {
+      "etiqueta": "P001 I X010 Y03",
+      "ubicacion": "P001 I X010 Y03"
+    },
+    {
+      "etiqueta": "P001 I X010 Y04",
+      "ubicacion": "P001 I X010 Y04"
+    },
+    {
+      "etiqueta": "P001 I X010 Y05",
+      "ubicacion": "P001 I X010 Y05"
+    },
+    {
+      "etiqueta": "P001 I X011 Y01",
+      "ubicacion": "P001 I X011 Y01"
+    },
+    {
+      "etiqueta": "P001 I X011 Y02",
+      "ubicacion": "P001 I X011 Y02"
+    },
+    {
+      "etiqueta": "P001 I X011 Y03",
+      "ubicacion": "P001 I X011 Y03"
+    },
+    {
+      "etiqueta": "P001 I X011 Y04",
+      "ubicacion": "P001 I X011 Y04"
+    },
+    {
+      "etiqueta": "P001 I X011 Y05",
+      "ubicacion": "P001 I X011 Y05"
+    },
+    {
+      "etiqueta": "P001 I X012 Y01",
+      "ubicacion": "P001 I X012 Y01"
+    },
+    {
+      "etiqueta": "P001 I X012 Y02",
+      "ubicacion": "P001 I X012 Y02"
+    },
+    {
+      "etiqueta": "P001 I X012 Y03",
+      "ubicacion": "P001 I X012 Y03"
+    },
+    {
+      "etiqueta": "P001 I X012 Y04",
+      "ubicacion": "P001 I X012 Y04"
+    },
+    {
+      "etiqueta": "P001 I X012 Y05",
+      "ubicacion": "P001 I X012 Y05"
+    },
+    {
+      "etiqueta": "P001 I X013 Y01",
+      "ubicacion": "P001 I X013 Y01"
+    },
+    {
+      "etiqueta": "P001 I X013 Y02",
+      "ubicacion": "P001 I X013 Y02"
+    },
+    {
+      "etiqueta": "P001 I X013 Y03",
+      "ubicacion": "P001 I X013 Y03"
+    },
+    {
+      "etiqueta": "P001 I X013 Y04",
+      "ubicacion": "P001 I X013 Y04"
+    },
+    {
+      "etiqueta": "P001 I X013 Y05",
+      "ubicacion": "P001 I X013 Y05"
+    },
+    {
+      "etiqueta": "P001 I X014 Y01",
+      "ubicacion": "P001 I X014 Y01"
+    },
+    {
+      "etiqueta": "P001 I X014 Y02",
+      "ubicacion": "P001 I X014 Y02"
+    },
+    {
+      "etiqueta": "P001 I X014 Y03",
+      "ubicacion": "P001 I X014 Y03"
+    },
+    {
+      "etiqueta": "P001 I X014 Y04",
+      "ubicacion": "P001 I X014 Y04"
+    },
+    {
+      "etiqueta": "P001 I X014 Y05",
+      "ubicacion": "P001 I X014 Y05"
+    },
+    {
+      "etiqueta": "P001 D X001 Y01",
+      "ubicacion": "P001 D X001 Y01"
+    },
+    {
+      "etiqueta": "P001 D X001 Y02",
+      "ubicacion": "P001 D X001 Y02"
+    },
+    {
+      "etiqueta": "P001 D X001 Y03",
+      "ubicacion": "P001 D X001 Y03"
+    },
+    {
+      "etiqueta": "P001 D X001 Y04",
+      "ubicacion": "P001 D X001 Y04"
+    },
+    {
+      "etiqueta": "P001 D X001 Y05",
+      "ubicacion": "P001 D X001 Y05"
+    },
+    {
+      "etiqueta": "P001 D X002 Y01",
+      "ubicacion": "P001 D X002 Y01"
+    },
+    {
+      "etiqueta": "P001 D X002 Y02",
+      "ubicacion": "P001 D X002 Y02"
+    },
+    {
+      "etiqueta": "P001 D X002 Y03",
+      "ubicacion": "P001 D X002 Y03"
+    },
+    {
+      "etiqueta": "P001 D X002 Y04",
+      "ubicacion": "P001 D X002 Y04"
+    },
+    {
+      "etiqueta": "P001 D X002 Y05",
+      "ubicacion": "P001 D X002 Y05"
+    },
+    {
+      "etiqueta": "P001 D X003 Y01",
+      "ubicacion": "P001 D X003 Y01"
+    },
+    {
+      "etiqueta": "P001 D X003 Y02",
+      "ubicacion": "P001 D X003 Y02"
+    },
+    {
+      "etiqueta": "P001 D X003 Y03",
+      "ubicacion": "P001 D X003 Y03"
+    },
+    {
+      "etiqueta": "P001 D X003 Y04",
+      "ubicacion": "P001 D X003 Y04"
+    },
+    {
+      "etiqueta": "P001 D X003 Y05",
+      "ubicacion": "P001 D X003 Y05"
+    },
+    {
+      "etiqueta": "P001 D X004 Y01",
+      "ubicacion": "P001 D X004 Y01"
+    },
+    {
+      "etiqueta": "P001 D X004 Y02",
+      "ubicacion": "P001 D X004 Y02"
+    },
+    {
+      "etiqueta": "P001 D X004 Y03",
+      "ubicacion": "P001 D X004 Y03"
+    },
+    {
+      "etiqueta": "P001 D X004 Y04",
+      "ubicacion": "P001 D X004 Y04"
+    },
+    {
+      "etiqueta": "P001 D X004 Y05",
+      "ubicacion": "P001 D X004 Y05"
+    },
+    {
+      "etiqueta": "P001 D X005 Y01",
+      "ubicacion": "P001 D X005 Y01"
+    },
+    {
+      "etiqueta": "P001 D X005 Y02",
+      "ubicacion": "P001 D X005 Y02"
+    },
+    {
+      "etiqueta": "P001 D X005 Y03",
+      "ubicacion": "P001 D X005 Y03"
+    },
+    {
+      "etiqueta": "P001 D X005 Y04",
+      "ubicacion": "P001 D X005 Y04"
+    },
+    {
+      "etiqueta": "P001 D X005 Y05",
+      "ubicacion": "P001 D X005 Y05"
+    },
+    {
+      "etiqueta": "P001 D X006 Y01",
+      "ubicacion": "P001 D X006 Y01"
+    },
+    {
+      "etiqueta": "P001 D X006 Y02",
+      "ubicacion": "P001 D X006 Y02"
+    },
+    {
+      "etiqueta": "P001 D X006 Y03",
+      "ubicacion": "P001 D X006 Y03"
+    },
+    {
+      "etiqueta": "P001 D X006 Y04",
+      "ubicacion": "P001 D X006 Y04"
+    },
+    {
+      "etiqueta": "P001 D X006 Y05",
+      "ubicacion": "P001 D X006 Y05"
+    },
+    {
+      "etiqueta": "P001 D X007 Y01",
+      "ubicacion": "P001 D X007 Y01"
+    },
+    {
+      "etiqueta": "P001 D X007 Y02",
+      "ubicacion": "P001 D X007 Y02"
+    },
+    {
+      "etiqueta": "P001 D X007 Y03",
+      "ubicacion": "P001 D X007 Y03"
+    },
+    {
+      "etiqueta": "P001 D X007 Y04",
+      "ubicacion": "P001 D X007 Y04"
+    },
+    {
+      "etiqueta": "P001 D X007 Y05",
+      "ubicacion": "P001 D X007 Y05"
+    },
+    {
+      "etiqueta": "P001 D X008 Y01",
+      "ubicacion": "P001 D X008 Y01"
+    },
+    {
+      "etiqueta": "P001 D X008 Y02",
+      "ubicacion": "P001 D X008 Y02"
+    },
+    {
+      "etiqueta": "P001 D X008 Y03",
+      "ubicacion": "P001 D X008 Y03"
+    },
+    {
+      "etiqueta": "P001 D X008 Y04",
+      "ubicacion": "P001 D X008 Y04"
+    },
+    {
+      "etiqueta": "P001 D X008 Y05",
+      "ubicacion": "P001 D X008 Y05"
+    },
+    {
+      "etiqueta": "P001 D X009 Y01",
+      "ubicacion": "P001 D X009 Y01"
+    },
+    {
+      "etiqueta": "P001 D X009 Y02",
+      "ubicacion": "P001 D X009 Y02"
+    },
+    {
+      "etiqueta": "P001 D X009 Y03",
+      "ubicacion": "P001 D X009 Y03"
+    },
+    {
+      "etiqueta": "P001 D X009 Y04",
+      "ubicacion": "P001 D X009 Y04"
+    },
+    {
+      "etiqueta": "P001 D X009 Y05",
+      "ubicacion": "P001 D X009 Y05"
+    },
+    {
+      "etiqueta": "P001 D X010 Y01",
+      "ubicacion": "P001 D X010 Y01"
+    },
+    {
+      "etiqueta": "P001 D X010 Y02",
+      "ubicacion": "P001 D X010 Y02"
+    },
+    {
+      "etiqueta": "P001 D X010 Y03",
+      "ubicacion": "P001 D X010 Y03"
+    },
+    {
+      "etiqueta": "P001 D X010 Y04",
+      "ubicacion": "P001 D X010 Y04"
+    },
+    {
+      "etiqueta": "P001 D X010 Y05",
+      "ubicacion": "P001 D X010 Y05"
+    },
+    {
+      "etiqueta": "P001 D X011 Y01",
+      "ubicacion": "P001 D X011 Y01"
+    },
+    {
+      "etiqueta": "P001 D X011 Y02",
+      "ubicacion": "P001 D X011 Y02"
+    },
+    {
+      "etiqueta": "P001 D X011 Y03",
+      "ubicacion": "P001 D X011 Y03"
+    },
+    {
+      "etiqueta": "P001 D X011 Y04",
+      "ubicacion": "P001 D X011 Y04"
+    },
+    {
+      "etiqueta": "P001 D X011 Y05",
+      "ubicacion": "P001 D X011 Y05"
+    },
+    {
+      "etiqueta": "P001 D X012 Y01",
+      "ubicacion": "P001 D X012 Y01"
+    },
+    {
+      "etiqueta": "P001 D X012 Y02",
+      "ubicacion": "P001 D X012 Y02"
+    },
+    {
+      "etiqueta": "P001 D X012 Y03",
+      "ubicacion": "P001 D X012 Y03"
+    },
+    {
+      "etiqueta": "P001 D X012 Y04",
+      "ubicacion": "P001 D X012 Y04"
+    },
+    {
+      "etiqueta": "P001 D X012 Y05",
+      "ubicacion": "P001 D X012 Y05"
+    },
+    {
+      "etiqueta": "P001 D X013 Y01",
+      "ubicacion": "P001 D X013 Y01"
+    },
+    {
+      "etiqueta": "P001 D X013 Y02",
+      "ubicacion": "P001 D X013 Y02"
+    },
+    {
+      "etiqueta": "P001 D X013 Y03",
+      "ubicacion": "P001 D X013 Y03"
+    },
+    {
+      "etiqueta": "P001 D X013 Y04",
+      "ubicacion": "P001 D X013 Y04"
+    },
+    {
+      "etiqueta": "P001 D X013 Y05",
+      "ubicacion": "P001 D X013 Y05"
+    },
+    {
+      "etiqueta": "P001 D X014 Y01",
+      "ubicacion": "P001 D X014 Y01"
+    },
+    {
+      "etiqueta": "P001 D X014 Y02",
+      "ubicacion": "P001 D X014 Y02"
+    },
+    {
+      "etiqueta": "P001 D X014 Y03",
+      "ubicacion": "P001 D X014 Y03"
+    },
+    {
+      "etiqueta": "P001 D X014 Y04",
+      "ubicacion": "P001 D X014 Y04"
+    },
+    {
+      "etiqueta": "P001 D X014 Y05",
+      "ubicacion": "P001 D X014 Y05"
+    },
+    {
+      "etiqueta": "P002 I X001 Y01",
+      "ubicacion": "P002 I X001 Y01"
+    },
+    {
+      "etiqueta": "P002 I X001 Y02",
+      "ubicacion": "P002 I X001 Y02"
+    },
+    {
+      "etiqueta": "P002 I X001 Y03",
+      "ubicacion": "P002 I X001 Y03"
+    },
+    {
+      "etiqueta": "P002 I X001 Y04",
+      "ubicacion": "P002 I X001 Y04"
+    },
+    {
+      "etiqueta": "P002 I X001 Y05",
+      "ubicacion": "P002 I X001 Y05"
+    },
+    {
+      "etiqueta": "P002 I X002 Y01",
+      "ubicacion": "P002 I X002 Y01"
+    },
+    {
+      "etiqueta": "P002 I X002 Y02",
+      "ubicacion": "P002 I X002 Y02"
+    },
+    {
+      "etiqueta": "P002 I X002 Y03",
+      "ubicacion": "P002 I X002 Y03"
+    },
+    {
+      "etiqueta": "P002 I X002 Y04",
+      "ubicacion": "P002 I X002 Y04"
+    },
+    {
+      "etiqueta": "P002 I X002 Y05",
+      "ubicacion": "P002 I X002 Y05"
+    },
+    {
+      "etiqueta": "P002 I X003 Y01",
+      "ubicacion": "P002 I X003 Y01"
+    },
+    {
+      "etiqueta": "P002 I X003 Y02",
+      "ubicacion": "P002 I X003 Y02"
+    },
+    {
+      "etiqueta": "P002 I X003 Y03",
+      "ubicacion": "P002 I X003 Y03"
+    },
+    {
+      "etiqueta": "P002 I X003 Y04",
+      "ubicacion": "P002 I X003 Y04"
+    },
+    {
+      "etiqueta": "P002 I X003 Y05",
+      "ubicacion": "P002 I X003 Y05"
+    },
+    {
+      "etiqueta": "P002 I X004 Y01",
+      "ubicacion": "P002 I X004 Y01"
+    },
+    {
+      "etiqueta": "P002 I X004 Y02",
+      "ubicacion": "P002 I X004 Y02"
+    },
+    {
+      "etiqueta": "P002 I X004 Y03",
+      "ubicacion": "P002 I X004 Y03"
+    },
+    {
+      "etiqueta": "P002 I X004 Y04",
+      "ubicacion": "P002 I X004 Y04"
+    },
+    {
+      "etiqueta": "P002 I X004 Y05",
+      "ubicacion": "P002 I X004 Y05"
+    },
+    {
+      "etiqueta": "P002 I X005 Y01",
+      "ubicacion": "P002 I X005 Y01"
+    },
+    {
+      "etiqueta": "P002 I X005 Y02",
+      "ubicacion": "P002 I X005 Y02"
+    },
+    {
+      "etiqueta": "P002 I X005 Y03",
+      "ubicacion": "P002 I X005 Y03"
+    },
+    {
+      "etiqueta": "P002 I X005 Y04",
+      "ubicacion": "P002 I X005 Y04"
+    },
+    {
+      "etiqueta": "P002 I X005 Y05",
+      "ubicacion": "P002 I X005 Y05"
+    },
+    {
+      "etiqueta": "P002 I X006 Y01",
+      "ubicacion": "P002 I X006 Y01"
+    },
+    {
+      "etiqueta": "P002 I X006 Y02",
+      "ubicacion": "P002 I X006 Y02"
+    },
+    {
+      "etiqueta": "P002 I X006 Y03",
+      "ubicacion": "P002 I X006 Y03"
+    },
+    {
+      "etiqueta": "P002 I X006 Y04",
+      "ubicacion": "P002 I X006 Y04"
+    },
+    {
+      "etiqueta": "P002 I X006 Y05",
+      "ubicacion": "P002 I X006 Y05"
+    },
+    {
+      "etiqueta": "P002 I X007 Y01",
+      "ubicacion": "P002 I X007 Y01"
+    },
+    {
+      "etiqueta": "P002 I X007 Y02",
+      "ubicacion": "P002 I X007 Y02"
+    },
+    {
+      "etiqueta": "P002 I X007 Y03",
+      "ubicacion": "P002 I X007 Y03"
+    },
+    {
+      "etiqueta": "P002 I X007 Y04",
+      "ubicacion": "P002 I X007 Y04"
+    },
+    {
+      "etiqueta": "P002 I X007 Y05",
+      "ubicacion": "P002 I X007 Y05"
+    },
+    {
+      "etiqueta": "P002 I X008 Y01",
+      "ubicacion": "P002 I X008 Y01"
+    },
+    {
+      "etiqueta": "P002 I X008 Y02",
+      "ubicacion": "P002 I X008 Y02"
+    },
+    {
+      "etiqueta": "P002 I X008 Y03",
+      "ubicacion": "P002 I X008 Y03"
+    },
+    {
+      "etiqueta": "P002 I X008 Y04",
+      "ubicacion": "P002 I X008 Y04"
+    },
+    {
+      "etiqueta": "P002 I X008 Y05",
+      "ubicacion": "P002 I X008 Y05"
+    },
+    {
+      "etiqueta": "P002 I X009 Y01",
+      "ubicacion": "P002 I X009 Y01"
+    },
+    {
+      "etiqueta": "P002 I X009 Y02",
+      "ubicacion": "P002 I X009 Y02"
+    },
+    {
+      "etiqueta": "P002 I X009 Y03",
+      "ubicacion": "P002 I X009 Y03"
+    },
+    {
+      "etiqueta": "P002 I X009 Y04",
+      "ubicacion": "P002 I X009 Y04"
+    },
+    {
+      "etiqueta": "P002 I X009 Y05",
+      "ubicacion": "P002 I X009 Y05"
+    },
+    {
+      "etiqueta": "P002 I X010 Y01",
+      "ubicacion": "P002 I X010 Y01"
+    },
+    {
+      "etiqueta": "P002 I X010 Y02",
+      "ubicacion": "P002 I X010 Y02"
+    },
+    {
+      "etiqueta": "P002 I X010 Y03",
+      "ubicacion": "P002 I X010 Y03"
+    },
+    {
+      "etiqueta": "P002 I X010 Y04",
+      "ubicacion": "P002 I X010 Y04"
+    },
+    {
+      "etiqueta": "P002 I X010 Y05",
+      "ubicacion": "P002 I X010 Y05"
+    },
+    {
+      "etiqueta": "P002 I X011 Y01",
+      "ubicacion": "P002 I X011 Y01"
+    },
+    {
+      "etiqueta": "P002 I X011 Y02",
+      "ubicacion": "P002 I X011 Y02"
+    },
+    {
+      "etiqueta": "P002 I X011 Y03",
+      "ubicacion": "P002 I X011 Y03"
+    },
+    {
+      "etiqueta": "P002 I X011 Y04",
+      "ubicacion": "P002 I X011 Y04"
+    },
+    {
+      "etiqueta": "P002 I X011 Y05",
+      "ubicacion": "P002 I X011 Y05"
+    },
+    {
+      "etiqueta": "P002 I X012 Y01",
+      "ubicacion": "P002 I X012 Y01"
+    },
+    {
+      "etiqueta": "P002 I X012 Y02",
+      "ubicacion": "P002 I X012 Y02"
+    },
+    {
+      "etiqueta": "P002 I X012 Y03",
+      "ubicacion": "P002 I X012 Y03"
+    },
+    {
+      "etiqueta": "P002 I X012 Y04",
+      "ubicacion": "P002 I X012 Y04"
+    },
+    {
+      "etiqueta": "P002 I X012 Y05",
+      "ubicacion": "P002 I X012 Y05"
+    },
+    {
+      "etiqueta": "P002 I X013 Y01",
+      "ubicacion": "P002 I X013 Y01"
+    },
+    {
+      "etiqueta": "P002 I X013 Y02",
+      "ubicacion": "P002 I X013 Y02"
+    },
+    {
+      "etiqueta": "P002 I X013 Y03",
+      "ubicacion": "P002 I X013 Y03"
+    },
+    {
+      "etiqueta": "P002 I X013 Y04",
+      "ubicacion": "P002 I X013 Y04"
+    },
+    {
+      "etiqueta": "P002 I X013 Y05",
+      "ubicacion": "P002 I X013 Y05"
+    },
+    {
+      "etiqueta": "P002 I X014 Y01",
+      "ubicacion": "P002 I X014 Y01"
+    },
+    {
+      "etiqueta": "P002 I X014 Y02",
+      "ubicacion": "P002 I X014 Y02"
+    },
+    {
+      "etiqueta": "P002 I X014 Y03",
+      "ubicacion": "P002 I X014 Y03"
+    },
+    {
+      "etiqueta": "P002 I X014 Y04",
+      "ubicacion": "P002 I X014 Y04"
+    },
+    {
+      "etiqueta": "P002 I X014 Y05",
+      "ubicacion": "P002 I X014 Y05"
+    },
+    {
+      "etiqueta": "P002 D X001 Y01",
+      "ubicacion": "P002 D X001 Y01"
+    },
+    {
+      "etiqueta": "P002 D X001 Y02",
+      "ubicacion": "P002 D X001 Y02"
+    },
+    {
+      "etiqueta": "P002 D X001 Y03",
+      "ubicacion": "P002 D X001 Y03"
+    },
+    {
+      "etiqueta": "P002 D X001 Y04",
+      "ubicacion": "P002 D X001 Y04"
+    },
+    {
+      "etiqueta": "P002 D X001 Y05",
+      "ubicacion": "P002 D X001 Y05"
+    },
+    {
+      "etiqueta": "P002 D X002 Y01",
+      "ubicacion": "P002 D X002 Y01"
+    },
+    {
+      "etiqueta": "P002 D X002 Y02",
+      "ubicacion": "P002 D X002 Y02"
+    },
+    {
+      "etiqueta": "P002 D X002 Y03",
+      "ubicacion": "P002 D X002 Y03"
+    },
+    {
+      "etiqueta": "P002 D X002 Y04",
+      "ubicacion": "P002 D X002 Y04"
+    },
+    {
+      "etiqueta": "P002 D X002 Y05",
+      "ubicacion": "P002 D X002 Y05"
+    },
+    {
+      "etiqueta": "P002 D X003 Y01",
+      "ubicacion": "P002 D X003 Y01"
+    },
+    {
+      "etiqueta": "P002 D X003 Y02",
+      "ubicacion": "P002 D X003 Y02"
+    },
+    {
+      "etiqueta": "P002 D X003 Y03",
+      "ubicacion": "P002 D X003 Y03"
+    },
+    {
+      "etiqueta": "P002 D X003 Y04",
+      "ubicacion": "P002 D X003 Y04"
+    },
+    {
+      "etiqueta": "P002 D X003 Y05",
+      "ubicacion": "P002 D X003 Y05"
+    },
+    {
+      "etiqueta": "P002 D X004 Y01",
+      "ubicacion": "P002 D X004 Y01"
+    },
+    {
+      "etiqueta": "P002 D X004 Y02",
+      "ubicacion": "P002 D X004 Y02"
+    },
+    {
+      "etiqueta": "P002 D X004 Y03",
+      "ubicacion": "P002 D X004 Y03"
+    },
+    {
+      "etiqueta": "P002 D X004 Y04",
+      "ubicacion": "P002 D X004 Y04"
+    },
+    {
+      "etiqueta": "P002 D X004 Y05",
+      "ubicacion": "P002 D X004 Y05"
+    },
+    {
+      "etiqueta": "P002 D X005 Y01",
+      "ubicacion": "P002 D X005 Y01"
+    },
+    {
+      "etiqueta": "P002 D X005 Y02",
+      "ubicacion": "P002 D X005 Y02"
+    },
+    {
+      "etiqueta": "P002 D X005 Y03",
+      "ubicacion": "P002 D X005 Y03"
+    },
+    {
+      "etiqueta": "P002 D X005 Y04",
+      "ubicacion": "P002 D X005 Y04"
+    },
+    {
+      "etiqueta": "P002 D X005 Y05",
+      "ubicacion": "P002 D X005 Y05"
+    },
+    {
+      "etiqueta": "P002 D X006 Y01",
+      "ubicacion": "P002 D X006 Y01"
+    },
+    {
+      "etiqueta": "P002 D X006 Y02",
+      "ubicacion": "P002 D X006 Y02"
+    },
+    {
+      "etiqueta": "P002 D X006 Y03",
+      "ubicacion": "P002 D X006 Y03"
+    },
+    {
+      "etiqueta": "P002 D X006 Y04",
+      "ubicacion": "P002 D X006 Y04"
+    },
+    {
+      "etiqueta": "P002 D X006 Y05",
+      "ubicacion": "P002 D X006 Y05"
+    },
+    {
+      "etiqueta": "P002 D X007 Y01",
+      "ubicacion": "P002 D X007 Y01"
+    },
+    {
+      "etiqueta": "P002 D X007 Y02",
+      "ubicacion": "P002 D X007 Y02"
+    },
+    {
+      "etiqueta": "P002 D X007 Y03",
+      "ubicacion": "P002 D X007 Y03"
+    },
+    {
+      "etiqueta": "P002 D X007 Y04",
+      "ubicacion": "P002 D X007 Y04"
+    },
+    {
+      "etiqueta": "P002 D X007 Y05",
+      "ubicacion": "P002 D X007 Y05"
+    },
+    {
+      "etiqueta": "P002 D X008 Y01",
+      "ubicacion": "P002 D X008 Y01"
+    },
+    {
+      "etiqueta": "P002 D X008 Y02",
+      "ubicacion": "P002 D X008 Y02"
+    },
+    {
+      "etiqueta": "P002 D X008 Y03",
+      "ubicacion": "P002 D X008 Y03"
+    },
+    {
+      "etiqueta": "P002 D X008 Y04",
+      "ubicacion": "P002 D X008 Y04"
+    },
+    {
+      "etiqueta": "P002 D X008 Y05",
+      "ubicacion": "P002 D X008 Y05"
+    },
+    {
+      "etiqueta": "P002 D X009 Y01",
+      "ubicacion": "P002 D X009 Y01"
+    },
+    {
+      "etiqueta": "P002 D X009 Y02",
+      "ubicacion": "P002 D X009 Y02"
+    },
+    {
+      "etiqueta": "P002 D X009 Y03",
+      "ubicacion": "P002 D X009 Y03"
+    },
+    {
+      "etiqueta": "P002 D X009 Y04",
+      "ubicacion": "P002 D X009 Y04"
+    },
+    {
+      "etiqueta": "P002 D X009 Y05",
+      "ubicacion": "P002 D X009 Y05"
+    },
+    {
+      "etiqueta": "P002 D X010 Y01",
+      "ubicacion": "P002 D X010 Y01"
+    },
+    {
+      "etiqueta": "P002 D X010 Y02",
+      "ubicacion": "P002 D X010 Y02"
+    },
+    {
+      "etiqueta": "P002 D X010 Y03",
+      "ubicacion": "P002 D X010 Y03"
+    },
+    {
+      "etiqueta": "P002 D X010 Y04",
+      "ubicacion": "P002 D X010 Y04"
+    },
+    {
+      "etiqueta": "P002 D X010 Y05",
+      "ubicacion": "P002 D X010 Y05"
+    },
+    {
+      "etiqueta": "P002 D X011 Y01",
+      "ubicacion": "P002 D X011 Y01"
+    },
+    {
+      "etiqueta": "P002 D X011 Y02",
+      "ubicacion": "P002 D X011 Y02"
+    },
+    {
+      "etiqueta": "P002 D X011 Y03",
+      "ubicacion": "P002 D X011 Y03"
+    },
+    {
+      "etiqueta": "P002 D X011 Y04",
+      "ubicacion": "P002 D X011 Y04"
+    },
+    {
+      "etiqueta": "P002 D X011 Y05",
+      "ubicacion": "P002 D X011 Y05"
+    },
+    {
+      "etiqueta": "P002 D X012 Y01",
+      "ubicacion": "P002 D X012 Y01"
+    },
+    {
+      "etiqueta": "P002 D X012 Y02",
+      "ubicacion": "P002 D X012 Y02"
+    },
+    {
+      "etiqueta": "P002 D X012 Y03",
+      "ubicacion": "P002 D X012 Y03"
+    },
+    {
+      "etiqueta": "P002 D X012 Y04",
+      "ubicacion": "P002 D X012 Y04"
+    },
+    {
+      "etiqueta": "P002 D X012 Y05",
+      "ubicacion": "P002 D X012 Y05"
+    },
+    {
+      "etiqueta": "P002 D X013 Y01",
+      "ubicacion": "P002 D X013 Y01"
+    },
+    {
+      "etiqueta": "P002 D X013 Y02",
+      "ubicacion": "P002 D X013 Y02"
+    },
+    {
+      "etiqueta": "P002 D X013 Y03",
+      "ubicacion": "P002 D X013 Y03"
+    },
+    {
+      "etiqueta": "P002 D X013 Y04",
+      "ubicacion": "P002 D X013 Y04"
+    },
+    {
+      "etiqueta": "P002 D X013 Y05",
+      "ubicacion": "P002 D X013 Y05"
+    },
+    {
+      "etiqueta": "P002 D X014 Y01",
+      "ubicacion": "P002 D X014 Y01"
+    },
+    {
+      "etiqueta": "P002 D X014 Y02",
+      "ubicacion": "P002 D X014 Y02"
+    },
+    {
+      "etiqueta": "P002 D X014 Y03",
+      "ubicacion": "P002 D X014 Y03"
+    },
+    {
+      "etiqueta": "P002 D X014 Y04",
+      "ubicacion": "P002 D X014 Y04"
+    },
+    {
+      "etiqueta": "P002 D X014 Y05",
+      "ubicacion": "P002 D X014 Y05"
+    },
+    {
+      "etiqueta": "P003 I X001 Y01",
+      "ubicacion": "P003 I X001 Y01"
+    },
+    {
+      "etiqueta": "P003 I X001 Y02",
+      "ubicacion": "P003 I X001 Y02"
+    },
+    {
+      "etiqueta": "P003 I X001 Y03",
+      "ubicacion": "P003 I X001 Y03"
+    },
+    {
+      "etiqueta": "P003 I X001 Y04",
+      "ubicacion": "P003 I X001 Y04"
+    },
+    {
+      "etiqueta": "P003 I X001 Y05",
+      "ubicacion": "P003 I X001 Y05"
+    },
+    {
+      "etiqueta": "P003 I X002 Y01",
+      "ubicacion": "P003 I X002 Y01"
+    },
+    {
+      "etiqueta": "P003 I X002 Y02",
+      "ubicacion": "P003 I X002 Y02"
+    },
+    {
+      "etiqueta": "P003 I X002 Y03",
+      "ubicacion": "P003 I X002 Y03"
+    },
+    {
+      "etiqueta": "P003 I X002 Y04",
+      "ubicacion": "P003 I X002 Y04"
+    },
+    {
+      "etiqueta": "P003 I X002 Y05",
+      "ubicacion": "P003 I X002 Y05"
+    },
+    {
+      "etiqueta": "P003 I X003 Y01",
+      "ubicacion": "P003 I X003 Y01"
+    },
+    {
+      "etiqueta": "P003 I X003 Y02",
+      "ubicacion": "P003 I X003 Y02"
+    },
+    {
+      "etiqueta": "P003 I X003 Y03",
+      "ubicacion": "P003 I X003 Y03"
+    },
+    {
+      "etiqueta": "P003 I X003 Y04",
+      "ubicacion": "P003 I X003 Y04"
+    },
+    {
+      "etiqueta": "P003 I X003 Y05",
+      "ubicacion": "P003 I X003 Y05"
+    },
+    {
+      "etiqueta": "P003 I X004 Y01",
+      "ubicacion": "P003 I X004 Y01"
+    },
+    {
+      "etiqueta": "P003 I X004 Y02",
+      "ubicacion": "P003 I X004 Y02"
+    },
+    {
+      "etiqueta": "P003 I X004 Y03",
+      "ubicacion": "P003 I X004 Y03"
+    },
+    {
+      "etiqueta": "P003 I X004 Y04",
+      "ubicacion": "P003 I X004 Y04"
+    },
+    {
+      "etiqueta": "P003 I X004 Y05",
+      "ubicacion": "P003 I X004 Y05"
+    },
+    {
+      "etiqueta": "P003 I X005 Y01",
+      "ubicacion": "P003 I X005 Y01"
+    },
+    {
+      "etiqueta": "P003 I X005 Y02",
+      "ubicacion": "P003 I X005 Y02"
+    },
+    {
+      "etiqueta": "P003 I X005 Y03",
+      "ubicacion": "P003 I X005 Y03"
+    },
+    {
+      "etiqueta": "P003 I X005 Y04",
+      "ubicacion": "P003 I X005 Y04"
+    },
+    {
+      "etiqueta": "P003 I X005 Y05",
+      "ubicacion": "P003 I X005 Y05"
+    },
+    {
+      "etiqueta": "P003 I X006 Y01",
+      "ubicacion": "P003 I X006 Y01"
+    },
+    {
+      "etiqueta": "P003 I X006 Y02",
+      "ubicacion": "P003 I X006 Y02"
+    },
+    {
+      "etiqueta": "P003 I X006 Y03",
+      "ubicacion": "P003 I X006 Y03"
+    },
+    {
+      "etiqueta": "P003 I X006 Y04",
+      "ubicacion": "P003 I X006 Y04"
+    },
+    {
+      "etiqueta": "P003 I X006 Y05",
+      "ubicacion": "P003 I X006 Y05"
+    },
+    {
+      "etiqueta": "P003 I X007 Y01",
+      "ubicacion": "P003 I X007 Y01"
+    },
+    {
+      "etiqueta": "P003 I X007 Y02",
+      "ubicacion": "P003 I X007 Y02"
+    },
+    {
+      "etiqueta": "P003 I X007 Y03",
+      "ubicacion": "P003 I X007 Y03"
+    },
+    {
+      "etiqueta": "P003 I X007 Y04",
+      "ubicacion": "P003 I X007 Y04"
+    },
+    {
+      "etiqueta": "P003 I X007 Y05",
+      "ubicacion": "P003 I X007 Y05"
+    },
+    {
+      "etiqueta": "P003 I X008 Y01",
+      "ubicacion": "P003 I X008 Y01"
+    },
+    {
+      "etiqueta": "P003 I X008 Y02",
+      "ubicacion": "P003 I X008 Y02"
+    },
+    {
+      "etiqueta": "P003 I X008 Y03",
+      "ubicacion": "P003 I X008 Y03"
+    },
+    {
+      "etiqueta": "P003 I X008 Y04",
+      "ubicacion": "P003 I X008 Y04"
+    },
+    {
+      "etiqueta": "P003 I X008 Y05",
+      "ubicacion": "P003 I X008 Y05"
+    },
+    {
+      "etiqueta": "P003 I X009 Y01",
+      "ubicacion": "P003 I X009 Y01"
+    },
+    {
+      "etiqueta": "P003 I X009 Y02",
+      "ubicacion": "P003 I X009 Y02"
+    },
+    {
+      "etiqueta": "P003 I X009 Y03",
+      "ubicacion": "P003 I X009 Y03"
+    },
+    {
+      "etiqueta": "P003 I X009 Y04",
+      "ubicacion": "P003 I X009 Y04"
+    },
+    {
+      "etiqueta": "P003 I X009 Y05",
+      "ubicacion": "P003 I X009 Y05"
+    },
+    {
+      "etiqueta": "P003 I X010 Y01",
+      "ubicacion": "P003 I X010 Y01"
+    },
+    {
+      "etiqueta": "P003 I X010 Y02",
+      "ubicacion": "P003 I X010 Y02"
+    },
+    {
+      "etiqueta": "P003 I X010 Y03",
+      "ubicacion": "P003 I X010 Y03"
+    },
+    {
+      "etiqueta": "P003 I X010 Y04",
+      "ubicacion": "P003 I X010 Y04"
+    },
+    {
+      "etiqueta": "P003 I X010 Y05",
+      "ubicacion": "P003 I X010 Y05"
+    },
+    {
+      "etiqueta": "P003 I X011 Y01",
+      "ubicacion": "P003 I X011 Y01"
+    },
+    {
+      "etiqueta": "P003 I X011 Y02",
+      "ubicacion": "P003 I X011 Y02"
+    },
+    {
+      "etiqueta": "P003 I X011 Y03",
+      "ubicacion": "P003 I X011 Y03"
+    },
+    {
+      "etiqueta": "P003 I X011 Y04",
+      "ubicacion": "P003 I X011 Y04"
+    },
+    {
+      "etiqueta": "P003 I X011 Y05",
+      "ubicacion": "P003 I X011 Y05"
+    },
+    {
+      "etiqueta": "P003 I X012 Y01",
+      "ubicacion": "P003 I X012 Y01"
+    },
+    {
+      "etiqueta": "P003 I X012 Y02",
+      "ubicacion": "P003 I X012 Y02"
+    },
+    {
+      "etiqueta": "P003 I X012 Y03",
+      "ubicacion": "P003 I X012 Y03"
+    },
+    {
+      "etiqueta": "P003 I X012 Y04",
+      "ubicacion": "P003 I X012 Y04"
+    },
+    {
+      "etiqueta": "P003 I X012 Y05",
+      "ubicacion": "P003 I X012 Y05"
+    },
+    {
+      "etiqueta": "P003 I X013 Y01",
+      "ubicacion": "P003 I X013 Y01"
+    },
+    {
+      "etiqueta": "P003 I X013 Y02",
+      "ubicacion": "P003 I X013 Y02"
+    },
+    {
+      "etiqueta": "P003 I X013 Y03",
+      "ubicacion": "P003 I X013 Y03"
+    },
+    {
+      "etiqueta": "P003 I X013 Y04",
+      "ubicacion": "P003 I X013 Y04"
+    },
+    {
+      "etiqueta": "P003 I X013 Y05",
+      "ubicacion": "P003 I X013 Y05"
+    },
+    {
+      "etiqueta": "P003 I X014 Y01",
+      "ubicacion": "P003 I X014 Y01"
+    },
+    {
+      "etiqueta": "P003 I X014 Y02",
+      "ubicacion": "P003 I X014 Y02"
+    },
+    {
+      "etiqueta": "P003 I X014 Y03",
+      "ubicacion": "P003 I X014 Y03"
+    },
+    {
+      "etiqueta": "P003 I X014 Y04",
+      "ubicacion": "P003 I X014 Y04"
+    },
+    {
+      "etiqueta": "P003 I X014 Y05",
+      "ubicacion": "P003 I X014 Y05"
+    },
+    {
+      "etiqueta": "P003 D X001 Y01",
+      "ubicacion": "P003 D X001 Y01"
+    },
+    {
+      "etiqueta": "P003 D X001 Y02",
+      "ubicacion": "P003 D X001 Y02"
+    },
+    {
+      "etiqueta": "P003 D X001 Y03",
+      "ubicacion": "P003 D X001 Y03"
+    },
+    {
+      "etiqueta": "P003 D X001 Y04",
+      "ubicacion": "P003 D X001 Y04"
+    },
+    {
+      "etiqueta": "P003 D X001 Y05",
+      "ubicacion": "P003 D X001 Y05"
+    },
+    {
+      "etiqueta": "P003 D X002 Y01",
+      "ubicacion": "P003 D X002 Y01"
+    },
+    {
+      "etiqueta": "P003 D X002 Y02",
+      "ubicacion": "P003 D X002 Y02"
+    },
+    {
+      "etiqueta": "P003 D X002 Y03",
+      "ubicacion": "P003 D X002 Y03"
+    },
+    {
+      "etiqueta": "P003 D X002 Y04",
+      "ubicacion": "P003 D X002 Y04"
+    },
+    {
+      "etiqueta": "P003 D X002 Y05",
+      "ubicacion": "P003 D X002 Y05"
+    },
+    {
+      "etiqueta": "P003 D X003 Y01",
+      "ubicacion": "P003 D X003 Y01"
+    },
+    {
+      "etiqueta": "P003 D X003 Y02",
+      "ubicacion": "P003 D X003 Y02"
+    },
+    {
+      "etiqueta": "P003 D X003 Y03",
+      "ubicacion": "P003 D X003 Y03"
+    },
+    {
+      "etiqueta": "P003 D X003 Y04",
+      "ubicacion": "P003 D X003 Y04"
+    },
+    {
+      "etiqueta": "P003 D X003 Y05",
+      "ubicacion": "P003 D X003 Y05"
+    },
+    {
+      "etiqueta": "P003 D X004 Y01",
+      "ubicacion": "P003 D X004 Y01"
+    },
+    {
+      "etiqueta": "P003 D X004 Y02",
+      "ubicacion": "P003 D X004 Y02"
+    },
+    {
+      "etiqueta": "P003 D X004 Y03",
+      "ubicacion": "P003 D X004 Y03"
+    },
+    {
+      "etiqueta": "P003 D X004 Y04",
+      "ubicacion": "P003 D X004 Y04"
+    },
+    {
+      "etiqueta": "P003 D X004 Y05",
+      "ubicacion": "P003 D X004 Y05"
+    },
+    {
+      "etiqueta": "P003 D X005 Y01",
+      "ubicacion": "P003 D X005 Y01"
+    },
+    {
+      "etiqueta": "P003 D X005 Y02",
+      "ubicacion": "P003 D X005 Y02"
+    },
+    {
+      "etiqueta": "P003 D X005 Y03",
+      "ubicacion": "P003 D X005 Y03"
+    },
+    {
+      "etiqueta": "P003 D X005 Y04",
+      "ubicacion": "P003 D X005 Y04"
+    },
+    {
+      "etiqueta": "P003 D X005 Y05",
+      "ubicacion": "P003 D X005 Y05"
+    },
+    {
+      "etiqueta": "P003 D X006 Y01",
+      "ubicacion": "P003 D X006 Y01"
+    },
+    {
+      "etiqueta": "P003 D X006 Y02",
+      "ubicacion": "P003 D X006 Y02"
+    },
+    {
+      "etiqueta": "P003 D X006 Y03",
+      "ubicacion": "P003 D X006 Y03"
+    },
+    {
+      "etiqueta": "P003 D X006 Y04",
+      "ubicacion": "P003 D X006 Y04"
+    },
+    {
+      "etiqueta": "P003 D X006 Y05",
+      "ubicacion": "P003 D X006 Y05"
+    },
+    {
+      "etiqueta": "P003 D X007 Y01",
+      "ubicacion": "P003 D X007 Y01"
+    },
+    {
+      "etiqueta": "P003 D X007 Y02",
+      "ubicacion": "P003 D X007 Y02"
+    },
+    {
+      "etiqueta": "P003 D X007 Y03",
+      "ubicacion": "P003 D X007 Y03"
+    },
+    {
+      "etiqueta": "P003 D X007 Y04",
+      "ubicacion": "P003 D X007 Y04"
+    },
+    {
+      "etiqueta": "P003 D X007 Y05",
+      "ubicacion": "P003 D X007 Y05"
+    },
+    {
+      "etiqueta": "P003 D X008 Y01",
+      "ubicacion": "P003 D X008 Y01"
+    },
+    {
+      "etiqueta": "P003 D X008 Y02",
+      "ubicacion": "P003 D X008 Y02"
+    },
+    {
+      "etiqueta": "P003 D X008 Y03",
+      "ubicacion": "P003 D X008 Y03"
+    },
+    {
+      "etiqueta": "P003 D X008 Y04",
+      "ubicacion": "P003 D X008 Y04"
+    },
+    {
+      "etiqueta": "P003 D X008 Y05",
+      "ubicacion": "P003 D X008 Y05"
+    },
+    {
+      "etiqueta": "P003 D X009 Y01",
+      "ubicacion": "P003 D X009 Y01"
+    },
+    {
+      "etiqueta": "P003 D X009 Y02",
+      "ubicacion": "P003 D X009 Y02"
+    },
+    {
+      "etiqueta": "P003 D X009 Y03",
+      "ubicacion": "P003 D X009 Y03"
+    },
+    {
+      "etiqueta": "P003 D X009 Y04",
+      "ubicacion": "P003 D X009 Y04"
+    },
+    {
+      "etiqueta": "P003 D X009 Y05",
+      "ubicacion": "P003 D X009 Y05"
+    },
+    {
+      "etiqueta": "P003 D X010 Y01",
+      "ubicacion": "P003 D X010 Y01"
+    },
+    {
+      "etiqueta": "P003 D X010 Y02",
+      "ubicacion": "P003 D X010 Y02"
+    },
+    {
+      "etiqueta": "P003 D X010 Y03",
+      "ubicacion": "P003 D X010 Y03"
+    },
+    {
+      "etiqueta": "P003 D X010 Y04",
+      "ubicacion": "P003 D X010 Y04"
+    },
+    {
+      "etiqueta": "P003 D X010 Y05",
+      "ubicacion": "P003 D X010 Y05"
+    },
+    {
+      "etiqueta": "P003 D X011 Y01",
+      "ubicacion": "P003 D X011 Y01"
+    },
+    {
+      "etiqueta": "P003 D X011 Y02",
+      "ubicacion": "P003 D X011 Y02"
+    },
+    {
+      "etiqueta": "P003 D X011 Y03",
+      "ubicacion": "P003 D X011 Y03"
+    },
+    {
+      "etiqueta": "P003 D X011 Y04",
+      "ubicacion": "P003 D X011 Y04"
+    },
+    {
+      "etiqueta": "P003 D X011 Y05",
+      "ubicacion": "P003 D X011 Y05"
+    },
+    {
+      "etiqueta": "P003 D X012 Y01",
+      "ubicacion": "P003 D X012 Y01"
+    },
+    {
+      "etiqueta": "P003 D X012 Y02",
+      "ubicacion": "P003 D X012 Y02"
+    },
+    {
+      "etiqueta": "P003 D X012 Y03",
+      "ubicacion": "P003 D X012 Y03"
+    },
+    {
+      "etiqueta": "P003 D X012 Y04",
+      "ubicacion": "P003 D X012 Y04"
+    },
+    {
+      "etiqueta": "P003 D X012 Y05",
+      "ubicacion": "P003 D X012 Y05"
+    },
+    {
+      "etiqueta": "P003 D X013 Y01",
+      "ubicacion": "P003 D X013 Y01"
+    },
+    {
+      "etiqueta": "P003 D X013 Y02",
+      "ubicacion": "P003 D X013 Y02"
+    },
+    {
+      "etiqueta": "P003 D X013 Y03",
+      "ubicacion": "P003 D X013 Y03"
+    },
+    {
+      "etiqueta": "P003 D X013 Y04",
+      "ubicacion": "P003 D X013 Y04"
+    },
+    {
+      "etiqueta": "P003 D X013 Y05",
+      "ubicacion": "P003 D X013 Y05"
+    },
+    {
+      "etiqueta": "P003 D X014 Y01",
+      "ubicacion": "P003 D X014 Y01"
+    },
+    {
+      "etiqueta": "P003 D X014 Y02",
+      "ubicacion": "P003 D X014 Y02"
+    },
+    {
+      "etiqueta": "P003 D X014 Y03",
+      "ubicacion": "P003 D X014 Y03"
+    },
+    {
+      "etiqueta": "P003 D X014 Y04",
+      "ubicacion": "P003 D X014 Y04"
+    },
+    {
+      "etiqueta": "P003 D X014 Y05",
+      "ubicacion": "P003 D X014 Y05"
+    },
+    {
+      "etiqueta": "P004 I X001 Y01",
+      "ubicacion": "P004 I X001 Y01"
+    },
+    {
+      "etiqueta": "P004 I X001 Y02",
+      "ubicacion": "P004 I X001 Y02"
+    },
+    {
+      "etiqueta": "P004 I X001 Y03",
+      "ubicacion": "P004 I X001 Y03"
+    },
+    {
+      "etiqueta": "P004 I X001 Y04",
+      "ubicacion": "P004 I X001 Y04"
+    },
+    {
+      "etiqueta": "P004 I X001 Y05",
+      "ubicacion": "P004 I X001 Y05"
+    },
+    {
+      "etiqueta": "P004 I X002 Y01",
+      "ubicacion": "P004 I X002 Y01"
+    },
+    {
+      "etiqueta": "P004 I X002 Y02",
+      "ubicacion": "P004 I X002 Y02"
+    },
+    {
+      "etiqueta": "P004 I X002 Y03",
+      "ubicacion": "P004 I X002 Y03"
+    },
+    {
+      "etiqueta": "P004 I X002 Y04",
+      "ubicacion": "P004 I X002 Y04"
+    },
+    {
+      "etiqueta": "P004 I X002 Y05",
+      "ubicacion": "P004 I X002 Y05"
+    },
+    {
+      "etiqueta": "P004 I X003 Y01",
+      "ubicacion": "P004 I X003 Y01"
+    },
+    {
+      "etiqueta": "P004 I X003 Y02",
+      "ubicacion": "P004 I X003 Y02"
+    },
+    {
+      "etiqueta": "P004 I X003 Y03",
+      "ubicacion": "P004 I X003 Y03"
+    },
+    {
+      "etiqueta": "P004 I X003 Y04",
+      "ubicacion": "P004 I X003 Y04"
+    },
+    {
+      "etiqueta": "P004 I X003 Y05",
+      "ubicacion": "P004 I X003 Y05"
+    },
+    {
+      "etiqueta": "P004 I X004 Y01",
+      "ubicacion": "P004 I X004 Y01"
+    },
+    {
+      "etiqueta": "P004 I X004 Y02",
+      "ubicacion": "P004 I X004 Y02"
+    },
+    {
+      "etiqueta": "P004 I X004 Y03",
+      "ubicacion": "P004 I X004 Y03"
+    },
+    {
+      "etiqueta": "P004 I X004 Y04",
+      "ubicacion": "P004 I X004 Y04"
+    },
+    {
+      "etiqueta": "P004 I X004 Y05",
+      "ubicacion": "P004 I X004 Y05"
+    },
+    {
+      "etiqueta": "P004 I X005 Y01",
+      "ubicacion": "P004 I X005 Y01"
+    },
+    {
+      "etiqueta": "P004 I X005 Y02",
+      "ubicacion": "P004 I X005 Y02"
+    },
+    {
+      "etiqueta": "P004 I X005 Y03",
+      "ubicacion": "P004 I X005 Y03"
+    },
+    {
+      "etiqueta": "P004 I X005 Y04",
+      "ubicacion": "P004 I X005 Y04"
+    },
+    {
+      "etiqueta": "P004 I X005 Y05",
+      "ubicacion": "P004 I X005 Y05"
+    },
+    {
+      "etiqueta": "P004 I X006 Y01",
+      "ubicacion": "P004 I X006 Y01"
+    },
+    {
+      "etiqueta": "P004 I X006 Y02",
+      "ubicacion": "P004 I X006 Y02"
+    },
+    {
+      "etiqueta": "P004 I X006 Y03",
+      "ubicacion": "P004 I X006 Y03"
+    },
+    {
+      "etiqueta": "P004 I X006 Y04",
+      "ubicacion": "P004 I X006 Y04"
+    },
+    {
+      "etiqueta": "P004 I X006 Y05",
+      "ubicacion": "P004 I X006 Y05"
+    },
+    {
+      "etiqueta": "P004 I X007 Y01",
+      "ubicacion": "P004 I X007 Y01"
+    },
+    {
+      "etiqueta": "P004 I X007 Y02",
+      "ubicacion": "P004 I X007 Y02"
+    },
+    {
+      "etiqueta": "P004 I X007 Y03",
+      "ubicacion": "P004 I X007 Y03"
+    },
+    {
+      "etiqueta": "P004 I X007 Y04",
+      "ubicacion": "P004 I X007 Y04"
+    },
+    {
+      "etiqueta": "P004 I X007 Y05",
+      "ubicacion": "P004 I X007 Y05"
+    },
+    {
+      "etiqueta": "P004 I X008 Y01",
+      "ubicacion": "P004 I X008 Y01"
+    },
+    {
+      "etiqueta": "P004 I X008 Y02",
+      "ubicacion": "P004 I X008 Y02"
+    },
+    {
+      "etiqueta": "P004 I X008 Y03",
+      "ubicacion": "P004 I X008 Y03"
+    },
+    {
+      "etiqueta": "P004 I X008 Y04",
+      "ubicacion": "P004 I X008 Y04"
+    },
+    {
+      "etiqueta": "P004 I X008 Y05",
+      "ubicacion": "P004 I X008 Y05"
+    },
+    {
+      "etiqueta": "P004 I X009 Y01",
+      "ubicacion": "P004 I X009 Y01"
+    },
+    {
+      "etiqueta": "P004 I X009 Y02",
+      "ubicacion": "P004 I X009 Y02"
+    },
+    {
+      "etiqueta": "P004 I X009 Y03",
+      "ubicacion": "P004 I X009 Y03"
+    },
+    {
+      "etiqueta": "P004 I X009 Y04",
+      "ubicacion": "P004 I X009 Y04"
+    },
+    {
+      "etiqueta": "P004 I X009 Y05",
+      "ubicacion": "P004 I X009 Y05"
+    },
+    {
+      "etiqueta": "P004 I X010 Y01",
+      "ubicacion": "P004 I X010 Y01"
+    },
+    {
+      "etiqueta": "P004 I X010 Y02",
+      "ubicacion": "P004 I X010 Y02"
+    },
+    {
+      "etiqueta": "P004 I X010 Y03",
+      "ubicacion": "P004 I X010 Y03"
+    },
+    {
+      "etiqueta": "P004 I X010 Y04",
+      "ubicacion": "P004 I X010 Y04"
+    },
+    {
+      "etiqueta": "P004 I X010 Y05",
+      "ubicacion": "P004 I X010 Y05"
+    },
+    {
+      "etiqueta": "P004 I X011 Y01",
+      "ubicacion": "P004 I X011 Y01"
+    },
+    {
+      "etiqueta": "P004 I X011 Y02",
+      "ubicacion": "P004 I X011 Y02"
+    },
+    {
+      "etiqueta": "P004 I X011 Y03",
+      "ubicacion": "P004 I X011 Y03"
+    },
+    {
+      "etiqueta": "P004 I X011 Y04",
+      "ubicacion": "P004 I X011 Y04"
+    },
+    {
+      "etiqueta": "P004 I X011 Y05",
+      "ubicacion": "P004 I X011 Y05"
+    },
+    {
+      "etiqueta": "P004 I X012 Y01",
+      "ubicacion": "P004 I X012 Y01"
+    },
+    {
+      "etiqueta": "P004 I X012 Y02",
+      "ubicacion": "P004 I X012 Y02"
+    },
+    {
+      "etiqueta": "P004 I X012 Y03",
+      "ubicacion": "P004 I X012 Y03"
+    },
+    {
+      "etiqueta": "P004 I X012 Y04",
+      "ubicacion": "P004 I X012 Y04"
+    },
+    {
+      "etiqueta": "P004 I X012 Y05",
+      "ubicacion": "P004 I X012 Y05"
+    },
+    {
+      "etiqueta": "P004 I X013 Y01",
+      "ubicacion": "P004 I X013 Y01"
+    },
+    {
+      "etiqueta": "P004 I X013 Y02",
+      "ubicacion": "P004 I X013 Y02"
+    },
+    {
+      "etiqueta": "P004 I X013 Y03",
+      "ubicacion": "P004 I X013 Y03"
+    },
+    {
+      "etiqueta": "P004 I X013 Y04",
+      "ubicacion": "P004 I X013 Y04"
+    },
+    {
+      "etiqueta": "P004 I X013 Y05",
+      "ubicacion": "P004 I X013 Y05"
+    },
+    {
+      "etiqueta": "P004 I X014 Y01",
+      "ubicacion": "P004 I X014 Y01"
+    },
+    {
+      "etiqueta": "P004 I X014 Y02",
+      "ubicacion": "P004 I X014 Y02"
+    },
+    {
+      "etiqueta": "P004 I X014 Y03",
+      "ubicacion": "P004 I X014 Y03"
+    },
+    {
+      "etiqueta": "P004 I X014 Y04",
+      "ubicacion": "P004 I X014 Y04"
+    },
+    {
+      "etiqueta": "P004 I X014 Y05",
+      "ubicacion": "P004 I X014 Y05"
+    },
+    {
+      "etiqueta": "P004 D X001 Y01",
+      "ubicacion": "P004 D X001 Y01"
+    },
+    {
+      "etiqueta": "P004 D X001 Y02",
+      "ubicacion": "P004 D X001 Y02"
+    },
+    {
+      "etiqueta": "P004 D X001 Y03",
+      "ubicacion": "P004 D X001 Y03"
+    },
+    {
+      "etiqueta": "P004 D X001 Y04",
+      "ubicacion": "P004 D X001 Y04"
+    },
+    {
+      "etiqueta": "P004 D X001 Y05",
+      "ubicacion": "P004 D X001 Y05"
+    },
+    {
+      "etiqueta": "P004 D X002 Y01",
+      "ubicacion": "P004 D X002 Y01"
+    },
+    {
+      "etiqueta": "P004 D X002 Y02",
+      "ubicacion": "P004 D X002 Y02"
+    },
+    {
+      "etiqueta": "P004 D X002 Y03",
+      "ubicacion": "P004 D X002 Y03"
+    },
+    {
+      "etiqueta": "P004 D X002 Y04",
+      "ubicacion": "P004 D X002 Y04"
+    },
+    {
+      "etiqueta": "P004 D X002 Y05",
+      "ubicacion": "P004 D X002 Y05"
+    },
+    {
+      "etiqueta": "P004 D X003 Y01",
+      "ubicacion": "P004 D X003 Y01"
+    },
+    {
+      "etiqueta": "P004 D X003 Y02",
+      "ubicacion": "P004 D X003 Y02"
+    },
+    {
+      "etiqueta": "P004 D X003 Y03",
+      "ubicacion": "P004 D X003 Y03"
+    },
+    {
+      "etiqueta": "P004 D X003 Y04",
+      "ubicacion": "P004 D X003 Y04"
+    },
+    {
+      "etiqueta": "P004 D X003 Y05",
+      "ubicacion": "P004 D X003 Y05"
+    },
+    {
+      "etiqueta": "P004 D X004 Y01",
+      "ubicacion": "P004 D X004 Y01"
+    },
+    {
+      "etiqueta": "P004 D X004 Y02",
+      "ubicacion": "P004 D X004 Y02"
+    },
+    {
+      "etiqueta": "P004 D X004 Y03",
+      "ubicacion": "P004 D X004 Y03"
+    },
+    {
+      "etiqueta": "P004 D X004 Y04",
+      "ubicacion": "P004 D X004 Y04"
+    },
+    {
+      "etiqueta": "P004 D X004 Y05",
+      "ubicacion": "P004 D X004 Y05"
+    },
+    {
+      "etiqueta": "P004 D X005 Y01",
+      "ubicacion": "P004 D X005 Y01"
+    },
+    {
+      "etiqueta": "P004 D X005 Y02",
+      "ubicacion": "P004 D X005 Y02"
+    },
+    {
+      "etiqueta": "P004 D X005 Y03",
+      "ubicacion": "P004 D X005 Y03"
+    },
+    {
+      "etiqueta": "P004 D X005 Y04",
+      "ubicacion": "P004 D X005 Y04"
+    },
+    {
+      "etiqueta": "P004 D X005 Y05",
+      "ubicacion": "P004 D X005 Y05"
+    },
+    {
+      "etiqueta": "P004 D X006 Y01",
+      "ubicacion": "P004 D X006 Y01"
+    },
+    {
+      "etiqueta": "P004 D X006 Y02",
+      "ubicacion": "P004 D X006 Y02"
+    },
+    {
+      "etiqueta": "P004 D X006 Y03",
+      "ubicacion": "P004 D X006 Y03"
+    },
+    {
+      "etiqueta": "P004 D X006 Y04",
+      "ubicacion": "P004 D X006 Y04"
+    },
+    {
+      "etiqueta": "P004 D X006 Y05",
+      "ubicacion": "P004 D X006 Y05"
+    },
+    {
+      "etiqueta": "P004 D X007 Y01",
+      "ubicacion": "P004 D X007 Y01"
+    },
+    {
+      "etiqueta": "P004 D X007 Y02",
+      "ubicacion": "P004 D X007 Y02"
+    },
+    {
+      "etiqueta": "P004 D X007 Y03",
+      "ubicacion": "P004 D X007 Y03"
+    },
+    {
+      "etiqueta": "P004 D X007 Y04",
+      "ubicacion": "P004 D X007 Y04"
+    },
+    {
+      "etiqueta": "P004 D X007 Y05",
+      "ubicacion": "P004 D X007 Y05"
+    },
+    {
+      "etiqueta": "P004 D X008 Y01",
+      "ubicacion": "P004 D X008 Y01"
+    },
+    {
+      "etiqueta": "P004 D X008 Y02",
+      "ubicacion": "P004 D X008 Y02"
+    },
+    {
+      "etiqueta": "P004 D X008 Y03",
+      "ubicacion": "P004 D X008 Y03"
+    },
+    {
+      "etiqueta": "P004 D X008 Y04",
+      "ubicacion": "P004 D X008 Y04"
+    },
+    {
+      "etiqueta": "P004 D X008 Y05",
+      "ubicacion": "P004 D X008 Y05"
+    },
+    {
+      "etiqueta": "P004 D X009 Y01",
+      "ubicacion": "P004 D X009 Y01"
+    },
+    {
+      "etiqueta": "P004 D X009 Y02",
+      "ubicacion": "P004 D X009 Y02"
+    },
+    {
+      "etiqueta": "P004 D X009 Y03",
+      "ubicacion": "P004 D X009 Y03"
+    },
+    {
+      "etiqueta": "P004 D X009 Y04",
+      "ubicacion": "P004 D X009 Y04"
+    },
+    {
+      "etiqueta": "P004 D X009 Y05",
+      "ubicacion": "P004 D X009 Y05"
+    },
+    {
+      "etiqueta": "P004 D X010 Y01",
+      "ubicacion": "P004 D X010 Y01"
+    },
+    {
+      "etiqueta": "P004 D X010 Y02",
+      "ubicacion": "P004 D X010 Y02"
+    },
+    {
+      "etiqueta": "P004 D X010 Y03",
+      "ubicacion": "P004 D X010 Y03"
+    },
+    {
+      "etiqueta": "P004 D X010 Y04",
+      "ubicacion": "P004 D X010 Y04"
+    },
+    {
+      "etiqueta": "P004 D X010 Y05",
+      "ubicacion": "P004 D X010 Y05"
+    },
+    {
+      "etiqueta": "P004 D X011 Y01",
+      "ubicacion": "P004 D X011 Y01"
+    },
+    {
+      "etiqueta": "P004 D X011 Y02",
+      "ubicacion": "P004 D X011 Y02"
+    },
+    {
+      "etiqueta": "P004 D X011 Y03",
+      "ubicacion": "P004 D X011 Y03"
+    },
+    {
+      "etiqueta": "P004 D X011 Y04",
+      "ubicacion": "P004 D X011 Y04"
+    },
+    {
+      "etiqueta": "P004 D X011 Y05",
+      "ubicacion": "P004 D X011 Y05"
+    },
+    {
+      "etiqueta": "P004 D X012 Y01",
+      "ubicacion": "P004 D X012 Y01"
+    },
+    {
+      "etiqueta": "P004 D X012 Y02",
+      "ubicacion": "P004 D X012 Y02"
+    },
+    {
+      "etiqueta": "P004 D X012 Y03",
+      "ubicacion": "P004 D X012 Y03"
+    },
+    {
+      "etiqueta": "P004 D X012 Y04",
+      "ubicacion": "P004 D X012 Y04"
+    },
+    {
+      "etiqueta": "P004 D X012 Y05",
+      "ubicacion": "P004 D X012 Y05"
+    },
+    {
+      "etiqueta": "P004 D X013 Y01",
+      "ubicacion": "P004 D X013 Y01"
+    },
+    {
+      "etiqueta": "P004 D X013 Y02",
+      "ubicacion": "P004 D X013 Y02"
+    },
+    {
+      "etiqueta": "P004 D X013 Y03",
+      "ubicacion": "P004 D X013 Y03"
+    },
+    {
+      "etiqueta": "P004 D X013 Y04",
+      "ubicacion": "P004 D X013 Y04"
+    },
+    {
+      "etiqueta": "P004 D X013 Y05",
+      "ubicacion": "P004 D X013 Y05"
+    },
+    {
+      "etiqueta": "P004 D X014 Y01",
+      "ubicacion": "P004 D X014 Y01"
+    },
+    {
+      "etiqueta": "P004 D X014 Y02",
+      "ubicacion": "P004 D X014 Y02"
+    },
+    {
+      "etiqueta": "P004 D X014 Y03",
+      "ubicacion": "P004 D X014 Y03"
+    },
+    {
+      "etiqueta": "P004 D X014 Y04",
+      "ubicacion": "P004 D X014 Y04"
+    },
+    {
+      "etiqueta": "P004 D X014 Y05",
+      "ubicacion": "P004 D X014 Y05"
+    }
+  ],
+  "stock": [
+    {
+      "ubicacion": "P001 I X001 Y01",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1674
+    },
+    {
+      "ubicacion": "P001 I X001 Y02",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1356
+    },
+    {
+      "ubicacion": "P001 I X001 Y03",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1125
+    },
+    {
+      "ubicacion": "P001 I X001 Y04",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1701
+    },
+    {
+      "ubicacion": "P001 I X002 Y01",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 900
+    },
+    {
+      "ubicacion": "P001 I X002 Y02",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 847
+    },
+    {
+      "ubicacion": "P001 I X002 Y03",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1655
+    },
+    {
+      "ubicacion": "P001 I X002 Y05",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 681
+    },
+    {
+      "ubicacion": "P001 I X003 Y01",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1561
+    },
+    {
+      "ubicacion": "P001 I X003 Y02",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 728
+    },
+    {
+      "ubicacion": "P001 I X003 Y03",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 779
+    },
+    {
+      "ubicacion": "P001 I X003 Y04",
+      "articulo": "TRN-M4-15",
+      "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+      "stock": 1239
+    },
+    {
+      "ubicacion": "P001 I X004 Y01",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 499
+    },
+    {
+      "ubicacion": "P001 I X004 Y02",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 712
+    },
+    {
+      "ubicacion": "P001 I X004 Y03",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 1314
+    },
+    {
+      "ubicacion": "P001 I X004 Y04",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 1120
+    },
+    {
+      "ubicacion": "P001 I X005 Y01",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 496
+    },
+    {
+      "ubicacion": "P001 I X005 Y02",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 553
+    },
+    {
+      "ubicacion": "P001 I X005 Y04",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 712
+    },
+    {
+      "ubicacion": "P001 I X006 Y01",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 694
+    },
+    {
+      "ubicacion": "P001 I X006 Y02",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 857
+    },
+    {
+      "ubicacion": "P001 I X006 Y04",
+      "articulo": "TRN-M6-20",
+      "nombre": "Tornillo hexagonal M6x20 inoxidable",
+      "stock": 502
+    },
+    {
+      "ubicacion": "P001 I X007 Y01",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 885
+    },
+    {
+      "ubicacion": "P001 I X007 Y02",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 523
+    },
+    {
+      "ubicacion": "P001 I X007 Y03",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 792
+    },
+    {
+      "ubicacion": "P001 I X008 Y01",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 584
+    },
+    {
+      "ubicacion": "P001 I X008 Y02",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 993
+    },
+    {
+      "ubicacion": "P001 I X008 Y03",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 902
+    },
+    {
+      "ubicacion": "P001 I X008 Y04",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 630
+    },
+    {
+      "ubicacion": "P001 I X008 Y05",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 763
+    },
+    {
+      "ubicacion": "P001 I X009 Y01",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 577
+    },
+    {
+      "ubicacion": "P001 I X009 Y03",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 1018
+    },
+    {
+      "ubicacion": "P001 I X009 Y04",
+      "articulo": "TRN-M6-35",
+      "nombre": "Tornillo hexagonal M6x35 acero 8.8",
+      "stock": 926
+    },
+    {
+      "ubicacion": "P001 I X010 Y01",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 489
+    },
+    {
+      "ubicacion": "P001 I X010 Y02",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 1107
+    },
+    {
+      "ubicacion": "P001 I X010 Y04",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 1152
+    },
+    {
+      "ubicacion": "P001 I X010 Y05",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 977
+    },
+    {
+      "ubicacion": "P001 I X011 Y01",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 632
+    },
+    {
+      "ubicacion": "P001 I X011 Y04",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 963
+    },
+    {
+      "ubicacion": "P001 I X011 Y05",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 1138
+    },
+    {
+      "ubicacion": "P001 I X012 Y01",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 1024
+    },
+    {
+      "ubicacion": "P001 I X012 Y02",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 803
+    },
+    {
+      "ubicacion": "P001 I X012 Y03",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 1097
+    },
+    {
+      "ubicacion": "P001 I X012 Y05",
+      "articulo": "ARA-M6-PL",
+      "nombre": "Arandela plana M6 zinc (bolsa 100u)",
+      "stock": 459
+    },
+    {
+      "ubicacion": "P001 I X013 Y01",
+      "articulo": "REM-4-10",
+      "nombre": "Remache pop 4x10mm aluminio (caja 500u)",
+      "stock": 264
+    },
+    {
+      "ubicacion": "P001 I X013 Y02",
+      "articulo": "REM-4-10",
+      "nombre": "Remache pop 4x10mm aluminio (caja 500u)",
+      "stock": 197
+    },
+    {
+      "ubicacion": "P001 I X013 Y04",
+      "articulo": "REM-4-10",
+      "nombre": "Remache pop 4x10mm aluminio (caja 500u)",
+      "stock": 290
+    },
+    {
+      "ubicacion": "P001 I X014 Y01",
+      "articulo": "REM-4-10",
+      "nombre": "Remache pop 4x10mm aluminio (caja 500u)",
+      "stock": 331
+    },
+    {
+      "ubicacion": "P001 I X014 Y03",
+      "articulo": "REM-4-10",
+      "nombre": "Remache pop 4x10mm aluminio (caja 500u)",
+      "stock": 237
+    },
+    {
+      "ubicacion": "P001 D X001 Y01",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 1803
+    },
+    {
+      "ubicacion": "P001 D X001 Y02",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 1870
+    },
+    {
+      "ubicacion": "P001 D X002 Y01",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 893
+    },
+    {
+      "ubicacion": "P001 D X002 Y02",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 1352
+    },
+    {
+      "ubicacion": "P001 D X002 Y04",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 1446
+    },
+    {
+      "ubicacion": "P001 D X002 Y05",
+      "articulo": "TCA-M5-10",
+      "nombre": "Tornillo Allen M5x10 negro",
+      "stock": 1827
+    },
+    {
+      "ubicacion": "P001 D X003 Y01",
+      "articulo": "TCA-M6-25",
+      "nombre": "Tornillo Allen M6x25 zinc",
+      "stock": 1312
+    },
+    {
+      "ubicacion": "P001 D X003 Y02",
+      "articulo": "TCA-M6-25",
+      "nombre": "Tornillo Allen M6x25 zinc",
+      "stock": 779
+    },
+    {
+      "ubicacion": "P001 D X003 Y03",
+      "articulo": "TCA-M6-25",
+      "nombre": "Tornillo Allen M6x25 zinc",
+      "stock": 1043
+    },
+    {
+      "ubicacion": "P001 D X003 Y04",
+      "articulo": "TCA-M6-25",
+      "nombre": "Tornillo Allen M6x25 zinc",
+      "stock": 911
+    },
+    {
+      "ubicacion": "P001 D X004 Y01",
+      "articulo": "TCA-M8-40",
+      "nombre": "Tornillo Allen M8x40 negro",
+      "stock": 430
+    },
+    {
+      "ubicacion": "P001 D X004 Y03",
+      "articulo": "TCA-M8-40",
+      "nombre": "Tornillo Allen M8x40 negro",
+      "stock": 683
+    },
+    {
+      "ubicacion": "P001 D X005 Y01",
+      "articulo": "TCA-M8-40",
+      "nombre": "Tornillo Allen M8x40 negro",
+      "stock": 603
+    },
+    {
+      "ubicacion": "P001 D X005 Y03",
+      "articulo": "TCA-M8-40",
+      "nombre": "Tornillo Allen M8x40 negro",
+      "stock": 546
+    },
+    {
+      "ubicacion": "P001 D X005 Y04",
+      "articulo": "TCA-M8-40",
+      "nombre": "Tornillo Allen M8x40 negro",
+      "stock": 850
+    },
+    {
+      "ubicacion": "P001 D X006 Y02",
+      "articulo": "TCA-M10-50",
+      "nombre": "Tornillo Allen M10x50 inoxidable",
+      "stock": 552
+    },
+    {
+      "ubicacion": "P001 D X006 Y04",
+      "articulo": "TCA-M10-50",
+      "nombre": "Tornillo Allen M10x50 inoxidable",
+      "stock": 402
+    },
+    {
+      "ubicacion": "P001 D X006 Y05",
+      "articulo": "TCA-M10-50",
+      "nombre": "Tornillo Allen M10x50 inoxidable",
+      "stock": 619
+    },
+    {
+      "ubicacion": "P001 D X007 Y01",
+      "articulo": "TRN-M8-30",
+      "nombre": "Tornillo hexagonal M8x30 acero 8.8",
+      "stock": 740
+    },
+    {
+      "ubicacion": "P001 D X007 Y02",
+      "articulo": "TRN-M8-30",
+      "nombre": "Tornillo hexagonal M8x30 acero 8.8",
+      "stock": 729
+    },
+    {
+      "ubicacion": "P001 D X007 Y03",
+      "articulo": "TRN-M8-30",
+      "nombre": "Tornillo hexagonal M8x30 acero 8.8",
+      "stock": 736
+    },
+    {
+      "ubicacion": "P001 D X007 Y04",
+      "articulo": "TRN-M8-30",
+      "nombre": "Tornillo hexagonal M8x30 acero 8.8",
+      "stock": 747
+    },
+    {
+      "ubicacion": "P001 D X008 Y01",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 820
+    },
+    {
+      "ubicacion": "P001 D X008 Y02",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 371
+    },
+    {
+      "ubicacion": "P001 D X008 Y03",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 842
+    },
+    {
+      "ubicacion": "P001 D X008 Y04",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 699
+    },
+    {
+      "ubicacion": "P001 D X009 Y01",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 566
+    },
+    {
+      "ubicacion": "P001 D X009 Y02",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 684
+    },
+    {
+      "ubicacion": "P001 D X009 Y03",
+      "articulo": "TRO-M6-ZN",
+      "nombre": "Tuerca hexagonal M6 zinc (caja 100u)",
+      "stock": 591
+    },
+    {
+      "ubicacion": "P001 D X010 Y01",
+      "articulo": "TRO-M8-AC",
+      "nombre": "Tuerca hexagonal M8 acero (caja 100u)",
+      "stock": 239
+    },
+    {
+      "ubicacion": "P001 D X010 Y03",
+      "articulo": "TRO-M8-AC",
+      "nombre": "Tuerca hexagonal M8 acero (caja 100u)",
+      "stock": 466
+    },
+    {
+      "ubicacion": "P001 D X011 Y01",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 278
+    },
+    {
+      "ubicacion": "P001 D X011 Y02",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 224
+    },
+    {
+      "ubicacion": "P001 D X011 Y04",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 302
+    },
+    {
+      "ubicacion": "P001 D X012 Y02",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 214
+    },
+    {
+      "ubicacion": "P001 D X012 Y04",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 213
+    },
+    {
+      "ubicacion": "P001 D X012 Y05",
+      "articulo": "TRO-M10-NY",
+      "nombre": "Tuerca autoblocante M10 nylon",
+      "stock": 434
+    },
+    {
+      "ubicacion": "P001 D X013 Y01",
+      "articulo": "ARA-M8-DE",
+      "nombre": "Arandela dentada M8 acero (bolsa 50u)",
+      "stock": 550
+    },
+    {
+      "ubicacion": "P001 D X013 Y02",
+      "articulo": "ARA-M8-DE",
+      "nombre": "Arandela dentada M8 acero (bolsa 50u)",
+      "stock": 694
+    },
+    {
+      "ubicacion": "P001 D X013 Y03",
+      "articulo": "ARA-M8-DE",
+      "nombre": "Arandela dentada M8 acero (bolsa 50u)",
+      "stock": 777
+    },
+    {
+      "ubicacion": "P001 D X014 Y01",
+      "articulo": "REM-5-12",
+      "nombre": "Remache pop 5x12mm acero (caja 500u)",
+      "stock": 190
+    },
+    {
+      "ubicacion": "P001 D X014 Y03",
+      "articulo": "REM-5-12",
+      "nombre": "Remache pop 5x12mm acero (caja 500u)",
+      "stock": 257
+    },
+    {
+      "ubicacion": "P002 I X001 Y01",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 106
+    },
+    {
+      "ubicacion": "P002 I X001 Y02",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 90
+    },
+    {
+      "ubicacion": "P002 I X001 Y03",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 96
+    },
+    {
+      "ubicacion": "P002 I X002 Y01",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 113
+    },
+    {
+      "ubicacion": "P002 I X002 Y02",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 81
+    },
+    {
+      "ubicacion": "P002 I X002 Y03",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 62
+    },
+    {
+      "ubicacion": "P002 I X002 Y04",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 113
+    },
+    {
+      "ubicacion": "P002 I X003 Y01",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 59
+    },
+    {
+      "ubicacion": "P002 I X003 Y02",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 97
+    },
+    {
+      "ubicacion": "P002 I X003 Y04",
+      "articulo": "CAB-15AV",
+      "nombre": "Cable H07V-K 1.5mm2 amarillo/verde (rollo)",
+      "stock": 129
+    },
+    {
+      "ubicacion": "P002 I X004 Y01",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 76
+    },
+    {
+      "ubicacion": "P002 I X004 Y02",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 175
+    },
+    {
+      "ubicacion": "P002 I X004 Y03",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 85
+    },
+    {
+      "ubicacion": "P002 I X005 Y01",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 156
+    },
+    {
+      "ubicacion": "P002 I X005 Y02",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 188
+    },
+    {
+      "ubicacion": "P002 I X005 Y03",
+      "articulo": "CAB-15N",
+      "nombre": "Cable H07V-K 1.5mm2 negro (rollo)",
+      "stock": 152
+    },
+    {
+      "ubicacion": "P002 I X006 Y01",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 116
+    },
+    {
+      "ubicacion": "P002 I X006 Y02",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 120
+    },
+    {
+      "ubicacion": "P002 I X006 Y03",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 46
+    },
+    {
+      "ubicacion": "P002 I X006 Y04",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 113
+    },
+    {
+      "ubicacion": "P002 I X007 Y01",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 47
+    },
+    {
+      "ubicacion": "P002 I X007 Y05",
+      "articulo": "CAB-25R",
+      "nombre": "Cable H07V-K 2.5mm2 rojo (rollo)",
+      "stock": 79
+    },
+    {
+      "ubicacion": "P002 I X008 Y01",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 41
+    },
+    {
+      "ubicacion": "P002 I X008 Y02",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 57
+    },
+    {
+      "ubicacion": "P002 I X009 Y01",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 51
+    },
+    {
+      "ubicacion": "P002 I X009 Y03",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 64
+    },
+    {
+      "ubicacion": "P002 I X010 Y01",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 70
+    },
+    {
+      "ubicacion": "P002 I X010 Y02",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 49
+    },
+    {
+      "ubicacion": "P002 I X010 Y04",
+      "articulo": "CAB-40AZ",
+      "nombre": "Cable H07V-K 4mm2 azul (rollo)",
+      "stock": 37
+    },
+    {
+      "ubicacion": "P002 I X011 Y01",
+      "articulo": "TUB-PV16",
+      "nombre": "Tubo corrugado PVC 16mm negro (rollo 50m)",
+      "stock": 40
+    },
+    {
+      "ubicacion": "P002 I X011 Y02",
+      "articulo": "TUB-PV16",
+      "nombre": "Tubo corrugado PVC 16mm negro (rollo 50m)",
+      "stock": 32
+    },
+    {
+      "ubicacion": "P002 I X011 Y05",
+      "articulo": "TUB-PV16",
+      "nombre": "Tubo corrugado PVC 16mm negro (rollo 50m)",
+      "stock": 60
+    },
+    {
+      "ubicacion": "P002 I X012 Y02",
+      "articulo": "TUB-PV16",
+      "nombre": "Tubo corrugado PVC 16mm negro (rollo 50m)",
+      "stock": 22
+    },
+    {
+      "ubicacion": "P002 I X012 Y04",
+      "articulo": "TUB-PV16",
+      "nombre": "Tubo corrugado PVC 16mm negro (rollo 50m)",
+      "stock": 22
+    },
+    {
+      "ubicacion": "P002 I X013 Y01",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 45
+    },
+    {
+      "ubicacion": "P002 I X013 Y02",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 34
+    },
+    {
+      "ubicacion": "P002 I X014 Y01",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 46
+    },
+    {
+      "ubicacion": "P002 I X014 Y02",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 46
+    },
+    {
+      "ubicacion": "P002 I X014 Y03",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 23
+    },
+    {
+      "ubicacion": "P002 I X014 Y04",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P002 I X014 Y05",
+      "articulo": "TUB-PV25",
+      "nombre": "Tubo corrugado PVC 25mm negro (rollo 50m)",
+      "stock": 53
+    },
+    {
+      "ubicacion": "P002 D X001 Y01",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 22
+    },
+    {
+      "ubicacion": "P002 D X001 Y02",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 41
+    },
+    {
+      "ubicacion": "P002 D X001 Y03",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 17
+    },
+    {
+      "ubicacion": "P002 D X001 Y04",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 25
+    },
+    {
+      "ubicacion": "P002 D X002 Y01",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 24
+    },
+    {
+      "ubicacion": "P002 D X002 Y04",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 24
+    },
+    {
+      "ubicacion": "P002 D X003 Y01",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 19
+    },
+    {
+      "ubicacion": "P002 D X003 Y02",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 21
+    },
+    {
+      "ubicacion": "P002 D X003 Y05",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 34
+    },
+    {
+      "ubicacion": "P002 D X004 Y02",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 25
+    },
+    {
+      "ubicacion": "P002 D X004 Y03",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 40
+    },
+    {
+      "ubicacion": "P002 D X004 Y05",
+      "articulo": "CAJ-IP65",
+      "nombre": "Caja estanca IP65 150x110x70mm",
+      "stock": 17
+    },
+    {
+      "ubicacion": "P002 D X005 Y01",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 45
+    },
+    {
+      "ubicacion": "P002 D X005 Y02",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 58
+    },
+    {
+      "ubicacion": "P002 D X005 Y03",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 73
+    },
+    {
+      "ubicacion": "P002 D X006 Y01",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 70
+    },
+    {
+      "ubicacion": "P002 D X006 Y02",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 94
+    },
+    {
+      "ubicacion": "P002 D X006 Y03",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 52
+    },
+    {
+      "ubicacion": "P002 D X006 Y04",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 33
+    },
+    {
+      "ubicacion": "P002 D X007 Y01",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 40
+    },
+    {
+      "ubicacion": "P002 D X007 Y02",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 85
+    },
+    {
+      "ubicacion": "P002 D X007 Y03",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 97
+    },
+    {
+      "ubicacion": "P002 D X007 Y04",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 44
+    },
+    {
+      "ubicacion": "P002 D X007 Y05",
+      "articulo": "INT-1P-16",
+      "nombre": "Interruptor automatico 1P 16A curva C",
+      "stock": 55
+    },
+    {
+      "ubicacion": "P002 D X008 Y01",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 35
+    },
+    {
+      "ubicacion": "P002 D X008 Y02",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 63
+    },
+    {
+      "ubicacion": "P002 D X008 Y03",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 49
+    },
+    {
+      "ubicacion": "P002 D X008 Y04",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 31
+    },
+    {
+      "ubicacion": "P002 D X009 Y01",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P002 D X009 Y03",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P002 D X009 Y04",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 58
+    },
+    {
+      "ubicacion": "P002 D X010 Y02",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 44
+    },
+    {
+      "ubicacion": "P002 D X010 Y03",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 58
+    },
+    {
+      "ubicacion": "P002 D X010 Y04",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 67
+    },
+    {
+      "ubicacion": "P002 D X010 Y05",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P002 D X011 Y01",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 38
+    },
+    {
+      "ubicacion": "P002 D X011 Y02",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 50
+    },
+    {
+      "ubicacion": "P002 D X011 Y03",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 47
+    },
+    {
+      "ubicacion": "P002 D X011 Y04",
+      "articulo": "INT-2P-25",
+      "nombre": "Interruptor automatico 2P 25A curva C",
+      "stock": 46
+    },
+    {
+      "ubicacion": "P002 D X012 Y01",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P002 D X012 Y02",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 20
+    },
+    {
+      "ubicacion": "P002 D X012 Y03",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 42
+    },
+    {
+      "ubicacion": "P002 D X012 Y04",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 34
+    },
+    {
+      "ubicacion": "P002 D X013 Y01",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P002 D X013 Y02",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P002 D X013 Y03",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 36
+    },
+    {
+      "ubicacion": "P002 D X014 Y01",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 38
+    },
+    {
+      "ubicacion": "P002 D X014 Y02",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 21
+    },
+    {
+      "ubicacion": "P002 D X014 Y04",
+      "articulo": "REL-24VDC",
+      "nombre": "Rele 24VDC 16A + zocalo enchufable",
+      "stock": 41
+    },
+    {
+      "ubicacion": "P003 I X001 Y01",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X001 Y02",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 12
+    },
+    {
+      "ubicacion": "P003 I X001 Y03",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X001 Y04",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P003 I X002 Y01",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 19
+    },
+    {
+      "ubicacion": "P003 I X002 Y02",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X002 Y03",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P003 I X003 Y01",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 8
+    },
+    {
+      "ubicacion": "P003 I X003 Y02",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 17
+    },
+    {
+      "ubicacion": "P003 I X003 Y05",
+      "articulo": "SEN-PT100",
+      "nombre": "Sonda PT100 clase A roscada G1/2",
+      "stock": 19
+    },
+    {
+      "ubicacion": "P003 I X004 Y01",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 7
+    },
+    {
+      "ubicacion": "P003 I X004 Y02",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X004 Y03",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 9
+    },
+    {
+      "ubicacion": "P003 I X004 Y04",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X005 Y01",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 13
+    },
+    {
+      "ubicacion": "P003 I X005 Y02",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P003 I X005 Y03",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 I X006 Y01",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 9
+    },
+    {
+      "ubicacion": "P003 I X006 Y02",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 7
+    },
+    {
+      "ubicacion": "P003 I X006 Y03",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 16
+    },
+    {
+      "ubicacion": "P003 I X006 Y05",
+      "articulo": "MAN-10BAR",
+      "nombre": "Manometro 63mm 0-10 bar conexion trasera",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 I X007 Y01",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 6
+    },
+    {
+      "ubicacion": "P003 I X007 Y03",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 13
+    },
+    {
+      "ubicacion": "P003 I X007 Y04",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 7
+    },
+    {
+      "ubicacion": "P003 I X008 Y02",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 12
+    },
+    {
+      "ubicacion": "P003 I X009 Y01",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 9
+    },
+    {
+      "ubicacion": "P003 I X009 Y02",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X009 Y03",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 12
+    },
+    {
+      "ubicacion": "P003 I X009 Y04",
+      "articulo": "VAL-1224V",
+      "nombre": "Valvula solenoide 1/2 24VDC NC",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 I X010 Y01",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 198
+    },
+    {
+      "ubicacion": "P003 I X010 Y02",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 136
+    },
+    {
+      "ubicacion": "P003 I X011 Y01",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 200
+    },
+    {
+      "ubicacion": "P003 I X011 Y02",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 218
+    },
+    {
+      "ubicacion": "P003 I X011 Y03",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 186
+    },
+    {
+      "ubicacion": "P003 I X011 Y04",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 152
+    },
+    {
+      "ubicacion": "P003 I X012 Y01",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 98
+    },
+    {
+      "ubicacion": "P003 I X012 Y02",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 110
+    },
+    {
+      "ubicacion": "P003 I X012 Y05",
+      "articulo": "FIT-6-G14",
+      "nombre": "Racor push-in G1/4 tubo 6mm",
+      "stock": 271
+    },
+    {
+      "ubicacion": "P003 I X013 Y01",
+      "articulo": "FIT-10G12",
+      "nombre": "Racor push-in G1/2 tubo 10mm",
+      "stock": 187
+    },
+    {
+      "ubicacion": "P003 I X013 Y02",
+      "articulo": "FIT-10G12",
+      "nombre": "Racor push-in G1/2 tubo 10mm",
+      "stock": 99
+    },
+    {
+      "ubicacion": "P003 I X014 Y01",
+      "articulo": "FIT-10G12",
+      "nombre": "Racor push-in G1/2 tubo 10mm",
+      "stock": 79
+    },
+    {
+      "ubicacion": "P003 I X014 Y02",
+      "articulo": "FIT-10G12",
+      "nombre": "Racor push-in G1/2 tubo 10mm",
+      "stock": 136
+    },
+    {
+      "ubicacion": "P003 D X001 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 22
+    },
+    {
+      "ubicacion": "P003 D X001 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 27
+    },
+    {
+      "ubicacion": "P003 D X001 Y03",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P003 D X001 Y05",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 29
+    },
+    {
+      "ubicacion": "P003 D X002 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 32
+    },
+    {
+      "ubicacion": "P003 D X002 Y03",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 16
+    },
+    {
+      "ubicacion": "P003 D X002 Y05",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 23
+    },
+    {
+      "ubicacion": "P003 D X003 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 33
+    },
+    {
+      "ubicacion": "P003 D X003 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 D X003 Y03",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 30
+    },
+    {
+      "ubicacion": "P003 D X004 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P003 D X004 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 33
+    },
+    {
+      "ubicacion": "P003 D X004 Y03",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P003 D X005 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 25
+    },
+    {
+      "ubicacion": "P003 D X005 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 16
+    },
+    {
+      "ubicacion": "P003 D X005 Y04",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 20
+    },
+    {
+      "ubicacion": "P003 D X006 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 27
+    },
+    {
+      "ubicacion": "P003 D X006 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P003 D X006 Y04",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 20
+    },
+    {
+      "ubicacion": "P003 D X007 Y01",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 17
+    },
+    {
+      "ubicacion": "P003 D X007 Y02",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 20
+    },
+    {
+      "ubicacion": "P003 D X007 Y03",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 23
+    },
+    {
+      "ubicacion": "P003 D X007 Y04",
+      "articulo": "TUB-PA6",
+      "nombre": "Tubo poliamida PA6 6mm (rollo 25m)",
+      "stock": 19
+    },
+    {
+      "ubicacion": "P003 D X008 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 10
+    },
+    {
+      "ubicacion": "P003 D X008 Y02",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 17
+    },
+    {
+      "ubicacion": "P003 D X008 Y04",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 D X008 Y05",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P003 D X009 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 D X009 Y02",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 13
+    },
+    {
+      "ubicacion": "P003 D X009 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P003 D X009 Y04",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 D X010 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 16
+    },
+    {
+      "ubicacion": "P003 D X010 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P003 D X010 Y04",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 16
+    },
+    {
+      "ubicacion": "P003 D X011 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 14
+    },
+    {
+      "ubicacion": "P003 D X011 Y02",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P003 D X011 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 21
+    },
+    {
+      "ubicacion": "P003 D X012 Y02",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 13
+    },
+    {
+      "ubicacion": "P003 D X012 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P003 D X012 Y04",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 9
+    },
+    {
+      "ubicacion": "P003 D X013 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P003 D X013 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 23
+    },
+    {
+      "ubicacion": "P003 D X013 Y04",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P003 D X014 Y01",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 11
+    },
+    {
+      "ubicacion": "P003 D X014 Y03",
+      "articulo": "TUB-PA8",
+      "nombre": "Tubo poliamida PA8 8mm (rollo 25m)",
+      "stock": 10
+    },
+    {
+      "ubicacion": "P004 I X001 Y01",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 118
+    },
+    {
+      "ubicacion": "P004 I X001 Y02",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 112
+    },
+    {
+      "ubicacion": "P004 I X001 Y03",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 111
+    },
+    {
+      "ubicacion": "P004 I X002 Y01",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 147
+    },
+    {
+      "ubicacion": "P004 I X002 Y02",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 82
+    },
+    {
+      "ubicacion": "P004 I X002 Y04",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 234
+    },
+    {
+      "ubicacion": "P004 I X003 Y01",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 170
+    },
+    {
+      "ubicacion": "P004 I X003 Y03",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 229
+    },
+    {
+      "ubicacion": "P004 I X004 Y02",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 97
+    },
+    {
+      "ubicacion": "P004 I X004 Y04",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 84
+    },
+    {
+      "ubicacion": "P004 I X005 Y01",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 179
+    },
+    {
+      "ubicacion": "P004 I X005 Y02",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 107
+    },
+    {
+      "ubicacion": "P004 I X005 Y03",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 113
+    },
+    {
+      "ubicacion": "P004 I X005 Y04",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 202
+    },
+    {
+      "ubicacion": "P004 I X005 Y05",
+      "articulo": "BRD-200B",
+      "nombre": "Brida nylon 2.5x200mm blanca (bolsa 100u)",
+      "stock": 125
+    },
+    {
+      "ubicacion": "P004 I X006 Y01",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 85
+    },
+    {
+      "ubicacion": "P004 I X006 Y02",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 100
+    },
+    {
+      "ubicacion": "P004 I X007 Y01",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 100
+    },
+    {
+      "ubicacion": "P004 I X007 Y02",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 86
+    },
+    {
+      "ubicacion": "P004 I X007 Y03",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 142
+    },
+    {
+      "ubicacion": "P004 I X007 Y05",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 144
+    },
+    {
+      "ubicacion": "P004 I X008 Y01",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 82
+    },
+    {
+      "ubicacion": "P004 I X008 Y02",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 145
+    },
+    {
+      "ubicacion": "P004 I X008 Y03",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 58
+    },
+    {
+      "ubicacion": "P004 I X009 Y01",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 70
+    },
+    {
+      "ubicacion": "P004 I X009 Y02",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 111
+    },
+    {
+      "ubicacion": "P004 I X009 Y03",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 111
+    },
+    {
+      "ubicacion": "P004 I X009 Y04",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 145
+    },
+    {
+      "ubicacion": "P004 I X009 Y05",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 102
+    },
+    {
+      "ubicacion": "P004 I X010 Y01",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 108
+    },
+    {
+      "ubicacion": "P004 I X010 Y02",
+      "articulo": "BRD-360N",
+      "nombre": "Brida nylon 3.6x360mm negra (bolsa 100u)",
+      "stock": 141
+    },
+    {
+      "ubicacion": "P004 I X011 Y01",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 51
+    },
+    {
+      "ubicacion": "P004 I X011 Y02",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 54
+    },
+    {
+      "ubicacion": "P004 I X011 Y05",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 48
+    },
+    {
+      "ubicacion": "P004 I X012 Y01",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 39
+    },
+    {
+      "ubicacion": "P004 I X012 Y02",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 25
+    },
+    {
+      "ubicacion": "P004 I X012 Y03",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 50
+    },
+    {
+      "ubicacion": "P004 I X012 Y05",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 24
+    },
+    {
+      "ubicacion": "P004 I X013 Y01",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P004 I X013 Y02",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 50
+    },
+    {
+      "ubicacion": "P004 I X013 Y03",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 40
+    },
+    {
+      "ubicacion": "P004 I X014 Y01",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 46
+    },
+    {
+      "ubicacion": "P004 I X014 Y02",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 50
+    },
+    {
+      "ubicacion": "P004 I X014 Y04",
+      "articulo": "CIN-48MA",
+      "nombre": "Cinta adhesiva 48mm marron 66m",
+      "stock": 54
+    },
+    {
+      "ubicacion": "P004 D X001 Y01",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 36
+    },
+    {
+      "ubicacion": "P004 D X001 Y02",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 57
+    },
+    {
+      "ubicacion": "P004 D X001 Y04",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 57
+    },
+    {
+      "ubicacion": "P004 D X002 Y01",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 55
+    },
+    {
+      "ubicacion": "P004 D X002 Y02",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 67
+    },
+    {
+      "ubicacion": "P004 D X002 Y05",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 24
+    },
+    {
+      "ubicacion": "P004 D X003 Y01",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 50
+    },
+    {
+      "ubicacion": "P004 D X003 Y03",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 63
+    },
+    {
+      "ubicacion": "P004 D X003 Y04",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 54
+    },
+    {
+      "ubicacion": "P004 D X003 Y05",
+      "articulo": "ETI-7042",
+      "nombre": "Etiqueta 70x42mm impresora laser (caja 100h)",
+      "stock": 51
+    },
+    {
+      "ubicacion": "P004 D X004 Y02",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 37
+    },
+    {
+      "ubicacion": "P004 D X004 Y03",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P004 D X004 Y05",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 27
+    },
+    {
+      "ubicacion": "P004 D X005 Y01",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 33
+    },
+    {
+      "ubicacion": "P004 D X005 Y02",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 18
+    },
+    {
+      "ubicacion": "P004 D X006 Y01",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 25
+    },
+    {
+      "ubicacion": "P004 D X006 Y02",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 32
+    },
+    {
+      "ubicacion": "P004 D X006 Y03",
+      "articulo": "LUB-LIT",
+      "nombre": "Grasa de litio multiusos 400g",
+      "stock": 15
+    },
+    {
+      "ubicacion": "P004 D X007 Y01",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 29
+    },
+    {
+      "ubicacion": "P004 D X007 Y02",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 81
+    },
+    {
+      "ubicacion": "P004 D X008 Y01",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 76
+    },
+    {
+      "ubicacion": "P004 D X008 Y02",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 37
+    },
+    {
+      "ubicacion": "P004 D X008 Y03",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 51
+    },
+    {
+      "ubicacion": "P004 D X009 Y01",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 40
+    },
+    {
+      "ubicacion": "P004 D X009 Y02",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 45
+    },
+    {
+      "ubicacion": "P004 D X009 Y05",
+      "articulo": "GUA-L",
+      "nombre": "Guantes anticorte nivel D talla L (par)",
+      "stock": 52
+    },
+    {
+      "ubicacion": "P004 D X010 Y01",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 69
+    },
+    {
+      "ubicacion": "P004 D X010 Y02",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 34
+    },
+    {
+      "ubicacion": "P004 D X010 Y03",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 38
+    },
+    {
+      "ubicacion": "P004 D X011 Y01",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 59
+    },
+    {
+      "ubicacion": "P004 D X011 Y02",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 43
+    },
+    {
+      "ubicacion": "P004 D X011 Y03",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 28
+    },
+    {
+      "ubicacion": "P004 D X011 Y04",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 60
+    },
+    {
+      "ubicacion": "P004 D X012 Y01",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 66
+    },
+    {
+      "ubicacion": "P004 D X012 Y02",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 45
+    },
+    {
+      "ubicacion": "P004 D X012 Y03",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 31
+    },
+    {
+      "ubicacion": "P004 D X012 Y04",
+      "articulo": "GUA-XL",
+      "nombre": "Guantes anticorte nivel D talla XL (par)",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P004 D X013 Y01",
+      "articulo": "EPI-GAFA",
+      "nombre": "Gafas de seguridad incoloras EN166",
+      "stock": 27
+    },
+    {
+      "ubicacion": "P004 D X013 Y03",
+      "articulo": "EPI-GAFA",
+      "nombre": "Gafas de seguridad incoloras EN166",
+      "stock": 26
+    },
+    {
+      "ubicacion": "P004 D X013 Y04",
+      "articulo": "EPI-GAFA",
+      "nombre": "Gafas de seguridad incoloras EN166",
+      "stock": 35
+    },
+    {
+      "ubicacion": "P004 D X014 Y02",
+      "articulo": "EPI-GAFA",
+      "nombre": "Gafas de seguridad incoloras EN166",
+      "stock": 29
+    }
+  ]
+}

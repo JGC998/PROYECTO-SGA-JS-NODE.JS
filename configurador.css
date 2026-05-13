@@ -1,0 +1,243 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: system-ui, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ── TOP BAR ─────────────────────────────────────────────────── */
+#topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 52px;
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    flex-shrink: 0;
+    gap: 12px;
+}
+.tb-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #f1f5f9;
+    white-space: nowrap;
+}
+.tb-title small { font-weight: 400; color: #64748b; margin-left: 8px; font-size: 12px; }
+.tb-actions { display: flex; gap: 8px; align-items: center; }
+.tb-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background .15s;
+}
+.tb-ghost   { background: #334155; color: #cbd5e1; }
+.tb-ghost:hover { background: #475569; }
+.tb-primary { background: #2563eb; color: #fff; }
+.tb-primary:hover { background: #1d4ed8; }
+.tb-secondary { background: #16a34a; color: #fff; }
+.tb-secondary:hover { background: #15803d; }
+
+/* ── WORKSPACE ───────────────────────────────────────────────── */
+#workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────────── */
+#sidebar {
+    width: 290px;
+    flex-shrink: 0;
+    background: #1e293b;
+    border-right: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.sb-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    background: #1e293b;
+    z-index: 1;
+}
+.sb-title { font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: .05em; }
+.sb-add {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.sb-add:hover { background: #1d4ed8; }
+
+#pasillo-list { flex: 1; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+
+/* ── PASILLO CARD ─────────────────────────────────────────────── */
+.p-card {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+}
+.p-card:hover { border-color: #475569; }
+.p-card.selected { border-color: #3b82f6; background: #172554; }
+
+.p-card-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.p-num {
+    font-weight: 700;
+    font-size: 14px;
+    color: #93c5fd;
+}
+.p-del {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+.p-del:hover { background: #7f1d1d; color: #fca5a5; }
+
+.p-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.p-field { display: flex; flex-direction: column; gap: 3px; }
+.p-field label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
+.p-field input[type="number"] {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 13px;
+    width: 100%;
+}
+.p-field input[type="number"]:focus { outline: none; border-color: #3b82f6; }
+
+.p-sides { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 3px; }
+.p-sides label.top { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
+.sides-btns { display: flex; gap: 6px; }
+.side-btn {
+    flex: 1;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    text-align: center;
+}
+.side-btn.active { border-color: #2563eb; background: #1e3a8a; color: #93c5fd; }
+
+.p-info {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #475569;
+}
+
+/* ── WAREHOUSE PROPS ─────────────────────────────────────────── */
+#warehouse-props {
+    border-top: 1px solid #334155;
+    padding: 12px 14px;
+}
+.wp-title { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.wp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 12px;
+    gap: 8px;
+}
+.wp-row span:first-child { color: #94a3b8; }
+.wp-val { color: #64748b; font-size: 11px; }
+.wp-row input[type="number"] {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 12px;
+    width: 72px;
+    text-align: right;
+}
+.wp-row input[type="number"]:focus { outline: none; border-color: #3b82f6; }
+
+/* ── STATUS BAR ──────────────────────────────────────────────── */
+#status-bar {
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #4ade80;
+    border-top: 1px solid #334155;
+    min-height: 36px;
+}
+
+/* ── CANVAS AREA ─────────────────────────────────────────────── */
+#canvas-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+    background: #0f172a;
+    position: relative;
+}
+#cfg-canvas {
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0a0f1e;
+    cursor: crosshair;
+    max-width: 100%;
+    max-height: 100%;
+}
+#canvas-hint {
+    font-size: 11px;
+    color: #334155;
+}
+#legend-bar {
+    display: flex;
+    gap: 18px;
+    font-size: 12px;
+    color: #64748b;
+    align-items: center;
+}
+.leg-box {
+    display: inline-block;
+    width: 14px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+}

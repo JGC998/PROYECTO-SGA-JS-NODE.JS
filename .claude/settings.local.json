@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:3000/schema\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Juan García Cárdenas\\\\Desktop\\\\SGA\" -Recurse -Force)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(find \"c:\\\\\\\\Users\\\\\\\\Juan García Cárdenas\\\\\\\\Desktop\\\\\\\\SGA\\\\\\\\frontend\" -type f -name \"*.html\")",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "Bash(node --input-type=module)",
+      "Bash(node -e ' *)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/local/**)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

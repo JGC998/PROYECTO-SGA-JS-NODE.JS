@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SGA LIN — Configurador de Almacén</title>
+    <link rel="stylesheet" href="configurador.css">
+</head>
+<body>
+    <div id="topbar">
+        <div class="tb-title">⚙️ Configurador de Almacén <small>SGA LIN</small></div>
+        <div class="tb-actions">
+            <button class="tb-btn tb-ghost" id="btn-import-demo" title="Importar estructura desde datos actuales del almacén">📥 Importar actual</button>
+            <button class="tb-btn tb-ghost" id="btn-load-file" title="Cargar desde archivo JSON">📂 Cargar JSON</button>
+            <input type="file" id="file-input" accept=".json" style="display:none">
+            <button class="tb-btn tb-ghost" id="btn-export" title="Exportar como archivo JSON">📤 Exportar</button>
+            <button class="tb-btn tb-primary" id="btn-save">💾 Guardar en almacén</button>
+            <a class="tb-btn tb-secondary" href="mapa-3d.html">🏭 Abrir en 3D</a>
+        </div>
+    </div>
+
+    <div id="workspace">
+        <!-- PANEL IZQUIERDO: lista de pasillos -->
+        <div id="sidebar">
+            <div class="sb-hdr">
+                <span class="sb-title">Pasillos</span>
+                <button class="sb-add" id="btn-add">+ Añadir</button>
+            </div>
+
+            <div id="pasillo-list"></div>
+
+            <div id="warehouse-props">
+                <div class="wp-title">Propiedades generales</div>
+                <label class="wp-row">
+                    <span>Unidad de medida</span>
+                    <span class="wp-val">metros</span>
+                </label>
+                <label class="wp-row">
+                    <span>Ancho pasillo (AW)</span>
+                    <input type="number" id="cfg-aw" min="1" max="10" step="0.5" value="4.5">
+                </label>
+                <label class="wp-row">
+                    <span>Prof. estantería (UD)</span>
+                    <input type="number" id="cfg-ud" min="0.5" max="3" step="0.1" value="0.85">
+                </label>
+                <label class="wp-row">
+                    <span>Ancho módulo (UW)</span>
+                    <input type="number" id="cfg-uw" min="0.5" max="3" step="0.1" value="1.5">
+                </label>
+                <label class="wp-row">
+                    <span>Alto nivel (LH)</span>
+                    <input type="number" id="cfg-lh" min="0.5" max="3" step="0.1" value="1.1">
+                </label>
+            </div>
+
+            <div id="status-bar"></div>
+        </div>
+
+        <!-- CANVAS principal -->
+        <div id="canvas-wrap">
+            <canvas id="cfg-canvas"></canvas>
+            <div id="canvas-hint">Vista cenital del almacén (escala aproximada)</div>
+            <div id="legend-bar">
+                <span><span class="leg-box" style="background:#7a9ab0"></span> Estantería</span>
+                <span><span class="leg-box" style="background:rgba(251,191,36,0.5)"></span> Pasillo</span>
+                <span><span class="leg-box" style="background:#3b82f6"></span> Seleccionado</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/configurador.js"></script>
+</body>
+</html>
