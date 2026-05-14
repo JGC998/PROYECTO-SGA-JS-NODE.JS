@@ -226,4 +226,34 @@ describe("GET /picking — listado de tareas de preparación", () => {
         expect(body).not.toMatch(/Microsoft|ODBC|SQL Server|LIN\.dbo/i);
     });
 
+    test("buscar por serie PLIN debe devolver 200 y un array", async () => {
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31&buscar=PLIN");
+        expect(res.statusCode).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+    }, 30000);
+
+    test("buscar por serie PLIN en rango con datos debe devolver filas con serie PLIN", async () => {
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31&buscar=PLIN");
+        expect(res.statusCode).toBe(200);
+        if (res.body.length > 0) {
+            res.body.forEach(fila => {
+                const serieNorm = (fila.serie || '').trim().toUpperCase();
+                expect(serieNorm).toBe('PLIN');
+            });
+        }
+    }, 30000);
+
+    test("buscar por numero de albaran debe devolver 200 y un array", async () => {
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31&buscar=51599");
+        expect(res.statusCode).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+    }, 30000);
+
+    test("buscar por cliente inexistente debe devolver array vacio", async () => {
+        const res = await request(app).get("/picking?buscar=__cliente_inexistente_xyz__");
+        expect(res.statusCode).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+        expect(res.body.length).toBe(0);
+    });
+
 });

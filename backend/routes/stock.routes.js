@@ -265,7 +265,7 @@ router.get('/picking', async (req, res) => {
                     AND ISNULL(c.LOTE,'') = ISNULL(e.ACSLOT,'')
                 WHERE e.ACSMOV IN ('E','PC')
                 AND (e.ACSCLICOD LIKE @b OR e.ACSCLINOM LIKE @b
-                     OR CAST(e.ACSNUM AS varchar) LIKE @b)
+                     OR CAST(e.ACSNUM AS varchar) LIKE @b OR e.ACSSER LIKE @b)
                 AND CAST(e.ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY
                     CASE WHEN e.ACSNUMPIC IS NULL THEN 0 ELSE 1 END ASC,

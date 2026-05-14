@@ -163,6 +163,7 @@
     /* ── CARGA DESDE SERVIDOR ────────────────────────────────────────────── */
 
     var _ultimaFechaDisponible = null;
+    var _limitAlcanzado        = false;
 
     function cargar() {
         if (_loading) return;
@@ -177,10 +178,13 @@
             _rows      = Array.isArray(data) ? data : [];
             _albaranes = groupByAlbaran(_rows);
             _loading   = false;
+            _limitAlcanzado = _rows.length >= 500;
             if (_rows.length > 0) {
                 var fechas = _rows.map(function (r) { return r.fecha || ''; })
                     .filter(Boolean).sort();
                 _ultimaFechaDisponible = fechas[fechas.length - 1] || null;
+            } else {
+                _ultimaFechaDisponible = null;
             }
             filterAndRender();
         }).catch(function (err) {
@@ -240,6 +244,18 @@
 
             elList.appendChild(ph);
             return;
+        }
+        if (_limitAlcanzado) {
+            var notice = document.createElement('div');
+            notice.className = 'pk-limit-notice';
+            notice.id = 'pk-limit-notice';
+            var icon = document.createElement('span');
+            icon.textContent = '⚠';
+            notice.appendChild(icon);
+            var txt = document.createElement('span');
+            txt.textContent = 'Mostrando las primeras 500 líneas. Amplía los filtros de fecha o usa el buscador para acotar resultados.';
+            notice.appendChild(txt);
+            elList.appendChild(notice);
         }
         lista.forEach(function (alb) {
             elList.appendChild(buildCard(alb));
