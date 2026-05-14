@@ -207,12 +207,10 @@
     background: #eff6ff;
 }
 
-/* Colores por tipo */
-.mv-card--e { border-left-color: var(--sga-success); }
-.mv-card--s { border-left-color: var(--sga-danger); }
-.mv-card--t { border-left-color: #2563eb; }
-.mv-card--r { border-left-color: var(--sga-warning); }
-.mv-card--p { border-left-color: #7c3aed; }
+/* Colores por tipo (PC=Picking cliente, RG=Regularización, PP=Preparación interna) */
+.mv-card--pc { border-left-color: #7c3aed; }
+.mv-card--rg { border-left-color: var(--sga-warning); }
+.mv-card--pp { border-left-color: #2563eb; }
 
 /* ── BADGE DE TIPO ────────────────────────────────────────────────────────── */
 .mv-card-badge {
@@ -227,12 +225,10 @@
     flex-shrink: 0;
 }
 
-.mv-card-badge--e { background: #dcfce7; color: var(--sga-success); }
-.mv-card-badge--s { background: #fee2e2; color: var(--sga-danger); }
-.mv-card-badge--t { background: #dbeafe; color: #2563eb; }
-.mv-card-badge--r { background: #fef3c7; color: var(--sga-warning); }
-.mv-card-badge--p { background: #ede9fe; color: #7c3aed; }
-.mv-card-badge--x { background: var(--sga-border); color: var(--sga-text-muted); }
+.mv-card-badge--pc { background: #ede9fe; color: #7c3aed; }
+.mv-card-badge--rg { background: #fef3c7; color: var(--sga-warning); }
+.mv-card-badge--pp { background: #dbeafe; color: #2563eb; }
+.mv-card-badge--x  { background: var(--sga-border); color: var(--sga-text-muted); }
 
 /* ── HORA ────────────────────────────────────────────────────────────────── */
 .mv-card-time {

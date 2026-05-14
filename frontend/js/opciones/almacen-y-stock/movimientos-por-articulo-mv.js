@@ -41,19 +41,19 @@
         return d.toISOString().slice(0, 10);
     }
 
-    var TIPO_LABEL = { E: 'Entrada', S: 'Salida', T: 'Traspaso', R: 'Regularización', P: 'Picking' };
+    var TIPO_LABEL = { PC: 'Picking cliente', RG: 'Regularización', PP: 'Preparación interna' };
 
     function labelTipo(t) {
         return TIPO_LABEL[t] || (t ? String(t) : '—');
     }
 
     function classTipo(t) {
-        var allowed = { E: 'e', S: 's', T: 't', R: 'r', P: 'p' };
+        var allowed = { PC: 'pc', RG: 'rg', PP: 'pp' };
         return 'mv-card--' + (allowed[t] || 'x');
     }
 
     function classBadge(t) {
-        var allowed = { E: 'e', S: 's', T: 't', R: 'r', P: 'p' };
+        var allowed = { PC: 'pc', RG: 'rg', PP: 'pp' };
         return 'mv-card-badge--' + (allowed[t] || 'x');
     }
 
@@ -124,10 +124,7 @@
 
         var art = document.createElement('div');
         art.className = 'mv-card-art';
-        art.textContent = dash(row.articulo_buscado || row.articulo || '');
-        // La búsqueda puede filtrar por artículo; si el campo no existe en el row
-        // se mostrará el valor del filtro o '—'. El backend no devuelve ACSARTCOD
-        // directamente, pero el campo de filtro está accesible en cierre.
+        art.textContent = dash(row.articulo || '');
 
         var meta = document.createElement('div');
         meta.className = 'mv-card-meta';
@@ -527,15 +524,8 @@
 
         var params = getFilterParams();
 
-        // Guardar artículo buscado para mostrarlo en las cards
-        var articuloBuscado = params.articulo;
-
         SGA.movimientos.list(params).then(function (data) {
-            _rows = (Array.isArray(data) ? data : []).map(function (r) {
-                // Inyectar el artículo buscado para mostrarlo en la card
-                r.articulo_buscado = articuloBuscado || null;
-                return r;
-            });
+            _rows = Array.isArray(data) ? data : [];
             renderTimeline(_rows);
 
             var exportBtn = document.getElementById('btn-mv-exportar');

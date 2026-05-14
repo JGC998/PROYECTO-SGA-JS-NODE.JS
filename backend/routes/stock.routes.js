@@ -76,6 +76,7 @@ router.get('/movimientos-por-articulo', async (req, res) => {
                 s.ACSMOV AS tipo,
                 s.ACSSER AS serie,
                 s.ACSNUM AS numero,
+                s.ACSARTCOD AS articulo,
                 s.ACSNUMPIC AS picking,
                 s.ACSUBI AS ubicacion,
                 s.ACSLOT AS lote,
@@ -94,6 +95,7 @@ router.get('/movimientos-por-articulo', async (req, res) => {
                 AND s.ACSMOV LIKE @mov
                 AND s.ACSUBI LIKE @ubi
                 AND s.ACSCLICOD LIKE @cli
+                AND RTRIM(s.ACSSER) <> 'PLIN'
                 ORDER BY s.ACSFEC DESC, s.ACSHOR DESC`);
         res.json(r.recordset);
     } catch (err) { serverError(res, err); }
