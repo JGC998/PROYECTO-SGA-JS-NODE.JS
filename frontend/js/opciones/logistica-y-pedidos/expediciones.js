@@ -33,6 +33,8 @@
     var elCntPend     = null;
     var elCntParcial  = null;
     var elCntPrep     = null;
+    var elKpiStrip    = null;
+    var elLimitNotice = null;
 
     /* ── FECHAS ──────────────────────────────────────────────────────────── */
 
@@ -105,6 +107,9 @@
 
     /* ── CARGA DESDE SERVIDOR ────────────────────────────────────────────── */
 
+    var _ultimaFechaDisponible = null;
+    var _limitAlcanzado        = false;
+
     function cargar() {
         if (_loading) return;
         _loading = true;
@@ -118,6 +123,14 @@
             _rows      = Array.isArray(data) ? data : [];
             _albaranes = groupByAlbaran(_rows);
             _loading   = false;
+            _limitAlcanzado = _rows.length >= 500;
+            if (_rows.length > 0) {
+                var fechas = _rows.map(function (r) { return r.fecha || ''; })
+                    .filter(Boolean).sort();
+                _ultimaFechaDisponible = fechas[fechas.length - 1] || null;
+            } else {
+                _ultimaFechaDisponible = null;
+            }
             filterAndRender();
         }).catch(function (err) {
             console.error('[EP] error al cargar expediciones:', err);
@@ -132,10 +145,31 @@
         var lista = filterAlbaranes();
         renderList(lista);
         updateCounters();
+        updateKpiStrip();
+    }
+
+    function _rangoEsCorto() {
+        if (!_filters.desde || !_filters.hasta) return false;
+        var d = new Date(_filters.desde);
+        var h = new Date(_filters.hasta);
+        return (h - d) <= 31 * 24 * 60 * 60 * 1000;
+    }
+
+    function _formatFechaMes(isoStr) {
+        if (!isoStr) return null;
+        var m = ['enero','febrero','marzo','abril','mayo','junio',
+                 'julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        var parts = isoStr.split('-');
+        if (parts.length < 2) return isoStr;
+        var mes = parseInt(parts[1], 10) - 1;
+        return m[mes] + ' ' + parts[0];
     }
 
     function renderList(lista) {
         elList.innerHTML = '';
+
+        if (elLimitNotice) elLimitNotice.hidden = true;
+
         if (!lista.length) {
             var ph = document.createElement('div');
             ph.className = 'ep-placeholder';
@@ -143,10 +177,27 @@
             icon.className = 'ep-placeholder-icon';
             icon.textContent = '🚛';
             ph.appendChild(icon);
-            ph.appendChild(document.createTextNode(' No hay expediciones para los filtros aplicados.'));
+
+            var msg = ' No hay expediciones para los filtros aplicados.';
+            if (_rangoEsCorto() && _ultimaFechaDisponible) {
+                var mesDisp = _formatFechaMes(_ultimaFechaDisponible);
+                msg = ' No hay expediciones en este periodo.'
+                    + '\nEl último registro disponible es de ' + mesDisp + '.'
+                    + '\nPrueba ampliando el rango de fechas.';
+            }
+            msg.split('\n').forEach(function (linea, i) {
+                if (i > 0) ph.appendChild(document.createElement('br'));
+                ph.appendChild(document.createTextNode(linea));
+            });
+
             elList.appendChild(ph);
             return;
         }
+
+        if (_limitAlcanzado && elLimitNotice) {
+            elLimitNotice.hidden = false;
+        }
+
         lista.forEach(function (alb) {
             elList.appendChild(buildCard(alb));
         });
@@ -323,6 +374,82 @@
         elCntPrep.textContent    = prep;
     }
 
+    /* ── KPI STRIP ───────────────────────────────────────────────────────── */
+
+    function updateKpiStrip() {
+        if (!elKpiStrip) return;
+        elKpiStrip.innerHTML = '';
+        elKpiStrip.hidden = false;
+
+        var vals = Object.values(_albaranes);
+        var total   = vals.length;
+        var prep    = vals.filter(function (a) { return a.status === 'preparado'; }).length;
+        var pct     = total > 0 ? Math.round(prep / total * 100) : 0;
+
+        if (total === 0) {
+            var g0 = document.createElement('span');
+            g0.className = 'ep-kpi-grp';
+            var v0 = document.createElement('span');
+            v0.className = 'ep-kpi-val';
+            v0.textContent = '0%';
+            g0.appendChild(v0);
+            g0.appendChild(document.createTextNode(' con picking'));
+            elKpiStrip.appendChild(g0);
+
+            var s0a = document.createElement('span');
+            s0a.className = 'ep-kpi-sep';
+            s0a.textContent = '·';
+            elKpiStrip.appendChild(s0a);
+
+            var g0b = document.createElement('span');
+            g0b.className = 'ep-kpi-grp';
+            var v0b = document.createElement('span');
+            v0b.className = 'ep-kpi-val';
+            v0b.textContent = '0 / 0';
+            g0b.appendChild(v0b);
+            g0b.appendChild(document.createTextNode(' expediciones'));
+            elKpiStrip.appendChild(g0b);
+
+            var s0b = document.createElement('span');
+            s0b.className = 'ep-kpi-sep';
+            s0b.textContent = '·';
+            elKpiStrip.appendChild(s0b);
+
+            var g0c = document.createElement('span');
+            g0c.className = 'ep-kpi-grp';
+            g0c.appendChild(document.createTextNode('Sin expediciones en este periodo'));
+            elKpiStrip.appendChild(g0c);
+            return;
+        }
+
+        var pctClass = pct >= 80 ? 'ep-kpi-val--verde'
+                     : pct >= 40 ? 'ep-kpi-val--ambar'
+                     :             'ep-kpi-val--rojo';
+
+        var g1 = document.createElement('span');
+        g1.className = 'ep-kpi-grp';
+        var v1 = document.createElement('span');
+        v1.className = 'ep-kpi-val ' + pctClass;
+        v1.textContent = pct + '%';
+        g1.appendChild(v1);
+        g1.appendChild(document.createTextNode(' con picking'));
+        elKpiStrip.appendChild(g1);
+
+        var s1 = document.createElement('span');
+        s1.className = 'ep-kpi-sep';
+        s1.textContent = '·';
+        elKpiStrip.appendChild(s1);
+
+        var g2 = document.createElement('span');
+        g2.className = 'ep-kpi-grp';
+        var v2 = document.createElement('span');
+        v2.className = 'ep-kpi-val';
+        v2.textContent = prep + ' / ' + total;
+        g2.appendChild(v2);
+        g2.appendChild(document.createTextNode(' expediciones'));
+        elKpiStrip.appendChild(g2);
+    }
+
     /* ── PANEL OPEN / CLOSE ──────────────────────────────────────────────── */
 
     function openPanel() {
@@ -474,10 +601,12 @@
         elHasta      = document.getElementById('ep-f-hasta');
         elBuscar     = document.getElementById('ep-f-buscar');
         elStatus     = document.getElementById('ep-f-status');
-        elCntTotal   = document.getElementById('ep-cnt-total');
-        elCntPend    = document.getElementById('ep-cnt-pend');
-        elCntParcial = document.getElementById('ep-cnt-parcial');
-        elCntPrep    = document.getElementById('ep-cnt-prep');
+        elCntTotal    = document.getElementById('ep-cnt-total');
+        elCntPend     = document.getElementById('ep-cnt-pend');
+        elCntParcial  = document.getElementById('ep-cnt-parcial');
+        elCntPrep     = document.getElementById('ep-cnt-prep');
+        elKpiStrip    = document.getElementById('ep-kpi-strip');
+        elLimitNotice = document.getElementById('ep-limit-notice');
 
         try {
             initFiltros();
