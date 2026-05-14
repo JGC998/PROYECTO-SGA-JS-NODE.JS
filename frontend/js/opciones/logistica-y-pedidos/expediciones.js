@@ -106,25 +106,21 @@
     /* ── CARGA DESDE SERVIDOR ────────────────────────────────────────────── */
 
     function cargar() {
-        console.debug('[EP] cargar() — _loading:', _loading, '— SGA ok:', typeof SGA !== 'undefined' && !!SGA.expediciones);
         if (_loading) return;
         _loading = true;
         setLoading(true);
-        console.debug('[EP] fetch iniciando…');
 
         SGA.expediciones.list({
             buscar : _filters.buscar,
             desde  : _filters.desde,
             hasta  : _filters.hasta
         }).then(function (data) {
-            console.debug('[EP] .then data:', typeof data, Array.isArray(data) ? data.length + ' rows' : data);
             _rows      = Array.isArray(data) ? data : [];
             _albaranes = groupByAlbaran(_rows);
             _loading   = false;
-            console.debug('[EP] albaranes:', Object.keys(_albaranes).length);
             filterAndRender();
         }).catch(function (err) {
-            console.error('[EP] .catch:', err);
+            console.error('[EP] error al cargar expediciones:', err);
             _loading = false;
             showError('Error al conectar con el servidor. Comprueba la conexión.');
         });
@@ -466,7 +462,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        console.debug('[EP] DOMContentLoaded fired');
         elList       = document.getElementById('ep-list');
         elPanel      = document.getElementById('ep-panel');
         elPanelTitle = document.getElementById('ep-panel-title');
@@ -483,13 +478,11 @@
         elCntPend    = document.getElementById('ep-cnt-pend');
         elCntParcial = document.getElementById('ep-cnt-parcial');
         elCntPrep    = document.getElementById('ep-cnt-prep');
-        console.debug('[EP] refs — elList:', elList, 'elDesde:', elDesde, 'elStatus:', elStatus);
 
         try {
             initFiltros();
             wireEvents();
             readUrlParams();
-            console.debug('[EP] calling cargar()');
             cargar();
         } catch (err) {
             console.error('[EP] init error:', err);

@@ -211,8 +211,9 @@ router.get('/expediciones', async (req, res) => {
                 ACSUBI AS ubicacion,
                 ACSLOT AS lote
                 FROM ALBARANCS
-                WHERE ACSMOV='E'
-                AND (ACSCLICOD LIKE @b OR ACSCLINOM LIKE @b OR CAST(ACSNUM AS varchar) LIKE @b)
+                WHERE ACSMOV='PC' AND RTRIM(ACSSER) <> 'PLIN'
+                AND (ACSCLICOD LIKE @b OR ACSCLINOM LIKE @b
+                     OR CAST(ACSNUM AS varchar) LIKE @b OR ACSSER LIKE @b)
                 AND CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
                 ORDER BY ACSFEC DESC, ACSNUM DESC`);
         res.json(r.recordset);
