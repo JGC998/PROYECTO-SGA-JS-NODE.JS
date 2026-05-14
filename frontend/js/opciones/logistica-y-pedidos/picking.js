@@ -162,6 +162,8 @@
 
     /* ── CARGA DESDE SERVIDOR ────────────────────────────────────────────── */
 
+    var _ultimaFechaDisponible = null;
+
     function cargar() {
         if (_loading) return;
         _loading = true;
@@ -175,6 +177,11 @@
             _rows      = Array.isArray(data) ? data : [];
             _albaranes = groupByAlbaran(_rows);
             _loading   = false;
+            if (_rows.length > 0) {
+                var fechas = _rows.map(function (r) { return r.fecha || ''; })
+                    .filter(Boolean).sort();
+                _ultimaFechaDisponible = fechas[fechas.length - 1] || null;
+            }
             filterAndRender();
         }).catch(function (err) {
             console.error('[PK] error al cargar picking:', err);
@@ -192,6 +199,23 @@
         updateKpiStrip();
     }
 
+    function _rangoEsCorto() {
+        if (!_filters.desde || !_filters.hasta) return false;
+        var d = new Date(_filters.desde);
+        var h = new Date(_filters.hasta);
+        return (h - d) <= 31 * 24 * 60 * 60 * 1000;
+    }
+
+    function _formatFechaMes(isoStr) {
+        if (!isoStr) return null;
+        var m = ['enero','febrero','marzo','abril','mayo','junio',
+                 'julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        var parts = isoStr.split('-');
+        if (parts.length < 2) return isoStr;
+        var mes = parseInt(parts[1], 10) - 1;
+        return m[mes] + ' ' + parts[0];
+    }
+
     function renderList(lista) {
         elList.innerHTML = '';
         if (!lista.length) {
@@ -201,7 +225,19 @@
             icon.className = 'pk-placeholder-icon';
             icon.textContent = '📋';
             ph.appendChild(icon);
-            ph.appendChild(document.createTextNode(' No hay tareas de picking para los filtros aplicados.'));
+
+            var msg = ' No hay tareas de picking para los filtros aplicados.';
+            if (_rangoEsCorto() && _ultimaFechaDisponible) {
+                var mesDisp = _formatFechaMes(_ultimaFechaDisponible);
+                msg = ' No hay tareas de picking en este periodo.'
+                    + '\nEl último registro disponible es de ' + mesDisp + '.'
+                    + '\nPrueba ampliando el rango de fechas.';
+            }
+            msg.split('\n').forEach(function (linea, i) {
+                if (i > 0) ph.appendChild(document.createElement('br'));
+                ph.appendChild(document.createTextNode(linea));
+            });
+
             elList.appendChild(ph);
             return;
         }
@@ -597,8 +633,43 @@
         });
 
         var total      = todasLineas.length;
-        if (total === 0) { elKpiStrip.hidden = true; return; }
         elKpiStrip.hidden = false;
+        if (total === 0) {
+            elKpiStrip.innerHTML = '';
+            var g0 = document.createElement('span');
+            g0.className = 'pk-kpi-grp';
+            var v0 = document.createElement('span');
+            v0.className = 'pk-kpi-val';
+            v0.textContent = '0%';
+            g0.appendChild(v0);
+            g0.appendChild(document.createTextNode(' preparado'));
+            elKpiStrip.appendChild(g0);
+
+            var s0a = document.createElement('span');
+            s0a.className = 'pk-kpi-sep';
+            s0a.textContent = '·';
+            elKpiStrip.appendChild(s0a);
+
+            var g0b = document.createElement('span');
+            g0b.className = 'pk-kpi-grp';
+            var v0b = document.createElement('span');
+            v0b.className = 'pk-kpi-val';
+            v0b.textContent = '0 / 0';
+            g0b.appendChild(v0b);
+            g0b.appendChild(document.createTextNode(' líneas'));
+            elKpiStrip.appendChild(g0b);
+
+            var s0b = document.createElement('span');
+            s0b.className = 'pk-kpi-sep';
+            s0b.textContent = '·';
+            elKpiStrip.appendChild(s0b);
+
+            var g0c = document.createElement('span');
+            g0c.className = 'pk-kpi-grp';
+            g0c.appendChild(document.createTextNode('Sin tareas en este periodo'));
+            elKpiStrip.appendChild(g0c);
+            return;
+        }
 
         var preparadas = todasLineas.filter(function (l) {
             return !!l.picking || !!l.confirmado_sga;
