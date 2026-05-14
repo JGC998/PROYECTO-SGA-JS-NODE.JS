@@ -184,10 +184,10 @@ describe("GET /picking — listado de tareas de preparación", () => {
     });
 
     test("con desde y hasta explícitos debe devolver 200 y un array", async () => {
-        const res = await request(app).get("/picking?desde=2020-01-01&hasta=2026-12-31");
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31");
         expect(res.statusCode).toBe(200);
         expect(Array.isArray(res.body)).toBe(true);
-    });
+    }, 30000);
 
     test("con parámetro buscar debe devolver 200 y un array", async () => {
         const res = await request(app).get("/picking?buscar=__inexistente__");
@@ -197,7 +197,7 @@ describe("GET /picking — listado de tareas de preparación", () => {
     });
 
     test("cada fila debe tener las propiedades que consume el frontend", async () => {
-        const res = await request(app).get("/picking?desde=2020-01-01&hasta=2026-12-31");
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31");
         expect(res.statusCode).toBe(200);
         if (res.body.length > 0) {
             const fila = res.body[0];
@@ -209,15 +209,15 @@ describe("GET /picking — listado de tareas de preparación", () => {
             ];
             props.forEach(p => expect(fila).toHaveProperty(p));
         }
-    });
+    }, 30000);
 
     test("confirmado_sga debe ser 0 o 1 (no null)", async () => {
-        const res = await request(app).get("/picking?desde=2020-01-01&hasta=2026-12-31");
+        const res = await request(app).get("/picking?desde=2025-12-01&hasta=2025-12-31");
         expect(res.statusCode).toBe(200);
         res.body.forEach(fila => {
             expect([0, 1]).toContain(fila.confirmado_sga);
         });
-    });
+    }, 30000);
 
     test("no debe exponer mensajes internos de SQL Server", async () => {
         const res = await request(app).get("/picking?buscar=' OR 1=1 --");

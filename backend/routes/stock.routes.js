@@ -263,7 +263,7 @@ router.get('/picking', async (req, res) => {
                     AND c.ARTICULO  = e.ACSARTCOD
                     AND c.UBICACION = e.ACSUBI
                     AND ISNULL(c.LOTE,'') = ISNULL(e.ACSLOT,'')
-                WHERE e.ACSMOV = 'E'
+                WHERE e.ACSMOV IN ('E','PC')
                 AND (e.ACSCLICOD LIKE @b OR e.ACSCLINOM LIKE @b
                      OR CAST(e.ACSNUM AS varchar) LIKE @b)
                 AND CAST(e.ACSFEC AS DATE) BETWEEN @desde AND @hasta
@@ -343,7 +343,7 @@ router.post('/picking/confirmar', async (req, res) => {
                   AND ACSSER    = @ser
                   AND ACSARTCOD = @art
                   AND ACSUBI    = @ubi
-                  AND ACSMOV    = 'E'
+                  AND ACSMOV    IN ('E','PC')
                   AND ISNULL(ACSLOT,'') = @lot`);
         if (existe.recordset[0].cnt === 0) {
             return res.status(404).json({ error: 'Línea no encontrada en ALBARANCS' });
