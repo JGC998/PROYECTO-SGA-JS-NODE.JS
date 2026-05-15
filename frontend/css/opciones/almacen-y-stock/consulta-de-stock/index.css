@@ -192,7 +192,6 @@
     border-bottom: 2px solid #dbeafe;
 }
 
-.cs-th--check  { width: 36px; text-align: center; }
 .cs-th--num    { text-align: right; }
 .cs-th--ubicacion { min-width: 130px; }
 .cs-th--articulo  { min-width: 100px; }
@@ -213,7 +212,6 @@
 .cs-row--selected td      { background: #eff6ff; }
 .cs-row--selected:hover td{ background: #dbeafe; }
 
-.cs-td--check  { text-align: center; }
 .cs-td--num    { text-align: right; font-variant-numeric: tabular-nums; }
 .cs-td--nombre {
     max-width: 260px;
@@ -254,10 +252,10 @@
     margin-left: 4px;
 }
 
-.cs-badge--excl {
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fde68a;
+.cs-badge--libre {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
 }
 
 /* ── VALORES DE STOCK ────────────────────────────────────────────────────── */
@@ -463,12 +461,6 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-}
-
-.cs-footer-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
 }
 
 .cs-footer-totals {

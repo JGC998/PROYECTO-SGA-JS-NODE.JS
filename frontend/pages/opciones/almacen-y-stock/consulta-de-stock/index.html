@@ -93,17 +93,11 @@
                     <!-- Fila secundaria (colapsable) -->
                     <div class="cs-filters-secondary" id="filtros-secundarios" hidden>
                         <div class="cs-filter-field">
-                            <label for="f-almacen">Almacén</label>
-                            <input type="text" id="f-almacen" class="cs-input cs-input--sm"
-                                   placeholder="Filtrar por almacén..."
-                                   title="Filtro local — actúa sobre resultados ya cargados">
-                        </div>
-                        <div class="cs-filter-field">
-                            <label for="f-exclusiva">Exclusiva</label>
-                            <select id="f-exclusiva" class="cs-select cs-select--sm">
+                            <label for="f-libre">Libre</label>
+                            <select id="f-libre" class="cs-select cs-select--sm">
                                 <option value="">Todas</option>
-                                <option value="1">Solo exclusivas</option>
-                                <option value="0">Solo no exclusivas</option>
+                                <option value="1">Solo libres</option>
+                                <option value="0">Solo no libres</option>
                             </select>
                         </div>
                     </div>
@@ -128,9 +122,6 @@
                             <table class="cs-table" id="tabla-stock">
                                 <thead>
                                     <tr>
-                                        <th class="cs-th cs-th--check">
-                                            <input type="checkbox" id="chk-all" title="Seleccionar todo">
-                                        </th>
                                         <th class="cs-th cs-th--ubicacion">Ubicación</th>
                                         <th class="cs-th cs-th--articulo">Artículo</th>
                                         <th class="cs-th cs-th--nombre">Nombre</th>
@@ -143,7 +134,7 @@
                                 </thead>
                                 <tbody id="tbody-stock">
                                     <tr class="cs-placeholder">
-                                        <td colspan="9">
+                                        <td colspan="8">
                                             Introduzca los filtros y pulse Buscar para cargar el stock.
                                         </td>
                                     </tr>
@@ -180,14 +171,6 @@
 
                 <!-- FOOTER DE TOTALES -->
                 <footer class="cs-footer">
-                    <div class="cs-footer-actions">
-                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-sel-todo">
-                            Seleccionar todo
-                        </button>
-                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-anular-sel">
-                            Anular selección
-                        </button>
-                    </div>
                     <div class="cs-footer-totals">
                         <span class="cs-total-label">Total stock:</span>
                         <span class="cs-total-value" id="total-stock">—</span>

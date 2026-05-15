@@ -34,18 +34,19 @@ router.get('/stock/:cod', async (req, res) => {
 router.get('/consulta-de-stock', async (req, res) => {
     try {
         const pool = await getPool();
-        const { articulo = '', ubicacion = '', lote = '', solo_existencias = '1' } = req.query;
-        const cond = solo_existencias === '1' ? 'AND s.STOCAN > 0' : '';
+        const { articulo = '', ubicacion = '', lote = '', solo_existencias = '1', sin_existencias = '0' } = req.query;
+        const cond = sin_existencias === '1' ? 'AND s.STOCAN = 0'
+                   : solo_existencias === '1' ? 'AND s.STOCAN > 0'
+                   : '';
         const r = await q(pool)
             .input('art', `%${articulo}%`).input('ubi', `%${ubicacion}%`).input('lot', `%${lote}%`)
             .query(`SELECT TOP 500
                 s.STOARTCOD AS articulo, a.ARTNOM AS nombre,
                 s.STOUBI AS ubicacion, u.UBINOM AS nom_ubicacion,
-                u.UBIALMCOD AS almacen,
                 s.STOLOT AS lote, s.STOCAN AS stock,
                 ISNULL(u.UBINUMPAL,0) AS palets,
                 ISNULL(u.UBIMUL,0) AS multiple,
-                ISNULL(u.UBILIB,0) AS exclusiva
+                ISNULL(u.UBILIB,0) AS libre
                 FROM STOCK s
                 LEFT JOIN ARTICULO a ON a.ARTCOD = s.STOARTCOD
                 LEFT JOIN UBICACION u ON u.UBICODUBI = s.STOUBI

@@ -48,26 +48,21 @@
         };
         if (existencias === '1')  params.solo_existencias = '1';
         if (existencias === '0')  params.solo_existencias = '0';
-        if (existencias === '-1') { params.solo_existencias = '0'; params.sin_existencias = '1'; }
+        if (existencias === '-1') params.sin_existencias = '1';
         return params;
     }
 
     function getClientFilters() {
         return {
-            almacen:  $('f-almacen').value.trim().toLowerCase(),
-            exclusiva: $('f-exclusiva').value,
+            libre: $('f-libre').value,
         };
     }
 
     function applyClientFilters() {
         var cf = getClientFilters();
-        var existencias = $('f-existencias').value;
         _filtered = _rows.filter(function (r) {
-            if (cf.almacen && !(r.almacen || '').toLowerCase().includes(cf.almacen)) return false;
-            if (cf.exclusiva === '1' && !r.exclusiva) return false;
-            if (cf.exclusiva === '0' && r.exclusiva)  return false;
-            // "Sin existencias" — el backend devuelve todo; filtramos aquí
-            if (existencias === '-1' && (parseFloat(r.stock) || 0) > 0) return false;
+            if (cf.libre === '1' && !r.libre) return false;
+            if (cf.libre === '0' && r.libre)  return false;
             return true;
         });
         renderTabla(_filtered);
@@ -159,22 +154,15 @@
     function buildRow(r) {
         var tr = el('tr', 'cs-row');
         tr.addEventListener('click', function (e) {
-            if (e.target.type === 'checkbox') return;
             if (e.target.classList.contains('cs-btn-action')) return;
             selectRow(tr, r);
             openDetail(r);
         });
 
-        // Checkbox
-        var tdChk = el('td', 'cs-td--check');
-        var chk = document.createElement('input');
-        chk.type = 'checkbox';
-        tdChk.appendChild(chk);
-
-        // Ubicación + badge EXCL
+        // Ubicación + badge LIBRE
         var tdUbi = el('td');
         tdUbi.appendChild(txt(val(r.ubicacion)));
-        if (r.exclusiva) tdUbi.appendChild(buildBadgeExcl());
+        if (r.libre) tdUbi.appendChild(buildBadgeLibre());
 
         // Artículo
         var tdArt = el('td');
@@ -208,7 +196,6 @@
         var tdAcc = el('td', 'cs-td--actions');
         tdAcc.appendChild(buildActionBtn(r));
 
-        tr.appendChild(tdChk);
         tr.appendChild(tdUbi);
         tr.appendChild(tdArt);
         tr.appendChild(tdNom);
@@ -220,9 +207,9 @@
         return tr;
     }
 
-    function buildBadgeExcl() {
-        var span = el('span', 'cs-badge cs-badge--excl');
-        span.textContent = 'EXCL';
+    function buildBadgeLibre() {
+        var span = el('span', 'cs-badge cs-badge--libre');
+        span.textContent = 'LIBRE';
         return span;
     }
 
@@ -264,7 +251,7 @@
         var header = el('div', 'cs-card-header');
         var ubiSpan = el('span', 'cs-card-ubi');
         ubiSpan.textContent = val(r.ubicacion);
-        if (r.exclusiva) ubiSpan.appendChild(buildBadgeExcl());
+        if (r.libre) ubiSpan.appendChild(buildBadgeLibre());
         var stockSpan = el('span', 'cs-card-stock ' + stockCls);
         stockSpan.textContent = fmt(r.stock);
         header.appendChild(ubiSpan);
@@ -281,11 +268,6 @@
             var loteSpan = el('span');
             loteSpan.textContent = 'Lote: ' + r.lote;
             meta.appendChild(loteSpan);
-        }
-        if (r.almacen) {
-            var almSpan = el('span');
-            almSpan.textContent = 'Almacén: ' + r.almacen;
-            meta.appendChild(almSpan);
         }
 
         div.appendChild(header);
@@ -402,9 +384,6 @@
         }
         frag.appendChild(ubiRow);
 
-        // Almacén
-        if (r.almacen) frag.appendChild(buildDetailRow('Almacén', r.almacen));
-
         // Lote
         frag.appendChild(buildDetailRow('Lote', val(r.lote, 'Sin lote')));
 
@@ -420,19 +399,19 @@
             frag.appendChild(row2);
         }
 
-        // Exclusiva
-        var exclRow = el('div', 'cs-detail-row');
-        var exclLbl = el('span', 'cs-detail-lbl');
-        exclLbl.textContent = 'Ubicación exclusiva';
-        var exclVal = el('span', 'cs-detail-val');
-        if (r.exclusiva) {
-            exclVal.appendChild(buildBadgeExcl());
+        // Libre
+        var libreRow = el('div', 'cs-detail-row');
+        var libreLbl = el('span', 'cs-detail-lbl');
+        libreLbl.textContent = 'Ubicación libre';
+        var libreVal = el('span', 'cs-detail-val');
+        if (r.libre) {
+            libreVal.appendChild(buildBadgeLibre());
         } else {
-            exclVal.textContent = 'No';
+            libreVal.textContent = 'No';
         }
-        exclRow.appendChild(exclLbl);
-        exclRow.appendChild(exclVal);
-        frag.appendChild(exclRow);
+        libreRow.appendChild(libreLbl);
+        libreRow.appendChild(libreVal);
+        frag.appendChild(libreRow);
 
         body.appendChild(frag);
     }
@@ -448,26 +427,12 @@
         return row;
     }
 
-    // ── SELECCIÓN MÚLTIPLE ────────────────────────────────────────────────────
-
-    function seleccionarTodo() {
-        document.querySelectorAll('#tbody-stock .cs-row input[type="checkbox"]')
-            .forEach(function (chk) { chk.checked = true; });
-        $('chk-all').checked = true;
-    }
-
-    function anularSeleccion() {
-        document.querySelectorAll('#tbody-stock .cs-row input[type="checkbox"]')
-            .forEach(function (chk) { chk.checked = false; });
-        $('chk-all').checked = false;
-    }
-
     // ── EXPORTAR CSV ──────────────────────────────────────────────────────────
 
     function exportarCSV() {
         if (!_filtered.length) return;
 
-        var headers = ['Ubicacion', 'Articulo', 'Nombre', 'Lote', 'Stock', 'Palets', 'Multiple', 'Almacen', 'Exclusiva'];
+        var headers = ['Ubicacion', 'Articulo', 'Nombre', 'Lote', 'Stock', 'Palets', 'Multiple', 'Libre'];
         var lines = [headers.join(';')];
 
         _filtered.forEach(function (r) {
@@ -479,8 +444,7 @@
                 r.stock       ?? 0,
                 r.palets      ?? 0,
                 r.multiple    ?? 0,
-                r.almacen     || '',
-                r.exclusiva ? 'Si' : 'No',
+                r.libre ? 'Si' : 'No',
             ].join(';');
             lines.push(line);
         });
@@ -524,12 +488,9 @@
         var btnToggle = $('btn-toggle-filtros');
         if (btnToggle) btnToggle.addEventListener('click', toggleFiltrosSecundarios);
 
-        // Filtros client-side (almacén, exclusiva)
-        var fAlmacen = $('f-almacen');
-        if (fAlmacen) fAlmacen.addEventListener('input', applyClientFilters);
-
-        var fExclusiva = $('f-exclusiva');
-        if (fExclusiva) fExclusiva.addEventListener('change', applyClientFilters);
+        // Filtro client-side (libre)
+        var fLibre = $('f-libre');
+        if (fLibre) fLibre.addEventListener('change', applyClientFilters);
 
         // Cerrar panel lateral
         var btnClose = $('cs-detail-close');
@@ -544,22 +505,6 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'F5') { e.preventDefault(); cargarDatos(); }
         });
-
-        // Checkbox "seleccionar todo"
-        var chkAll = $('chk-all');
-        if (chkAll) {
-            chkAll.addEventListener('change', function () {
-                if (chkAll.checked) seleccionarTodo();
-                else anularSeleccion();
-            });
-        }
-
-        // Botones de selección en footer
-        var btnSel = $('btn-sel-todo');
-        if (btnSel) btnSel.addEventListener('click', seleccionarTodo);
-
-        var btnAnular = $('btn-anular-sel');
-        if (btnAnular) btnAnular.addEventListener('click', anularSeleccion);
 
         // Enter en inputs de filtros primarios
         ['f-articulo', 'f-ubicacion', 'f-lote'].forEach(function (id) {
