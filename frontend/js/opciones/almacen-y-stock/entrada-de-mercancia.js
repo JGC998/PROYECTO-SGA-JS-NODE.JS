@@ -182,14 +182,23 @@
         if (!cod) {
             $('ent-art-cod').classList.add('em-input--invalid');
             errors.push('Artículo obligatorio');
+        } else if (cod.length > 50) {
+            $('ent-art-cod').classList.add('em-input--invalid');
+            errors.push('Artículo demasiado largo (máx 50 caracteres)');
         }
         if (!lot) {
             $('ent-lot').classList.add('em-input--invalid');
             errors.push('Lote obligatorio — use "SIN LOTE" si no aplica');
+        } else if (lot.length > 10) {
+            $('ent-lot').classList.add('em-input--invalid');
+            errors.push('Lote demasiado largo (máx 10 caracteres en LIN)');
         }
         if (!ubi) {
             $('ent-ubi').classList.add('em-input--invalid');
             errors.push('Ubicación destino obligatoria');
+        } else if (ubi.length > 20) {
+            $('ent-ubi').classList.add('em-input--invalid');
+            errors.push('Ubicación demasiado larga (máx 20 caracteres)');
         } else if (_ubiState === 'notfound') {
             errors.push('La ubicación no existe en el sistema');
         } else if (_ubiState === null) {
@@ -366,17 +375,23 @@
     }
 
     function saveLinea(l) {
-        return SGA.entradas.save({ cod: l.cod, ubi: l.ubi, lot: l.lot, cant: l.cant })
-            .catch(function (err) {
-                var match = err.message && err.message.match(/→ (\d+)/);
-                if (!match) match = err.message && err.message.match(/(\d{3})/);
-                if (match) {
-                    var status = parseInt(match[1], 10);
-                    if (status === 400) throw new Error('Datos inválidos (artículo, ubicación o cantidad)');
-                    if (status === 500) throw new Error('Error del servidor');
-                }
-                throw err;
-            });
+        return SGA.entradaMercancia.save({
+            articulo:  l.cod,
+            ubicacion: l.ubi,
+            lote:      l.lot,
+            cantidad:  l.cant,
+            usuario:   'SGA'
+        }).catch(function (err) {
+            var match = err.message && err.message.match(/→ (\d+)/);
+            if (!match) match = err.message && err.message.match(/(\d{3})/);
+            if (match) {
+                var status = parseInt(match[1], 10);
+                if (status === 400) throw new Error('Datos inválidos (artículo, ubicación, lote o cantidad)');
+                if (status === 404) throw new Error('Artículo o ubicación no encontrados en LIN');
+                if (status === 500) throw new Error('Error del servidor ERP');
+            }
+            throw err;
+        });
     }
 
     /* ── RENDERIZAR RESULTADOS ──────────────────────────────────────────────── */
@@ -415,7 +430,14 @@
             row.appendChild(iconSpan);
 
             var infoSpan = el('span', 'em-result-info');
-            infoSpan.appendChild(txt(l.cod + ' · ' + l.ubi + ' · ' + fmt(l.cant) + ' uds.'));
+            if (r.status === 'fulfilled') {
+                var d = r.value;
+                var alb  = d.serie + '/' + d.albaran;
+                var delta = 'Stock: ' + fmt(d.stocklote_antes) + ' → ' + fmt(d.stocklote_nuevo);
+                infoSpan.appendChild(txt(l.cod + ' · ' + l.ubi + ' · ' + fmt(l.cant) + ' uds. — Alb. ' + alb + ' · ' + delta));
+            } else {
+                infoSpan.appendChild(txt(l.cod + ' · ' + l.ubi + ' · ' + fmt(l.cant) + ' uds.'));
+            }
             row.appendChild(infoSpan);
 
             if (r.status === 'rejected') {

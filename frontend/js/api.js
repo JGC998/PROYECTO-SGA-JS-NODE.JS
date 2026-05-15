@@ -91,6 +91,9 @@ const SGA = {
     entradas: {
         save: data => _post('/entrada', data),
     },
+    entradaMercancia: {
+        save: data => _post('/entrada-mercancia', data),
+    },
     salidas: {
         save: data => _post('/salida', data),
     },

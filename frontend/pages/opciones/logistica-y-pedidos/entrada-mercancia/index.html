@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Entrada de Mercancía</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/entrada-mercancia/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Entrada de Mercancía</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar"
+                        type="button" title="Atajo: F5">
+                    Limpiar (F5)
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="enm-inner">
+
+                <!-- CABECERA DE PÁGINA -->
+                <div class="enm-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Entrada de Mercancía</h1>
+                        <p class="sga-page-description">Recepción de stock directo · Serie ELIN · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO -->
+                <section class="enm-form" id="enm-form-section">
+
+                    <div class="enm-form-title">Registrar entrada</div>
+
+                    <!-- ARTÍCULO -->
+                    <div class="enm-field-group" id="fg-articulo">
+                        <label for="enm-art" class="enm-label">Artículo <span class="enm-required">*</span></label>
+                        <div class="enm-input-row">
+                            <input type="text" id="enm-art" class="enm-input enm-input--lg"
+                                   placeholder="Código de artículo..." autocomplete="off"
+                                   maxlength="50">
+                            <button class="enm-btn-clear" id="btn-art-clear"
+                                    type="button" aria-label="Limpiar artículo" hidden>✕</button>
+                        </div>
+                        <div class="enm-pill" id="enm-art-pill" hidden></div>
+                    </div>
+
+                    <!-- UBICACIÓN -->
+                    <div class="enm-field-group" id="fg-ubicacion">
+                        <label for="enm-ubi" class="enm-label">Ubicación <span class="enm-required">*</span></label>
+                        <div class="enm-input-row">
+                            <input type="text" id="enm-ubi" class="enm-input enm-input--lg"
+                                   placeholder="Código de ubicación..." autocomplete="off"
+                                   maxlength="20">
+                        </div>
+                        <div class="enm-pill" id="enm-ubi-pill" hidden></div>
+                    </div>
+
+                    <!-- LOTE -->
+                    <div class="enm-field-group" id="fg-lote">
+                        <label for="enm-lot" class="enm-label">
+                            Lote <span class="enm-required">*</span>
+                            <span class="enm-hint">(máx 10 caracteres)</span>
+                        </label>
+                        <div class="enm-lote-row">
+                            <input type="text" id="enm-lot" class="enm-input"
+                                   placeholder="Código de lote..." autocomplete="off"
+                                   maxlength="10">
+                            <button class="enm-btn-tag" id="btn-sin-lote" type="button">SIN LOTE</button>
+                        </div>
+                        <div class="enm-pill" id="enm-lot-pill" hidden></div>
+                    </div>
+
+                    <!-- CANTIDAD -->
+                    <div class="enm-field-group" id="fg-cantidad">
+                        <label for="enm-cant" class="enm-label">Cantidad <span class="enm-required">*</span></label>
+                        <div class="enm-cant-row">
+                            <button class="enm-stepper" id="btn-menos" type="button"
+                                    aria-label="Disminuir cantidad">−</button>
+                            <input type="number" id="enm-cant" class="enm-input enm-input--cant"
+                                   value="1" min="1" step="1" autocomplete="off">
+                            <button class="enm-stepper" id="btn-mas" type="button"
+                                    aria-label="Aumentar cantidad">+</button>
+                        </div>
+                    </div>
+
+                    <!-- ESTADO / NOTIFICACIÓN -->
+                    <div class="enm-form-status" id="enm-form-status" hidden></div>
+
+                    <!-- BOTÓN REGISTRAR -->
+                    <div class="enm-form-actions">
+                        <button class="enm-btn-registrar" id="btn-registrar" type="button">
+                            Registrar entrada ▶
+                        </button>
+                    </div>
+
+                </section>
+
+                <!-- PANEL DE RESULTADO -->
+                <section class="enm-resultado" id="enm-resultado" hidden>
+
+                    <div class="enm-resultado-header" id="enm-resultado-header"></div>
+
+                    <div class="enm-resultado-detalle" id="enm-resultado-detalle"></div>
+
+                    <div class="enm-resultado-footer">
+                        <button class="sga-btn sga-btn-primary" id="btn-nueva-entrada" type="button">
+                            Nueva entrada
+                        </button>
+                        <a class="sga-btn sga-btn-secondary"
+                           href="../../almacen-y-stock/consulta-de-stock/index.html"
+                           id="link-ver-stock">
+                            Ver stock ↗
+                        </a>
+                    </div>
+
+                </section>
+
+            </div><!-- /.enm-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/logistica-y-pedidos/entrada-mercancia.js"></script>
+
+</body>
+
+</html>
