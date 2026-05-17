@@ -1,50 +1,77 @@
-document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
-document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarDatos(); } });
+(function () {
+    'use strict';
 
-async function cargarDatos() {
-    const btn = document.getElementById('btn-actualizar');
-    btn.textContent = 'Cargando...';
-    btn.disabled = true;
+    var elTbody = document.getElementById('tbody-spv');
 
-    const params = {
-        cliente: document.getElementById('f-cliente').value,
-        articulo: document.getElementById('f-articulo').value,
-        desde: document.getElementById('f-desde').value,
-        hasta: document.getElementById('f-hasta').value,
-    };
-
-    try {
-        const data = await SGA.situacionPedidos.list(params);
-        renderTabla(data);
-    } catch {
-        document.getElementById('tbody-spv').innerHTML =
-            '<tr class="placeholder-row"><td colspan="8">Error al conectar con el servidor.</td></tr>';
-    } finally {
-        btn.textContent = 'Actualizar (F5)';
-        btn.disabled = false;
+    function setLoading(on) {
+        elTbody.innerHTML = '';
+        if (on) {
+            var ph = document.createElement('div');
+            ph.className = 'spv-loading';
+            var sp = document.createElement('span');
+            sp.className = 'spv-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            ph.appendChild(sp);
+            ph.appendChild(document.createTextNode('Cargando pedidos…'));
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.colSpan = 8;
+            td.appendChild(ph);
+            tr.appendChild(td);
+            elTbody.appendChild(tr);
+        }
     }
-}
 
-function renderTabla(rows) {
-    const tbody = document.getElementById('tbody-spv');
-    if (!rows.length) {
-        tbody.innerHTML = '<tr class="placeholder-row"><td colspan="8">No se encontraron pedidos con los filtros indicados.</td></tr>';
-        return;
+    function renderTabla(rows) {
+        if (!rows.length) {
+            elTbody.innerHTML = '<tr class="placeholder-row"><td colspan="8">No se encontraron pedidos con los filtros indicados.</td></tr>';
+            return;
+        }
+        elTbody.innerHTML = rows.map(function (r) {
+            return '<tr>'
+                + '<td>' + (r.fecha ?? '') + '</td>'
+                + '<td>' + (r.serie ?? '') + '/' + (r.albaran ?? '') + '</td>'
+                + '<td>' + (r.cliente ?? '') + '</td>'
+                + '<td>' + (r.nombre_cliente ?? '') + '</td>'
+                + '<td>' + (r.articulo ?? '') + '</td>'
+                + '<td>' + (r.nombre_articulo ?? '') + '</td>'
+                + '<td class="col-num">' + (r.cantidad ?? '') + '</td>'
+                + '<td>' + (r.tipo ?? '') + '</td>'
+                + '</tr>';
+        }).join('');
     }
-    tbody.innerHTML = rows.map(r => `
-        <tr>
-            <td>${r.fecha ?? ''}</td>
-            <td>${r.serie ?? ''}/${r.albaran ?? ''}</td>
-            <td>${r.cliente ?? ''}</td>
-            <td>${r.nombre_cliente ?? ''}</td>
-            <td>${r.articulo ?? ''}</td>
-            <td>${r.nombre_articulo ?? ''}</td>
-            <td class="col-num">${r.cantidad ?? ''}</td>
-            <td>${r.tipo ?? ''}</td>
-        </tr>`).join('');
-}
 
-const hoy = new Date().toISOString().split('T')[0];
-const hace30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-document.getElementById('f-desde').value = hace30;
-document.getElementById('f-hasta').value = hoy;
+    function cargarDatos() {
+        var btn = document.getElementById('btn-actualizar');
+        btn.textContent = 'Cargando…';
+        btn.disabled = true;
+        setLoading(true);
+
+        var params = {
+            cliente:  document.getElementById('f-cliente').value,
+            articulo: document.getElementById('f-articulo').value,
+            desde:    document.getElementById('f-desde').value,
+            hasta:    document.getElementById('f-hasta').value
+        };
+
+        SGA.situacionPedidos.list(params)
+            .then(renderTabla)
+            .catch(function () {
+                elTbody.innerHTML = '<tr class="placeholder-row"><td colspan="8">Error al conectar con el servidor.</td></tr>';
+            })
+            .finally(function () {
+                btn.textContent = 'Actualizar (F5)';
+                btn.disabled = false;
+            });
+    }
+
+    document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'F5') { e.preventDefault(); cargarDatos(); }
+    });
+
+    var hoy    = new Date().toISOString().split('T')[0];
+    var hace30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    document.getElementById('f-desde').value = hace30;
+    document.getElementById('f-hasta').value = hoy;
+})();

@@ -1,94 +1,127 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Hojas de Ruta</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Hojas de Ruta</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/tables.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/hojas-de-ruta/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>🚛 Preparación de Rutas</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Preparación de Rutas</span>
+                </nav>
             </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="filter-bar">
-            <input type="text" class="input-sm" placeholder="Buscar...">
-            <select class="select-filter"><option>Todos</option></select>
-            <span class="period-label">Periodo:</span>
-            <input type="date" class="input-date" value="2026-04-23">
-            <input type="date" class="input-date" value="2026-05-01">
-            <button class="btn-refresh" title="Actualizar">↻</button>
-        </div>
+        <div class="sga-content">
+            <main class="container">
 
-        <nav class="tab-nav">
-            <button class="tab-btn active" data-tab="pedidos-cliente">Pedidos de cliente</button>
-            <button class="tab-btn" data-tab="hojas-ruta">Hojas de ruta</button>
-        </nav>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>Preparación de Rutas</h1>
+                    </div>
+                </header>
 
-        <!-- TAB: Pedidos de cliente -->
-        <div class="tab-panel active" id="tab-pedidos-cliente">
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-star">*</th>
-                            <th>S</th>
-                            <th>Albarán</th>
-                            <th>Gr</th>
-                            <th>Exped.</th>
-                            <th>Cliente</th>
-                            <th>Cen</th>
-                            <th>Nombre de cliente</th>
-                            <th>Pick</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="10">No hay pedidos de cliente en el periodo seleccionado.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <div class="filter-bar">
+                    <input type="text" class="input-sm" placeholder="Buscar...">
+                    <select class="select-filter"><option>Todos</option></select>
+                    <span class="period-label">Periodo:</span>
+                    <input type="date" class="input-date" id="f-desde">
+                    <input type="date" class="input-date" id="f-hasta">
+                    <button class="btn-refresh" id="btn-refresh" title="Actualizar" aria-label="Actualizar">↻</button>
+                </div>
 
-        <!-- TAB: Hojas de ruta -->
-        <div class="tab-panel" id="tab-hojas-ruta">
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-star">*</th>
-                            <th>S</th>
-                            <th>Hoja de ruta</th>
-                            <th>Fecha</th>
-                            <th>Agencia</th>
-                            <th>Bultos</th>
-                            <th>Kilos</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="8">No hay hojas de ruta en el periodo seleccionado.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+                <nav class="tab-nav" role="tablist">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-pedidos-cliente" data-tab="pedidos-cliente">Pedidos de cliente</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-hojas-ruta" data-tab="hojas-ruta">Hojas de ruta</button>
+                </nav>
 
-    <script src="../../../../js/navegacion.js"></script>
+                <!-- TAB: Pedidos de cliente -->
+                <div class="tab-panel active" id="tab-pedidos-cliente" role="tabpanel" aria-live="polite">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="col-star">*</th>
+                                    <th>S</th>
+                                    <th>Albarán</th>
+                                    <th>Gr</th>
+                                    <th>Exped.</th>
+                                    <th>Cliente</th>
+                                    <th>Cen</th>
+                                    <th>Nombre de cliente</th>
+                                    <th>Pick</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-pedidos">
+                                <tr class="placeholder-row">
+                                    <td colspan="10">No hay pedidos de cliente en el periodo seleccionado.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: Hojas de ruta -->
+                <div class="tab-panel" id="tab-hojas-ruta" role="tabpanel" aria-live="polite">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="col-star">*</th>
+                                    <th>S</th>
+                                    <th>Hoja de ruta</th>
+                                    <th>Fecha</th>
+                                    <th>Agencia</th>
+                                    <th>Bultos</th>
+                                    <th>Kilos</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="8">No hay hojas de ruta en el periodo seleccionado.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/logistica-y-pedidos/hojas-de-ruta.js"></script>
 </body>
 
 </html>
-

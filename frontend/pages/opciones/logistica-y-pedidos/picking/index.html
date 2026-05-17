@@ -28,6 +28,10 @@
                 <nav class="sga-breadcrumb">
                     <a href="../../../../index.html">Inicio</a>
                     <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
                     <span class="sga-breadcrumb-current">Preparación / Picking</span>
                 </nav>
             </div>
@@ -70,7 +74,7 @@
                 </div>
 
                 <!-- CONTADORES -->
-                <div class="pk-counters">
+                <div class="pk-counters" role="status" aria-live="polite" aria-atomic="true">
                     <div class="pk-counter pk-counter--total">
                         <span class="pk-counter__val" id="pk-cnt-total">—</span>
                         <span class="pk-counter__label">Total</span>
@@ -90,14 +94,14 @@
                 </div>
 
                 <!-- KPI STRIP: métricas de líneas -->
-                <div class="pk-kpi-strip" id="pk-kpi-strip" hidden></div>
+                <div class="pk-kpi-strip" id="pk-kpi-strip" aria-live="polite" hidden></div>
 
                 <!-- WORKSPACE -->
                 <div class="pk-workspace">
 
                     <!-- LISTA DE TAREAS -->
                     <div class="pk-list-col">
-                        <div class="pk-list" id="pk-list">
+                        <div class="pk-list" id="pk-list" aria-live="polite" aria-atomic="false">
                             <div class="pk-placeholder" id="pk-placeholder">
                                 <span class="pk-placeholder-icon">📋</span>
                                 Cargando tareas de picking…

@@ -1,86 +1,119 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Artículos por Ubicación</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Artículos por Ubicación</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/tables.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/articulos-por-ubicacion/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>📦 Artículos por Ubicación</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Artículos por Ubicación</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary">Importar stocks</button>
-                <button class="btn-tool secondary">Exclusivas al suelo sin stock</button>
-            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="filter-panel">
-            <div class="filter-row">
-                <div class="filter-group">
-                    <label>Ubicación:</label>
-                    <input type="text" class="input-sm" id="f-ubicacion">
-                    <label>P:</label>
-                    <input type="text" class="input-xs">
-                    <label>L:</label>
-                    <input type="text" class="input-xs">
-                    <select class="input-xs-sel"><option></option></select>
-                    <label>X:</label>
-                    <input type="text" class="input-xs">
-                    <label>Y:</label>
-                    <input type="text" class="input-xs">
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="filter-group">
-                    <label>Artículo:</label>
-                    <input type="text" class="input-sm" id="f-articulo">
-                    <button class="btn-browse">...</button>
-                    <input type="text" class="input-desc" readonly>
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Incluir ubicaciones sin artículos asignados
-                    </label>
-                    <button class="btn-tool secondary">Asignar ubicación en compras</button>
-                </div>
-            </div>
-        </div>
+        <div class="sga-content">
+            <main class="container">
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-check"><input type="checkbox"></th>
-                        <th>Sel</th>
-                        <th>Ubicación</th>
-                        <th>Etiqueta</th>
-                        <th>Artículo</th>
-                        <th>Nombre de artículo</th>
-                        <th>Stock mínimo</th>
-                        <th>Stock máximo</th>
-                        <th>Exclusiva</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-apu">
-                    <tr class="placeholder-row">
-                        <td colspan="9">Introduzca los filtros y pulse Actualizar para cargar los datos.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>Artículos por Ubicación</h1>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                        <button class="btn-tool secondary">Importar stocks</button>
+                        <button class="btn-tool secondary">Exclusivas al suelo sin stock</button>
+                    </div>
+                </header>
 
-    <script src="../../../../js/navegacion.js"></script>
+                <div class="filter-panel">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label>Ubicación:</label>
+                            <input type="text" class="input-sm" id="f-ubicacion">
+                            <label>P:</label>
+                            <input type="text" class="input-xs">
+                            <label>L:</label>
+                            <input type="text" class="input-xs">
+                            <select class="input-xs-sel"><option></option></select>
+                            <label>X:</label>
+                            <input type="text" class="input-xs">
+                            <label>Y:</label>
+                            <input type="text" class="input-xs">
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label>Artículo:</label>
+                            <input type="text" class="input-sm" id="f-articulo">
+                            <button class="btn-browse">...</button>
+                            <input type="text" class="input-desc" readonly>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Incluir ubicaciones sin artículos asignados
+                            </label>
+                            <button class="btn-tool secondary">Asignar ubicación en compras</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-wrapper" id="apu-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-check"><input type="checkbox" aria-label="Seleccionar todo"></th>
+                                <th>Sel</th>
+                                <th>Ubicación</th>
+                                <th>Etiqueta</th>
+                                <th>Artículo</th>
+                                <th>Nombre de artículo</th>
+                                <th>Stock mínimo</th>
+                                <th>Stock máximo</th>
+                                <th>Exclusiva</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-apu">
+                            <tr class="placeholder-row">
+                                <td colspan="9">Introduzca los filtros y pulse Actualizar para cargar los datos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/almacen-y-stock/articulos-por-ubicacion.js"></script>
 </body>
 
 </html>
-

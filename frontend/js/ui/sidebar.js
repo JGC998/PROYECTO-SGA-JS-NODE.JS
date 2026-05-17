@@ -29,18 +29,23 @@
         {
             label: 'Expediciones',
             links: [
-                { icon: '🚛', text: 'Expediciones desde pedido', href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
-                { icon: '📋', text: 'Preparación / Picking',    href: 'pages/opciones/logistica-y-pedidos/picking/index.html' },
-                { icon: '🗺️', text: 'Hojas de ruta',            href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' }
+                { icon: '⬇️', text: 'Entrada de mercancía',        href: 'pages/opciones/logistica-y-pedidos/entrada-mercancia/index.html' },
+                { icon: '🚛', text: 'Expediciones desde pedido',    href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
+                { icon: '📋', text: 'Preparación / Picking',       href: 'pages/opciones/logistica-y-pedidos/picking/index.html' },
+                { icon: '📦', text: 'Situación pedidos de venta',  href: 'pages/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.html' },
+                { icon: '🗺️', text: 'Hojas de ruta',               href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' },
+                { icon: '🗑️', text: 'Borrar picking',             href: 'pages/opciones/logistica-y-pedidos/borrar-picking/index.html' },
+                { icon: '🔄', text: 'Poner a cero carrusel',      href: 'pages/opciones/logistica-y-pedidos/poner-cero-carrusel/index.html' }
             ]
         },
         {
             label: 'Almacén',
             links: [
-                { icon: '🏗️', text: 'Almacenes',          href: 'pages/opciones/almacen-y-stock/almacenes/index.html' },
-                { icon: '📌', text: 'Ubicaciones',         href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
-                { icon: '🔧', text: 'Generar ubicaciones', href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' },
-                { icon: '📋', text: 'Regularizaciones',    href: 'pages/opciones/almacen-y-stock/traspaso-inventario-regularizacion/index.html' }
+                { icon: '🏗️', text: 'Almacenes',            href: 'pages/opciones/almacen-y-stock/almacenes/index.html' },
+                { icon: '📌', text: 'Ubicaciones',           href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
+                { icon: '🔧', text: 'Generar ubicaciones',   href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' },
+                { icon: '📋', text: 'Regularizaciones',      href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' },
+                { icon: '🔄', text: 'Traspaso / Regulariz.', href: 'pages/opciones/almacen-y-stock/traspaso-inventario-regularizacion/index.html' }
             ]
         },
         {
@@ -50,7 +55,8 @@
                 { icon: '🚫', text: 'Lote en cuarentena',        href: 'pages/opciones/control-de-lotes-y-minimos/lote-cuarentena/index.html' },
                 { icon: '🔒', text: 'Lote exclusivo',            href: 'pages/opciones/control-de-lotes-y-minimos/lote-exclusivo/index.html' },
                 { icon: '💤', text: 'Lote no utilizado',         href: 'pages/opciones/control-de-lotes-y-minimos/lote-no-utilizado/index.html' },
-                { icon: '📝', text: 'Observaciones art./lote',   href: 'pages/opciones/control-de-lotes-y-minimos/observaciones-por-articulo-lote/index.html' }
+                { icon: '📝', text: 'Observaciones art./lote',   href: 'pages/opciones/control-de-lotes-y-minimos/observaciones-por-articulo-lote/index.html' },
+                { icon: '📈', text: 'Mínimos y máximos',         href: 'pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html' }
             ]
         },
         {
@@ -69,7 +75,8 @@
                 { icon: '👤', text: 'Usuarios',           href: 'pages/opciones/sistema/usuarios/index.html' },
                 { icon: '⚙️', text: 'Config. empresa',    href: 'pages/opciones/sistema/configuracion-empresa/index.html' },
                 { icon: '📱', text: 'Terminales PDA',     href: 'pages/opciones/sistema/terminales-pda/index.html' },
-                { icon: '🔢', text: 'Contadores',         href: 'pages/opciones/sistema/contadores/index.html' }
+                { icon: '🔢', text: 'Contadores',         href: 'pages/opciones/sistema/contadores/index.html' },
+                { icon: '💾', text: 'Copia de seguridad', href: 'pages/opciones/sistema/copia-seguridad/index.html' }
             ]
         },
         {

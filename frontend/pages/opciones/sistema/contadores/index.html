@@ -4,39 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Contadores</title>
-    <link rel="stylesheet" href="../../../../../css/navegacion.css">
-    <style>
-        .page-toolbar { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #ddd; margin-bottom:24px; }
-        .toolbar-left h1 { font-size:1.2rem; margin:0; }
-        .btn-tool { padding:5px 14px; background:#0057b7; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:.85rem; }
-        .btn-tool:hover { background:#004499; }
-        #grid-contadores { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; }
-        .contador-card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:20px 16px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-        .contador-valor { font-size:2rem; font-weight:700; color:#0057b7; line-height:1.1; }
-        .contador-label { font-size:.8rem; color:#666; margin-top:6px; text-transform:uppercase; letter-spacing:.04em; }
-    </style>
+    <title>SGA LIN — Contadores del Sistema</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/sistema/contadores/index.css">
 </head>
 
-<body>
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>🔢 Contadores del Sistema</h1>
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Sistema</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Contadores del Sistema</span>
+                </nav>
             </div>
-            <div>
-                <button class="btn-tool" id="btn-actualizar">Actualizar</button>
-            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div id="grid-contadores">
-            <p style="padding:20px">Cargando contadores...</p>
-        </div>
-    </main>
+        <div class="sga-content">
+            <main class="container">
 
-    <script src="../../../../../js/navegacion.js"></script>
-    <script src="../../../../../js/api.js"></script>
-    <script src="../../../../../js/opciones/sistema/contadores.js"></script>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>🔢 Contadores del Sistema</h1>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="btn-tool" id="btn-actualizar">Actualizar</button>
+                    </div>
+                </header>
+
+                <div id="grid-contadores" aria-live="polite" aria-atomic="false">
+                    <p style="padding:20px">Cargando contadores...</p>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/sistema/contadores.js"></script>
 </body>
 
 </html>

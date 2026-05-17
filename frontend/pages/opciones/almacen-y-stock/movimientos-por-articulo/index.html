@@ -28,7 +28,11 @@
                 <nav class="sga-breadcrumb">
                     <a href="../../../../index.html">Inicio</a>
                     <span class="sga-breadcrumb-sep">›</span>
-                    <span class="sga-breadcrumb-current">Movimientos por artículo</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Movimientos por Artículo</span>
                 </nav>
             </div>
             <div class="sga-header-right"></div>
@@ -46,7 +50,6 @@
                     <div class="mv-header-actions">
                         <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-mv-exportar"
                                 disabled title="Carga movimientos para exportar">Exportar CSV</button>
-                        <a href="legacy.html" class="mv-link-legacy">Ver versión clásica</a>
                     </div>
                 </div>
 
@@ -119,7 +122,7 @@
 
                     <!-- Timeline -->
                     <div class="mv-timeline-col">
-                        <div id="mv-timeline">
+                        <div id="mv-timeline" aria-live="polite" aria-atomic="false">
                             <div class="mv-placeholder" id="mv-placeholder">
                                 <span class="mv-placeholder-icon">🔍</span>
                                 Introduce un artículo u otros filtros y pulsa <strong>Buscar</strong>
@@ -147,7 +150,8 @@
                 <div class="mv-panel-backdrop" id="mv-panel-backdrop"></div>
 
                 <!-- RESUMEN -->
-                <div class="mv-summary" id="mv-summary" hidden>
+                <div class="mv-summary" id="mv-summary" hidden
+                     role="status" aria-live="polite">
                     <span id="mv-summary-text"></span>
                 </div>
 

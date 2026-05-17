@@ -1,51 +1,82 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Lote en Cuarentena por Artículo</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Lote en Cuarentena por Artículo</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/lote-cuarentena/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>🏷️ Lote en Cuarentena por Artículo</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Control de Lotes y Mínimos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Lote en Cuarentena</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-num">#</th>
-                        <th>Artículo</th>
-                        <th>Nombre de artículo</th>
-                        <th>Lote en cuarentena</th>
-                        <th>Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-lcuarentena">
-                    <tr class="placeholder-row">
-                        <td colspan="5">Pulse Actualizar para cargar los lotes en cuarentena.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+        <div class="sga-content">
+            <main class="container">
 
-    <script src="../../../../js/navegacion.js"></script>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>🏷️ Lote en Cuarentena por Artículo</h1>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
+                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
+                    </div>
+                </header>
+
+                <div class="table-wrapper" id="lcuarentena-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Artículo</th>
+                                <th>Nombre de artículo</th>
+                                <th>Lote en cuarentena</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-lcuarentena">
+                            <tr class="placeholder-row">
+                                <td colspan="5">Pulse Actualizar para cargar los lotes en cuarentena.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/control-de-lotes-y-minimos/lote-cuarentena.js"></script>
 </body>
 
 </html>
-

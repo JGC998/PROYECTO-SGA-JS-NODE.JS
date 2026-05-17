@@ -70,6 +70,27 @@
         renderTotales(_filtered);
     }
 
+    // ── SPINNER BOTÓN ─────────────────────────────────────────────────────────
+
+    function setBtnCargando(cargando) {
+        var ids = ['btn-buscar', 'btn-actualizar'];
+        ids.forEach(function (id) {
+            var btn = $(id);
+            if (!btn) return;
+            btn.disabled = cargando;
+            btn.innerHTML = '';
+            if (cargando) {
+                var sp = el('span', 'cs-btn-spinner');
+                sp.setAttribute('aria-hidden', 'true');
+                btn.appendChild(sp);
+                btn.appendChild(txt(' Cargando…'));
+            } else {
+                var label = id === 'btn-buscar' ? 'Buscar' : 'Actualizar (F5)';
+                btn.appendChild(txt(label));
+            }
+        });
+    }
+
     // ── CARGA DE DATOS ────────────────────────────────────────────────────────
 
     function setLoadingState() {
@@ -79,7 +100,10 @@
             var tr = el('tr', 'cs-state-row');
             var td = el('td');
             td.colSpan = 9;
-            td.textContent = 'Cargando…';
+            var sp = el('span', 'cs-loading-spinner');
+            sp.setAttribute('aria-hidden', 'true');
+            td.appendChild(sp);
+            td.appendChild(txt(' Cargando…'));
             tr.appendChild(td);
             tbody.appendChild(tr);
         }
@@ -99,6 +123,7 @@
 
     function cargarDatos() {
         setLoadingState();
+        setBtnCargando(true);
 
         var params = getServerParams();
         SGA.consultaStock.list(params)
@@ -114,6 +139,9 @@
                 renderTablaError();
                 var countEl = $('cs-count');
                 if (countEl) countEl.textContent = 'Error de conexión';
+            })
+            .then(function () {
+                setBtnCargando(false);
             });
     }
 
@@ -135,7 +163,12 @@
         }
 
         var frag = document.createDocumentFragment();
-        rows.forEach(function (r) { frag.appendChild(buildRow(r)); });
+        rows.forEach(function (r, i) {
+            var tr = buildRow(r);
+            tr.style.animationDelay = Math.min(i * 12, 200) + 'ms';
+            tr.classList.add('cs-row--fadein');
+            frag.appendChild(tr);
+        });
         tbody.appendChild(frag);
     }
 
@@ -472,6 +505,10 @@
     // ── INIT ──────────────────────────────────────────────────────────────────
 
     document.addEventListener('DOMContentLoaded', function () {
+
+        // Autofoco en artículo al cargar
+        var artInp = $('f-articulo');
+        if (artInp) artInp.focus();
 
         // Buscar / Actualizar
         var btnBuscar = $('btn-buscar');

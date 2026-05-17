@@ -1,54 +1,85 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Almacenes</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Almacenes</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/almacenes/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>🏗️ Almacenes</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Almacenes</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-guardar">💾 Guardar</button>
-                <button class="btn-tool secondary" id="btn-limpiar">🧹 Limpiar</button>
-                <button class="btn-tool secondary" id="btn-borrar">🗑️ Borrar</button>
-                <button class="btn-tool secondary">❓</button>
-            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <form class="master-form">
-            <fieldset class="form-section">
-                <legend>Datos del Almacén</legend>
-                <div class="form-fields">
-                    <div class="field-row">
-                        <label>Código de almacén:</label>
-                        <div class="input-nav">
-                            <input type="text" id="alm-codigo" class="input-code" placeholder="">
-                            <button type="button" class="btn-nav" id="btn-prev">&#8249;</button>
-                            <button type="button" class="btn-nav" id="btn-next">&#8250;</button>
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <label>Nombre de almacén:</label>
-                        <input type="text" id="alm-nombre" class="input-name" placeholder="">
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </main>
+        <div class="sga-content">
+            <main class="container">
 
-    <script src="../../../../js/navegacion.js"></script>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>🏗️ Almacenes</h1>
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="btn-tool" id="btn-guardar">💾 Guardar</button>
+                        <button class="btn-tool secondary" id="btn-limpiar">🧹 Limpiar</button>
+                        <button class="btn-tool secondary" id="btn-borrar">🗑️ Borrar</button>
+                        <button class="btn-tool secondary">❓</button>
+                    </div>
+                </header>
+
+                <form class="master-form">
+                    <fieldset class="form-section">
+                        <legend>Datos del Almacén</legend>
+                        <div class="form-fields">
+                            <div class="field-row">
+                                <label>Código de almacén:</label>
+                                <div class="input-nav">
+                                    <input type="text" id="alm-codigo" class="input-code" placeholder="">
+                                    <button type="button" class="btn-nav" id="btn-prev">&#8249;</button>
+                                    <button type="button" class="btn-nav" id="btn-next">&#8250;</button>
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <label>Nombre de almacén:</label>
+                                <input type="text" id="alm-nombre" class="input-name" placeholder="">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/almacen-y-stock/almacenes.js"></script>
 </body>
 
 </html>
-

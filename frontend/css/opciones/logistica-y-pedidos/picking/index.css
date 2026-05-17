@@ -206,6 +206,31 @@
     margin-bottom: 8px;
 }
 
+/* ── LOADING SPINNER ─────────────────────────────────────────────────────── */
+
+.pk-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px 24px;
+    color: var(--sga-text-muted);
+    font-size: 14px;
+}
+
+.pk-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--sga-border);
+    border-top-color: var(--sga-accent);
+    border-radius: 50%;
+    animation: pk-spin .7s linear infinite;
+}
+
+@keyframes pk-spin   { to { transform: rotate(360deg); } }
+@keyframes pk-fadein { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+
 /* ── AVISO LÍMITE TOP 500 ────────────────────────────────────────────────── */
 
 .pk-limit-notice {

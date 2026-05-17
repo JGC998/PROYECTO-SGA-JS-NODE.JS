@@ -148,6 +148,7 @@
         qty.textContent = qtySign(cant) + fmt(cant);
 
         btn.append(badge, time, body, qty);
+        btn.style.animation = 'mv-fadein .18s ease both';
 
         btn.addEventListener('click', function () { selectCard(idx); });
         btn.addEventListener('keydown', function (e) {
@@ -490,11 +491,11 @@
 
         var div = document.createElement('div');
         div.className = 'mv-loading';
-        var icon = document.createElement('span');
-        icon.className = 'mv-loading-icon';
-        icon.textContent = '⏳';
-        var txt = document.createTextNode('Cargando movimientos…');
-        div.append(icon, txt);
+        var sp = document.createElement('span');
+        sp.className = 'mv-spinner';
+        sp.setAttribute('aria-hidden', 'true');
+        var txtn = document.createTextNode('Cargando movimientos…');
+        div.append(sp, txtn);
         container.appendChild(div);
     }
 
@@ -512,12 +513,27 @@
         updateSummary([]);
     }
 
+    function setBtnBuscando(cargando) {
+        var btn = document.getElementById('btn-mv-buscar');
+        if (!btn) return;
+        btn.disabled = cargando;
+        btn.innerHTML = '';
+        if (cargando) {
+            var sp = document.createElement('span');
+            sp.className = 'mv-btn-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            btn.appendChild(sp);
+            btn.appendChild(document.createTextNode(' Buscando…'));
+        } else {
+            btn.appendChild(document.createTextNode('Buscar'));
+        }
+    }
+
     function cargarMovimientos() {
         if (_loading) return;
         _loading = true;
 
-        var btn = document.getElementById('btn-mv-buscar');
-        if (btn) { btn.disabled = true; btn.textContent = 'Cargando…'; }
+        setBtnBuscando(true);
 
         closePanel();
         setLoading();
@@ -538,7 +554,7 @@
 
         }).then(function () {
             _loading = false;
-            if (btn) { btn.disabled = false; btn.textContent = 'Buscar'; }
+            setBtnBuscando(false);
         });
     }
 
@@ -586,6 +602,9 @@
 
         var exportBtn = document.getElementById('btn-mv-exportar');
         if (exportBtn) exportBtn.disabled = true;
+
+        var artEl = document.getElementById('mv-f-articulo');
+        if (artEl) artEl.focus();
     }
 
     // ── EXPORTAR CSV ──────────────────────────────────────────────────────────
@@ -693,6 +712,10 @@
         // Auto-carga si hay parámetros en URL
         if (hasTrigger) {
             cargarMovimientos();
+        } else {
+            // Autofoco en artículo al cargar la página vacía
+            var artEl = document.getElementById('mv-f-articulo');
+            if (artEl) artEl.focus();
         }
     });
 

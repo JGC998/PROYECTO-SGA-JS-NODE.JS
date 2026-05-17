@@ -1,47 +1,91 @@
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+(function () {
+    'use strict';
+
+    /* ── TABS ─────────────────────────────────────────────────────────────── */
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.tab-btn').forEach(function (b) {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-panel').forEach(function (p) {
+                p.classList.remove('active');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            var panel = document.getElementById('tab-' + btn.dataset.tab);
+            if (panel) panel.classList.add('active');
+        });
     });
-});
 
-const [inputDesde, inputHasta] = document.querySelectorAll('.input-date');
-const btnRefresh = document.querySelector('.btn-refresh');
-const tbodyPedidos = document.querySelector('#tab-pedidos-cliente tbody');
+    /* ── CARGA ────────────────────────────────────────────────────────────── */
+    var elTbodyPedidos = document.getElementById('tbody-pedidos');
+    var elDesde  = document.querySelector('#f-desde');
+    var elHasta  = document.querySelector('#f-hasta');
+    var btnRef   = document.getElementById('btn-refresh');
 
-async function cargarDatos() {
-    const params = {};
-    if (inputDesde) params.desde = inputDesde.value;
-    if (inputHasta) params.hasta = inputHasta.value;
-
-    tbodyPedidos.innerHTML = '<tr class="placeholder-row"><td colspan="10">Cargando...</td></tr>';
-    try {
-        const data = await SGA.expediciones.list(params);
-        if (!data.length) {
-            tbodyPedidos.innerHTML = '<tr class="placeholder-row"><td colspan="10">No hay pedidos en el periodo seleccionado.</td></tr>';
-            return;
+    function setLoading(tbody, cols, on) {
+        tbody.innerHTML = '';
+        if (on) {
+            var ph = document.createElement('div');
+            ph.className = 'hr-loading';
+            var sp = document.createElement('span');
+            sp.className = 'hr-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            ph.appendChild(sp);
+            ph.appendChild(document.createTextNode('Cargando…'));
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.colSpan = cols;
+            td.appendChild(ph);
+            tr.appendChild(td);
+            tbody.appendChild(tr);
         }
-        tbodyPedidos.innerHTML = data.map(r => `
-            <tr>
-                <td></td>
-                <td></td>
-                <td>${r.albaran ?? ''}</td>
-                <td></td>
-                <td></td>
-                <td>${r.cliente ?? ''}</td>
-                <td></td>
-                <td>${r.nombre_cliente ?? ''}</td>
-                <td>${r.picking ?? ''}</td>
-                <td>${r.fecha ?? ''}</td>
-            </tr>`).join('');
-    } catch {
-        tbodyPedidos.innerHTML = '<tr class="placeholder-row"><td colspan="10">Error al conectar con el servidor.</td></tr>';
     }
-}
 
-if (btnRefresh) btnRefresh.addEventListener('click', cargarDatos);
-document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarDatos(); } });
+    function cargarDatos() {
+        var params = {};
+        if (elDesde) params.desde = elDesde.value;
+        if (elHasta) params.hasta = elHasta.value;
 
-cargarDatos();
+        setLoading(elTbodyPedidos, 10, true);
+
+        SGA.expediciones.list(params)
+            .then(function (data) {
+                if (!data.length) {
+                    elTbodyPedidos.innerHTML = '<tr class="placeholder-row"><td colspan="10">No hay pedidos en el periodo seleccionado.</td></tr>';
+                    return;
+                }
+                elTbodyPedidos.innerHTML = data.map(function (r) {
+                    return '<tr>'
+                        + '<td></td>'
+                        + '<td></td>'
+                        + '<td>' + (r.albaran ?? '') + '</td>'
+                        + '<td></td>'
+                        + '<td></td>'
+                        + '<td>' + (r.cliente ?? '') + '</td>'
+                        + '<td></td>'
+                        + '<td>' + (r.nombre_cliente ?? '') + '</td>'
+                        + '<td>' + (r.picking ?? '') + '</td>'
+                        + '<td>' + (r.fecha ?? '') + '</td>'
+                        + '</tr>';
+                }).join('');
+            })
+            .catch(function () {
+                elTbodyPedidos.innerHTML = '<tr class="placeholder-row"><td colspan="10">Error al conectar con el servidor.</td></tr>';
+            });
+    }
+
+    if (btnRef) btnRef.addEventListener('click', cargarDatos);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'F5') { e.preventDefault(); cargarDatos(); }
+    });
+
+    /* Inicializar fechas */
+    var hoy    = new Date().toISOString().split('T')[0];
+    var hace30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    if (elDesde) elDesde.value = hace30;
+    if (elHasta) elHasta.value = hoy;
+
+    cargarDatos();
+})();

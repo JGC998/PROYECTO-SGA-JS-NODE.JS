@@ -118,6 +118,30 @@
 .cs-toggle-secondary:hover { color: var(--sga-primary); }
 .cs-toggle-secondary[aria-expanded="true"] { color: var(--sga-primary); font-weight: 600; }
 
+/* ── SPINNERS ────────────────────────────────────────────────────────────── */
+.cs-btn-spinner,
+.cs-loading-spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(255,255,255,.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: cs-spin .7s linear infinite;
+    vertical-align: middle;
+}
+
+.cs-loading-spinner {
+    border-color: var(--sga-border);
+    border-top-color: var(--sga-accent);
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes cs-spin    { to { transform: rotate(360deg); } }
+@keyframes cs-fadein  { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cs-slidein { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+
 /* ── BARRA DE ESTADO ─────────────────────────────────────────────────────── */
 .cs-statusbar {
     display: flex;
@@ -220,6 +244,11 @@
 }
 .cs-td--actions { text-align: center; }
 
+/* Animación entrada de fila */
+.cs-row--fadein {
+    animation: cs-fadein .2s ease both;
+}
+
 /* ── ESTADOS DE FILA ─────────────────────────────────────────────────────── */
 .cs-placeholder td,
 .cs-state-row td {
@@ -286,6 +315,14 @@
 }
 
 /* ── PANEL LATERAL DE DETALLE ────────────────────────────────────────────── */
+
+/* Asegurar que hidden prevalece sobre display:flex */
+.cs-detail[hidden] { display: none !important; }
+
+.cs-workspace.cs-detail-open .cs-detail {
+    animation: cs-slidein .2s ease both;
+}
+
 .cs-detail {
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
@@ -402,6 +439,7 @@
     cursor: pointer;
     border: 2px solid transparent;
     transition: border-color .12s;
+    animation: cs-fadein .2s ease both;
 }
 
 .cs-card:hover          { border-color: var(--sga-accent); }

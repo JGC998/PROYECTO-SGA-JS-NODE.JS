@@ -4,67 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Configuración de Empresa</title>
-    <link rel="stylesheet" href="../../../../../css/navegacion.css">
-    <style>
-        .page-toolbar { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #ddd; margin-bottom:20px; }
-        .toolbar-left h1 { font-size:1.2rem; margin:0; }
-        .form-panel { max-width:600px; background:#fff; border:1px solid #ddd; border-radius:6px; padding:20px; }
-        .form-row { display:grid; grid-template-columns:180px 1fr; align-items:center; gap:8px; margin-bottom:12px; }
-        .form-row label { font-size:.9rem; font-weight:500; }
-        .form-row input, .form-row textarea, .form-row select { padding:5px 8px; border:1px solid #ccc; border-radius:3px; width:100%; box-sizing:border-box; }
-        .form-actions { display:flex; gap:8px; margin-top:16px; }
-        .btn-tool { padding:7px 18px; background:#0057b7; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:.9rem; }
-        .btn-tool:hover { background:#004499; }
-        .msg { margin-top:10px; padding:8px 12px; border-radius:4px; display:none; }
-        .msg.ok { display:block; background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
-        .msg.error { display:block; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
-    </style>
+    <title>SGA LIN — Configuración de Empresa</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/sistema/configuracion-empresa/index.css">
 </head>
 
-<body>
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>⚙️ Configuración de Empresa</h1>
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Sistema</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Configuración de Empresa</span>
+                </nav>
             </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <form class="form-panel" id="form-empresa">
-            <div class="form-row">
-                <label>Nombre empresa</label>
-                <input type="text" name="nombre">
-            </div>
-            <div class="form-row">
-                <label>CIF / NIF</label>
-                <input type="text" name="cif">
-            </div>
-            <div class="form-row">
-                <label>Dirección</label>
-                <input type="text" name="direccion">
-            </div>
-            <div class="form-row">
-                <label>Localidad</label>
-                <input type="text" name="localidad">
-            </div>
-            <div class="form-row">
-                <label>Teléfono</label>
-                <input type="text" name="telefono">
-            </div>
-            <div class="form-row">
-                <label>Email</label>
-                <input type="email" name="email">
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn-tool" id="btn-guardar">Guardar</button>
-            </div>
-            <div class="msg" id="msg-config"></div>
-        </form>
-    </main>
+        <div class="sga-content">
+            <main class="container">
 
-    <script src="../../../../../js/navegacion.js"></script>
-    <script src="../../../../../js/api.js"></script>
-    <script src="../../../../../js/opciones/sistema/configuracion-empresa.js"></script>
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>⚙️ Configuración de Empresa</h1>
+                    </div>
+                </header>
+
+                <form class="form-panel" id="form-empresa">
+                    <div class="form-row">
+                        <label>Nombre empresa</label>
+                        <input type="text" name="nombre">
+                    </div>
+                    <div class="form-row">
+                        <label>CIF / NIF</label>
+                        <input type="text" name="cif">
+                    </div>
+                    <div class="form-row">
+                        <label>Dirección</label>
+                        <input type="text" name="direccion">
+                    </div>
+                    <div class="form-row">
+                        <label>Localidad</label>
+                        <input type="text" name="localidad">
+                    </div>
+                    <div class="form-row">
+                        <label>Teléfono</label>
+                        <input type="text" name="telefono">
+                    </div>
+                    <div class="form-row">
+                        <label>Email</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-tool" id="btn-guardar">Guardar</button>
+                    </div>
+                    <div class="msg" id="msg-config" role="status" aria-live="polite"></div>
+                </form>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/sistema/configuracion-empresa.js"></script>
 </body>
 
 </html>

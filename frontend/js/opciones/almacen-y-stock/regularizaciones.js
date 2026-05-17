@@ -1,51 +1,92 @@
-document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
-document.addEventListener('keydown', e => { if (e.key === 'F5') { e.preventDefault(); cargarDatos(); } });
+(function () {
+    'use strict';
 
-async function cargarDatos() {
-    const btn = document.getElementById('btn-actualizar');
-    btn.textContent = 'Cargando...';
-    btn.disabled = true;
+    var elTbody  = document.getElementById('tbody-reg');
+    var elStatus = document.getElementById('rg-status');
 
-    const params = {
-        articulo: document.getElementById('f-articulo').value,
-        desde: document.getElementById('f-desde').value,
-        hasta: document.getElementById('f-hasta').value,
-    };
-
-    try {
-        const data = await SGA.regularizaciones.list(params);
-        renderTabla(data);
-    } catch {
-        document.getElementById('tbody-reg').innerHTML =
-            '<tr class="placeholder-row"><td colspan="9">Error al conectar con el servidor.</td></tr>';
-    } finally {
-        btn.textContent = 'Actualizar (F5)';
-        btn.disabled = false;
+    function setLoading(on) {
+        elTbody.innerHTML = '';
+        if (on) {
+            var ph = document.createElement('div');
+            ph.className = 'rg-loading';
+            var sp = document.createElement('span');
+            sp.className = 'rg-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            ph.appendChild(sp);
+            ph.appendChild(document.createTextNode('Cargando regularizaciones…'));
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.colSpan = 9;
+            td.appendChild(ph);
+            tr.appendChild(td);
+            elTbody.appendChild(tr);
+        }
     }
-}
 
-function renderTabla(rows) {
-    const tbody = document.getElementById('tbody-reg');
-    if (!rows.length) {
-        tbody.innerHTML = '<tr class="placeholder-row"><td colspan="9">No se encontraron regularizaciones.</td></tr>';
-        return;
+    function setStatus(msg) {
+        if (!elStatus) return;
+        if (msg) {
+            elStatus.textContent = msg;
+            elStatus.removeAttribute('hidden');
+        } else {
+            elStatus.hidden = true;
+        }
     }
-    tbody.innerHTML = rows.map(r => `
-        <tr>
-            <td>${r.fecha ?? ''}</td>
-            <td>${r.serie ?? ''}/${r.numero ?? ''}</td>
-            <td>${r.articulo ?? ''}</td>
-            <td>${r.nombre ?? ''}</td>
-            <td>${r.ubicacion ?? ''}</td>
-            <td>${r.lote ?? ''}</td>
-            <td class="col-num">${r.cantidad ?? ''}</td>
-            <td>${r.tercero ?? ''}</td>
-            <td>${r.nombre_tercero ?? ''}</td>
-        </tr>`).join('');
-}
 
-// Inicializar fechas
-const hoy = new Date().toISOString().split('T')[0];
-const hace30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-document.getElementById('f-desde').value = hace30;
-document.getElementById('f-hasta').value = hoy;
+    function renderTabla(rows) {
+        if (!rows.length) {
+            elTbody.innerHTML = '<tr class="placeholder-row"><td colspan="9">No se encontraron regularizaciones.</td></tr>';
+            setStatus('Sin resultados para los filtros indicados.');
+            return;
+        }
+        setStatus('');
+        elTbody.innerHTML = rows.map(function (r) {
+            return '<tr>'
+                + '<td>' + (r.fecha  ?? '') + '</td>'
+                + '<td>' + (r.serie  ?? '') + '/' + (r.numero ?? '') + '</td>'
+                + '<td>' + (r.articulo ?? '') + '</td>'
+                + '<td>' + (r.nombre ?? '') + '</td>'
+                + '<td>' + (r.ubicacion ?? '') + '</td>'
+                + '<td>' + (r.lote ?? '') + '</td>'
+                + '<td class="col-num">' + (r.cantidad ?? '') + '</td>'
+                + '<td>' + (r.tercero ?? '') + '</td>'
+                + '<td>' + (r.nombre_tercero ?? '') + '</td>'
+                + '</tr>';
+        }).join('');
+    }
+
+    function cargarDatos() {
+        var btn = document.getElementById('btn-actualizar');
+        btn.textContent = 'Cargando…';
+        btn.disabled = true;
+        setLoading(true);
+        setStatus('');
+
+        var params = {
+            articulo: document.getElementById('f-articulo').value,
+            desde:    document.getElementById('f-desde').value,
+            hasta:    document.getElementById('f-hasta').value
+        };
+
+        SGA.regularizaciones.list(params)
+            .then(renderTabla)
+            .catch(function () {
+                elTbody.innerHTML = '<tr class="placeholder-row"><td colspan="9">Error al conectar con el servidor.</td></tr>';
+                setStatus('Error de conexión. Inténtelo de nuevo.');
+            })
+            .finally(function () {
+                btn.textContent = 'Actualizar (F5)';
+                btn.disabled = false;
+            });
+    }
+
+    document.getElementById('btn-actualizar').addEventListener('click', cargarDatos);
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'F5') { e.preventDefault(); cargarDatos(); }
+    });
+
+    var hoy    = new Date().toISOString().split('T')[0];
+    var hace30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    document.getElementById('f-desde').value = hace30;
+    document.getElementById('f-hasta').value = hoy;
+})();

@@ -28,6 +28,10 @@
                 <nav class="sga-breadcrumb">
                     <a href="../../../../index.html">Inicio</a>
                     <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
                     <span class="sga-breadcrumb-current">Expediciones desde Pedido</span>
                 </nav>
             </div>
@@ -70,7 +74,7 @@
                 </div>
 
                 <!-- CONTADORES -->
-                <div class="ep-counters">
+                <div class="ep-counters" role="status" aria-live="polite" aria-atomic="true">
                     <div class="ep-counter ep-counter--total">
                         <span class="ep-counter__val" id="ep-cnt-total">—</span>
                         <span class="ep-counter__label">Total</span>
@@ -90,10 +94,10 @@
                 </div>
 
                 <!-- KPI STRIP: métricas de albaranes -->
-                <div class="ep-kpi-strip" id="ep-kpi-strip" hidden></div>
+                <div class="ep-kpi-strip" id="ep-kpi-strip" aria-live="polite" hidden></div>
 
                 <!-- AVISO LÍMITE 500 -->
-                <div class="ep-limit-notice" id="ep-limit-notice" hidden>
+                <div class="ep-limit-notice" id="ep-limit-notice" role="alert" hidden>
                     <span>⚠</span>
                     <span>Mostrando las primeras 500 líneas. Amplía los filtros de fecha o usa el buscador para acotar resultados.</span>
                 </div>
@@ -103,7 +107,7 @@
 
                     <!-- LISTA -->
                     <div class="ep-list-col">
-                        <div class="ep-list" id="ep-list">
+                        <div class="ep-list" id="ep-list" aria-live="polite" aria-atomic="false">
                             <div class="ep-placeholder" id="ep-placeholder">
                                 <span class="ep-placeholder-icon">🚛</span>
                                 Cargando expediciones…

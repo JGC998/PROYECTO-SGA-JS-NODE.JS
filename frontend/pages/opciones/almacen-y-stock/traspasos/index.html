@@ -28,7 +28,11 @@
                 <nav class="sga-breadcrumb">
                     <a href="../../../../index.html">Inicio</a>
                     <span class="sga-breadcrumb-sep">›</span>
-                    <span class="sga-breadcrumb-current">Traspasos entre ubicaciones</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Traspasos entre Ubicaciones</span>
                 </nav>
             </div>
             <div class="sga-header-right"></div>
@@ -50,8 +54,6 @@
                         </button>
                         <button class="sga-btn sga-btn-secondary sga-btn-sm"
                                 id="tp-btn-vaciar">Vaciar todo</button>
-                        <a href="../../../../pages/ferreteria/traspasos.html"
-                           class="tp-link-legacy">Ver versión clásica</a>
                     </div>
                 </div>
 
@@ -73,7 +75,7 @@
                         </div>
 
                         <!-- Stock disponible (selector de origen) -->
-                        <div id="tp-stock-section">
+                        <div id="tp-stock-section" aria-live="polite" aria-atomic="false">
                             <div class="tp-placeholder" id="tp-placeholder">
                                 <span class="tp-placeholder-icon">📦</span>
                                 Introduce un código de artículo y pulsa <strong>Buscar</strong>
@@ -122,7 +124,7 @@
                         <div class="tp-panel-header">
                             <span class="tp-panel-title">
                                 Carrito
-                                <span class="tp-panel-badge" id="tp-panel-count">0</span>
+                                <span class="tp-panel-badge" id="tp-panel-count" aria-live="polite">0</span>
                             </span>
                             <button class="tp-panel-close" id="btn-tp-panel-close"
                                     aria-label="Cerrar panel">×</button>

@@ -499,12 +499,12 @@
         elList.innerHTML = '';
         if (on) {
             var ph = document.createElement('div');
-            ph.className = 'ep-placeholder';
-            var icon = document.createElement('span');
-            icon.className = 'ep-placeholder-icon';
-            icon.textContent = '🚛';
-            ph.appendChild(icon);
-            ph.appendChild(document.createTextNode(' Cargando expediciones…'));
+            ph.className = 'ep-loading';
+            var sp = document.createElement('span');
+            sp.className = 'ep-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            ph.appendChild(sp);
+            ph.appendChild(document.createTextNode('Cargando expediciones…'));
             elList.appendChild(ph);
         }
     }

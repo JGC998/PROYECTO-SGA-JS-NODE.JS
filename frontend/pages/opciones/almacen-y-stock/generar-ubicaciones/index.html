@@ -1,116 +1,147 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Generar Ubicaciones</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Generar Ubicaciones</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/generar-ubicaciones/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>📍 Generar Ubicaciones</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Generar Ubicaciones</span>
+                </nav>
             </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="main-layout">
-            <!-- Panel izquierdo: tabla de ubicaciones generadas -->
-            <div class="left-panel">
-                <div class="check-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Mostrar ubicaciones no existentes con movimientos
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Solo con existencias
-                    </label>
-                </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="col-num">#</th>
-                                <th>Sel</th>
-                                <th>Ubicación</th>
-                                <th>Etiqueta</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-num">1</td>
-                                <td><input type="checkbox"></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="sga-content">
+            <main class="container">
 
-            <!-- Panel derecho: formulario de generación -->
-            <div class="right-panel">
-                <fieldset class="form-section">
-                    <legend>Parámetros de generación</legend>
-                    <div class="params-grid">
-                        <label>Desde pasillo:</label>
-                        <input type="text" class="input-param">
-                        <label>Desde lateral:</label>
-                        <input type="text" class="input-param" value="11">
-                        <label>Desde X:</label>
-                        <input type="text" class="input-param">
-                        <label>Desde Y:</label>
-                        <input type="text" class="input-param">
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>📍 Generar Ubicaciones</h1>
+                    </div>
+                </header>
 
-                        <label>Hasta pasillo:</label>
-                        <input type="text" class="input-param">
-                        <label>Hasta lateral:</label>
-                        <input type="text" class="input-param" value="21">
-                        <label>Hasta X:</label>
-                        <input type="text" class="input-param">
-                        <label>Hasta Y:</label>
-                        <input type="text" class="input-param">
-
-                        <label>Ancho:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label>Alto:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label>Palets:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label></label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Ubicación múltiple
-                        </label>
+                <div class="main-layout">
+                    <!-- Panel izquierdo: tabla de ubicaciones generadas -->
+                    <div class="left-panel">
+                        <div class="check-row">
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Mostrar ubicaciones no existentes con movimientos
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Solo con existencias
+                            </label>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="col-num">#</th>
+                                        <th>Sel</th>
+                                        <th>Ubicación</th>
+                                        <th>Etiqueta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-num">1</td>
+                                        <td><input type="checkbox"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="picking-row">
-                        <select class="select-picking">
-                            <option>Picking</option>
-                            <option>Reserva</option>
-                            <option>Suelo</option>
-                        </select>
-                    </div>
+                    <!-- Panel derecho: formulario de generación -->
+                    <div class="right-panel">
+                        <fieldset class="form-section">
+                            <legend>Parámetros de generación</legend>
+                            <div class="params-grid">
+                                <label>Desde pasillo:</label>
+                                <input type="text" class="input-param">
+                                <label>Desde lateral:</label>
+                                <input type="text" class="input-param" value="11">
+                                <label>Desde X:</label>
+                                <input type="text" class="input-param">
+                                <label>Desde Y:</label>
+                                <input type="text" class="input-param">
 
-                    <div class="ok-row">
-                        <button class="btn-ok" type="button">OK</button>
-                    </div>
-                </fieldset>
+                                <label>Hasta pasillo:</label>
+                                <input type="text" class="input-param">
+                                <label>Hasta lateral:</label>
+                                <input type="text" class="input-param" value="21">
+                                <label>Hasta X:</label>
+                                <input type="text" class="input-param">
+                                <label>Hasta Y:</label>
+                                <input type="text" class="input-param">
 
-                <div class="action-buttons">
-                    <button class="btn-action danger">Eliminar ubicaciones y movimientos</button>
-                    <button class="btn-action">Asignar picking CLIN 1995</button>
+                                <label>Ancho:</label>
+                                <input type="number" class="input-param" value="0">
+                                <label>Alto:</label>
+                                <input type="number" class="input-param" value="0">
+                                <label>Palets:</label>
+                                <input type="number" class="input-param" value="0">
+                                <label></label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox"> Ubicación múltiple
+                                </label>
+                            </div>
+
+                            <div class="picking-row">
+                                <select class="select-picking">
+                                    <option>Picking</option>
+                                    <option>Reserva</option>
+                                    <option>Suelo</option>
+                                </select>
+                            </div>
+
+                            <div class="ok-row">
+                                <button class="btn-ok" type="button">OK</button>
+                            </div>
+                        </fieldset>
+
+                        <div class="action-buttons">
+                            <button class="btn-action danger">Eliminar ubicaciones y movimientos</button>
+                            <button class="btn-action">Asignar picking CLIN 1995</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </main>
 
-    <script src="../../../../js/navegacion.js"></script>
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/almacen-y-stock/generar-ubicaciones.js"></script>
 </body>
 
 </html>
-

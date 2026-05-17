@@ -809,12 +809,12 @@
         elList.innerHTML = '';
         if (on) {
             var ph = document.createElement('div');
-            ph.className = 'pk-placeholder';
-            var icon = document.createElement('span');
-            icon.className = 'pk-placeholder-icon';
-            icon.textContent = '📋';
-            ph.appendChild(icon);
-            ph.appendChild(document.createTextNode(' Cargando tareas de picking…'));
+            ph.className = 'pk-loading';
+            var sp = document.createElement('span');
+            sp.className = 'pk-spinner';
+            sp.setAttribute('aria-hidden', 'true');
+            ph.appendChild(sp);
+            ph.appendChild(document.createTextNode('Cargando tareas de picking…'));
             elList.appendChild(ph);
         }
     }

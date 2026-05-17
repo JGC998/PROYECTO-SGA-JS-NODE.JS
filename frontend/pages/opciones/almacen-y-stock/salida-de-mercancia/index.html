@@ -32,6 +32,8 @@
                     <span class="sga-breadcrumb-sep">›</span>
                     <a href="../../index.html">Opciones</a>
                     <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
                     <span class="sga-breadcrumb-current">Salida de Mercancía</span>
                 </nav>
             </div>
@@ -87,7 +89,7 @@
                                 <div class="sm-stock-empty" id="sm-stock-empty" hidden>
                                     Sin stock disponible para este artículo.
                                 </div>
-                                <div class="sm-stock-loading" id="sm-stock-loading" hidden>
+                                <div class="sm-stock-loading" id="sm-stock-loading" role="status" aria-live="polite" hidden>
                                     Consultando stock…
                                 </div>
                             </div>
@@ -109,7 +111,7 @@
                         </div>
 
                         <!-- ESTADO / NOTIFICACIÓN -->
-                        <div class="sm-form-status" id="sm-form-status" hidden></div>
+                        <div class="sm-form-status" id="sm-form-status" role="alert" aria-live="assertive" hidden></div>
 
                         <!-- BOTÓN AÑADIR -->
                         <div class="sm-form-actions">
@@ -123,7 +125,7 @@
                     <aside class="sm-carrito" id="sm-carrito">
                         <div class="sm-carrito-header">
                             <span class="sm-carrito-title">Carrito de salida</span>
-                            <span class="sm-carrito-badge" id="sm-carrito-count">0 líneas</span>
+                            <span class="sm-carrito-badge" id="sm-carrito-count" aria-live="polite">0 líneas</span>
                         </div>
                         <div class="sm-carrito-body" id="sm-carrito-body">
                             <div class="sm-carrito-empty" id="sm-carrito-empty">
