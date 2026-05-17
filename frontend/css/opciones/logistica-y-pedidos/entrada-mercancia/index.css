@@ -17,6 +17,8 @@
 }
 
 /* ── FORMULARIO ───────────────────────────────────────────────────────────── */
+.enm-form[hidden] { display: none !important; }
+
 .enm-form {
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
@@ -51,7 +53,6 @@
     color: var(--sga-text-muted);
     text-transform: uppercase;
     letter-spacing: .05em;
-    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -69,6 +70,7 @@
     text-transform: none;
     letter-spacing: 0;
     opacity: .8;
+    margin-left: auto;        /* empuja al extremo derecho del label */
 }
 
 /* ── INPUTS ───────────────────────────────────────────────────────────────── */
@@ -80,14 +82,16 @@
     font-size: .9rem;
     color: var(--sga-text);
     background: var(--sga-surface);
-    transition: border-color .12s, outline .12s, box-shadow .12s;
+    transition: border-color .15s, box-shadow .15s;
     font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .enm-input:focus {
-    outline: 2px solid var(--sga-accent);
-    outline-offset: 1px;
+    outline: none;
     border-color: var(--sga-accent);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
 }
 
 .enm-input--lg { width: 100%; }
@@ -100,11 +104,18 @@
     font-variant-numeric: tabular-nums;
 }
 
-/* Validation states */
-.enm-input--valid   { border-color: var(--sga-success) !important; }
-.enm-input--invalid { border-color: var(--sga-danger)  !important; box-shadow: 0 0 0 2px rgba(239,68,68,.12); }
+/* Estados de validación */
+.enm-input--valid {
+    border-color: var(--sga-success) !important;
+    background: #f0fdf4;
+}
+.enm-input--invalid {
+    border-color: var(--sga-danger) !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,.12);
+    background: #fff8f8;
+}
 .enm-input--warn    { border-color: var(--sga-warning) !important; }
-.enm-input--loading { color: var(--sga-text-muted); }
+.enm-input--loading { color: var(--sga-text-muted); font-style: italic; }
 
 /* ── FILAS DE CAMPO ───────────────────────────────────────────────────────── */
 .enm-input-row {
@@ -119,13 +130,26 @@
     align-items: center;
 }
 
-.enm-lote-row .enm-input { flex: 1; }
+.enm-lote-row .enm-input { flex: 1; width: auto; }
 
 .enm-cant-row {
     display: flex;
     gap: 8px;
     align-items: center;
 }
+
+/* ── CONTADOR DE CARACTERES (lote) ───────────────────────────────────────── */
+.enm-char-count {
+    font-size: .68rem;
+    font-weight: 600;
+    color: var(--sga-text-muted);
+    text-align: right;
+    letter-spacing: .02em;
+    transition: color .12s;
+}
+
+.enm-char-count--warn  { color: var(--sga-warning); }
+.enm-char-count--full  { color: var(--sga-danger);  font-weight: 800; }
 
 /* ── BOTONES PEQUEÑOS ─────────────────────────────────────────────────────── */
 .enm-btn-clear {
@@ -159,11 +183,12 @@
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
-    transition: border-color .12s, color .12s;
+    transition: border-color .12s, color .12s, background .12s;
     font-family: inherit;
 }
 
-.enm-btn-tag:hover { border-color: var(--sga-accent); color: var(--sga-primary); }
+.enm-btn-tag:hover         { border-color: var(--sga-accent); color: var(--sga-primary); }
+.enm-btn-tag--active       { border-color: var(--sga-success); color: var(--sga-success); background: #f0fdf4; }
 
 .enm-stepper {
     width: 42px;
@@ -182,21 +207,24 @@
     transition: background .12s, border-color .12s;
     font-family: inherit;
     line-height: 1;
+    user-select: none;
 }
 
 .enm-stepper:hover  { background: #eff6ff; border-color: var(--sga-accent); color: var(--sga-primary); }
-.enm-stepper:active { background: #dbeafe; }
+.enm-stepper:active { background: #dbeafe; transform: scale(.95); }
 
 /* ── PILLS ────────────────────────────────────────────────────────────────── */
 .enm-pill {
     display: inline-flex;
     align-items: center;
+    gap: 4px;
     font-size: .78rem;
     font-weight: 500;
     padding: 4px 10px;
     border-radius: var(--sga-radius-sm);
     border: 1px solid transparent;
     line-height: 1.4;
+    animation: enm-fadein .15s ease;
 }
 
 .enm-pill--ok      { background: #f0fdf4; color: var(--sga-success); border-color: #bbf7d0; }
@@ -208,11 +236,15 @@
 
 /* ── NOTIFICACIÓN INLINE ──────────────────────────────────────────────────── */
 .enm-form-status {
-    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
     border-radius: var(--sga-radius-sm);
     font-size: .84rem;
     font-weight: 600;
     margin-bottom: 4px;
+    animation: enm-fadein .15s ease;
 }
 
 .enm-form-status--error {
@@ -241,19 +273,42 @@
     font-weight: 700;
     cursor: pointer;
     letter-spacing: .02em;
-    transition: background .12s, transform .06s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .15s, transform .06s, box-shadow .15s;
     font-family: inherit;
+    position: relative;
+    overflow: hidden;
 }
 
-.enm-btn-registrar:hover    { background: var(--sga-primary-light); }
-.enm-btn-registrar:active   { transform: scale(.99); }
+.enm-btn-registrar:hover:not(:disabled) {
+    background: var(--sga-primary-light);
+    box-shadow: 0 4px 12px rgba(59,130,246,.25);
+}
+.enm-btn-registrar:active:not(:disabled) { transform: scale(.985); }
 .enm-btn-registrar:disabled {
     background: var(--sga-text-muted);
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
+}
+
+/* Spinner inline del botón */
+.enm-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: enm-spin .7s linear infinite;
+    flex-shrink: 0;
 }
 
 /* ── PANEL DE RESULTADO ───────────────────────────────────────────────────── */
+.enm-resultado[hidden] { display: none !important; }
+
 .enm-resultado {
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
@@ -262,6 +317,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    animation: enm-slidein .25s ease;
 }
 
 .enm-resultado-header { display: flex; flex-direction: column; gap: 10px; }
@@ -269,8 +325,11 @@
 .enm-resultado-summary {
     font-size: 1rem;
     font-weight: 700;
-    padding: 12px 18px;
+    padding: 13px 18px;
     border-radius: var(--sga-radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .enm-resultado-summary--ok {
@@ -285,15 +344,26 @@
     border: 1px solid #fecaca;
 }
 
-/* Ficha con datos: albarán, stock delta */
+/* Número de albarán destacado sobre el summary */
+.enm-albaran-badge {
+    margin-left: auto;
+    background: var(--sga-primary);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: .03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Ficha con datos */
 .enm-resultado-ficha {
     background: #fafbfc;
     border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius-sm);
-    padding: 14px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    overflow: hidden;
 }
 
 .enm-ficha-row {
@@ -302,32 +372,51 @@
     align-items: center;
     font-size: .85rem;
     gap: 10px;
-    flex-wrap: wrap;
+    padding: 9px 16px;
+    border-bottom: 1px solid #f0f2f4;
+}
+
+.enm-ficha-row:last-child { border-bottom: none; }
+
+/* Fila de stock — destacada */
+.enm-ficha-row--stock {
+    background: #f0fdf4;
+    border-bottom-color: #bbf7d0;
 }
 
 .enm-ficha-label {
     font-weight: 600;
     color: var(--sga-text-muted);
-    font-size: .75rem;
+    font-size: .73rem;
     text-transform: uppercase;
     letter-spacing: .04em;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .enm-ficha-value {
     font-weight: 700;
     color: var(--sga-text);
     font-variant-numeric: tabular-nums;
+    text-align: right;
+    word-break: break-word;
 }
 
-.enm-ficha-value--alb {
-    color: var(--sga-primary);
-    font-size: 1.05rem;
-}
+.enm-ficha-value--alb   { color: var(--sga-primary); font-size: 1.05rem; }
+.enm-ficha-value--delta { color: var(--sga-success); font-size: .92rem; }
 
-.enm-ficha-value--delta {
-    color: var(--sga-success);
-    font-size: .95rem;
+/* Badge delta (+N) */
+.enm-delta-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: .72rem;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    letter-spacing: .02em;
 }
 
 .enm-resultado-footer {
@@ -337,17 +426,58 @@
     margin-top: 4px;
 }
 
-/* ── RESPONSIVE ───────────────────────────────────────────────────────────── */
+/* ── ANIMACIONES ──────────────────────────────────────────────────────────── */
+@keyframes enm-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes enm-fadein {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes enm-slidein {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE — TABLET 768px ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .enm-inner { max-width: 100%; padding: 20px 20px 36px; }
+}
+
+@media (max-width: 768px) {
+    .enm-inner  { padding: 16px 16px 32px; gap: 14px; }
+    .enm-form   { padding: 18px 20px 22px; }
+
+    .enm-cant-row { justify-content: flex-start; }
+    .enm-stepper  { width: 46px; height: 46px; }
+
+    .enm-resultado { padding: 18px 20px 22px; }
+    .enm-ficha-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .enm-ficha-value { text-align: left; }
+}
+
+/* ── RESPONSIVE — MÓVIL 640px ─────────────────────────────────────────────── */
 @media (max-width: 640px) {
     .enm-inner  { padding: 12px 12px 32px; gap: 12px; }
     .enm-form   { padding: 16px; }
 
     .enm-cant-row { justify-content: center; }
-    .enm-stepper  { width: 48px; height: 48px; }
-    .enm-input--cant { width: 120px; font-size: 1.3rem; }
+    .enm-stepper  { width: 52px; height: 52px; font-size: 1.6rem; }
+    .enm-input--cant { width: 120px; font-size: 1.3rem; height: 52px; }
 
     .enm-btn-registrar { height: 56px; font-size: 1.05rem; }
+    .enm-btn-tag       { height: 46px; }
 
     .enm-resultado-footer { flex-direction: column; }
     .enm-resultado-footer .sga-btn { width: 100%; justify-content: center; }
+
+    .enm-albaran-badge { font-size: .75rem; padding: 2px 9px; }
+}
+
+/* ── MÓVIL MUY PEQUEÑO 390px ─────────────────────────────────────────────── */
+@media (max-width: 420px) {
+    .enm-resultado-summary { flex-wrap: wrap; }
+    .enm-albaran-badge     { margin-left: 0; margin-top: 4px; }
 }

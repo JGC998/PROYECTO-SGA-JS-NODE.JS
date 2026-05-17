@@ -87,13 +87,14 @@
                     <div class="enm-field-group" id="fg-lote">
                         <label for="enm-lot" class="enm-label">
                             Lote <span class="enm-required">*</span>
-                            <span class="enm-hint">(máx 10 caracteres)</span>
+                            <span class="enm-char-count" id="enm-lot-count" aria-live="polite">0 / 10</span>
                         </label>
                         <div class="enm-lote-row">
                             <input type="text" id="enm-lot" class="enm-input"
                                    placeholder="Código de lote..." autocomplete="off"
                                    maxlength="10">
-                            <button class="enm-btn-tag" id="btn-sin-lote" type="button">SIN LOTE</button>
+                            <button class="enm-btn-tag" id="btn-sin-lote" type="button"
+                                    title="Rellenar con valor SIN LOTE (SL)">SIN LOTE</button>
                         </div>
                         <div class="enm-pill" id="enm-lot-pill" hidden></div>
                     </div>
@@ -112,7 +113,8 @@
                     </div>
 
                     <!-- ESTADO / NOTIFICACIÓN -->
-                    <div class="enm-form-status" id="enm-form-status" hidden></div>
+                    <div class="enm-form-status" id="enm-form-status"
+                         role="alert" aria-live="assertive" hidden></div>
 
                     <!-- BOTÓN REGISTRAR -->
                     <div class="enm-form-actions">

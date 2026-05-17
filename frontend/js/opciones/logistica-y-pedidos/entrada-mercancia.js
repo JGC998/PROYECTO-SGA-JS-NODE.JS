@@ -3,10 +3,10 @@
 (function () {
 
     /* ── ESTADO ────────────────────────────────────────────────────────────── */
-    var _artState = null;   // null | 'loading' | 'found' | 'notfound'
-    var _ubiState = null;
+    var _artState  = null;   // null | 'loading' | 'found' | 'notfound'
+    var _ubiState  = null;
     var _artNombre = '';
-    var _sending  = false;
+    var _sending   = false;
 
     /* ── HELPERS ────────────────────────────────────────────────────────────── */
     function $(id)      { return document.getElementById(id); }
@@ -25,6 +25,7 @@
                 _artNombre = a.nombre || cod;
                 setArtState('found');
                 showPill('enm-art-pill', 'ok', '✓ ' + _artNombre);
+                $('enm-ubi').focus();
             })
             .catch(function () {
                 _artNombre = '';
@@ -38,7 +39,7 @@
         removeInputStates('enm-art');
         if (state === 'loading') {
             $('enm-art').classList.add('enm-input--loading');
-            showPill('enm-art-pill', 'loading', 'Buscando…');
+            showPill('enm-art-pill', 'loading', 'Buscando artículo…');
         } else if (state === 'found') {
             $('enm-art').classList.add('enm-input--valid');
             $('btn-art-clear').hidden = false;
@@ -73,18 +74,18 @@
                 var arr   = Array.isArray(data) ? data : [];
                 var codUp = cod.toUpperCase();
                 var found = arr.find(function (u) {
-                    return (u.ubicacion || '').toUpperCase() === codUp;
+                    return (u.ubicacion || '').trim().toUpperCase() === codUp;
                 });
                 if (found) {
                     setUbiState('found');
-                    var label = '📍 ' + (found.ubicacion || cod);
-                    if (found.nombre || found.nom_ubicacion)
-                        label += ' · ' + (found.nombre || found.nom_ubicacion);
-                    if (found.almacen) label += ' · ' + found.almacen;
+                    var etiqueta = (found.etiqueta || '').trim();
+                    var label = '📍 ' + cod.toUpperCase();
+                    if (etiqueta) label += '  ·  ' + etiqueta;
                     showPill('enm-ubi-pill', 'ubi-ok', label);
+                    $('enm-lot').focus();
                 } else {
                     setUbiState('notfound');
-                    showPill('enm-ubi-pill', 'ubi-err', '✗ Ubicación no encontrada');
+                    showPill('enm-ubi-pill', 'ubi-err', '✗ Ubicación no encontrada en LIN');
                 }
             })
             .catch(function () {
@@ -98,7 +99,7 @@
         removeInputStates('enm-ubi');
         if (state === 'loading') {
             $('enm-ubi').classList.add('enm-input--loading');
-            showPill('enm-ubi-pill', 'loading', 'Buscando…');
+            showPill('enm-ubi-pill', 'loading', 'Buscando ubicación…');
         } else if (state === 'found') {
             $('enm-ubi').classList.add('enm-input--valid');
         } else if (state === 'notfound') {
@@ -143,10 +144,29 @@
 
     /* ── LOTE ───────────────────────────────────────────────────────────────── */
 
+    var _sinLoteActivo = false;
+
     function setSinLote() {
+        _sinLoteActivo = true;
         $('enm-lot').value = 'SL';
         clearPill('enm-lot-pill');
         removeInputStates('enm-lot');
+        $('enm-lot').classList.add('enm-input--valid');
+        showPill('enm-lot-pill', 'ok', '✓ Sin lote (SL)');
+        $('btn-sin-lote').classList.add('enm-btn-tag--active');
+        actualizarContadorLote();
+        $('enm-cant').focus();
+    }
+
+    function actualizarContadorLote() {
+        var inp  = $('enm-lot');
+        var cnt  = $('enm-lot-count');
+        if (!cnt || !inp) return;
+        var len  = inp.value.length;
+        cnt.textContent = len + ' / 10';
+        cnt.className   = 'enm-char-count';
+        if (len >= 10)     cnt.classList.add('enm-char-count--full');
+        else if (len >= 7) cnt.classList.add('enm-char-count--warn');
     }
 
     /* ── STEPPER ────────────────────────────────────────────────────────────── */
@@ -154,9 +174,9 @@
     function stepCant(delta) {
         var inp  = $('enm-cant');
         var curr = parseInt(inp.value, 10) || 0;
-        var next = Math.max(1, curr + delta);
-        inp.value = String(next);
+        inp.value = String(Math.max(1, curr + delta));
         removeInputStates('enm-cant');
+        inp.focus();
     }
 
     /* ── VALIDACIÓN ─────────────────────────────────────────────────────────── */
@@ -169,6 +189,7 @@
 
         if (!art) {
             $('enm-art').classList.add('enm-input--invalid');
+            $('enm-art').focus();
             return 'Artículo obligatorio';
         }
         if (art.length > 50) {
@@ -176,11 +197,13 @@
             return 'Artículo demasiado largo (máx 50 caracteres)';
         }
         if (_artState === 'notfound') {
-            return 'El artículo no existe en LIN';
+            $('enm-art').focus();
+            return 'El artículo no existe en LIN — verifique el código';
         }
 
         if (!ubi) {
             $('enm-ubi').classList.add('enm-input--invalid');
+            $('enm-ubi').focus();
             return 'Ubicación obligatoria';
         }
         if (ubi.length > 20) {
@@ -188,27 +211,48 @@
             return 'Ubicación demasiado larga (máx 20 caracteres)';
         }
         if (_ubiState === 'notfound') {
+            $('enm-ubi').focus();
             return 'La ubicación no existe en LIN';
         }
         if (_ubiState === null) {
+            $('enm-ubi').focus();
             return 'Verifique la ubicación (pulse Enter o Tab en el campo)';
         }
 
         if (!lot) {
             $('enm-lot').classList.add('enm-input--invalid');
+            $('enm-lot').focus();
             return 'Lote obligatorio — use "SIN LOTE" si no aplica';
         }
         if (lot.length > 10) {
             $('enm-lot').classList.add('enm-input--invalid');
+            $('enm-lot').focus();
             return 'Lote demasiado largo (máx 10 caracteres en LIN)';
         }
 
         if (!Number.isFinite(cant) || cant < 1) {
             $('enm-cant').classList.add('enm-input--invalid');
+            $('enm-cant').focus();
             return 'La cantidad debe ser un número entero mayor que 0';
         }
 
         return null;
+    }
+
+    /* ── BOTÓN: estado enviando ──────────────────────────────────────────────── */
+
+    function setBtnEnviando(enviando) {
+        var btn = $('btn-registrar');
+        btn.disabled = enviando;
+        btn.textContent = '';
+
+        if (enviando) {
+            var sp = el('span', 'enm-spinner');
+            btn.appendChild(sp);
+            btn.appendChild(txt(' Registrando…'));
+        } else {
+            btn.appendChild(txt('Registrar entrada ▶'));
+        }
     }
 
     /* ── REGISTRAR ──────────────────────────────────────────────────────────── */
@@ -223,14 +267,14 @@
 
         var error = validar();
         if (error) {
-            mostrarStatus(error, 'error');
+            mostrarStatus('⚠ ' + error, 'error');
             return;
         }
 
         _sending = true;
-        var btn  = $('btn-registrar');
-        btn.disabled    = true;
-        btn.textContent = 'Registrando…';
+        setBtnEnviando(true);
+        $('btn-menos').disabled = true;
+        $('btn-mas').disabled   = true;
 
         var payload = {
             articulo:  $('enm-art').value.trim(),
@@ -242,61 +286,67 @@
 
         SGA.entradaMercancia.save(payload)
             .then(function (data) {
-                _sending        = false;
-                btn.disabled    = false;
-                btn.textContent = 'Registrar entrada ▶';
-                renderResultadoOk(data, payload);
+                _sending = false;
+                setBtnEnviando(false);
+                $('btn-menos').disabled = false;
+                $('btn-mas').disabled   = false;
+                renderResultadoOk(data);
             })
             .catch(function (err) {
-                _sending        = false;
-                btn.disabled    = false;
-                btn.textContent = 'Registrar entrada ▶';
+                _sending = false;
+                setBtnEnviando(false);
+                $('btn-menos').disabled = false;
+                $('btn-mas').disabled   = false;
                 var msg = err.message || 'Error desconocido';
-                /* Humanizar mensaje según status */
-                if (/→ 400/.test(msg)) msg = 'Datos inválidos (artículo, ubicación, lote o cantidad)';
+                if (/→ 400/.test(msg)) msg = 'Datos inválidos — artículo, ubicación, lote o cantidad incorrectos';
                 if (/→ 404/.test(msg)) msg = 'Artículo o ubicación no encontrados en LIN';
                 if (/→ 500/.test(msg)) msg = 'Error del servidor ERP — compruebe los datos e inténtelo de nuevo';
-                renderResultadoError(msg, payload);
+                renderResultadoError(msg);
             });
     }
 
     /* ── RENDER RESULTADO OK ────────────────────────────────────────────────── */
 
-    function renderResultadoOk(data, payload) {
+    function renderResultadoOk(data) {
         var header = $('enm-resultado-header');
         header.textContent = '';
 
-        /* Línea de éxito */
+        /* Banner de éxito con albarán badge */
         var sumDiv = el('div', 'enm-resultado-summary enm-resultado-summary--ok');
         sumDiv.appendChild(txt('✓ Entrada registrada correctamente'));
+        var albBadge = el('span', 'enm-albaran-badge');
+        albBadge.appendChild(txt(data.serie + ' / ' + data.albaran));
+        sumDiv.appendChild(albBadge);
         header.appendChild(sumDiv);
 
         /* Ficha de datos */
         var ficha = el('div', 'enm-resultado-ficha');
 
-        function addFichaRow(label, value, valueClass) {
-            var row    = el('div', 'enm-ficha-row');
-            var lEl    = el('span', 'enm-ficha-label');
-            var vEl    = el('span', 'enm-ficha-value' + (valueClass ? ' ' + valueClass : ''));
+        function fRow(label, value, cls, isStock) {
+            var row = el('div', 'enm-ficha-row' + (isStock ? ' enm-ficha-row--stock' : ''));
+            var lEl = el('span', 'enm-ficha-label');
+            var vEl = el('span', 'enm-ficha-value' + (cls ? ' ' + cls : ''));
             lEl.appendChild(txt(label));
             vEl.appendChild(txt(value));
+            if (isStock) {
+                /* badge de delta */
+                var delta = data.stocklote_nuevo - data.stocklote_antes;
+                var badge = el('span', 'enm-delta-badge');
+                badge.appendChild(txt('+' + fmt(delta)));
+                vEl.appendChild(badge);
+            }
             row.appendChild(lEl);
             row.appendChild(vEl);
             ficha.appendChild(row);
         }
 
-        addFichaRow('Albarán',  data.serie + ' / ' + data.albaran, 'enm-ficha-value--alb');
-        addFichaRow('Artículo', data.articulo  + (_artNombre ? '  ·  ' + _artNombre : ''));
-        addFichaRow('Ubicación', data.ubicacion);
-        addFichaRow('Lote',     data.lote);
-        addFichaRow('Cantidad', fmt(data.cantidad) + ' uds.');
-        addFichaRow('Stock anterior', fmt(data.stocklote_antes) + ' uds.');
-        addFichaRow(
-            'Stock nuevo',
-            fmt(data.stocklote_nuevo) + ' uds. (+' + fmt(data.stocklote_nuevo - data.stocklote_antes) + ')',
-            'enm-ficha-value--delta'
-        );
-        addFichaRow('Fecha', new Date().toLocaleString('es-ES'));
+        fRow('Artículo',       data.articulo + (_artNombre ? '  ·  ' + _artNombre : ''));
+        fRow('Ubicación',      data.ubicacion);
+        fRow('Lote',           data.lote);
+        fRow('Cantidad',       fmt(data.cantidad) + ' uds.');
+        fRow('Stock anterior', fmt(data.stocklote_antes) + ' uds.');
+        fRow('Stock nuevo',    fmt(data.stocklote_nuevo) + ' uds.', 'enm-ficha-value--delta', true);
+        fRow('Fecha',          new Date().toLocaleString('es-ES'));
 
         header.appendChild(ficha);
 
@@ -305,14 +355,16 @@
             '../../almacen-y-stock/consulta-de-stock/index.html?articulo=' +
             encodeURIComponent(data.articulo);
 
-        $('enm-resultado').hidden = false;
+        $('enm-resultado').hidden    = false;
         $('enm-form-section').hidden = true;
-        $('enm-resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        $('enm-resultado').setAttribute('role', 'status');
+        $('enm-resultado').setAttribute('aria-live', 'polite');
+        $('btn-nueva-entrada').focus();
     }
 
     /* ── RENDER RESULTADO ERROR ─────────────────────────────────────────────── */
 
-    function renderResultadoError(msg, payload) {
+    function renderResultadoError(msg) {
         var header = $('enm-resultado-header');
         header.textContent = '';
 
@@ -322,14 +374,13 @@
 
         var detalle = $('enm-resultado-detalle');
         detalle.textContent = '';
-        var errDiv = el('div', 'enm-pill enm-pill--err');
-        errDiv.style.marginTop = '8px';
+        var errDiv = el('div', 'enm-form-status enm-form-status--error');
         errDiv.appendChild(txt(msg));
         detalle.appendChild(errDiv);
 
-        $('enm-resultado').hidden = false;
+        $('enm-resultado').hidden    = false;
         $('enm-form-section').hidden = true;
-        $('enm-resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        $('btn-nueva-entrada').focus();
     }
 
     /* ── LIMPIAR ────────────────────────────────────────────────────────────── */
@@ -340,31 +391,34 @@
         $('enm-lot').value  = '';
         $('enm-cant').value = '1';
 
-        _artState  = null;
-        _artNombre = '';
-        _ubiState  = null;
+        _artState      = null;
+        _artNombre     = '';
+        _ubiState      = null;
+        _sinLoteActivo = false;
 
         clearPill('enm-art-pill');
         clearPill('enm-ubi-pill');
         clearPill('enm-lot-pill');
         $('btn-art-clear').hidden = true;
+        $('btn-sin-lote').classList.remove('enm-btn-tag--active');
 
         ['enm-art', 'enm-ubi', 'enm-lot', 'enm-cant'].forEach(function (id) {
             removeInputStates(id);
         });
 
+        actualizarContadorLote();
         ocultarStatus();
-        $('enm-resultado').hidden     = true;
-        $('enm-form-section').hidden  = false;
 
-        /* Limpiar contenido resultado */
+        $('enm-resultado').hidden    = false;  /* quitar hidden antes de ocultar */
+        $('enm-resultado').hidden    = true;
+        $('enm-form-section').hidden = false;
+
         $('enm-resultado-header').textContent  = '';
         $('enm-resultado-detalle').textContent = '';
 
-        /* Reset botón registrar */
-        var btn = $('btn-registrar');
-        btn.disabled    = false;
-        btn.textContent = 'Registrar entrada ▶';
+        setBtnEnviando(false);
+        $('btn-menos').disabled = false;
+        $('btn-mas').disabled   = false;
 
         $('enm-art').focus();
     }
@@ -388,36 +442,37 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-        /* Artículo */
+        /* Artículo: blur y Enter disparan búsqueda */
         $('enm-art').addEventListener('blur', buscarArticulo);
         $('enm-art').addEventListener('keydown', function (e) {
             if (e.key === 'Enter') { e.preventDefault(); buscarArticulo(); }
         });
         $('enm-art').addEventListener('input', function () {
             if (!this.value.trim()) clearArticulo();
+            else ocultarStatus();
         });
         $('btn-art-clear').addEventListener('click', clearArticulo);
 
         /* Ubicación */
         $('enm-ubi').addEventListener('blur', buscarUbicacion);
         $('enm-ubi').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                buscarUbicacion();
-                setTimeout(function () { $('enm-lot').focus(); }, 80);
-            }
+            if (e.key === 'Enter') { e.preventDefault(); buscarUbicacion(); }
         });
         $('enm-ubi').addEventListener('input', function () {
             if (!this.value.trim()) clearUbicacionState();
+            else ocultarStatus();
         });
 
-        /* Lote — Enter salta a cantidad */
+        /* Lote */
         $('enm-lot').addEventListener('keydown', function (e) {
             if (e.key === 'Enter') { e.preventDefault(); $('enm-cant').focus(); }
         });
         $('enm-lot').addEventListener('input', function () {
+            _sinLoteActivo = false;
+            $('btn-sin-lote').classList.remove('enm-btn-tag--active');
             clearPill('enm-lot-pill');
             removeInputStates('enm-lot');
+            actualizarContadorLote();
             if (this.value.trim().length > 10) {
                 this.classList.add('enm-input--invalid');
                 showPill('enm-lot-pill', 'err', '✗ Máximo 10 caracteres');
@@ -431,9 +486,13 @@
         $('btn-menos').addEventListener('click', function () { stepCant(-1); });
         $('btn-mas').addEventListener('click',   function () { stepCant(1);  });
 
-        /* Cantidad — Enter = Registrar */
+        /* Cantidad Enter = registrar */
         $('enm-cant').addEventListener('keydown', function (e) {
             if (e.key === 'Enter') { e.preventDefault(); registrar(); }
+        });
+        $('enm-cant').addEventListener('input', function () {
+            removeInputStates('enm-cant');
+            ocultarStatus();
         });
 
         /* Botón registrar */
@@ -450,7 +509,8 @@
             if (e.key === 'F5') { e.preventDefault(); limpiarTodo(); }
         });
 
-        /* Foco inicial */
+        /* Init contador lote y foco */
+        actualizarContadorLote();
         $('enm-art').focus();
     });
 
