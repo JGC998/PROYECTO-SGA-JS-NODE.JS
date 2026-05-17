@@ -1,0 +1,72 @@
+/* ── KEYFRAMES GLOBALES ───────────────────────────────────────────────────── */
+@keyframes sga-spin    { to { transform: rotate(360deg); } }
+@keyframes sga-fadein  { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sga-fadein-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sga-slidein { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes sga-pulse   { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+/* ── SPINNER GLOBAL ───────────────────────────────────────────────────────── */
+.sga-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--sga-border);
+    border-top-color: var(--sga-accent);
+    border-radius: 50%;
+    animation: sga-spin .7s linear infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.sga-spinner--sm {
+    width: 13px;
+    height: 13px;
+}
+
+.sga-spinner--lg {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+}
+
+/* Spinner dentro de botón (fondo claro) */
+.sga-btn .sga-spinner {
+    border-color: rgba(255,255,255,.35);
+    border-top-color: #fff;
+    width: 13px;
+    height: 13px;
+}
+
+/* ── ESTADO DE CARGA CENTRADO ─────────────────────────────────────────────── */
+.sga-loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px 24px;
+    color: var(--sga-text-muted);
+    font-size: var(--sga-text-base);
+}
+
+/* ── ANIMACIONES DE ENTRADA ───────────────────────────────────────────────── */
+.sga-anim-fadein  { animation: sga-fadein    .2s ease both; }
+.sga-anim-fadein-up { animation: sga-fadein-up .2s ease both; }
+.sga-anim-slidein { animation: sga-slidein   .2s ease both; }
+
+/* ── MENSAJE DE FEEDBACK / STATUS ─────────────────────────────────────────── */
+.sga-status-msg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--sga-text-sm);
+    padding: 6px 12px;
+    border-radius: var(--sga-radius-sm);
+    font-weight: 500;
+    margin-top: 8px;
+    animation: sga-fadein .18s ease both;
+}
+
+.sga-status-msg--ok      { background: var(--sga-success-bg); color: #15803d; }
+.sga-status-msg--error   { background: var(--sga-danger-bg);  color: #b91c1c; }
+.sga-status-msg--warning { background: var(--sga-warning-bg); color: #92400e; }
+.sga-status-msg--info    { background: var(--sga-info-bg);    color: #1d4ed8; }

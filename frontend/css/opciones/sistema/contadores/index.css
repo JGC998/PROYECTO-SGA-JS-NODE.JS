@@ -1,59 +1,30 @@
-.page-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--sga-border, #ddd);
-    margin-bottom: 24px;
-}
+/* Módulo: Contadores — estilos específicos (globales en components.css) */
 
-.toolbar-left h1 {
-    font-size: 1.2rem;
-    margin: 0;
-    color: var(--sga-text, #1e293b);
-}
-
-.toolbar-actions { display: flex; gap: 8px; }
-
-.btn-tool {
-    padding: 5px 14px;
-    background: var(--sga-accent, #0057b7);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.15s;
-}
-
-.btn-tool:hover { background: var(--sga-accent-hover, #004499); }
-
-#grid-contadores {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
-}
+/* #grid-contadores definido globalmente en components.css */
 
 .contador-card {
-    background: var(--sga-surface, #fff);
-    border: 1px solid var(--sga-border, #ddd);
-    border-radius: 8px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
     padding: 20px 16px;
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--sga-shadow);
+    transition: box-shadow var(--sga-transition);
 }
+.contador-card:hover { box-shadow: var(--sga-shadow-md); }
 
 .contador-valor {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--sga-accent, #0057b7);
+    color: var(--sga-primary-light);
     line-height: 1.1;
+    font-variant-numeric: tabular-nums;
 }
 
 .contador-label {
-    font-size: 0.8rem;
-    color: var(--sga-text-muted, #666);
+    font-size: var(--sga-text-xs);
+    color: var(--sga-text-muted);
     margin-top: 6px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: .05em;
 }
