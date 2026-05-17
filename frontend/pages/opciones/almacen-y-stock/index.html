@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Almacén y Stock</title>
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/layout.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/cards.css">
+    <link rel="stylesheet" href="../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../css/opciones/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Almacén y Stock</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="container">
+
+                <header class="section-header">
+                    <h1>Almacén y Stock</h1>
+                    <p>Consulta, control y gestión de stock, ubicaciones y regularizaciones</p>
+                </header>
+
+                <div class="options-grid">
+                    <section class="option-group">
+                        <h2><span class="icon">📦</span> Consulta</h2>
+                        <ul>
+                            <li><a href="consulta-de-stock/index.html">Consulta de Stock</a></li>
+                            <li><a href="movimientos-por-articulo/index.html">Movimientos por Artículo</a></li>
+                            <li><a href="articulos-por-ubicacion/index.html">Artículos por Ubicación</a></li>
+                            <li><a href="articulos-sin-reposicion/index.html">Artículos sin Reposición Automática</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="option-group">
+                        <h2><span class="icon">⬆️⬇️</span> Operaciones</h2>
+                        <ul>
+                            <li><a href="entrada-de-mercancia/index.html">Entrada de Mercancía</a></li>
+                            <li><a href="salida-de-mercancia/index.html">Salida de Mercancía</a></li>
+                            <li><a href="traspasos/index.html">Traspasos entre Ubicaciones</a></li>
+                            <li><a href="regularizaciones/index.html">Regularizaciones</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="option-group">
+                        <h2><span class="icon">🏗️</span> Configuración</h2>
+                        <ul>
+                            <li><a href="almacenes/index.html">Almacenes</a></li>
+                            <li><a href="ubicaciones/index.html">Ubicaciones</a></li>
+                            <li><a href="generar-ubicaciones/index.html">Generar Ubicaciones</a></li>
+                            <li><a href="traspaso-inventario-regularizacion/index.html">Traspaso de Inventario / Regularización</a></li>
+                        </ul>
+                    </section>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../js/ui/sidebar.js"></script>
+    <script src="../../../js/ui/layout.js"></script>
+</body>
+
+</html>
