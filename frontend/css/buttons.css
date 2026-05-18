@@ -45,3 +45,6 @@
 /* ── TAMAÑOS ─────────────────────────────────────────────────────────────── */
 .sga-btn-sm { padding: 5px 10px; font-size: .8rem; }
 .sga-btn-lg { padding: 11px 22px; font-size: 1rem; }
+
+/* ── ICONO DENTRO DE BOTÓN ───────────────────────────────────────────────── */
+.sga-btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; }

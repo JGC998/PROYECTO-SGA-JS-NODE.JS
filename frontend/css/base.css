@@ -49,6 +49,10 @@
     --sga-sp-lg:          24px;
     --sga-sp-xl:          32px;
 
+    /* Color secundario (gris neutro para acciones secundarias) */
+    --sga-secondary:      #64748b;
+    --sga-secondary-bg:   #f1f5f9;
+
     /* Animaciones */
     --sga-transition:     .14s ease;
     --sga-transition-md:  .22s ease;
