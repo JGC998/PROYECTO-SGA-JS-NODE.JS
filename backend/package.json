@@ -4,7 +4,7 @@
     "test": "jest --runInBand --forceExit",
     "test:watch": "jest --watch",
     "lint": "eslint .",
-    "test:ci": "jest --runInBand --forceExit tests/dynamic-sql.test.js"
+    "test:ci": "jest --runInBand --forceExit tests/dynamic-sql.test.js tests/services.test.js tests/stubs.test.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
