@@ -66,29 +66,6 @@ router.post('/minimos-maximos', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
-// ─── MAESTRO ARTÍCULO ─────────────────────────────────────────────────────────
-
-router.post('/maestro-articulo', async (req, res) => {
-    try {
-        const { cod, nom } = req.body;
-        const pool = await getPool();
-        await q(pool).input('cod', cod).input('nom', nom)
-            .query('INSERT INTO ARTICULO (ARTCOD, ARTNOM) VALUES (@cod, @nom)');
-        res.json({ success: true, message: 'Artículo creado' });
-    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: "Error interno del servidor" }); }
-});
-
-// ─── MAESTRO UBICACIÓN ────────────────────────────────────────────────────────
-
-router.post('/maestro-ubicacion', async (req, res) => {
-    try {
-        const { ubi, alm } = req.body;
-        const pool = await getPool();
-        await q(pool).input('ubi', ubi).input('alm', alm)
-            .query('INSERT INTO UBICACION (UBICODUBI, UBIALMCOD) VALUES (@ubi, @alm)');
-        res.json({ success: true, message: 'Ubicación creada' });
-    } catch (err) { console.error("[ERROR]", err.message || err); res.status(500).json({ success: false, message: "Error interno del servidor" }); }
-});
 
 // ─── GENERAR UBICACIONES ──────────────────────────────────────────────────────
 
