@@ -60,4 +60,81 @@ router.get('/contadores', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
+// ─── ENDPOINTS GRANULARES PARA INFORMES ───────────────────────────────────────
+
+function parseDias(query) {
+    const d = parseInt(query.dias);
+    return (isNaN(d) || d <= 0) ? 365 : d;
+}
+
+router.get('/estadisticas/resumen', async (req, res) => {
+    try {
+        const data = await analyticsService.getResumen(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/movimientos-por-dia', async (req, res) => {
+    try {
+        const data = await analyticsService.getMovimientosPorDia(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/top-articulos', async (req, res) => {
+    try {
+        const data = await analyticsService.getTopArticulos(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/entradas-vs-salidas', async (req, res) => {
+    try {
+        const data = await analyticsService.getEntradasVsSalidas(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/alertas-stock', async (req, res) => {
+    try {
+        const data = await analyticsService.getAlertasStock();
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/trabajadores', async (req, res) => {
+    try {
+        const data = await analyticsService.getTrabajadores(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/almacen', async (req, res) => {
+    try {
+        const data = await analyticsService.getAlmacen(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/por-tipo', async (req, res) => {
+    try {
+        const data = await analyticsService.getPorTipo(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/proveedores-actividad', async (req, res) => {
+    try {
+        const data = await analyticsService.getProveedoresActividad(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.get('/estadisticas/articulos-analisis', async (req, res) => {
+    try {
+        const data = await analyticsService.getArticulosAnalisis(parseDias(req.query));
+        res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
 module.exports = router;

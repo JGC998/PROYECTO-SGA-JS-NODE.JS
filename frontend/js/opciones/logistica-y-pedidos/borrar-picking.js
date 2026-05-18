@@ -11,9 +11,11 @@ document.getElementById('btn-borrar').addEventListener('click', async () => {
         const res = await SGA.borrarPicking.borrar({ albaran });
         document.getElementById('resultado').textContent = res.message || 'Picking eliminado correctamente.';
         document.getElementById('resultado').className = 'resultado ok';
-    } catch {
-        document.getElementById('resultado').textContent = 'Error al borrar el picking.';
-        document.getElementById('resultado').className = 'resultado error';
+    } catch (err) {
+        const msg = err.pendiente ? err.message : 'Error al borrar el picking.';
+        const cls = err.pendiente ? 'resultado pendiente' : 'resultado error';
+        document.getElementById('resultado').textContent = msg;
+        document.getElementById('resultado').className = cls;
     } finally {
         btn.textContent = 'Borrar picking';
         btn.disabled = false;

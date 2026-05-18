@@ -10,8 +10,8 @@ document.getElementById('btn-traspasar').addEventListener('click', async () => {
             lote_000000: document.getElementById('f-lote-000000').checked
         });
         alert(res.message || 'Traspaso completado.');
-    } catch {
-        alert('Error al traspasar inventarios.');
+    } catch (err) {
+        alert(err.message || 'Error al traspasar inventarios.');
     } finally {
         btn.textContent = 'Traspasar inventarios';
         btn.disabled = false;
@@ -26,8 +26,8 @@ document.getElementById('btn-importar-regularizaciones').addEventListener('click
     try {
         const res = await SGA.traspasoInventario.importarRegularizaciones({ fecha });
         alert(res.message || 'Regularizaciones importadas.');
-    } catch {
-        alert('Error al importar regularizaciones.');
+    } catch (err) {
+        alert(err.message || 'Error al importar regularizaciones.');
     } finally {
         btn.disabled = false;
     }
@@ -40,8 +40,8 @@ document.getElementById('btn-asignar-fecha').addEventListener('click', async () 
     try {
         const res = await SGA.traspasoInventario.asignarFechaStock({ hora });
         alert(res.message || 'Fecha de stock inicial asignada.');
-    } catch {
-        alert('Error al asignar fecha de stock inicial.');
+    } catch (err) {
+        alert(err.message || 'Error al asignar fecha de stock inicial.');
     } finally {
         btn.disabled = false;
     }

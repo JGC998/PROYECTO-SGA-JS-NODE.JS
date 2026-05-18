@@ -90,9 +90,7 @@ router.get('/configuracion-empresa', async (req, res) => {
 });
 
 router.post('/configuracion-empresa', async (req, res) => {
-    try {
-        res.json({ ok: true });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 module.exports = router;

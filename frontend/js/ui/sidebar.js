@@ -33,7 +33,7 @@
                 { icon: '🚛', text: 'Expediciones desde pedido',    href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
                 { icon: '📋', text: 'Preparación / Picking',       href: 'pages/opciones/logistica-y-pedidos/picking/index.html' },
                 { icon: '📦', text: 'Situación pedidos de venta',  href: 'pages/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.html' },
-                { icon: '🗺️', text: 'Hojas de ruta',               href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' },
+                { icon: '🗺️', text: 'Albaranes de expedición',       href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' },
                 { icon: '🗑️', text: 'Borrar picking',             href: 'pages/opciones/logistica-y-pedidos/borrar-picking/index.html' },
                 { icon: '🔄', text: 'Poner a cero carrusel',      href: 'pages/opciones/logistica-y-pedidos/poner-cero-carrusel/index.html' }
             ]

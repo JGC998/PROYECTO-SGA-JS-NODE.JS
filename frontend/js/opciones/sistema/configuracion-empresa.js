@@ -23,9 +23,11 @@ document.getElementById('btn-guardar').addEventListener('click', async () => {
         await SGA.configuracionEmpresa.save(data);
         document.getElementById('msg-config').textContent = 'Configuración guardada correctamente.';
         document.getElementById('msg-config').className = 'msg ok';
-    } catch {
-        document.getElementById('msg-config').textContent = 'Error al guardar la configuración.';
-        document.getElementById('msg-config').className = 'msg error';
+    } catch (err) {
+        const msg = err.pendiente ? err.message : 'Error al guardar la configuración.';
+        const cls = err.pendiente ? 'msg pendiente' : 'msg error';
+        document.getElementById('msg-config').textContent = msg;
+        document.getElementById('msg-config').className = cls;
     } finally {
         btn.disabled = false;
     }

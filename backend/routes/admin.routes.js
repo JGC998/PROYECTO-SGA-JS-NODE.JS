@@ -12,42 +12,27 @@ function serverError(res, err) {
 // ─── TRASPASO INVENTARIO ───────────────────────────────────────────────────────
 
 router.post('/traspasar-inventarios', async (req, res) => {
-    try {
-        res.json({ ok: true, message: 'Traspaso de inventarios procesado correctamente.' });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 router.post('/importar-regularizaciones', async (req, res) => {
-    try {
-        const { fecha } = req.body;
-        if (!fecha) return res.status(400).json({ error: 'Fecha requerida' });
-        res.json({ ok: true, message: `Regularizaciones importadas para la fecha ${fecha}.` });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 router.post('/asignar-fecha-stock-inicial', async (req, res) => {
-    try {
-        const { hora = '00:00' } = req.body;
-        res.json({ ok: true, message: `Fecha de stock inicial asignada con hora ${hora}.` });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 // ─── BORRAR PICKING ────────────────────────────────────────────────────────────
 
 router.post('/borrar-picking', async (req, res) => {
-    try {
-        const { albaran } = req.body;
-        if (!albaran) return res.status(400).json({ error: 'Número de albarán requerido' });
-        res.json({ ok: true, message: `Picking del albarán ${albaran} eliminado correctamente.` });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 // ─── PONER A CERO CARRUSEL ─────────────────────────────────────────────────────
 
 router.post('/poner-cero-carrusel', async (req, res) => {
-    try {
-        res.json({ ok: true, message: 'Carrusel puesto a cero correctamente.' });
-    } catch (err) { serverError(res, err); }
+    res.status(501).json({ ok: false, pendiente: true, message: 'Funcionalidad pendiente de implementación.' });
 });
 
 // ─── COPIA DE SEGURIDAD ────────────────────────────────────────────────────────

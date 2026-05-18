@@ -12,7 +12,17 @@ async function _post(path, body) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
     });
-    if (!res.ok) throw new Error(`POST ${path} → ${res.status}`);
+    if (!res.ok) {
+        let msg = `POST ${path} → ${res.status}`;
+        try {
+            const data = await res.json();
+            if (data.message) msg = data.message;
+        } catch (_) { /* respuesta sin JSON */ }
+        const err = new Error(msg);
+        err.status = res.status;
+        err.pendiente = res.status === 501;
+        throw err;
+    }
     return res.json();
 }
 
