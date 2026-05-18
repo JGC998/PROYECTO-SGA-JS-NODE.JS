@@ -29,6 +29,9 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Audit de dependencias de producción
+        run: npm audit --omit=dev
+
       - name: Lint
         run: npm run lint
 
