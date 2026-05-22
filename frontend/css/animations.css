@@ -66,7 +66,7 @@
     animation: sga-fadein .18s ease both;
 }
 
-.sga-status-msg--ok      { background: var(--sga-success-bg); color: #15803d; }
-.sga-status-msg--error   { background: var(--sga-danger-bg);  color: #b91c1c; }
-.sga-status-msg--warning { background: var(--sga-warning-bg); color: #92400e; }
-.sga-status-msg--info    { background: var(--sga-info-bg);    color: #1d4ed8; }
+.sga-status-msg--ok      { background: var(--sga-success-bg); color: var(--sga-success); }
+.sga-status-msg--error   { background: var(--sga-danger-bg);  color: var(--sga-danger); }
+.sga-status-msg--warning { background: var(--sga-warning-bg); color: var(--sga-warning); }
+.sga-status-msg--info    { background: var(--sga-info-bg);    color: var(--sga-info); }

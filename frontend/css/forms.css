@@ -44,7 +44,7 @@
     box-shadow: 0 0 0 3px rgba(59,130,246,.15);
 }
 .sga-input[readonly] {
-    background: #f9fafb;
+    background: var(--sga-surface-alt);
     color: var(--sga-text-muted);
 }
 

@@ -9,53 +9,53 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
+    background: var(--sga-surface);
     padding: 15px 25px;
-    border-radius: 10px;
+    border-radius: var(--sga-radius);
     margin-bottom: 25px;
-    border-left: 5px solid #6366f1;
+    border-left: 5px solid var(--sga-info);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .toolbar h1 {
     margin: 0;
     font-size: 1.4rem;
-    color: #1e3a8a;
+    color: var(--sga-primary);
 }
 
 .btn-tool {
     padding: 10px 20px;
     margin-left: 10px;
     border: none;
-    border-radius: 5px;
-    background: #1e3a8a;
-    color: white;
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-primary);
+    color: var(--sga-surface);
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: background var(--sga-transition);
 }
 
 .btn-tool:hover {
-    background: #3b82f6;
+    background: var(--sga-primary-light);
 }
 
 .btn-danger {
-    background: #ef4444;
+    background: var(--sga-danger);
 }
 
 .btn-danger:hover {
-    background: #dc2626;
+    opacity: .88;
 }
 
 .btn-help {
-    background: #6b7280;
+    background: var(--sga-secondary);
 }
 
 /* Secciones del formulario */
 .form-section {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
     padding: 20px;
     margin-bottom: 25px;
 }
@@ -63,17 +63,17 @@
 .form-section legend {
     padding: 0 10px;
     font-weight: bold;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     font-size: 0.9rem;
     text-transform: uppercase;
 }
 
 .highlight-origin {
-    border-top: 4px solid #ef4444;
+    border-top: 4px solid var(--sga-danger);
 }
 
 .highlight-dest {
-    border-top: 4px solid #10b981;
+    border-top: 4px solid var(--sga-success);
 }
 
 /* Grid de cabecera */
@@ -99,21 +99,21 @@
 label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #4b5563;
+    color: var(--sga-text-muted);
     margin-bottom: 5px;
 }
 
 input {
     padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
     font-size: 0.95rem;
 }
 
 .readonly-input {
-    background-color: #f9fafb;
-    color: #6b7280;
-    border-color: #e5e7eb;
+    background-color: var(--sga-surface-alt);
+    color: var(--sga-text-muted);
+    border-color: var(--sga-border-light);
 }
 
 /* Layout de dos columnas origen → destino */
@@ -130,7 +130,7 @@ input {
     align-items: center;
     justify-content: center;
     font-size: 2.5rem;
-    color: #6366f1;
+    color: var(--sga-info);
     padding-top: 55px;
 }
 
@@ -148,51 +148,51 @@ input {
 
 .btn-add {
     padding: 10px 20px;
-    background: #10b981;
-    color: white;
+    background: var(--sga-success);
+    color: var(--sga-surface);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--sga-radius-sm);
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: background var(--sga-transition);
 }
 
 .btn-add:hover {
-    background: #059669;
+    opacity: .9;
 }
 
 /* Tabla de previsualización */
 .preview-table-wrapper h3 {
     font-size: 1rem;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     margin-bottom: 10px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
     overflow: hidden;
 }
 
 th {
-    background: #f3f4f6;
+    background: var(--sga-surface-alt);
     padding: 12px;
     font-size: 0.85rem;
     text-align: left;
-    border-bottom: 2px solid #e5e7eb;
-    color: #1e3a8a;
+    border-bottom: 2px solid var(--sga-border);
+    color: var(--sga-primary);
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--sga-border-light);
     font-size: 0.9rem;
 }
 
 .placeholder-row {
     text-align: center;
-    color: #9ca3af;
+    color: var(--sga-text-muted);
     font-style: italic;
 }

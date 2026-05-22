@@ -14,7 +14,7 @@
 }
 
 .sga-table thead th {
-    background: #f8fafc;
+    background: var(--sga-surface-alt);
     color: var(--sga-text-muted);
     font-weight: 600;
     font-size: .72rem;
@@ -27,23 +27,23 @@
 }
 
 .sga-table tbody tr {
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--sga-border-light);
     transition: background .1s;
 }
 .sga-table tbody tr:last-child { border-bottom: none; }
-.sga-table tbody tr:hover { background: #f8fafc; }
+.sga-table tbody tr:hover { background: var(--sga-surface-hover); }
 
 .sga-table tbody td {
     padding: 9px 12px;
     color: var(--sga-text);
 }
 
-.sga-table tbody tr:nth-child(even) { background: #fafbfc; }
-.sga-table tbody tr:nth-child(even):hover { background: #f3f4f6; }
+.sga-table tbody tr:nth-child(even) { background: var(--sga-surface-alt); }
+.sga-table tbody tr:nth-child(even):hover { background: var(--sga-surface-hover); }
 
 .sga-table tfoot td {
     padding: 10px 12px;
     font-weight: 600;
-    background: #f8fafc;
+    background: var(--sga-surface-alt);
     border-top: 2px solid var(--sga-border);
 }

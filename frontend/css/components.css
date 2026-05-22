@@ -261,7 +261,7 @@
 .main-layout tr:hover td { background: var(--sga-surface-hover); }
 
 .table-wrapper tr.selected td,
-.main-layout tr.selected td { background: #eff6ff; }
+.main-layout tr.selected td { background: var(--sga-info-bg); }
 
 .placeholder-row td {
     text-align: center;
