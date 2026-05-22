@@ -1,9 +1,19 @@
 /* ── MOVIMIENTOS POR ARTÍCULO — namespace mv- ─────────────────────────────
-   Depende del sistema visual FASE 1 (base.css, layout.css, buttons.css…)
-   Colores semánticos de tipo sin variable en el sistema:
-     Traspaso #2563eb  ·  Picking #7c3aed
-   Resto usa --sga-success / --sga-danger / --sga-warning
+   Depende del Design System base (base.css, layout.css, buttons.css, forms.css,
+   badges.css, cards.css). No duplica estilos ya definidos en el DS.
+   Colores semánticos de tipo:
+     PC (Picking)  →  var(--sga-primary-light) / #7c3aed (violeta, sin var DS)
+     RG (Regular.) →  var(--sga-warning)
+     PP (Prep.)    →  var(--sga-info)
    ────────────────────────────────────────────────────────────────────────── */
+
+/* ── VARIABLES LOCALES (colores sin equivalente en DS) ───────────────────── */
+:root {
+    --mv-color-pc:    #7c3aed;
+    --mv-color-pc-bg: #ede9fe;
+    --mv-color-pp:    var(--sga-info);
+    --mv-color-pp-bg: var(--sga-info-bg);
+}
 
 /* ── WRAPPER INTERIOR ─────────────────────────────────────────────────────── */
 .mv-inner {
@@ -58,11 +68,12 @@
 @keyframes mv-spin   { to { transform: rotate(360deg); } }
 @keyframes mv-fadein { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ── BARRA DE FILTROS ─────────────────────────────────────────────────────── */
+/* ── BARRA DE FILTROS — usa .sga-filter-panel del DS ─────────────────────── */
 .mv-filter-bar {
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
+    border: 1px solid var(--sga-border);
     padding: 14px 18px;
     display: flex;
     flex-direction: column;
@@ -81,16 +92,17 @@
     flex-wrap: wrap;
     align-items: flex-end;
     gap: 10px;
-    padding-top: 6px;
+    padding-top: 8px;
     border-top: 1px solid var(--sga-border);
 }
 
 .mv-filter-group {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
 }
 
+/* Label — alias semántico de .sga-label con tamaño reducido */
 .mv-filter-label {
     font-size: .68rem;
     font-weight: 600;
@@ -99,32 +111,20 @@
     letter-spacing: .05em;
 }
 
-.mv-filter-group input[type="text"],
-.mv-filter-group input[type="date"],
-.mv-filter-group select {
+/* Inputs y selects heredan estilos del DS (.sga-input / .sga-select) */
+.mv-filter-group .sga-input,
+.mv-filter-group .sga-select {
     height: 34px;
     padding: 0 10px;
-    border: 1px solid var(--sga-border);
-    border-radius: var(--sga-radius-sm);
     font-size: .82rem;
-    color: var(--sga-text);
-    background: var(--sga-surface);
 }
 
-.mv-filter-group input[type="text"]:focus,
-.mv-filter-group input[type="date"]:focus,
-.mv-filter-group select:focus {
-    outline: 2px solid var(--sga-accent);
-    outline-offset: 1px;
-    border-color: var(--sga-accent);
-}
-
-.mv-filter-group input.mv-f-art   { width: 120px; }
-.mv-filter-group input.mv-f-lote  { width: 100px; }
-.mv-filter-group input.mv-f-ubi   { width: 110px; }
-.mv-filter-group select.mv-f-tipo { width: 140px; }
-.mv-filter-group input.mv-f-date  { width: 130px; }
-.mv-filter-group input.mv-f-cli   { width: 110px; }
+.mv-filter-group .sga-input.mv-f-art   { width: 120px; }
+.mv-filter-group .sga-input.mv-f-lote  { width: 100px; }
+.mv-filter-group .sga-input.mv-f-ubi   { width: 110px; }
+.mv-filter-group .sga-select.mv-f-tipo { width: 160px; }
+.mv-filter-group .sga-input.mv-f-date  { width: 130px; }
+.mv-filter-group .sga-input.mv-f-cli   { width: 110px; }
 
 .mv-filter-actions {
     display: flex;
@@ -177,9 +177,9 @@
     font-size: .72rem;
     font-weight: 600;
     color: var(--sga-accent);
-    background: #eff6ff;
+    background: var(--sga-info-bg);
     padding: 1px 6px;
-    border-radius: 4px;
+    border-radius: var(--sga-radius-sm);
 }
 
 .mv-day-header-count {
@@ -210,23 +210,23 @@
     text-align: left;
     width: 100%;
     font-family: var(--sga-font);
-    transition: box-shadow .12s, border-left-color .12s, background .12s;
+    transition: box-shadow var(--sga-transition), border-left-color var(--sga-transition), background var(--sga-transition);
 }
 
 .mv-card:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,.1);
-    background: #f8fafc;
+    box-shadow: var(--sga-shadow-md);
+    background: var(--sga-surface-hover);
 }
 
 .mv-card--selected {
     border-left-color: var(--sga-accent) !important;
-    background: #eff6ff;
+    background: var(--sga-info-bg);
 }
 
-/* Colores por tipo (PC=Picking cliente, RG=Regularización, PP=Preparación interna) */
-.mv-card--pc { border-left-color: #7c3aed; }
+/* Colores por tipo */
+.mv-card--pc { border-left-color: var(--mv-color-pc); }
 .mv-card--rg { border-left-color: var(--sga-warning); }
-.mv-card--pp { border-left-color: #2563eb; }
+.mv-card--pp { border-left-color: var(--mv-color-pp); }
 
 /* ── BADGE DE TIPO ────────────────────────────────────────────────────────── */
 .mv-card-badge {
@@ -241,10 +241,10 @@
     flex-shrink: 0;
 }
 
-.mv-card-badge--pc { background: #ede9fe; color: #7c3aed; }
-.mv-card-badge--rg { background: #fef3c7; color: var(--sga-warning); }
-.mv-card-badge--pp { background: #dbeafe; color: #2563eb; }
-.mv-card-badge--x  { background: var(--sga-border); color: var(--sga-text-muted); }
+.mv-card-badge--pc { background: var(--mv-color-pc-bg); color: var(--mv-color-pc); }
+.mv-card-badge--rg { background: var(--sga-warning-bg); color: var(--sga-warning); }
+.mv-card-badge--pp { background: var(--mv-color-pp-bg); color: var(--mv-color-pp); }
+.mv-card-badge--x  { background: var(--sga-border);     color: var(--sga-text-muted); }
 
 /* ── HORA ────────────────────────────────────────────────────────────────── */
 .mv-card-time {
@@ -299,8 +299,8 @@
     min-width: 64px;
 }
 
-.mv-card-qty--pos { color: var(--sga-success); }
-.mv-card-qty--neg { color: var(--sga-danger); }
+.mv-card-qty--pos  { color: var(--sga-success); }
+.mv-card-qty--neg  { color: var(--sga-danger); }
 .mv-card-qty--zero { color: var(--sga-text-muted); }
 
 /* ── PANEL DE DETALLE ─────────────────────────────────────────────────────── */
@@ -330,6 +330,7 @@
     padding: 2px 6px;
     border-radius: var(--sga-radius-sm);
     display: none;
+    transition: background var(--sga-transition), color var(--sga-transition);
 }
 
 .mv-panel-close:hover { background: var(--sga-bg); color: var(--sga-text); }
@@ -360,6 +361,8 @@
     align-items: center;
     gap: 12px;
     border-bottom: 1px solid var(--sga-border);
+    background: var(--sga-surface-alt);
+    border-radius: var(--sga-radius) var(--sga-radius) 0 0;
 }
 
 .mv-panel-badge-lg {
@@ -418,8 +421,8 @@
     margin-bottom: 4px;
 }
 
-.mv-detail-qty--pos { color: var(--sga-success); }
-.mv-detail-qty--neg { color: var(--sga-danger); }
+.mv-detail-qty--pos  { color: var(--sga-success); }
+.mv-detail-qty--neg  { color: var(--sga-danger); }
 .mv-detail-qty--zero { color: var(--sga-text-muted); }
 
 /* Filas de detalle */
@@ -465,6 +468,7 @@
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
+    border: 1px solid var(--sga-border);
 }
 
 .mv-loading {
@@ -484,7 +488,7 @@
 
 .mv-error {
     color: var(--sga-danger);
-    background: #fef2f2;
+    background: var(--sga-danger-bg);
     border-left: 3px solid var(--sga-danger);
     padding: 14px 18px;
     text-align: left;
@@ -493,7 +497,7 @@
 
 .mv-limit-note {
     padding: 6px 12px;
-    background: #fffbeb;
+    background: var(--sga-warning-bg);
     border: 1px solid #fde68a;
     border-radius: var(--sga-radius-sm);
     font-size: .72rem;
@@ -511,6 +515,7 @@
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
+    border: 1px solid var(--sga-border);
     font-size: .8rem;
     color: var(--sga-text-muted);
     flex-wrap: wrap;
@@ -560,7 +565,7 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, .35);
+        background: rgba(0,0,0,.35);
         z-index: 299;
     }
 
@@ -587,8 +592,8 @@
         align-items: stretch;
     }
 
-    .mv-filter-group input,
-    .mv-filter-group select {
+    .mv-filter-group .sga-input,
+    .mv-filter-group .sga-select {
         width: 100% !important;
     }
 
