@@ -1,3 +1,15 @@
+/* ── ENTRADA DE MERCANCÍA — namespace em- ────────────────────────────────────
+   Depende del Design System base (base.css, layout.css, buttons.css, forms.css,
+   badges.css, cards.css). No duplica estilos ya definidos en el DS.
+   ────────────────────────────────────────────────────────────────────────────── */
+
+/* ── VARIABLES LOCALES ────────────────────────────────────────────────────── */
+:root {
+    --em-color-lote:    #7c3aed;
+    --em-color-lote-bg: #f5f3ff;
+    --em-color-lote-border: #ddd6fe;
+}
+
 /* ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────── */
 .em-inner {
     max-width: 1200px;
@@ -19,6 +31,7 @@
 /* ── CABECERA ALBARÁN (colapsable) ───────────────────────────────────────── */
 .em-cabecera {
     background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     overflow: hidden;
@@ -33,11 +46,11 @@
     font-size: .78rem;
     color: var(--sga-text-muted);
     cursor: pointer;
-    transition: color .12s, background .12s;
+    transition: color var(--sga-transition), background var(--sga-transition);
     font-family: inherit;
 }
 
-.em-cabecera-toggle:hover { color: var(--sga-primary); background: #f8fafc; }
+.em-cabecera-toggle:hover { color: var(--sga-primary); background: var(--sga-surface-alt); }
 .em-cabecera-toggle[aria-expanded="true"] { color: var(--sga-primary); font-weight: 600; }
 
 .em-cabecera-body {
@@ -71,7 +84,7 @@
     display: block;
 }
 
-/* ── INPUTS ──────────────────────────────────────────────────────────────── */
+/* ── INPUTS — usan .sga-input del DS; solo variantes semánticas aquí ────── */
 .em-input {
     height: 40px;
     padding: 0 12px;
@@ -80,8 +93,10 @@
     font-size: .88rem;
     color: var(--sga-text);
     background: var(--sga-surface);
-    transition: border-color .12s, outline .12s, box-shadow .12s;
+    transition: border-color var(--sga-transition), box-shadow var(--sga-transition);
     font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .em-input:focus {
@@ -90,9 +105,9 @@
     border-color: var(--sga-accent);
 }
 
-.em-input--lg  { width: 100%; }
+.em-input--lg { width: 100%; }
 .em-input--readonly {
-    background: #f8fafc;
+    background: var(--sga-surface-alt);
     color: var(--sga-text-muted);
     border-color: var(--sga-border);
 }
@@ -123,6 +138,7 @@
 /* ── FORMULARIO ENTRADA RÁPIDA ───────────────────────────────────────────── */
 .em-form {
     background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     padding: 20px 24px 24px;
@@ -136,7 +152,7 @@
     color: var(--sga-primary);
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #dbeafe;
+    border-bottom: 2px solid var(--sga-info-bg);
 }
 
 .em-field-group {
@@ -162,9 +178,7 @@
     align-items: center;
 }
 
-.em-lote-row .em-input {
-    flex: 1;
-}
+.em-lote-row .em-input { flex: 1; }
 
 /* Cantidad stepper row */
 .em-cant-row {
@@ -186,38 +200,38 @@
 }
 
 .em-pill--ok {
-    background: #f0fdf4;
+    background: var(--sga-success-bg);
     color: var(--sga-success);
     border-color: #bbf7d0;
 }
 
 .em-pill--warn {
-    background: #fffbeb;
+    background: var(--sga-warning-bg);
     color: var(--sga-warning);
     border-color: #fde68a;
 }
 
 .em-pill--err {
-    background: #fef2f2;
+    background: var(--sga-danger-bg);
     color: var(--sga-danger);
     border-color: #fecaca;
 }
 
 .em-pill--loading {
     color: var(--sga-text-muted);
-    background: #f8fafc;
+    background: var(--sga-surface-alt);
     border-color: var(--sga-border);
     font-style: italic;
 }
 
 .em-pill--ubi-ok {
-    background: #eff6ff;
+    background: var(--sga-info-bg);
     color: var(--sga-primary);
     border-color: #bfdbfe;
 }
 
 .em-pill--ubi-err {
-    background: #fef2f2;
+    background: var(--sga-danger-bg);
     color: var(--sga-danger);
     border-color: #fecaca;
 }
@@ -236,7 +250,7 @@
     font-size: .78rem;
     color: var(--sga-text-muted);
     flex-shrink: 0;
-    transition: color .12s, border-color .12s;
+    transition: color var(--sga-transition), border-color var(--sga-transition);
     font-family: inherit;
 }
 
@@ -254,7 +268,7 @@
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
-    transition: border-color .12s, color .12s;
+    transition: border-color var(--sga-transition), color var(--sga-transition);
     font-family: inherit;
 }
 
@@ -275,13 +289,13 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: background .12s, border-color .12s;
+    transition: background var(--sga-transition), border-color var(--sga-transition);
     font-family: inherit;
     line-height: 1;
 }
 
-.em-stepper:hover { background: #eff6ff; border-color: var(--sga-accent); color: var(--sga-primary); }
-.em-stepper:active { background: #dbeafe; }
+.em-stepper:hover  { background: var(--sga-info-bg); border-color: var(--sga-accent); color: var(--sga-primary); }
+.em-stepper:active { background: var(--sga-info-bg); }
 
 /* ── ESTADO / NOTIFICACIÓN ───────────────────────────────────────────────── */
 .em-form-status {
@@ -293,13 +307,13 @@
 }
 
 .em-form-status--ok {
-    background: #f0fdf4;
+    background: var(--sga-success-bg);
     color: var(--sga-success);
     border: 1px solid #bbf7d0;
 }
 
 .em-form-status--error {
-    background: #fef2f2;
+    background: var(--sga-danger-bg);
     color: var(--sga-danger);
     border: 1px solid #fecaca;
 }
@@ -320,7 +334,7 @@
     font-weight: 700;
     cursor: pointer;
     letter-spacing: .02em;
-    transition: background .12s, transform .06s;
+    transition: background var(--sga-transition), transform .06s;
     font-family: inherit;
 }
 
@@ -335,6 +349,7 @@
 /* ── CARRITO DE ENTRADA ──────────────────────────────────────────────────── */
 .em-carrito {
     background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     display: flex;
@@ -348,7 +363,7 @@
     justify-content: space-between;
     padding: 12px 16px;
     border-bottom: 1px solid var(--sga-border);
-    background: #fafbfc;
+    background: var(--sga-surface-alt);
 }
 
 .em-carrito-title {
@@ -360,7 +375,7 @@
 }
 
 .em-carrito-badge {
-    background: #eff6ff;
+    background: var(--sga-info-bg);
     color: var(--sga-primary);
     border: 1px solid #bfdbfe;
     border-radius: 12px;
@@ -416,11 +431,11 @@
     font-weight: 700;
     cursor: pointer;
     letter-spacing: .02em;
-    transition: background .12s, transform .06s;
+    transition: opacity var(--sga-transition), transform .06s;
     font-family: inherit;
 }
 
-.em-btn-confirm:hover  { background: #15803d; }
+.em-btn-confirm:hover:not(:disabled) { opacity: .88; }
 .em-btn-confirm:active { transform: scale(.99); }
 .em-btn-confirm:disabled {
     background: var(--sga-border);
@@ -435,14 +450,14 @@
     align-items: flex-start;
     gap: 8px;
     padding: 8px 10px;
-    background: #fafbfc;
+    background: var(--sga-surface-alt);
     border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius-sm);
-    transition: background .1s, border-color .1s;
+    transition: background var(--sga-transition), border-color var(--sga-transition);
 }
 
-.em-line--sent  { background: #f0fdf4; border-color: #bbf7d0; }
-.em-line--error { background: #fef2f2; border-color: #fecaca; }
+.em-line--sent  { background: var(--sga-success-bg); border-color: #bbf7d0; }
+.em-line--error { background: var(--sga-danger-bg);  border-color: #fecaca; }
 
 .em-line-info {
     flex: 1;
@@ -487,9 +502,9 @@
     font-weight: 700;
     letter-spacing: .04em;
     text-transform: uppercase;
-    background: #f5f3ff;
-    color: #7c3aed;
-    border: 1px solid #ddd6fe;
+    background: var(--em-color-lote-bg);
+    color: var(--em-color-lote);
+    border: 1px solid var(--em-color-lote-border);
     border-radius: 3px;
     padding: 1px 5px;
 }
@@ -501,7 +516,7 @@
     font-weight: 700;
     letter-spacing: .04em;
     text-transform: uppercase;
-    background: #eff6ff;
+    background: var(--sga-info-bg);
     color: var(--sga-primary);
     border: 1px solid #bfdbfe;
     border-radius: 3px;
@@ -536,7 +551,7 @@
     font-size: .85rem;
     color: var(--sga-text-muted);
     line-height: 1;
-    transition: color .12s;
+    transition: color var(--sga-transition);
     font-family: inherit;
 }
 
@@ -545,6 +560,7 @@
 /* ── ZONA RESULTADOS ─────────────────────────────────────────────────────── */
 .em-results {
     background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     padding: 20px 24px;
@@ -563,13 +579,13 @@
 }
 
 .em-results-summary--ok {
-    background: #f0fdf4;
+    background: var(--sga-success-bg);
     color: var(--sga-success);
     border: 1px solid #bbf7d0;
 }
 
 .em-results-summary--partial {
-    background: #fffbeb;
+    background: var(--sga-warning-bg);
     color: var(--sga-warning);
     border: 1px solid #fde68a;
 }
@@ -590,13 +606,13 @@
 }
 
 .em-result-line--ok {
-    background: #f0fdf4;
+    background: var(--sga-success-bg);
     color: var(--sga-success);
     border: 1px solid #bbf7d0;
 }
 
 .em-result-line--err {
-    background: #fef2f2;
+    background: var(--sga-danger-bg);
     color: var(--sga-danger);
     border: 1px solid #fecaca;
 }
@@ -609,10 +625,7 @@
     text-align: center;
 }
 
-.em-result-info {
-    flex: 1;
-    font-weight: 600;
-}
+.em-result-info { flex: 1; font-weight: 600; }
 
 .em-result-err {
     font-size: .78rem;

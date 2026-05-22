@@ -53,20 +53,7 @@ describe("GET /datos/:tabla — whitelist (FASE 9)", () => {
   });
 });
 
-// ─── GET /schema — información sensible ──────────────────────────────────────
-
-describe("GET /schema — uso normal (FASE 9)", () => {
-  test("debe responder sin error del servidor", async () => {
-    const res = await request(app).get("/schema");
-    // El endpoint no tiene input de usuario — debe funcionar o fallar con 500 limpio
-    expect(res.statusCode).not.toBe(400);
-    const bodyStr = JSON.stringify(res.body);
-    // No debe exponer errores internos SQL en caso de fallo
-    if (res.statusCode === 500) {
-      expect(bodyStr).not.toMatch(/Microsoft|ODBC|SQL Server|LIN\.dbo/i);
-    }
-  });
-});
+// ─── GET /schema — movido a schema-integration.test.js (requiere BD real) ────
 
 // ─── POST /generar-ubicaciones — validación de rango ─────────────────────────
 
