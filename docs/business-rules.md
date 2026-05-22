@@ -211,8 +211,8 @@
 |---|---|---|
 | `SGA_SERIE` | `'ELIN'` | CONFIRMADO — pre-creada en LIN con `CONNUM=0` |
 | `SGA_CONEJE` | `''` | CONFIRMADO — ejercicio vacío (igual que ENTRADAS ERP en LIN) |
-| `EMPALMCOD` | `''` | **PENDIENTE QANET** — asumido vacío porque `ARTUBIALMCOD` es vacío en 100% filas LIN |
-| `EMPTIPEMP` | `0` | **PENDIENTE QANET** — no hay evidencia de tipo 5 en LIN; afecta solo ubi 900* |
+| `EMPALMCOD` | `''` | **CONFIRMADO** — Qanet: almacén de trabajo; LIN usa siempre el mismo valor (`''`). Riesgo: si se pasa un almacén incorrecto, `pr_grabarCompraDirecta` podría registrar el movimiento en el almacén equivocado. |
+| `EMPTIPEMP` | `0` | **CONFIRMADO** — Qanet: tipo de empresa; permite configurar excepciones por delegación. Valor `0` correcto para LIN. No se pasa al SP (campo leído pero no usado); la variable se ha eliminado del código. Riesgo si se activa tipo 5: afecta gestión de ubicaciones 900*. |
 
 ### Por qué no se usa `pr_sumaContador2`
 
@@ -248,14 +248,12 @@ El test `tests/arch.test.js` congela esta lista. Si se añade o elimina un stub 
 
 ---
 
-## 9. Campos pendientes de confirmar con Qanet
+## 9. Campos confirmados por Qanet
 
-| CAMPO | UBICACIÓN EN CÓDIGO | VALOR ASUMIDO | RIESGO | ESTADO |
+| CAMPO | UBICACIÓN EN CÓDIGO | VALOR | SIGNIFICADO | ESTADO |
 |---|---|---|---|---|
-| `EMPALMCOD` | `entrada-mercancia.routes.js:25` | `''` (vacío) | Si el valor real es distinto, `pr_grabarCompraDirecta` puede fallar o registrar empresa incorrecta | **PENDIENTE QANET** |
-| `EMPTIPEMP` | `entrada-mercancia.routes.js:26` | `0` | Afecta gestión de ubicaciones 900* (tipo empresa 5); si hay ubis 900* activas, se podría registrar stock en zona incorrecta | **PENDIENTE QANET** |
-
-> Mientras no se confirmen, la entrada de mercancía funciona en LIN porque `ARTUBIALMCOD` es vacío en el 100% de filas. Si esto cambia, hay que revisar.
+| `EMPALMCOD` | `entrada-mercancia.routes.js` (constante) | `''` (vacío) | Almacén de trabajo. LIN siempre usa el mismo valor (`''`). Se pasa como `@EMPRESA` a `pr_grabarCompraDirecta`. **Riesgo:** un valor incorrecto registraría el movimiento en el almacén equivocado. | **CONFIRMADO — Qanet 2026-05-22** |
+| `EMPTIPEMP` | — (variable eliminada) | `0` | Tipo de empresa; permite configurar excepciones por delegación. LIN usa `0`. `pr_grabarCompraDirecta` no recibe este parámetro; la variable era muerta y se ha eliminado del código. **Riesgo si se activa tipo 5:** afecta gestión de ubicaciones 900*. | **CONFIRMADO — Qanet 2026-05-22** |
 
 ---
 
@@ -329,7 +327,7 @@ Los siguientes endpoints calculan stock **sin filtrar** ubicaciones virtuales (7
 | `npm start` | Arranca `api.js` en puerto 3000 |
 | `npm test` | Todos los tests (requiere BD LIN local) — 254 tests / 21 suites |
 | `npm run test:ci` | Solo tests sin BD — 63 tests / 4 suites (CI-safe) |
-| `npm run lint` | ESLint — 0 errores (1 warning en `EMPTIPEMP`, preexistente, no tocar) |
+| `npm run lint` | ESLint — 0 errores, 0 warnings (variable `EMPTIPEMP` eliminada en FASE K.1) |
 
 ### Suites CI-safe (sin BD)
 
@@ -370,11 +368,12 @@ Estas restricciones no deben romperse nunca sin autorización explícita:
 | NO modificar stored procedures legacy | `pr_grabarCompraDirecta` y similares son propiedad de Qanet |
 | NO añadir WebSockets ni frameworks | Decisión arquitectónica firme |
 | NO mover endpoints de Picking a `picking.routes.js` todavía | Ya están en ese archivo — acción completada |
-| NO tocar `EMPALMCOD` ni `EMPTIPEMP` | Pendiente confirmación Qanet |
+| NO cambiar el valor de `EMPALMCOD` sin validar con Qanet | Almacén de trabajo confirmado; cambiar puede desviar movimientos al almacén incorrecto |
+| NO introducir `EMPTIPEMP` en llamadas al SP sin validar con Qanet | Tipo empresa confirmado; activar tipo 5 afecta ubicaciones 900* |
 | NO filtrar stock virtual en producción todavía | Semántica 789*/799* no completamente definida |
 | Mantener `createElement` only en frontend | Sin React, Vue ni similares |
 | Mantener CSS separado del HTML | Convención establecida |
 
 ---
 
-*Última actualización: 2026-05-18 — FASE I.5*
+*Última actualización: 2026-05-22 — FASE K.1*

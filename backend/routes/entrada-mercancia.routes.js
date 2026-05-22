@@ -19,11 +19,11 @@ function serverError(res, err) {
 //   - Numeración: pr_sumaContador2 retorna N-anterior; numAsignado = retorno + 1
 //   - Serie 'ELIN' pre-creada con CONNUM=0 antes del primer uso (evita branch ELSE buggy del SP)
 //
-// TODO confirmar con Qanet los valores reales de EMPALMCOD y EMPTIPEMP para LIN.
-//   EMPALMCOD → '' (validado: 100% de ARTICULOUBI tiene ARTUBIALMCOD vacío en LIN)
-//   EMPTIPEMP → 0  (no hay evidencia de tipo 5 en LIN; afecta solo ubi 900*)
-const EMPALMCOD  = '';      // TODO confirmar con Qanet
-const EMPTIPEMP  = 0;       // TODO confirmar con Qanet
+// Confirmado con Qanet (2026-05-22, FASE K.1):
+//   EMPALMCOD = '' → almacén de trabajo; LIN siempre usa el mismo valor vacío.
+//   EMPTIPEMP = 0  → tipo de empresa; no se pasa al SP (pr_grabarCompraDirecta no lo recibe).
+//                    Riesgo si se activa tipo 5: afecta ubicaciones 900*.
+const EMPALMCOD  = '';      // Confirmado Qanet: almacén de trabajo LIN
 const SGA_SERIE  = 'ELIN';  // Serie SGA entradas (≤5 chars, char(5) en CONTADOR.CONSER)
 const SGA_CONEJE = '';      // Ejercicio vacío, igual que ENTRADAS ERP en LIN
 
