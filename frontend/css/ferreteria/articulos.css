@@ -1,28 +1,32 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Maestros — Artículos (legacy layout con navegacion.css)
+   FASE J.7: Design System tokens, sin cambiar clases ni estructura HTML
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .container {
     max-width: 1400px;
     margin: 30px auto;
     padding: 20px;
 }
 
-/* Cabecera de sección */
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
-    border-bottom: 2px solid #e5e7eb;
+    border-bottom: 2px solid var(--sga-border);
     padding-bottom: 15px;
 }
 
 .header-left h1 {
     margin: 0;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     font-size: 1.8rem;
 }
 
 .header-left p {
     margin: 5px 0 0;
-    color: #6b7280;
+    color: var(--sga-text-muted);
     font-size: 0.9rem;
 }
 
@@ -34,41 +38,47 @@
 
 .btn-new {
     padding: 10px 20px;
-    background: #1e3a8a;
-    color: white;
+    background: var(--sga-primary);
+    color: var(--sga-surface);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--sga-radius-sm);
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--sga-transition);
 }
 
 .btn-new:hover {
-    background: #3b82f6;
+    background: var(--sga-accent);
 }
 
-/* Buscador */
 .search-bar {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
     margin-bottom: 10px;
     font-size: 0.95rem;
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
 }
 
-/* Estado de carga */
+.search-bar:focus {
+    outline: none;
+    border-color: var(--sga-accent);
+}
+
 .loading {
     text-align: center;
-    color: #9ca3af;
+    color: var(--sga-text-muted);
     font-style: italic;
     padding: 30px;
 }
 
 .table-wrapper {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow-md);
     overflow-x: auto;
     margin-top: 20px;
 }
@@ -80,28 +90,22 @@ table {
 }
 
 th {
-    background: #f8f9fa;
+    background: var(--sga-surface-alt);
     padding: 15px;
-    border-bottom: 2px solid #dee2e6;
-    color: #1e3a8a;
+    border-bottom: 2px solid var(--sga-border);
+    color: var(--sga-primary);
     position: sticky;
     top: 0;
+    font-size: 0.85rem;
 }
 
 td {
     padding: 12px 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--sga-border-light);
     font-size: 0.9rem;
+    color: var(--sga-text);
 }
 
 tr:hover {
-    background: #f1f5f9;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-bottom: 10px;
+    background: var(--sga-surface-hover);
 }

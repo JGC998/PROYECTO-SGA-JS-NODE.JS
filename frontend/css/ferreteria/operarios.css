@@ -1,49 +1,52 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Maestros — Operarios (legacy layout con navegacion.css)
+   FASE J.7: Design System tokens, sin cambiar clases ni estructura HTML
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .container {
     max-width: 1300px;
     margin: 30px auto;
     padding: 0 20px;
 }
 
-/* Cabecera */
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 25px;
-    border-bottom: 2px solid #e5e7eb;
+    border-bottom: 2px solid var(--sga-border);
     padding-bottom: 15px;
 }
 
 .section-header h1 {
     margin: 0;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     font-size: 1.8rem;
 }
 
 .section-header p {
     margin: 5px 0 0;
-    color: #6b7280;
+    color: var(--sga-text-muted);
 }
 
-/* Botones de herramientas */
 .btn-tool {
     padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--sga-radius-sm);
     font-weight: bold;
     cursor: pointer;
     margin-left: 10px;
-    transition: 0.2s;
+    transition: opacity var(--sga-transition), transform var(--sga-transition);
 }
 
 .btn-tool.primary {
-    background: #1e3a8a;
-    color: white;
+    background: var(--sga-primary);
+    color: var(--sga-surface);
 }
 
 .btn-tool.secondary {
-    background: #e5e7eb;
-    color: #374151;
+    background: var(--sga-secondary-bg);
+    color: var(--sga-text);
 }
 
 .btn-tool:hover {
@@ -51,38 +54,36 @@
     transform: translateY(-1px);
 }
 
-/* Resumen rápido */
 .status-summary {
     display: flex;
     gap: 30px;
     margin-bottom: 25px;
-    background: #f9fafb;
+    background: var(--sga-surface-alt);
     padding: 15px 25px;
-    border-radius: 8px;
-    border: 1px solid #eee;
+    border-radius: var(--sga-radius);
+    border: 1px solid var(--sga-border);
 }
 
 .status-item .label {
-    color: #6b7280;
+    color: var(--sga-text-muted);
     font-size: 0.85rem;
     margin-right: 8px;
 }
 
 .status-item .count {
     font-weight: bold;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     font-size: 1.1rem;
 }
 
 .status-item .count.success {
-    color: #10b981;
+    color: var(--sga-success);
 }
 
-/* Tabla */
 .table-wrapper {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius-lg);
+    box-shadow: var(--sga-shadow-md);
     overflow: hidden;
 }
 
@@ -93,26 +94,25 @@ table {
 }
 
 th {
-    background: #f8f9fa;
+    background: var(--sga-surface-alt);
     padding: 15px;
     font-size: 0.85rem;
     text-transform: uppercase;
-    color: #1e3a8a;
-    border-bottom: 2px solid #edf2f7;
+    color: var(--sga-primary);
+    border-bottom: 2px solid var(--sga-border);
 }
 
 td {
     padding: 15px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--sga-border-light);
     font-size: 0.95rem;
-    color: #374151;
+    color: var(--sga-text);
 }
 
 tr:hover {
-    background: #f9fbff;
+    background: var(--sga-surface-hover);
 }
 
-/* Badges de estado */
 .badge {
     padding: 4px 10px;
     border-radius: 20px;
@@ -122,23 +122,30 @@ tr:hover {
 }
 
 .badge.active {
-    background: #d1fae5;
-    color: #065f46;
+    background: var(--sga-success-bg);
+    color: var(--sga-success);
 }
 
 .badge.inactive {
-    background: #fee2e2;
-    color: #991b1b;
+    background: var(--sga-danger-bg);
+    color: var(--sga-danger);
 }
 
-/* Buscador */
 .search-bar {
     width: 100%;
     padding: 12px 20px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
     margin-bottom: 15px;
     font-size: 1rem;
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--sga-accent);
 }
 
 .btn-icon {
@@ -146,7 +153,7 @@ tr:hover {
     border: none;
     cursor: pointer;
     font-size: 1.1rem;
-    transition: transform 0.2s;
+    transition: transform var(--sga-transition);
 }
 
 .btn-icon:hover {

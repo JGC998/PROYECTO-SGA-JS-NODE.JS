@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Visor — tablas de consulta (legacy layout con navegacion.css)
+   FASE J.7: Design System tokens, sin cambiar clases ni estructura HTML
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .container {
     max-width: 1300px;
     margin: 30px auto;
@@ -9,39 +14,51 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 3px solid #059669;
-    /* Verde Visor */
+    border-bottom: 3px solid var(--sga-success);
     padding-bottom: 10px;
 }
 
 .visor-header h1 {
-    color: #065f46;
+    color: var(--sga-primary);
     margin: 0;
     font-size: 1.6rem;
 }
 
 .btn-export {
     padding: 8px 15px;
-    background: #059669;
-    color: white;
+    background: var(--sga-success);
+    color: var(--sga-surface);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--sga-radius-sm);
     cursor: pointer;
     font-weight: 600;
+    transition: opacity var(--sga-transition);
+}
+
+.btn-export:hover {
+    opacity: .88;
 }
 
 .search-bar {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--sga-accent);
 }
 
 .table-wrapper {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow-md);
     overflow: hidden;
 }
 
@@ -51,20 +68,21 @@ table {
 }
 
 th {
-    background: #f0fdf4;
+    background: var(--sga-success-bg);
     padding: 12px;
     text-align: left;
-    color: #065f46;
-    border-bottom: 2px solid #bcf0da;
+    color: var(--sga-primary);
+    border-bottom: 2px solid var(--sga-border);
     font-size: 0.85rem;
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--sga-border-light);
     font-size: 0.9rem;
+    color: var(--sga-text);
 }
 
 tr:hover {
-    background: #f9fafb;
+    background: var(--sga-surface-hover);
 }
