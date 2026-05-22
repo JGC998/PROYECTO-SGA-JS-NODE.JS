@@ -9,8 +9,8 @@
 .resultado.ok {
     display: block;
     background: var(--sga-success-bg);
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    color: var(--sga-success);
+    border: 1px solid var(--sga-success-bg);
     border-radius: var(--sga-radius-sm);
     padding: 8px 14px;
     font-size: var(--sga-text-base);
@@ -20,8 +20,8 @@
 .resultado.error {
     display: block;
     background: var(--sga-danger-bg);
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    color: var(--sga-danger);
+    border: 1px solid var(--sga-danger-bg);
     border-radius: var(--sga-radius-sm);
     padding: 8px 14px;
     font-size: var(--sga-text-base);

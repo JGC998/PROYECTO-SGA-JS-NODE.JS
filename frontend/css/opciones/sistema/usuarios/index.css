@@ -1,16 +1,20 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Sistema — Usuarios · FASE J.8: Design System
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .page-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid var(--sga-border, #ddd);
+    border-bottom: 1px solid var(--sga-border);
     margin-bottom: 12px;
 }
 
 .toolbar-left h1 {
     font-size: 1.2rem;
     margin: 0;
-    color: var(--sga-text, #1e293b);
+    color: var(--sga-text);
 }
 
 .toolbar-actions { display: flex; gap: 8px; }
@@ -18,11 +22,19 @@
 .search-bar {
     width: 100%;
     padding: 6px 10px;
-    border: 1px solid var(--sga-border, #ccc);
-    border-radius: 4px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
     margin-bottom: 10px;
     box-sizing: border-box;
-    font-size: 0.875rem;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--sga-accent);
 }
 
 .main-layout {
@@ -36,38 +48,38 @@
 table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
 
 th {
-    background: var(--sga-surface-alt, #f0f4f8);
+    background: var(--sga-surface-alt);
     padding: 6px 8px;
     text-align: left;
-    border-bottom: 2px solid var(--sga-border, #ccc);
+    border-bottom: 2px solid var(--sga-border);
     white-space: nowrap;
     font-size: 0.8rem;
     text-transform: uppercase;
-    color: var(--sga-text-muted, #64748b);
+    color: var(--sga-text-muted);
 }
 
 td {
     padding: 5px 8px;
-    border-bottom: 1px solid var(--sga-border-light, #eee);
-    color: var(--sga-text, #1e293b);
+    border-bottom: 1px solid var(--sga-border-light);
+    color: var(--sga-text);
 }
 
-tr:hover td { background: var(--sga-surface-hover, #f9fafb); }
-tr.selected td { background: #e8f0fe; }
-.placeholder-row td { text-align: center; color: var(--sga-text-muted, #888); padding: 20px; }
+tr:hover td { background: var(--sga-surface-hover); }
+tr.selected td { background: var(--sga-info-bg); }
+.placeholder-row td { text-align: center; color: var(--sga-text-muted); padding: 20px; }
 .btn-icon { background: none; border: none; cursor: pointer; font-size: 1rem; }
 
 .form-panel {
-    background: var(--sga-surface, #fff);
-    border: 1px solid var(--sga-border, #ddd);
-    border-radius: 6px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
     padding: 16px;
 }
 
 .form-panel h3 {
     margin: 0 0 12px;
     font-size: 1rem;
-    color: var(--sga-text, #1e293b);
+    color: var(--sga-text);
 }
 
 .form-row {
@@ -78,31 +90,45 @@ tr.selected td { background: #e8f0fe; }
 }
 
 .form-row label {
-    font-size: 0.82rem;
-    color: var(--sga-text-muted, #555);
+    font-size: var(--sga-text-xs);
+    color: var(--sga-text-muted);
 }
 
 .form-row input {
     padding: 5px 7px;
-    border: 1px solid var(--sga-border, #ccc);
-    border-radius: 4px;
-    font-size: 0.875rem;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+
+.form-row input:focus {
+    outline: none;
+    border-color: var(--sga-accent);
 }
 
 .btn-tool {
     padding: 5px 12px;
-    background: var(--sga-accent, #0057b7);
-    color: #fff;
+    background: var(--sga-accent);
+    color: var(--sga-surface);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--sga-radius-sm);
     cursor: pointer;
     font-size: 0.85rem;
-    transition: background 0.15s;
+    transition: opacity var(--sga-transition);
 }
 
-.btn-tool:hover { background: var(--sga-accent-hover, #004499); }
-.btn-tool.secondary { background: var(--sga-surface-alt, #6c757d); color: #fff; }
-.btn-tool.secondary:hover { background: #5a6268; }
+.btn-tool:hover { opacity: .88; }
+
+.btn-tool.secondary {
+    background: var(--sga-surface-alt);
+    color: var(--sga-text);
+    border: 1px solid var(--sga-border);
+}
+
+.btn-tool.secondary:hover { background: var(--sga-surface-hover); }
 
 .form-actions {
     display: flex;

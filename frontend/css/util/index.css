@@ -1,7 +1,12 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Útil — menú de herramientas (legacy layout con navegacion.css)
+   FASE J.8: Design System tokens
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 body {
     margin: 0;
-    background-color: #f3f4f6;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--sga-bg);
+    font-family: var(--sga-font);
 }
 
 .dashboard-container {
@@ -12,19 +17,19 @@ body {
 
 .section-header {
     margin-bottom: 30px;
-    border-left: 5px solid #f59e0b;
+    border-left: 5px solid var(--sga-warning);
     padding-left: 15px;
 }
 
 .section-header h1 {
     margin: 0;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     font-size: 1.8rem;
 }
 
 .section-header p {
     margin: 5px 0 0;
-    color: #6b7280;
+    color: var(--sga-text-muted);
     font-size: 0.9rem;
 }
 
@@ -35,13 +40,13 @@ body {
 }
 
 .menu-card {
-    background: white;
+    background: var(--sga-surface);
     padding: 35px;
-    border-radius: 12px;
+    border-radius: var(--sga-radius-lg);
     text-decoration: none;
     text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #e5e7eb;
+    transition: transform var(--sga-transition-md), box-shadow var(--sga-transition-md), border-color var(--sga-transition-md);
+    border: 1px solid var(--sga-border);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,8 +55,8 @@ body {
 
 .menu-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    border-color: #f59e0b;
+    box-shadow: var(--sga-shadow-md);
+    border-color: var(--sga-warning);
 }
 
 .menu-card .icon {
@@ -61,11 +66,32 @@ body {
 
 .menu-card h3 {
     margin: 0 0 10px;
-    color: #92400e;
+    color: var(--sga-primary);
 }
 
 .menu-card p {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: var(--sga-text-muted);
     margin: 0;
+}
+
+.menu-card.disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    pointer-events: none;
+    position: relative;
+}
+
+.soon-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--sga-secondary);
+    color: var(--sga-surface);
+    font-size: .65rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
 }

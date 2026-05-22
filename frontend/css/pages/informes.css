@@ -1,0 +1,205 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Informes y Estadísticas (legacy layout con navegacion.css)
+   FASE J.8: Design System tokens, extraído de inline styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+body {
+    background: var(--sga-bg);
+    font-family: var(--sga-font);
+}
+
+/* ── CABECERA ────────────────────────────────────────────────────────────── */
+
+.inf-header {
+    background: var(--sga-primary);
+    padding: 20px 32px 0;
+    color: var(--sga-surface);
+}
+
+.inf-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.inf-title    { font-size: 1.25rem; font-weight: 800; margin: 0; }
+.inf-subtitle { font-size: .78rem; opacity: .7; margin: 3px 0 0; }
+
+.btn-refresh {
+    padding: 7px 16px;
+    background: rgba(255,255,255,.2);
+    color: var(--sga-surface);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: var(--sga-radius-sm);
+    cursor: pointer;
+    font-size: .83rem;
+    font-weight: 600;
+    transition: background var(--sga-transition);
+}
+
+.btn-refresh:hover { background: rgba(255,255,255,.3); }
+
+/* ── SELECTOR DE PERIODO ─────────────────────────────────────────────────── */
+
+.period-pills {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.period-pill {
+    padding: 5px 12px;
+    background: rgba(255,255,255,.12);
+    color: rgba(255,255,255,.7);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: .78rem;
+    font-weight: 600;
+    transition: background var(--sga-transition), color var(--sga-transition);
+    white-space: nowrap;
+}
+
+.period-pill:hover  { background: rgba(255,255,255,.22); color: var(--sga-surface); }
+.period-pill.active { background: rgba(255,255,255,.9);  color: var(--sga-primary); border-color: var(--sga-surface); }
+
+/* ── KPIs EN CABECERA ────────────────────────────────────────────────────── */
+
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,.1);
+    border-radius: var(--sga-radius) var(--sga-radius) 0 0;
+    overflow: hidden;
+}
+
+.kpi-cell {
+    background: rgba(255,255,255,.08);
+    padding: 14px 18px;
+    text-align: center;
+}
+
+.kpi-cell:hover { background: rgba(255,255,255,.14); }
+.kpi-num   { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+.kpi-label { font-size: .68rem; opacity: .65; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+.kpi-cell.danger  .kpi-num { color: var(--sga-danger-bg); }
+.kpi-cell.success .kpi-num { color: var(--sga-success-bg); }
+.kpi-cell.amber   .kpi-num { color: var(--sga-warning-bg); }
+
+/* ── TABS ────────────────────────────────────────────────────────────────── */
+
+.tab-nav-inf {
+    display: flex;
+    background: var(--sga-primary);
+    padding: 0 32px;
+    gap: 2px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.tab-btn-inf {
+    padding: 11px 18px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.6);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color var(--sga-transition), border-color var(--sga-transition);
+    white-space: nowrap;
+}
+
+.tab-btn-inf:hover  { color: rgba(255,255,255,.9); }
+.tab-btn-inf.active { color: var(--sga-surface); border-bottom-color: var(--sga-accent); }
+
+/* ── CONTENIDO ───────────────────────────────────────────────────────────── */
+
+.tab-panel-inf        { display: none; padding: 24px 32px; }
+.tab-panel-inf.active { display: block; }
+
+.charts-2col { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; margin-bottom: 16px; }
+.charts-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
+.charts-full { margin-bottom: 16px; }
+
+.chart-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 18px 20px;
+}
+
+.chart-title {
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--sga-text);
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sga-border-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ── SUB-KPIs ────────────────────────────────────────────────────────────── */
+
+.mini-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
+
+.mini-kpi {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    padding: 14px 16px;
+    box-shadow: var(--sga-shadow);
+    border-top: 3px solid var(--sga-accent);
+}
+
+.mini-kpi.green  { border-top-color: var(--sga-success); }
+.mini-kpi.amber  { border-top-color: var(--sga-warning); }
+.mini-kpi.red    { border-top-color: var(--sga-danger); }
+.mini-kpi.purple { border-top-color: var(--sga-info); }
+
+.mk-val   { font-size: 1.5rem; font-weight: 800; color: var(--sga-text); line-height: 1; }
+.mk-label { font-size: .72rem; color: var(--sga-text-muted); text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+
+/* ── TABLA COMÚN ─────────────────────────────────────────────────────────── */
+
+.data-table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+
+th {
+    background: var(--sga-surface-alt);
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--sga-border);
+    color: var(--sga-text-muted);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+
+td { padding: 9px 10px; border-bottom: 1px solid var(--sga-border-light); color: var(--sga-text); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--sga-surface-alt); }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.badge        { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .75rem; font-weight: 700; }
+.badge-red    { background: var(--sga-danger-bg);  color: var(--sga-danger); }
+.badge-green  { background: var(--sga-success-bg); color: var(--sga-success); }
+.badge-blue   { background: var(--sga-info-bg);    color: var(--sga-info); }
+.badge-amber  { background: var(--sga-warning-bg); color: var(--sga-warning); }
+.badge-purple { background: var(--sga-info-bg);    color: var(--sga-primary); }
+
+/* ── BARRA MINI ──────────────────────────────────────────────────────────── */
+
+.mini-bar      { height: 6px; background: var(--sga-border); border-radius: 3px; margin-top: 4px; }
+.mini-bar-fill { height: 6px; border-radius: 3px; background: var(--sga-accent); }
+
+/* ── ESTADOS ─────────────────────────────────────────────────────────────── */
+
+.placeholder-msg { text-align: center; color: var(--sga-text-muted); padding: 32px; font-size: .88rem; }
+.loading-msg     { text-align: center; color: var(--sga-text-muted); padding: 48px; font-size: .88rem; }
