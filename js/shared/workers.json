@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Carlos",  "bodyColor": 1920728,  "hatColor": 16498468 },
+  { "id": 2, "name": "María",   "bodyColor": 1409085,  "hatColor": 15680580 },
+  { "id": 3, "name": "Pedro",   "bodyColor": 8330525,  "hatColor": 16498468 },
+  { "id": 4, "name": "Ana",     "bodyColor": 7153881,  "hatColor": 16382715 },
+  { "id": 5, "name": "Luis",    "bodyColor": 12730636, "hatColor": 3900150  }
+]

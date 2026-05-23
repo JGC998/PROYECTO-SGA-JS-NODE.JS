@@ -1,0 +1,27 @@
+{
+  "name": "proyecto-sga-js-node.js-3d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/run.mjs",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGC998/PROYECTO-SGA-JS-NODE.JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JGC998/PROYECTO-SGA-JS-NODE.JS/issues"
+  },
+  "homepage": "https://github.com/JGC998/PROYECTO-SGA-JS-NODE.JS#readme",
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

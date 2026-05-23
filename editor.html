@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Editor 3D de Almacén</title>
+    <link rel="stylesheet" href="editor.css">
+   <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+
+<!-- ── TOPBAR ──────────────────────────────────────────────── -->
+<header id="ed-topbar">
+    <div class="ed-brand">🏭 Editor 3D <span>SGA LIN</span></div>
+
+    <div class="ed-cam-toggle" id="cam-toggle">
+        <button class="cam-btn active" id="btn-cam-persp" title="Vista libre 3D (P)">
+            🎮 Vista Libre
+        </button>
+        <button class="cam-btn" id="btn-cam-ortho" title="Vista cenital 2D (O)">
+            📐 Vista Cenital
+        </button>
+    </div>
+
+    <div class="ed-mode-toggle">
+        <button class="mode-btn active" id="btn-mode-translate" title="Mover objeto (G)">↖ Mover</button>
+        <button class="mode-btn" id="btn-mode-rotate"    title="Rotar objeto (R)">↻ Rotar</button>
+        <button class="mode-btn" id="btn-mode-scale"     title="Escalar objeto (S)">⤡ Escalar</button>
+    </div>
+
+    <div class="ed-snap">
+        <label>Grid <input type="number" id="snap-input" value="0.5" min="0.1" max="5" step="0.1"> m</label>
+    </div>
+
+    <div class="ed-snap">
+        <label>Rot <select id="rot-snap-select" class="ed-select" title="Snap de rotación">
+            <option value="90">90°</option>
+            <option value="45">45°</option>
+            <option value="15">15°</option>
+            <option value="0">Libre</option>
+        </select></label>
+    </div>
+
+    <div class="ed-topbar-actions">
+        <button class="tb-btn" id="btn-undo" title="Deshacer (Ctrl+Z)">↩ Deshacer</button>
+        <button class="tb-btn" id="btn-redo" title="Rehacer (Ctrl+Y)">↪ Rehacer</button>
+        <button class="tb-btn" id="btn-load-api"    title="Cargar layout desde fichero JSON">📂 Cargar</button>
+        <button class="tb-btn" id="btn-load-server" title="Recargar el layout guardado en el servidor (distribucion.json) — descarta cambios locales no guardados">🔄 Desde visor</button>
+        <button class="tb-btn" id="btn-save-api"    title="Guardar distribución en disco (sobrescribe distribucion.json)">💾 Guardar</button>
+        <button class="tb-btn" id="btn-stock-preview" title="Colorear estanterías según cobertura de stock (requiere articulos.json)">📊 Stock</button>
+        <button class="tb-btn btn-export" id="btn-export"   title="Exportar copia JSON para compartir o respaldar">📤 Exportar</button>
+        <button class="tb-btn" id="btn-reparar-pasillos" title="Crea objetos pasillo a partir de las estanterías huérfanas (sin pasillo-objeto)">🛠 Reparar</button>
+        <button class="tb-btn" id="btn-unir-pasillos" title="Selecciona 2 pasillos perpendiculares (Shift+click) y este botón los une en uno con codo en L automático">🔗 Unir</button>
+        <a class="tb-btn btn-viewer" href="mapa-3d.html" target="_blank">🏭 Ver en 3D</a>
+    </div>
+</header>
+
+<!-- ── WORKSPACE ───────────────────────────────────────────── -->
+<div id="ed-workspace">
+
+    <!-- Sidebar izquierdo -->
+    <aside id="ed-sidebar">
+
+        <!-- CATÁLOGO -->
+        <div class="sb-section">
+            <div class="sb-section-title">Catálogo de objetos</div>
+            <div class="catalog-grid">
+                <button class="cat-btn" data-tipo="estanteria" title="Añade un módulo de estantería/rack">
+                    <span class="cat-icon">📦</span>
+                    <span>Estantería</span>
+                </button>
+                <button class="cat-btn" data-tipo="pasillo" title="Añade un pasillo vacío (define la guía y luego rellena con estanterías)">
+                    <span class="cat-icon">↕</span>
+                    <span>Pasillo</span>
+                </button>
+                <button class="cat-btn" id="btn-add-pasillo" title="Crea pasillo recto + auto-rellena estanterías I+D">
+                    <span class="cat-icon">🏗</span>
+                    <span>Pasillo I+D</span>
+                </button>
+                <button class="cat-btn" data-tipo="pared" title="Añade un panel de pared">
+                    <span class="cat-icon">🧱</span>
+                    <span>Pared</span>
+                </button>
+                <button class="cat-btn" data-tipo="zona_carga" title="Muelle de carga — zona de descarga de camiones con puertas seccionales">
+                    <span class="cat-icon">🚛</span>
+                    <span>Muelle carga</span>
+                </button>
+                <button class="cat-btn" data-tipo="zona_oficina" title="Garita de control / oficina de supervisión">
+                    <span class="cat-icon">🏠</span>
+                    <span>Garita/Oficina</span>
+                </button>
+                <button class="cat-btn" data-tipo="columna" title="Añade pilar estructural">
+                    <span class="cat-icon">🏛</span>
+                    <span>Pilar</span>
+                </button>
+                <button class="cat-btn" data-tipo="puerta" title="Añade puerta/acceso">
+                    <span class="cat-icon">🚪</span>
+                    <span>Puerta</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CATÁLOGO ERP (estanterías desde ubicaciones.json) -->
+        <div class="sb-section" id="erp-catalog-section" style="display:none">
+            <div class="sb-section-title">
+                Catálogo ERP <span id="erp-catalog-count" style="color:var(--text3)"></span>
+                <button class="obj-item-lock" id="btn-erp-reload" title="Recargar desde ubicaciones.json" aria-label="Recargar catálogo ERP" style="margin-left:auto">🔄</button>
+            </div>
+            <input type="text" id="erp-filter" class="prop-input" placeholder="🔍 Filtrar pasillo/lado" style="margin-bottom:6px">
+            <div id="erp-catalog-list" style="max-height:260px;overflow-y:auto;font-size:11px"></div>
+        </div>
+
+        <!-- PROPIEDADES del objeto seleccionado -->
+        <div class="sb-section" id="props-section" style="display:none">
+            <div class="sb-section-title">
+                Propiedades
+                <span id="props-type-badge" class="type-badge"></span>
+            </div>
+
+            <div class="prop-group">
+                <div class="prop-label">Etiqueta</div>
+                <input type="text" id="prop-label" class="prop-input" maxlength="32">
+            </div>
+
+            <div class="prop-row-2">
+                <div class="prop-group">
+                    <div class="prop-label">Pos. X (m)</div>
+                    <input type="number" id="prop-x" class="prop-input" step="0.5">
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">Pos. Z (m)</div>
+                    <input type="number" id="prop-z" class="prop-input" step="0.5">
+                </div>
+            </div>
+
+            <div class="prop-group">
+                <div class="prop-label">Rotación Y (°)</div>
+                <input type="number" id="prop-roty" class="prop-input" step="15" min="-180" max="180">
+            </div>
+
+            <!-- Dimensiones rápidas (mapean al campo principal del tipo) -->
+            <div class="prop-row-2" id="prop-dim-row" style="display:none">
+                <div class="prop-group">
+                    <div class="prop-label" id="prop-dim-a-label">Largo (m)</div>
+                    <input type="number" id="prop-dim-a" class="prop-input" step="0.1" min="0.1">
+                </div>
+                <div class="prop-group" id="prop-dim-b-group">
+                    <div class="prop-label" id="prop-dim-b-label">Ancho (m)</div>
+                    <input type="number" id="prop-dim-b" class="prop-input" step="0.1" min="0.1">
+                </div>
+            </div>
+
+            <!-- Dimensiones dinámicas según tipo -->
+            <div id="dim-estanteria" class="dim-section" style="display:none">
+                <div class="dim-title">Dimensiones del rack</div>
+                <div class="prop-row-2">
+                    <div class="prop-group">
+                        <div class="prop-label">Ancho (m)</div>
+                        <input type="number" id="dim-ancho" class="prop-input" step="0.1" min="0.5" max="5">
+                    </div>
+                    <div class="prop-group">
+                        <div class="prop-label">Fondo (m)</div>
+                        <input type="number" id="dim-prof" class="prop-input" step="0.05" min="0.3" max="2">
+                    </div>
+                </div>
+                <div class="prop-row-2">
+                    <div class="prop-group">
+                        <div class="prop-label">Niveles</div>
+                        <input type="number" id="dim-niveles" class="prop-input" step="1" min="1" max="10">
+                    </div>
+                    <div class="prop-group">
+                        <div class="prop-label">Alt./nivel (m)</div>
+                        <input type="number" id="dim-altnivel" class="prop-input" step="0.05" min="0.3" max="3">
+                    </div>
+                </div>
+                <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+                    <div class="dim-title">Pasillo ERP</div>
+                    <div class="prop-row-2">
+                        <div class="prop-group">
+                            <div class="prop-label">Nº Pasillo</div>
+                            <input type="number" id="meta-pasillo" class="prop-input" step="1" min="1" max="99" placeholder="—">
+                        </div>
+                        <div class="prop-group">
+                            <div class="prop-label">Lado</div>
+                            <div class="ed-mode-toggle" style="width:100%">
+                                <button class="mode-btn" id="meta-lado-i" style="flex:1">I</button>
+                                <button class="mode-btn" id="meta-lado-d" style="flex:1">D</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prop-group" style="margin-top:6px">
+                        <div class="prop-label">⚓ Anclar a pasillo</div>
+                        <select id="anclar-pasillo" class="prop-input"></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimensiones de PASILLO -->
+            <div id="dim-pasillo" class="dim-section" style="display:none">
+                <div class="dim-title">Pasillo</div>
+                <div class="prop-row-2">
+                    <div class="prop-group">
+                        <div class="prop-label">Nº Pasillo</div>
+                        <input type="number" id="dim-pas-num" class="prop-input" step="1" min="1" max="99">
+                    </div>
+                    <div class="prop-group">
+                        <div class="prop-label">Ancho corredor (m)</div>
+                        <input type="number" id="dim-pas-ancho" class="prop-input" step="0.1" min="0.6" max="6">
+                    </div>
+                </div>
+                <div class="prop-group" style="margin-top:6px">
+                    <div class="prop-label">Longitud segmento 1 (m)</div>
+                    <input type="number" id="dim-pas-long" class="prop-input" step="0.5" min="1" max="100">
+                </div>
+                <div class="prop-group" style="margin-top:6px">
+                    <div class="prop-label">Forma</div>
+                    <select id="dim-pas-forma" class="prop-input">
+                        <option value="recto">Recto</option>
+                        <option value="L_derecha">L (codo a la derecha)</option>
+                        <option value="L_izquierda">L (codo a la izquierda)</option>
+                    </select>
+                </div>
+                <div id="dim-pas-long2-row" class="prop-row-2" style="display:none;margin-top:6px">
+                    <div class="prop-group">
+                        <div class="prop-label">Longitud codo (m)</div>
+                        <input type="number" id="dim-pas-long2" class="prop-input" step="0.5" min="1" max="50">
+                    </div>
+                </div>
+                <button class="btn-scene-update" id="btn-pasillo-fill" style="margin-top:10px" title="Crear estanterías I+D en los segmentos del pasillo">🔧 Crear estanterías I+D</button>
+            </div>
+
+            <div id="dim-pared" class="dim-section" style="display:none">
+                <div class="dim-title">Dimensiones de pared</div>
+                <div class="prop-row-2">
+                    <div class="prop-group">
+                        <div class="prop-label">Longitud (m)</div>
+                        <input type="number" id="dim-pared-w" class="prop-input" step="0.5" min="0.5">
+                    </div>
+                    <div class="prop-group">
+                        <div class="prop-label">Alto (m)</div>
+                        <input type="number" id="dim-pared-h" class="prop-input" step="0.1" min="0.5" max="15">
+                    </div>
+                </div>
+            </div>
+
+            <div id="dim-zona" class="dim-section" style="display:none">
+                <div class="dim-title">Dimensiones de zona</div>
+                <div class="prop-row-2">
+                    <div class="prop-group">
+                        <div class="prop-label">Ancho (m)</div>
+                        <input type="number" id="dim-zona-w" class="prop-input" step="0.5" min="1">
+                    </div>
+                    <div class="prop-group">
+                        <div class="prop-label">Fondo (m)</div>
+                        <input type="number" id="dim-zona-d" class="prop-input" step="0.5" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:5px;margin-top:8px">
+                <button class="btn-scene-update" id="btn-align-grid" style="flex:1;margin-top:0" title="Redondear posición al snap más cercano">⊞ Encajar</button>
+                <button class="btn-scene-update" id="btn-lock-obj"   style="flex:1;margin-top:0" title="Bloquear/desbloquear objeto (protege contra movimiento accidental)">🔓 Bloquear</button>
+            </div>
+            <button class="btn-delete" id="btn-delete">🗑 Eliminar objeto</button>
+        </div>
+
+        <!-- ESCENA -->
+        <div class="sb-section">
+            <div class="sb-section-title">Escena</div>
+            <div class="prop-group">
+                <div class="prop-label">Nombre del layout</div>
+                <input type="text" id="scene-name" class="prop-input" value="Nuevo Almacén">
+            </div>
+            <div class="prop-row-2">
+                <div class="prop-group">
+                    <div class="prop-label">Ancho (m)</div>
+                    <input type="number" id="scene-w" class="prop-input" value="50" min="5" step="1">
+                </div>
+                <div class="prop-group">
+                    <div class="prop-label">Fondo (m)</div>
+                    <input type="number" id="scene-d" class="prop-input" value="30" min="5" step="1">
+                </div>
+            </div>
+            <button class="btn-scene-update" id="btn-scene-update">↺ Actualizar planta</button>
+        </div>
+
+        <!-- PASILLOS ERP -->
+        <div class="sb-section" id="pasillo-section" style="display:none">
+            <div class="sb-section-title">Pasillos ERP (<span id="pasillo-count">0</span>)</div>
+            <div id="pasillo-list"></div>
+        </div>
+
+        <!-- OBJETOS EN ESCENA -->
+        <div class="sb-section sb-section-grow">
+            <div class="sb-section-title">Objetos (<span id="obj-count">0</span>)</div>
+            <div id="obj-list"></div>
+        </div>
+
+        <div id="ed-status"></div>
+    </aside>
+
+    <!-- Canvas 3D -->
+    <main id="ed-canvas-wrap">
+        <canvas id="editor-canvas"></canvas>
+        <div id="ed-overlay-hint">
+            Clic · G/R/S mover/rotar/escalar · ←↑→↓ nudge (Shift×10) · Q/E rotar 90°± · F encajar · H ocultar · Ctrl+D duplicar · Supr borrar · P/O cámara
+        </div>
+        <!-- Coordenadas del ratón sobre el suelo -->
+        <div id="ed-coords-hud">X — &nbsp; Z —</div>
+        <!-- Leyenda de orientación -->
+        <div id="ed-orient-legend">
+            <span class="orient-x">→ X</span>
+            <span class="orient-sep">·</span>
+            <span class="orient-z">↓ Z</span>
+        </div>
+    </main>
+
+</div><!-- /#ed-workspace -->
+
+<script type="module" src="js/editor/editor.js"></script>
+</body>
+</html>

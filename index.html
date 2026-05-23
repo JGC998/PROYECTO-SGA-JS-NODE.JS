@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Sistema de Gestión de Almacén</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:  #1e3a5f;
+            --blue:  #3b82f6;
+            --green: #22c55e;
+            --bg:    #0f172a;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #fff;
+        }
+
+        /* ── LOGO ── */
+        .logo {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .logo-icon {
+            font-size: 52px;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .logo-title {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -.5px;
+            color: #f1f5f9;
+        }
+        .logo-sub {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 6px;
+            letter-spacing: .3px;
+        }
+        .logo-version {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 3px 10px;
+            background: rgba(59,130,246,.15);
+            border: 1px solid rgba(59,130,246,.3);
+            border-radius: 12px;
+            font-size: 11px;
+            color: #93c5fd;
+            letter-spacing: .5px;
+        }
+
+        /* ── CARDS ── */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 1060px;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform .15s, box-shadow .15s, border-color .15s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .15s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+        .card:hover::before { opacity: 1; }
+
+        .card-3d { border-top: 3px solid #3b82f6; }
+        .card-3d:hover { border-color: #60a5fa; }
+        .card-3d::before { background: linear-gradient(135deg, rgba(59,130,246,.06) 0%, transparent 60%); }
+
+        .card-editor { border-top: 3px solid #8b5cf6; }
+        .card-editor:hover { border-color: #a78bfa; }
+        .card-editor::before { background: linear-gradient(135deg, rgba(139,92,246,.06) 0%, transparent 60%); }
+
+        .card-supervisor { border-top: 3px solid #22c55e; }
+        .card-supervisor:hover { border-color: #4ade80; }
+        .card-supervisor::before { background: linear-gradient(135deg, rgba(34,197,94,.06) 0%, transparent 60%); }
+
+        .card-icon {
+            font-size: 36px;
+            line-height: 1;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .card-desc {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .tag {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .tag-blue   { background: rgba(59,130,246,.15);  color: #93c5fd; }
+        .tag-purple { background: rgba(139,92,246,.15);  color: #c4b5fd; }
+        .tag-green  { background: rgba(34,197,94,.15);   color: #86efac; }
+        .tag-amber  { background: rgba(245,158,11,.15);  color: #fcd34d; }
+
+        .card-arrow {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 20px;
+            color: #475569;
+            transition: color .15s, transform .15s;
+        }
+        .card:hover .card-arrow { color: #94a3b8; transform: translate(2px, -2px); }
+
+        /* ── NOTA DE SERVIDOR ── */
+        .server-note {
+            margin-top: 36px;
+            padding: 12px 20px;
+            background: rgba(245,158,11,.08);
+            border: 1px solid rgba(245,158,11,.2);
+            border-radius: 8px;
+            font-size: 12px;
+            color: #fcd34d;
+            text-align: center;
+            max-width: 820px;
+            width: 100%;
+        }
+        .server-note code {
+            background: rgba(0,0,0,.3);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .server-dot {
+            display: inline-block;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #ef4444;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .server-dot.online { background: var(--green); box-shadow: 0 0 6px rgba(34,197,94,.6); }
+
+        /* ── FOOTER ── */
+        .footer {
+            margin-top: 32px;
+            font-size: 11px;
+            color: #334155;
+        }
+
+        .card-planta { border-top: 3px solid #f59e0b; }
+        .card-planta:hover { border-color: #fbbf24; }
+        .card-planta::before { background: linear-gradient(135deg, rgba(245,158,11,.06) 0%, transparent 60%); }
+
+        @media (max-width: 900px) {
+            .cards { grid-template-columns: repeat(2, 1fr); max-width: 600px; }
+        }
+        @media (max-width: 480px) {
+            .cards { grid-template-columns: 1fr; max-width: 360px; }
+            .logo-title { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="logo">
+    <div class="logo-icon">&#x1F3ED;</div>
+    <div class="logo-title">SGA LIN</div>
+    <div class="logo-sub">Sistema de Gestión de Almacén</div>
+    <span class="logo-version">3D &middot; Node.js</span>
+</div>
+
+<div class="cards">
+
+    <a href="mapa-3d.html" class="card card-3d">
+        <div class="card-icon">&#127922;</div>
+        <div class="card-title">Visor 3D</div>
+        <div class="card-desc">Navega el almacén en primera persona. Consulta stock, crea rutas de picking y simula recorridos.</div>
+        <div class="card-tags">
+            <span class="tag tag-blue">Three.js</span>
+            <span class="tag tag-blue">Picking</span>
+            <span class="tag tag-blue">Simulación</span>
+        </div>
+        <span class="card-arrow">&#8599;</span>
+    </a>
+
+    <a href="editor.html" class="card card-editor">
+        <div class="card-icon">&#9881;</div>
+        <div class="card-title">Editor de almacén</div>
+        <div class="card-desc">Diseña y modifica la distribución del almacén: estanterías, zonas, puertas y pasillos.</div>
+        <div class="card-tags">
+            <span class="tag tag-purple">Layout</span>
+            <span class="tag tag-purple">Arrastrar</span>
+            <span class="tag tag-purple">Exportar</span>
+        </div>
+        <span class="card-arrow">&#8599;</span>
+    </a>
+
+    <a href="planta.html" class="card card-planta">
+        <div class="card-icon">&#9783;</div>
+        <div class="card-title">Editor de Planta 2D</div>
+        <div class="card-desc">Diseña el almacén en vista de planta: dibuja estanterías, pasillos y zonas con total fluidez, sin Three.js.</div>
+        <div class="card-tags">
+            <span class="tag tag-amber">Canvas 2D</span>
+            <span class="tag tag-amber">Top-down</span>
+            <span class="tag tag-amber">Sin CSP</span>
+        </div>
+        <span class="card-arrow">&#8599;</span>
+    </a>
+
+    <a href="supervisor.html" class="card card-supervisor">
+        <div class="card-icon">&#128203;</div>
+        <div class="card-title">Supervisor picking</div>
+        <div class="card-desc">Crea rutas de picking, genera PDF y QR, y sigue el progreso del operario en tiempo real.</div>
+        <div class="card-tags">
+            <span class="tag tag-green">Tiempo real</span>
+            <span class="tag tag-green">PDF</span>
+            <span class="tag tag-amber">QR móvil</span>
+        </div>
+        <span class="card-arrow">&#8599;</span>
+    </a>
+
+</div>
+
+<div class="server-note">
+    <span class="server-dot" id="srv-dot"></span>
+    <span id="srv-txt">Comprobando servidor…</span>
+    &nbsp;&mdash;&nbsp; Para usar la aplicación ejecuta <code>./start.sh</code> y abre <code>http://localhost:3000</code>
+</div>
+
+<div class="footer">SGA LIN &middot; 2026</div>
+
+<script defer src="js/hub.js"></script>
+
+</body>
+</html>
