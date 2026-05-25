@@ -39,10 +39,11 @@
         {
             label: 'Almacén',
             links: [
-                { icon: '🏗️', text: 'Almacenes',            href: 'pages/opciones/almacen-y-stock/almacenes/index.html' },
-                { icon: '📌', text: 'Ubicaciones',           href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
-                { icon: '🔧', text: 'Generar ubicaciones',   href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' },
-                { icon: '📋', text: 'Regularizaciones',      href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' },
+                { icon: '🗺️', text: 'Mapa aéreo',            href: 'pages/opciones/almacen-y-stock/mapa-almacen/index.html' },
+                { icon: '🏗️', text: 'Almacenes',             href: 'pages/opciones/almacen-y-stock/almacenes/index.html' },
+                { icon: '📌', text: 'Ubicaciones',            href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
+                { icon: '🔧', text: 'Generar ubicaciones',    href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' },
+                { icon: '📋', text: 'Regularizaciones',       href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' },
             ]
         },
         {

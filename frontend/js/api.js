@@ -178,4 +178,9 @@ const SGA = {
         importarRegularizaciones: data => _post('/importar-regularizaciones', data),
         asignarFechaStock: data => _post('/asignar-fecha-stock-inicial', data),
     },
+    mapaAlmacen: {
+        ubicaciones:    ()         => _get('/ubicaciones'),
+        stock:          ()         => _get('/consulta-de-stock?existencias=1&limit=9999'),
+        minimosMaximos: ()         => _get('/minimos-maximos'),
+    },
 };
