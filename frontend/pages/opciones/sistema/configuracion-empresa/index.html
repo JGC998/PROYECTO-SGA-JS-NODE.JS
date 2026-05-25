@@ -35,19 +35,20 @@
                     <span class="sga-breadcrumb-current">Configuración de Empresa</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="ce-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>⚙️ Configuración de Empresa</h1>
-                    </div>
-                </header>
+                <div class="ce-page-header">
+                    <h1 class="sga-page-title">Configuración de Empresa</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
 
-                <form class="form-panel" id="form-empresa">
+                <form class="ce-form-card" id="form-empresa">
                     <div class="form-row">
                         <label>Nombre empresa</label>
                         <input type="text" name="nombre">
@@ -73,7 +74,6 @@
                         <input type="email" name="email">
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn-tool" id="btn-guardar">Guardar</button>
                     </div>
                     <div class="msg" id="msg-config" role="status" aria-live="polite"></div>
                 </form>

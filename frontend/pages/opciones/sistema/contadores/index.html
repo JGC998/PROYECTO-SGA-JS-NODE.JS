@@ -35,20 +35,18 @@
                     <span class="sga-breadcrumb-current">Contadores del Sistema</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="cnt-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>🔢 Contadores del Sistema</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar</button>
-                    </div>
-                </header>
+                <div class="cnt-page-header">
+                    <h1 class="sga-page-title">Contadores del Sistema</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
 
                 <div id="grid-contadores" aria-live="polite" aria-atomic="false">
                     <p style="padding:20px">Cargando contadores...</p>

@@ -35,22 +35,20 @@
                     <span class="sga-breadcrumb-current">Lote Exclusivo</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="le-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>🏷️ Lote Exclusivo por Cliente y Artículo</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                        <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                    </div>
-                </header>
+                <div class="le-page-header">
+                    <h1 class="sga-page-title">Lote Exclusivo por Cliente y Artículo</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
                 <div class="filter-bar">
                     <label>Código cliente:</label>
@@ -64,6 +62,7 @@
                     <button class="btn-browse">...</button>
                 </div>
 
+                <div class="le-table-card">
                 <div class="table-wrapper" id="lexclusivo-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table>
                         <thead>
@@ -83,6 +82,7 @@
                         </tbody>
                     </table>
                 </div>
+                </div><!-- /.le-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

@@ -3,11 +3,6 @@
    FASE J.8: Design System tokens, extraído de inline styles
    ═══════════════════════════════════════════════════════════════════════════ */
 
-body {
-    background: var(--sga-bg);
-    font-family: var(--sga-font);
-}
-
 /* ── CABECERA ────────────────────────────────────────────────────────────── */
 
 .inf-header {

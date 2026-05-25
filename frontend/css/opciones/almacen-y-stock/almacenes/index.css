@@ -1,39 +1,59 @@
 /* Módulo: Almacenes — estilos específicos (globales en components.css) */
 
+.alm-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.alm-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.master-form {
+    max-width: 560px;
+}
+
 /* Formulario maestro (navegación + campos) */
 .master-form .form-section {
     background: var(--sga-surface);
     border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius);
-    padding: 24px 28px;
     box-shadow: var(--sga-shadow);
+    overflow: hidden;
 }
 
-.master-form .form-section legend {
-    padding: 0 8px;
+.form-section-title {
+    padding: 12px 20px;
     font-weight: 700;
     color: var(--sga-primary);
     font-size: var(--sga-text-sm);
     text-transform: uppercase;
     letter-spacing: .05em;
+    background: var(--sga-surface-alt);
+    border-bottom: 1px solid var(--sga-border);
 }
 
 .form-fields {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: var(--sga-sp-sm);
+    padding: 20px 20px 24px;
 }
 
 .field-row {
     display: flex;
     align-items: center;
-    gap: var(--sga-sp-sm);
-    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .field-row label {
-    width: 180px;
+    width: 160px;
     font-weight: 600;
     font-size: var(--sga-text-base);
     color: var(--sga-text);
@@ -44,10 +64,17 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    flex: 1;
+}
+
+.input-nav .input-code {
+    flex: 1;
+    min-width: 0;
 }
 
 .input-name {
-    width: 340px;
+    flex: 1;
+    min-width: 0;
     padding: 7px 10px;
     border: 1px solid var(--sga-border);
     border-radius: var(--sga-radius-sm);
@@ -66,5 +93,4 @@
 @media (max-width: 600px) {
     .field-row { flex-direction: column; align-items: flex-start; }
     .field-row label { width: auto; }
-    .input-name { width: 100%; }
 }

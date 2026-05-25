@@ -35,23 +35,22 @@
                     <span class="sga-breadcrumb-current">Subfamilias</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="sf-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Subfamilias</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                        <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                    </div>
-                </header>
+                <div class="sf-page-header">
+                    <h1 class="sga-page-title">Subfamilias</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
+                <div class="sf-table-card">
                 <div class="table-wrapper" id="subfamilias-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table id="tabla-subfamilias">
                         <thead>
@@ -72,6 +71,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                </div><!-- /.sf-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

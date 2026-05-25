@@ -1,5 +1,16 @@
 /* Módulo: Contadores — estilos específicos (globales en components.css) */
 
+.cnt-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.cnt-page-header { display: flex; flex-direction: column; gap: 2px; }
+
 /* #grid-contadores definido globalmente en components.css */
 
 .contador-card {

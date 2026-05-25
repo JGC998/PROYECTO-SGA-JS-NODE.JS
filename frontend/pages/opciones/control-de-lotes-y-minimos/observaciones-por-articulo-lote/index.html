@@ -35,22 +35,20 @@
                     <span class="sga-breadcrumb-current">Observaciones por Artículo y Lote</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="ob-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Observaciones por Artículo y Lote</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                        <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                    </div>
-                </header>
+                <div class="ob-page-header">
+                    <h1 class="sga-page-title">Observaciones por Artículo y Lote</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
                 <div class="filter-panel">
                     <div class="filter-row">
@@ -61,6 +59,7 @@
                     </div>
                 </div>
 
+                <div class="ob-table-card">
                 <div class="table-wrapper" id="obs-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table id="tabla-obs">
                         <thead>
@@ -83,6 +82,7 @@
                         </tbody>
                     </table>
                 </div>
+                </div><!-- /.ob-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

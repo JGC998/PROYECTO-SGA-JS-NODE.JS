@@ -8,9 +8,10 @@
 .pk-inner {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 24px;
-    max-width: 1400px;
+    gap: 28px;
+    padding: 28px 32px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .pk-header-row {

@@ -1,8 +1,23 @@
 /* Módulo: Artículos sin Reposición — estilos específicos (globales en components.css) */
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.asr-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .filter-bar {
     background: var(--sga-surface);
-    padding: 12px 20px;
+    padding: 14px 18px;
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     display: flex;

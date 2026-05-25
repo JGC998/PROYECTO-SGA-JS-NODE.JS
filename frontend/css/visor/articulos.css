@@ -1,6 +1,6 @@
-/* Módulo: Proveedores — estilos específicos (globales en components.css) */
+/* Módulo: Visor Artículos — estilos específicos (globales en components.css) */
 
-.prov-inner {
+.va-inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 28px 32px 40px;
@@ -9,9 +9,9 @@
     gap: 28px;
 }
 
-.prov-page-header { display: flex; flex-direction: column; gap: 2px; }
+.va-page-header { display: flex; flex-direction: column; gap: 2px; }
 
-.prov-table-card {
+.va-table-card {
     background: var(--sga-surface);
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
@@ -26,10 +26,9 @@
     display: flex;
     align-items: center;
     gap: var(--sga-sp-sm);
-    flex-wrap: wrap;
 }
 
-.prov-search {
+.va-search {
     flex: 1;
     min-width: 260px;
     padding: 6px 10px;
@@ -41,4 +40,4 @@
     background: var(--sga-surface);
     transition: border-color var(--sga-transition);
 }
-.prov-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+.va-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

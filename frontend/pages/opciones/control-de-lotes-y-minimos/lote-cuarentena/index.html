@@ -35,22 +35,21 @@
                     <span class="sga-breadcrumb-current">Lote en Cuarentena</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="lc-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>🏷️ Lote en Cuarentena por Artículo</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                    </div>
-                </header>
+                <div class="lc-page-header">
+                    <h1 class="sga-page-title">Lote en Cuarentena por Artículo</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
+                <div class="lc-table-card">
                 <div class="table-wrapper" id="lcuarentena-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table>
                         <thead>
@@ -69,6 +68,7 @@
                         </tbody>
                     </table>
                 </div>
+                </div><!-- /.lc-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

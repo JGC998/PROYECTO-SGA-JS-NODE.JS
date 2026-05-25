@@ -35,23 +35,21 @@
                     <span class="sga-breadcrumb-current">Mínimos y Máximos</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">Exportar a CSV</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="mm-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Mínimos y Máximos por Artículo</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                        <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                        <button class="btn-tool secondary" id="btn-exportar">Exportar a CSV</button>
-                    </div>
-                </header>
+                <div class="mm-page-header">
+                    <h1 class="sga-page-title">Mínimos y Máximos por Artículo</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
                 <div class="filter-bar">
                     <label>Artículo:</label>
@@ -60,6 +58,7 @@
                     <input type="text" class="input-desc" readonly id="f-articulo-nombre">
                 </div>
 
+                <div class="mm-table-card">
                 <div class="table-wrapper" id="minmax-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table id="tabla-minmax">
                         <thead>
@@ -86,6 +85,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                </div><!-- /.mm-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

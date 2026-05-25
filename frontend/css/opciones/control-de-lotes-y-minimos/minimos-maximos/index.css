@@ -1,3 +1,22 @@
+/* Inner layout — namespace mm- */
+.mm-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.mm-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.mm-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
 /* Módulo: Mínimos y Máximos — estilos específicos (globales en components.css) */
 
 .filter-bar {

@@ -1,3 +1,22 @@
+/* Inner layout — namespace sf- */
+.sf-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.sf-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.sf-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
 /* Módulo: Subfamilias — estilos específicos (globales en components.css) */
 
 /* Columnas específicas */

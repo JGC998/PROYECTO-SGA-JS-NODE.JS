@@ -1,27 +1,27 @@
-.page-toolbar {
+.spv-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--sga-border);
-    margin-bottom: 12px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.toolbar-left h1 {
-    font-size: 1.2rem;
-    margin: 0;
-    color: var(--sga-text);
+.spv-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
-
-.toolbar-actions { display: flex; gap: 8px; }
 
 .filter-bar {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    padding: 8px 0;
-    margin-bottom: 8px;
     font-size: 0.875rem;
 }
 
@@ -53,6 +53,13 @@
 
 .btn-tool:hover { opacity: .88; }
 .btn-tool:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spv-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
 
 .table-wrapper { overflow-x: auto; }
 

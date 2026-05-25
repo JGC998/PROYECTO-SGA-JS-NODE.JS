@@ -1,5 +1,16 @@
 /* Módulo: Copia de Seguridad — estilos específicos (globales en components.css) */
 
+.cs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.cs-page-header { display: flex; flex-direction: column; gap: 2px; }
+
 /* .action-panel, .action-block, .btn-primary, .resultado definidos en components.css */
 
 /* Feedback resultado ok/error */
@@ -13,7 +24,6 @@
     font-size: var(--sga-text-base);
     animation: sga-fadein .18s ease both;
 }
-
 .resultado.error {
     display: block;
     background: var(--sga-danger-bg);

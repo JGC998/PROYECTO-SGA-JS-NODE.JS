@@ -1,24 +1,26 @@
-.page-toolbar {
+.hr-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--sga-border);
-    margin-bottom: 12px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.toolbar-left h1 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: var(--sga-text);
+.hr-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .filter-bar {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 0;
-    margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
@@ -44,8 +46,8 @@
 .tab-nav {
     display: flex;
     border-bottom: 2px solid var(--sga-border);
-    margin-top: 4px;
     overflow-x: auto;
+    background: var(--sga-surface-alt);
 }
 
 .tab-btn {
@@ -68,7 +70,14 @@
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-.table-wrapper { overflow-x: auto; margin-top: 4px; }
+.hr-tabs-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.table-wrapper { overflow-x: auto; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
 

@@ -1,8 +1,26 @@
 /* Módulo: Lote Mínimo — estilos específicos (globales en components.css) */
 
+.lm-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.lm-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.lm-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
 .filter-bar {
     background: var(--sga-surface);
-    padding: 10px 20px;
+    padding: 14px 18px;
     border-radius: var(--sga-radius);
     box-shadow: var(--sga-shadow);
     display: flex;

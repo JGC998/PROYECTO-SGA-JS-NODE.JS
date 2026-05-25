@@ -1,11 +1,11 @@
 /* ── LAYOUT PRINCIPAL ─────────────────────────────────────────────────────── */
 .enm-inner {
-    max-width: 680px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 28px 40px;
+    padding: 28px 32px 40px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 28px;
 }
 
 .enm-page-header {

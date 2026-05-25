@@ -35,27 +35,24 @@
                     <span class="sga-breadcrumb-current">Almacenes</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-primary sga-btn-sm" id="btn-guardar">Guardar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar">Limpiar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-borrar">Borrar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="alm-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>🏗️ Almacenes</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-guardar">💾 Guardar</button>
-                        <button class="btn-tool secondary" id="btn-limpiar">🧹 Limpiar</button>
-                        <button class="btn-tool secondary" id="btn-borrar">🗑️ Borrar</button>
-                        <button class="btn-tool secondary">❓</button>
-                    </div>
-                </header>
+                <div class="alm-page-header">
+                    <h1 class="sga-page-title">Almacenes</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
                 <form class="master-form">
-                    <fieldset class="form-section">
-                        <legend>Datos del Almacén</legend>
+                    <div class="form-section">
+                        <div class="form-section-title">Datos del Almacén</div>
                         <div class="form-fields">
                             <div class="field-row">
                                 <label>Código de almacén:</label>
@@ -70,11 +67,12 @@
                                 <input type="text" id="alm-nombre" class="input-name" placeholder="">
                             </div>
                         </div>
-                    </fieldset>
+                    </div>
                 </form>
 
             </main>
         </div><!-- /.sga-content -->
+
 
     </div><!-- /.sga-main -->
 

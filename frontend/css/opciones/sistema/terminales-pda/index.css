@@ -1,9 +1,23 @@
 /* Módulo: Terminales PDA — estilos específicos (globales en components.css) */
 
-/* .record-nav, .nav-field, .tab-nav, .tab-btn, .tab-panel, .form-section,
-   .form-row, .input-code, .input-nombre, .input-xs, .input-path,
-   .select-md, .select-lg, .btn-nav, .btn-action, .btn-tool, .empty-tab
-   — todos definidos en components.css */
+.pda-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.pda-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.pda-card {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
 
 /* Feedback de borrar ficheros */
 .resultado.ok {
@@ -16,7 +30,6 @@
     font-size: var(--sga-text-base);
     animation: sga-fadein .18s ease both;
 }
-
 .resultado.error {
     display: block;
     background: var(--sga-danger-bg);

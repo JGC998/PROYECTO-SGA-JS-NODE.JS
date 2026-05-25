@@ -4,45 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Útil</title>
+    <title>SGA LIN — Utilidades</title>
     <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/util/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="dashboard-container">
-        <header class="section-header">
-            <h1>Útil</h1>
-            <p>Herramientas de mantenimiento y administración del sistema</p>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Utilidades</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="card-grid">
-            <div class="menu-card disabled">
-                <span class="soon-badge">Próximamente</span>
-                <div class="icon">🗄️</div>
-                <h3>Adaptación BBDD</h3>
-                <p>Actualización y adaptación de la estructura de base de datos.</p>
-            </div>
+        <div class="sga-content">
+            <main class="util-inner">
 
-            <div class="menu-card disabled">
-                <span class="soon-badge">Próximamente</span>
-                <div class="icon">📊</div>
-                <h3>Generar información TABLEAU</h3>
-                <p>Exportación de datos para análisis en TABLEAU.</p>
-            </div>
+                <div class="util-page-header">
+                    <h1 class="sga-page-title">Utilidades</h1>
+                    <p class="sga-page-description">Herramientas de mantenimiento · SGA LIN</p>
+                </div>
 
-            <div class="menu-card disabled">
-                <span class="soon-badge">Próximamente</span>
-                <div class="icon">🔧</div>
-                <h3>Reconstruir Stock</h3>
-                <p>Recalcula y reconstruye los valores de stock desde los movimientos.</p>
-            </div>
-        </div>
-    </main>
+                <div class="util-card-grid">
+                    <div class="menu-card disabled">
+                        <span class="soon-badge">Próximamente</span>
+                        <div class="icon">🗄️</div>
+                        <h3>Adaptación BBDD</h3>
+                        <p>Actualización y adaptación de la estructura de base de datos.</p>
+                    </div>
 
-    <script src="../../js/navegacion.js"></script>
+                    <div class="menu-card disabled">
+                        <span class="soon-badge">Próximamente</span>
+                        <div class="icon">📊</div>
+                        <h3>Generar información TABLEAU</h3>
+                        <p>Exportación de datos para análisis en TABLEAU.</p>
+                    </div>
+
+                    <div class="menu-card disabled">
+                        <span class="soon-badge">Próximamente</span>
+                        <div class="icon">🔧</div>
+                        <h3>Reconstruir Stock</h3>
+                        <p>Recalcula y reconstruye los valores de stock desde los movimientos.</p>
+                    </div>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
 </body>
 
 </html>

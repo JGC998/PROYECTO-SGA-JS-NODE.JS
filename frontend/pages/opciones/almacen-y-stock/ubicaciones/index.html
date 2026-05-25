@@ -35,24 +35,22 @@
                     <span class="sga-breadcrumb-current">Ubicaciones</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">Exportar a CSV</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-anular">Anular selección</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-seleccionar-todo">Seleccionar todo</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-cambiar-tipo">Cambiar tipo ubicación</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="ubi-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Ubicaciones</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary" id="btn-exportar">Exportar a CSV</button>
-                        <button class="btn-tool secondary" id="btn-anular">Anular selección</button>
-                        <button class="btn-tool secondary" id="btn-seleccionar-todo">Seleccionar todo</button>
-                        <button class="btn-tool secondary" id="btn-cambiar-tipo">Cambiar tipo ubicación</button>
-                    </div>
-                </header>
+                <div class="ubi-page-header">
+                    <h1 class="sga-page-title">Ubicaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
                 <div class="filter-panel">
                     <div class="filter-row">
@@ -68,6 +66,7 @@
                     </div>
                 </div>
 
+                <div class="ubi-table-card">
                 <div class="table-wrapper" id="ubi-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table id="tabla-ubicaciones">
                         <thead>
@@ -108,6 +107,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                </div><!-- /.ubi-table-card -->
 
                 <footer class="ubi-footer">
                     <div class="footer-left">

@@ -35,23 +35,22 @@
                     <span class="sga-breadcrumb-current">Terminales PDA</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nuevo</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-eliminar">Eliminar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="pda-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Terminales PDA</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                        <button class="btn-tool secondary" id="btn-nuevo">Nuevo</button>
-                        <button class="btn-tool secondary btn-danger" id="btn-eliminar">Eliminar</button>
-                    </div>
-                </header>
+                <div class="pda-page-header">
+                    <h1 class="sga-page-title">Terminales PDA</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
 
+                <div class="pda-card">
                 <div class="record-nav">
                     <div class="nav-field">
                         <label>Código de terminal:</label>
@@ -134,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                </div><!-- /.pda-card -->
 
             </main>
         </div><!-- /.sga-content -->

@@ -4,59 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Gestión de Operarios</title>
-    <link rel="stylesheet" href="../../css/navegacion.css">
+    <title>SGA LIN — Maestro de Operarios</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/ferreteria/operarios.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="section-header">
-            <div class="header-left">
-                <h1>Maestro de Operarios</h1>
-                <p>Personal autorizado para retiradas y movimientos de almacén</p>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Operarios</span>
+                </nav>
             </div>
-            <div class="header-actions">
-                <button class="btn-tool primary">+ Añadir Operario</button>
-                <button class="btn-tool secondary">📤 Exportar</button>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">Exportar</button>
             </div>
         </header>
 
-        <div class="status-summary">
-            <div class="status-item">
-                <span class="label">Total Operarios:</span>
-                <span class="count" id="total-operarios">—</span>
-            </div>
-        </div>
+        <div class="sga-content">
+            <main class="op-inner">
 
-        <section class="table-section">
-            <div class="search-box">
-                <input type="text" placeholder="🔍 Buscar por nombre, código o departamento..." class="search-bar">
-            </div>
+                <div class="op-page-header">
+                    <h1 class="sga-page-title">Maestro de Operarios</h1>
+                    <p class="sga-page-description">Maestros · SGA LIN</p>
+                </div>
 
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Cód. Operario</th>
-                            <th>Nombre Completo</th>
-                            <th>Dirección</th>
-                            <th>Persona de Contacto</th>
-                            <th>Email Corporativo</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-operarios">
-                        <tr><td colspan="7" class="loading">Cargando operarios...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
+                <div class="filter-bar">
+                    <input type="text" class="sga-input op-search search-bar" id="buscador-operarios"
+                        placeholder="Buscar por nombre, código o departamento...">
+                    <span id="total-operarios" style="display:none"></span>
+                </div>
 
-    <script src="../../js/navegacion.js"></script>
+                <div class="op-table-card">
+                <div class="table-wrapper" id="operarios-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table id="tabla-operarios">
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Cód. operario</th>
+                                <th>Nombre completo</th>
+                                <th>Dirección</th>
+                                <th>Persona de contacto</th>
+                                <th>Email corporativo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-operarios">
+                            <tr class="placeholder-row">
+                                <td colspan="7">Pulse Actualizar para cargar los operarios.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div><!-- /.op-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
     <script src="../../js/api.js"></script>
     <script src="../../js/ferreteria/operarios.js"></script>
 </body>

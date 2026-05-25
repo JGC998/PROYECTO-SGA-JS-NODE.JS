@@ -37,20 +37,18 @@
                     <span class="sga-breadcrumb-current">Situación de Pedidos de Venta</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="spv-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Situación de Pedidos de Venta</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                    </div>
-                </header>
+                <div class="spv-page-header">
+                    <h1 class="sga-page-title">Situación de Pedidos de Venta</h1>
+                    <p class="sga-page-description">Logística y Pedidos · SGA LIN</p>
+                </div>
 
                 <div class="filter-bar">
                     <label>Cliente:</label>
@@ -63,27 +61,29 @@
                     <input type="date" class="input-date" id="f-hasta">
                 </div>
 
-                <div class="table-wrapper" id="spv-table-wrapper" aria-live="polite" aria-atomic="false">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Documento</th>
-                                <th>Cliente</th>
-                                <th>Nombre cliente</th>
-                                <th>Artículo</th>
-                                <th>Nombre artículo</th>
-                                <th class="col-num">Cantidad</th>
-                                <th>Tipo</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody-spv">
-                            <tr class="placeholder-row">
-                                <td colspan="8">Pulse Actualizar para cargar los datos.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="spv-table-card">
+                    <div class="table-wrapper" id="spv-table-wrapper" aria-live="polite" aria-atomic="false">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                    <th>Cliente</th>
+                                    <th>Nombre cliente</th>
+                                    <th>Artículo</th>
+                                    <th>Nombre artículo</th>
+                                    <th class="col-num">Cantidad</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-spv">
+                                <tr class="placeholder-row">
+                                    <td colspan="8">Pulse Actualizar para cargar los datos.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- /.spv-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

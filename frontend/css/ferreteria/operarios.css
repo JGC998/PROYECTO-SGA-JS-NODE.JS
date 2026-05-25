@@ -1,161 +1,44 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   Maestros — Operarios (legacy layout con navegacion.css)
-   FASE J.7: Design System tokens, sin cambiar clases ni estructura HTML
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* Módulo: Operarios — estilos específicos (globales en components.css) */
 
-.container {
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.section-header {
+.op-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--sga-border);
-    padding-bottom: 15px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.section-header h1 {
-    margin: 0;
-    color: var(--sga-primary);
-    font-size: 1.8rem;
-}
+.op-page-header { display: flex; flex-direction: column; gap: 2px; }
 
-.section-header p {
-    margin: 5px 0 0;
-    color: var(--sga-text-muted);
-}
-
-.btn-tool {
-    padding: 10px 20px;
-    border: none;
-    border-radius: var(--sga-radius-sm);
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: opacity var(--sga-transition), transform var(--sga-transition);
-}
-
-.btn-tool.primary {
-    background: var(--sga-primary);
-    color: var(--sga-surface);
-}
-
-.btn-tool.secondary {
-    background: var(--sga-secondary-bg);
-    color: var(--sga-text);
-}
-
-.btn-tool:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-.status-summary {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 25px;
-    background: var(--sga-surface-alt);
-    padding: 15px 25px;
-    border-radius: var(--sga-radius);
-    border: 1px solid var(--sga-border);
-}
-
-.status-item .label {
-    color: var(--sga-text-muted);
-    font-size: 0.85rem;
-    margin-right: 8px;
-}
-
-.status-item .count {
-    font-weight: bold;
-    color: var(--sga-primary);
-    font-size: 1.1rem;
-}
-
-.status-item .count.success {
-    color: var(--sga-success);
-}
-
-.table-wrapper {
+.op-table-card {
     background: var(--sga-surface);
-    border-radius: var(--sga-radius-lg);
-    box-shadow: var(--sga-shadow-md);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
     overflow: hidden;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-th {
-    background: var(--sga-surface-alt);
-    padding: 15px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: var(--sga-primary);
-    border-bottom: 2px solid var(--sga-border);
-}
-
-td {
-    padding: 15px;
-    border-bottom: 1px solid var(--sga-border-light);
-    font-size: 0.95rem;
-    color: var(--sga-text);
-}
-
-tr:hover {
-    background: var(--sga-surface-hover);
-}
-
-.badge {
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.badge.active {
-    background: var(--sga-success-bg);
-    color: var(--sga-success);
-}
-
-.badge.inactive {
-    background: var(--sga-danger-bg);
-    color: var(--sga-danger);
-}
-
-.search-bar {
-    width: 100%;
-    padding: 12px 20px;
-    border: 1px solid var(--sga-border);
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
     border-radius: var(--sga-radius);
-    margin-bottom: 15px;
-    font-size: 1rem;
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+
+.op-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
     color: var(--sga-text);
     background: var(--sga-surface);
     transition: border-color var(--sga-transition);
 }
-
-.search-bar:focus {
-    outline: none;
-    border-color: var(--sga-accent);
-}
-
-.btn-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: transform var(--sga-transition);
-}
-
-.btn-icon:hover {
-    transform: scale(1.2);
-}
+.op-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

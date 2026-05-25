@@ -1,88 +1,44 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   Visor — tablas de consulta (legacy layout con navegacion.css)
-   FASE J.7: Design System tokens, sin cambiar clases ni estructura HTML
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* Módulo: Clientes (visor) — estilos específicos (globales en components.css) */
 
-.container {
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.visor-header {
+.cli-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 3px solid var(--sga-success);
-    padding-bottom: 10px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.visor-header h1 {
-    color: var(--sga-primary);
-    margin: 0;
-    font-size: 1.6rem;
-}
+.cli-page-header { display: flex; flex-direction: column; gap: 2px; }
 
-.btn-export {
-    padding: 8px 15px;
-    background: var(--sga-success);
-    color: var(--sga-surface);
-    border: none;
-    border-radius: var(--sga-radius-sm);
-    cursor: pointer;
-    font-weight: 600;
-    transition: opacity var(--sga-transition);
-}
-
-.btn-export:hover {
-    opacity: .88;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid var(--sga-border);
+.cli-table-card {
+    background: var(--sga-surface);
     border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+
+.cli-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
     color: var(--sga-text);
     background: var(--sga-surface);
     transition: border-color var(--sga-transition);
 }
-
-.search-bar:focus {
-    outline: none;
-    border-color: var(--sga-accent);
-}
-
-.table-wrapper {
-    background: var(--sga-surface);
-    border-radius: var(--sga-radius);
-    box-shadow: var(--sga-shadow-md);
-    overflow: hidden;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background: var(--sga-success-bg);
-    padding: 12px;
-    text-align: left;
-    color: var(--sga-primary);
-    border-bottom: 2px solid var(--sga-border);
-    font-size: 0.85rem;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid var(--sga-border-light);
-    font-size: 0.9rem;
-    color: var(--sga-text);
-}
-
-tr:hover {
-    background: var(--sga-surface-hover);
-}
+.cli-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

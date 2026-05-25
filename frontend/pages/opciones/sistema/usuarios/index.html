@@ -35,25 +35,26 @@
                     <span class="sga-breadcrumb-current">Usuarios del Sistema</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nuevo</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="usu-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>👤 Usuarios del Sistema</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool secondary" id="btn-nuevo">Nuevo</button>
-                        <button class="btn-tool" id="btn-guardar">Guardar</button>
-                    </div>
-                </header>
+                <div class="usu-page-header">
+                    <h1 class="sga-page-title">Usuarios del Sistema</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
 
-                <input type="text" class="sga-input search-bar" placeholder="Buscar usuario..." id="f-buscar">
+                <div class="usu-filter-bar">
+                    <input type="text" class="sga-input search-bar" placeholder="Buscar usuario..." id="f-buscar">
+                </div>
 
-                <div class="main-layout">
+                <div class="usu-main-layout">
+                    <div class="usu-table-card">
                     <div class="table-wrapper" id="usuarios-table-wrapper" aria-live="polite" aria-atomic="false">
                         <table>
                             <thead>
@@ -72,6 +73,7 @@
                             </tbody>
                         </table>
                     </div>
+                    </div><!-- /.usu-table-card -->
 
                     <div class="form-panel">
                         <h3>Datos del usuario</h3>
@@ -92,7 +94,7 @@
                             <input type="text" id="usu-nivel">
                         </div>
                     </div>
-                </div>
+                </div><!-- /.usu-main-layout -->
 
             </main>
         </div><!-- /.sga-content -->

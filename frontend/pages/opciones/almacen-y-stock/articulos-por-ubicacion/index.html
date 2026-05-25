@@ -37,22 +37,20 @@
                     <span class="sga-breadcrumb-current">Artículos por Ubicación</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm">Importar stocks</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm">Exclusivas al suelo sin stock</button>
+            </div>
         </header>
 
         <div class="sga-content">
             <main class="container">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Artículos por Ubicación</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                        <button class="btn-tool secondary">Importar stocks</button>
-                        <button class="btn-tool secondary">Exclusivas al suelo sin stock</button>
-                    </div>
-                </header>
+                <div class="apu-page-header">
+                    <h1 class="sga-page-title">Artículos por Ubicación</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
                 <div class="filter-panel">
                     <div class="filter-row">
@@ -84,6 +82,7 @@
                     </div>
                 </div>
 
+                <div class="apu-table-card">
                 <div class="table-wrapper" id="apu-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table>
                         <thead>
@@ -105,7 +104,8 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div><!-- /.table-wrapper -->
+                </div><!-- /.apu-table-card -->
 
             </main>
         </div><!-- /.sga-content -->

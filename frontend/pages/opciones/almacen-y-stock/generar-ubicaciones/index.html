@@ -39,13 +39,12 @@
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="gu-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>📍 Generar Ubicaciones</h1>
-                    </div>
-                </header>
+                <div class="gu-page-header">
+                    <h1 class="sga-page-title">Generar Ubicaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
                 <div class="main-layout">
                     <!-- Panel izquierdo: tabla de ubicaciones generadas -->
@@ -82,8 +81,8 @@
 
                     <!-- Panel derecho: formulario de generación -->
                     <div class="right-panel">
-                        <fieldset class="form-section">
-                            <legend>Parámetros de generación</legend>
+                        <div class="form-section">
+                            <div class="form-section-title">Parámetros de generación</div>
                             <div class="params-grid">
                                 <label>Desde pasillo:</label>
                                 <input type="text" class="input-param">
@@ -126,7 +125,7 @@
                             <div class="ok-row">
                                 <button class="btn-ok" type="button">OK</button>
                             </div>
-                        </fieldset>
+                        </div><!-- /.form-section -->
 
                         <div class="action-buttons">
                             <button class="btn-action danger">Eliminar ubicaciones y movimientos</button>

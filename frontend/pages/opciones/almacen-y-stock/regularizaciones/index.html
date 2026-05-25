@@ -37,20 +37,18 @@
                     <span class="sga-breadcrumb-current">Regularizaciones</span>
                 </nav>
             </div>
-            <div class="sga-header-right"></div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+            </div>
         </header>
 
         <div class="sga-content">
-            <main class="container">
+            <main class="rg-inner">
 
-                <header class="page-toolbar">
-                    <div class="toolbar-left">
-                        <h1>Regularizaciones</h1>
-                    </div>
-                    <div class="toolbar-actions">
-                        <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                    </div>
-                </header>
+                <div class="rg-page-header">
+                    <h1 class="sga-page-title">Regularizaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
                 <div class="filter-bar">
                     <label>Artículo:</label>
@@ -63,6 +61,7 @@
 
                 <div class="rg-status" id="rg-status" role="status" aria-live="polite" hidden></div>
 
+                <div class="rg-table-card">
                 <div class="table-wrapper" id="rg-table-wrapper" aria-live="polite" aria-atomic="false">
                     <table>
                         <thead>
@@ -85,6 +84,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                </div><!-- /.rg-table-card -->
 
             </main>
         </div><!-- /.sga-content -->
