@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Maestro de Artículos</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/ferreteria/articulos.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Artículos</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <main class="art-inner">
+
+                <div class="art-page-header">
+                    <h1 class="sga-page-title">Maestro de Artículos</h1>
+                    <p class="sga-page-description">Maestros · SGA LIN</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="sga-input art-search" id="buscador-articulos"
+                        placeholder="Buscar por código, nombre, medida o material...">
+                </div>
+
+                <div class="art-table-card">
+                <div class="table-wrapper" id="articulos-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table id="tabla-articulos">
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Artículo</th>
+                                <th>Nombre de artículo</th>
+                                <th>Stock mín.</th>
+                                <th>Stock máx.</th>
+                                <th>Costo</th>
+                                <th>% Dto.</th>
+                                <th>Color</th>
+                                <th>Medida</th>
+                                <th>Material</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-articulos">
+                            <tr class="placeholder-row">
+                                <td colspan="10">Pulse Actualizar para cargar el catálogo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div><!-- /.art-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/ferreteria/articulos.js"></script>
+</body>
+
+</html>

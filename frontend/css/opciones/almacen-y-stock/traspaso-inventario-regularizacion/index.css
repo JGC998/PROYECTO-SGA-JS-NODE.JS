@@ -1,0 +1,84 @@
+/* Módulo: Traspaso/Inventario/Regularización — estilos específicos (globales en components.css) */
+
+/* .action-panel definido en components.css */
+
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+.action-row label {
+    font-weight: 600;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text-muted);
+    white-space: nowrap;
+}
+
+/* Botones de acción primaria/secundaria dentro del panel */
+.btn-primary-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border: none;
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-primary-light);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: var(--sga-text-base);
+    font-family: var(--sga-font);
+    transition: background var(--sga-transition);
+    align-self: flex-start;
+}
+.btn-primary-action:hover    { background: var(--sga-primary); }
+.btn-primary-action:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-secondary-action {
+    padding: 8px 16px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    color: var(--sga-text);
+    cursor: pointer;
+    font-size: var(--sga-text-sm);
+    font-weight: 500;
+    font-family: var(--sga-font);
+    transition: background var(--sga-transition), border-color var(--sga-transition), color var(--sga-transition);
+}
+.btn-secondary-action:hover { background: var(--sga-info-bg); border-color: var(--sga-accent); color: var(--sga-primary); }
+
+.checkbox-group { display: flex; flex-direction: column; gap: var(--sga-sp-sm); }
+.checkbox-label { display: flex; align-items: center; gap: var(--sga-sp-sm); font-size: var(--sga-text-base); color: var(--sga-text); cursor: pointer; }
+.checkbox-label input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; }
+
+.input-date,
+.input-time {
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+.input-time { width: 100px; }
+.input-date:focus, .input-time:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+
+.hint { font-weight: 400; color: var(--sga-text-muted); font-size: var(--sga-text-xs); }
+
+/* Bloque informativo con leyenda */
+.info-block {
+    background: var(--sga-info-bg);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--sga-radius);
+    padding: var(--sga-sp-md) 20px;
+}
+.info-title { font-weight: 700; font-size: var(--sga-text-sm); color: var(--sga-primary); margin-bottom: var(--sga-sp-sm); letter-spacing: .02em; }
+.info-separator { border-top: 1px dashed #93c5fd; margin-bottom: 10px; }
+.info-body { font-family: 'Courier New', monospace; font-size: var(--sga-text-sm); color: var(--sga-text); display: flex; flex-direction: column; gap: 4px; }
+.info-row { display: flex; gap: var(--sga-sp-sm); }
+.col-letter { font-weight: 700; color: var(--sga-primary); width: 16px; }
+.col-arrow  { color: var(--sga-text-muted); }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Traspaso de Inventario / Regularización</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/traspaso-inventario-regularizacion/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Traspaso de Inventario / Regularización</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="container">
+
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>Traspaso de Inventario / Regularización</h1>
+                    </div>
+                </header>
+
+                <div class="action-panel">
+                    <!-- Bloque principal -->
+                    <div class="action-block" style="display:none">
+                        <button class="btn-primary-action" id="btn-traspasar">Traspasar inventarios</button>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="f-rellenar-ceros" checked>
+                                Rellenar códigos de artículo con ceros por la izquierda
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="f-lote-000000" checked>
+                                Asignar lote 000000 a filas sin lote
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Importar stock externo -->
+                    <div class="action-block">
+                        <div class="action-row">
+                            <button class="btn-secondary-action" id="btn-importar-mysalon">Importar stock Mysalon</button>
+                            <button class="btn-secondary-action" id="btn-importar-azalea">Importar stock Azalea</button>
+                        </div>
+                    </div>
+
+                    <!-- Fecha regularización -->
+                    <div class="action-block" style="display:none">
+                        <div class="action-row">
+                            <label>Fecha regularización:</label>
+                            <input type="date" class="input-date" id="f-fecha-regularizacion">
+                            <button class="btn-secondary-action" id="btn-importar-regularizaciones">Importar regularizaciones</button>
+                        </div>
+                    </div>
+
+                    <!-- Fecha stock inicial -->
+                    <div class="action-block" style="display:none">
+                        <div class="action-row">
+                            <label>Fecha stock inicial <span class="hint">(recomendable fin de mes):</span></label>
+                            <input type="time" class="input-time" id="f-hora-stock" value="00:00">
+                            <button class="btn-secondary-action" id="btn-asignar-fecha">Asignar fecha stock inicial</button>
+                        </div>
+                    </div>
+
+                    <!-- Info estructura Excel -->
+                    <div class="info-block">
+                        <div class="info-title">ESTRUCTURA DEL EXCEL PARA IMPORTAR INVENTARIOS</div>
+                        <div class="info-separator"></div>
+                        <div class="info-body">
+                            <div class="info-row"><span class="col-letter">A</span> <span class="col-arrow">--&gt;</span> artículo busca por CDDIRE y por código interno</div>
+                            <div class="info-row"><span class="col-letter">B</span> <span class="col-arrow">--&gt;</span> cantidad</div>
+                            <div class="info-row"><span class="col-letter">C</span> <span class="col-arrow">--&gt;</span> ubicación del tipo 00100100111</div>
+                            <div class="info-row"><span class="col-letter">D</span> <span class="col-arrow">--&gt;</span> lote</div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/traspaso-inventario-regularizacion.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--sga-surface);
+    padding: 15px 25px;
+    border-radius: var(--sga-radius);
+    margin-bottom: 25px;
+    border-left: 5px solid var(--sga-warning);
+}
+
+.toolbar h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--sga-primary);
+}
+
+.btn-tool {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-primary);
+    color: var(--sga-surface);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background: var(--sga-danger);
+    margin-left: 10px;
+}
+
+.form-section {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.form-section legend {
+    font-weight: bold;
+    color: var(--sga-primary);
+    padding: 0 10px;
+}
+
+.highlight-exit {
+    border-top: 4px solid var(--sga-warning);
+}
+
+.form-grid,
+.form-grid-detail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field.span-2 {
+    grid-column: span 2;
+}
+
+.field.span-3 {
+    grid-column: span 3;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sga-text-muted);
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+}
+
+.readonly-input {
+    background: var(--sga-surface-alt);
+    border-color: var(--sga-border-light);
+}
+
+.btn-add {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: var(--sga-success);
+    color: var(--sga-surface);
+    border: none;
+    border-radius: var(--sga-radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.preview-table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+th {
+    background: var(--sga-surface-alt);
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--sga-border);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--sga-border-light);
+    font-size: 0.9rem;
+}
+
+.placeholder-row {
+    text-align: center;
+    color: var(--sga-text-muted);
+    font-style: italic;
+}

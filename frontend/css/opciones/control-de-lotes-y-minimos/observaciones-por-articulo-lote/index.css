@@ -1,0 +1,80 @@
+/* Inner layout — namespace ob- */
+.ob-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.ob-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.ob-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+/* Módulo: Observaciones por Artículo/Lote — estilos específicos (globales en components.css) */
+
+.filter-panel {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+
+.filter-row label {
+    font-weight: 600;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text-muted);
+    white-space: nowrap;
+}
+
+.input-sm {
+    width: 120px;
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+}
+
+.input-desc {
+    width: 260px;
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+}
+
+.btn-browse {
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    cursor: pointer;
+    font-size: var(--sga-text-xs);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    transition: background var(--sga-transition);
+}
+.btn-browse:hover { background: var(--sga-surface-hover); }
+
+/* Columnas específicas */
+.cell-wide { min-width: 200px; }
+.cell-obs  { min-width: 300px; }

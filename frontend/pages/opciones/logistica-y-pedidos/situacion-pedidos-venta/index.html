@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Situación de Pedidos de Venta</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Situación Pedidos de Venta</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">
+                    📤 Exportar CSV
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="spv-inner">
+
+                <!-- CABECERA -->
+                <div class="spv-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Situación Pedidos de Venta</h1>
+                        <p class="sga-page-description">Consulta de pedidos de venta · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="spv-filters">
+                    <div class="spv-filters-row">
+                        <span class="spv-date-label">Desde</span>
+                        <input type="date" id="spv-f-desde" class="sga-input spv-date-input" aria-label="Fecha desde">
+                        <span class="spv-date-label">Hasta</span>
+                        <input type="date" id="spv-f-hasta" class="sga-input spv-date-input" aria-label="Fecha hasta">
+                        <input type="text" id="spv-f-cliente" class="sga-input spv-search-input"
+                               placeholder="Cliente…" autocomplete="off" aria-label="Buscar cliente">
+                        <input type="text" id="spv-f-articulo" class="sga-input spv-search-input"
+                               placeholder="Artículo…" autocomplete="off" aria-label="Buscar artículo">
+                        <div class="spv-quick-btns">
+                            <button class="spv-quick-btn" data-days="0" aria-label="Hoy">Hoy</button>
+                            <button class="spv-quick-btn" data-days="7" aria-label="Últimos 7 días">7d</button>
+                            <button class="spv-quick-btn" data-days="30" aria-label="Últimos 30 días">30d</button>
+                            <button class="spv-quick-btn" data-days="90" aria-label="Últimos 90 días">90d</button>
+                            <button class="spv-quick-btn spv-quick-btn--active" data-days="365" aria-label="Último año">1a</button>
+                        </div>
+                        <button class="spv-btn-buscar" id="spv-btn-buscar" type="button">Buscar</button>
+                    </div>
+                </div>
+
+                <!-- CONTADORES -->
+                <div class="spv-counters" role="status" aria-live="polite" aria-atomic="true">
+                    <div class="spv-counter spv-counter--total">
+                        <span class="spv-counter__val" id="spv-cnt-total">—</span>
+                        <span class="spv-counter__label">Total líneas</span>
+                    </div>
+                    <div class="spv-counter spv-counter--clientes">
+                        <span class="spv-counter__val" id="spv-cnt-clientes">—</span>
+                        <span class="spv-counter__label">Clientes</span>
+                    </div>
+                    <div class="spv-counter spv-counter--articulos">
+                        <span class="spv-counter__val" id="spv-cnt-articulos">—</span>
+                        <span class="spv-counter__label">Artículos</span>
+                    </div>
+                    <div class="spv-counter spv-counter--cantidad">
+                        <span class="spv-counter__val" id="spv-cnt-cantidad">—</span>
+                        <span class="spv-counter__label">Uds totales</span>
+                    </div>
+                </div>
+
+                <!-- TABLA -->
+                <div class="spv-table-card">
+                    <div class="spv-table-wrapper" id="spv-table-wrapper" aria-live="polite" aria-atomic="false">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                    <th>Cliente</th>
+                                    <th>Nombre cliente</th>
+                                    <th>Artículo</th>
+                                    <th>Nombre artículo</th>
+                                    <th class="col-num">Cantidad</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-spv">
+                                <tr class="spv-placeholder-row">
+                                    <td colspan="8">Introduce los filtros y pulsa <strong>Buscar</strong>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /.spv-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/logistica-y-pedidos/situacion-pedidos-venta.js"></script>
+</body>
+
+</html>

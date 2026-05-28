@@ -1,0 +1,976 @@
+{
+  "_v": 2,
+  "version": 4,
+  "nombre": "Almacén Logístico",
+  "dimensiones": {
+    "ancho": 50,
+    "profundidad": 50,
+    "alto": 9
+  },
+  "objetos": [
+    {
+      "id": "oficina_001",
+      "tipo": "zona_oficina",
+      "etiqueta": "Control",
+      "posicion": {
+        "x": 46.5,
+        "y": 0,
+        "z": 3.5
+      },
+      "rotacion": {
+        "y": 180
+      },
+      "dimensiones": {
+        "ancho": 6,
+        "profundidad": 4
+      },
+      "meta": {}
+    },
+    {
+      "id": "puerta_entrada",
+      "tipo": "puerta",
+      "etiqueta": "Entrada principal",
+      "posicion": {
+        "x": 12,
+        "y": 0,
+        "z": 0.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 4,
+        "alto": 4
+      },
+      "meta": {}
+    },
+    {
+      "id": "puerta_muelle1",
+      "tipo": "puerta",
+      "etiqueta": "Muelle 1",
+      "posicion": {
+        "x": 32,
+        "y": 0,
+        "z": 0.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 4,
+        "alto": 4
+      },
+      "meta": {}
+    },
+    {
+      "id": "puerta_muelle2",
+      "tipo": "puerta",
+      "etiqueta": "Muelle 2",
+      "posicion": {
+        "x": 40,
+        "y": 0,
+        "z": 0.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 4,
+        "alto": 4
+      },
+      "meta": {}
+    },
+    {
+      "id": "carga_expedicion",
+      "tipo": "zona_carga",
+      "etiqueta": "Expedición",
+      "posicion": {
+        "x": 36,
+        "y": 0,
+        "z": 4
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 14,
+        "profundidad": 6
+      },
+      "meta": {}
+    },
+    {
+      "id": "carga_recepcion",
+      "tipo": "zona_carga",
+      "etiqueta": "Recepción",
+      "posicion": {
+        "x": 12,
+        "y": 0,
+        "z": 4
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 10,
+        "profundidad": 6
+      },
+      "meta": {}
+    },
+    {
+      "id": "pilar_001",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 20,
+        "y": 0,
+        "z": 8.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pilar_002",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 30,
+        "y": 0,
+        "z": 8.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pilar_003",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 20,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pilar_004",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 30,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pilar_005",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 20,
+        "y": 0,
+        "z": 41.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pilar_006",
+      "tipo": "columna",
+      "etiqueta": "",
+      "posicion": {
+        "x": 30,
+        "y": 0,
+        "z": 41.5
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {},
+      "meta": {}
+    },
+    {
+      "id": "pasillo_001",
+      "tipo": "pasillo",
+      "etiqueta": "P001",
+      "posicion": {
+        "x": 4.6,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 1
+      }
+    },
+    {
+      "id": "pasillo_002",
+      "tipo": "pasillo",
+      "etiqueta": "P002",
+      "posicion": {
+        "x": 10.8,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 2
+      }
+    },
+    {
+      "id": "pasillo_003",
+      "tipo": "pasillo",
+      "etiqueta": "P003",
+      "posicion": {
+        "x": 16.5,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 3
+      }
+    },
+    {
+      "id": "pasillo_004",
+      "tipo": "pasillo",
+      "etiqueta": "P004",
+      "posicion": {
+        "x": 33.5,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 4
+      }
+    },
+    {
+      "id": "pasillo_005",
+      "tipo": "pasillo",
+      "etiqueta": "P005",
+      "posicion": {
+        "x": 39.7,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 5
+      }
+    },
+    {
+      "id": "pasillo_006",
+      "tipo": "pasillo",
+      "etiqueta": "P006",
+      "posicion": {
+        "x": 45.9,
+        "y": 0,
+        "z": 25
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "longitud": 33,
+        "ancho": 4.5,
+        "forma": "recto"
+      },
+      "meta": {
+        "numero": 6
+      }
+    },
+    {
+      "id": "estanteria_001D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P001 D",
+      "posicion": {
+        "x": 1.925,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 1,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_001I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P001 I",
+      "posicion": {
+        "x": 7.275,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 1,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_001D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P001 D (fondo)",
+      "posicion": {
+        "x": 1.925,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 1,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_001I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P001 I (fondo)",
+      "posicion": {
+        "x": 7.275,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 1,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_002D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P002 D",
+      "posicion": {
+        "x": 8.125,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 2,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_002I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P002 I",
+      "posicion": {
+        "x": 13.475,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 2,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_002D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P002 D (fondo)",
+      "posicion": {
+        "x": 8.125,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 2,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_002I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P002 I (fondo)",
+      "posicion": {
+        "x": 13.475,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 2,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_003D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P003 D",
+      "posicion": {
+        "x": 13.825,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 3,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_003I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P003 I",
+      "posicion": {
+        "x": 19.175,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 3,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_003D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P003 D (fondo)",
+      "posicion": {
+        "x": 13.825,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 3,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_003I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P003 I (fondo)",
+      "posicion": {
+        "x": 19.175,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 3,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_004D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P004 D",
+      "posicion": {
+        "x": 30.825,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 4,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_004I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P004 I",
+      "posicion": {
+        "x": 36.175,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 4,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_004D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P004 D (fondo)",
+      "posicion": {
+        "x": 30.825,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 4,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_004I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P004 I (fondo)",
+      "posicion": {
+        "x": 36.175,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 4,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_005D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P005 D",
+      "posicion": {
+        "x": 37.025,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 5,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_005I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P005 I",
+      "posicion": {
+        "x": 42.375,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 5,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_005D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P005 D (fondo)",
+      "posicion": {
+        "x": 37.025,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 5,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_005I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P005 I (fondo)",
+      "posicion": {
+        "x": 42.375,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 5,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_006D_f",
+      "tipo": "estanteria",
+      "etiqueta": "P006 D",
+      "posicion": {
+        "x": 43.225,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 6,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_006I_f",
+      "tipo": "estanteria",
+      "etiqueta": "P006 I",
+      "posicion": {
+        "x": 48.575,
+        "y": 0,
+        "z": 14.85
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 6,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_006D_b",
+      "tipo": "estanteria",
+      "etiqueta": "P006 D (fondo)",
+      "posicion": {
+        "x": 43.225,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 6,
+        "lado": "D",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "estanteria_006I_b",
+      "tipo": "estanteria",
+      "etiqueta": "P006 I (fondo)",
+      "posicion": {
+        "x": 48.575,
+        "y": 0,
+        "z": 35.15
+      },
+      "rotacion": {
+        "y": 90
+      },
+      "dimensiones": {
+        "ancho": 14.3,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {
+        "pasillo": 6,
+        "lado": "I",
+        "columnas": 9,
+        "niveles": 5
+      }
+    },
+    {
+      "id": "rack_trasero_izq",
+      "tipo": "estanteria",
+      "etiqueta": "Zona Trasera Izq",
+      "posicion": {
+        "x": 10,
+        "y": 0,
+        "z": 45
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 17,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {}
+    },
+    {
+      "id": "rack_trasero_der",
+      "tipo": "estanteria",
+      "etiqueta": "Zona Trasera Der",
+      "posicion": {
+        "x": 40,
+        "y": 0,
+        "z": 45
+      },
+      "rotacion": {
+        "y": 0
+      },
+      "dimensiones": {
+        "ancho": 17,
+        "profundidad": 0.85,
+        "niveles": 5,
+        "alturaNivel": 1.1
+      },
+      "meta": {}
+    }
+  ]
+}

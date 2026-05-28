@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main, paco-dev]
+  pull_request:
+    branches: [main, paco-dev]
+
+jobs:
+  quality:
+    name: Lint y Tests de Validación
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Audit de dependencias de producción
+        run: npm audit --omit=dev
+
+      - name: Lint
+        run: npm run lint
+
+      # Los tests de validación no requieren SQL Server.
+      # Los tests de integración (health, stock, traspaso) requieren la BD LIN
+      # y se ejecutan únicamente en entorno local con: npm test
+      - name: Tests de validación (sin BD)
+        run: npm run test:ci

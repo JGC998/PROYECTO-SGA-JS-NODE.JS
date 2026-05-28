@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Almacenes</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/almacenes/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Almacenes</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-primary sga-btn-sm" id="btn-guardar">Guardar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar">Limpiar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-borrar">Borrar</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <main class="alm-inner">
+
+                <div class="alm-page-header">
+                    <h1 class="sga-page-title">Almacenes</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
+
+                <form class="master-form">
+                    <div class="form-section">
+                        <div class="form-section-title">Datos del Almacén</div>
+                        <div class="form-fields">
+                            <div class="field-row">
+                                <label>Código de almacén:</label>
+                                <div class="input-nav">
+                                    <input type="text" id="alm-codigo" class="input-code" placeholder="">
+                                    <button type="button" class="btn-nav" id="btn-prev">&#8249;</button>
+                                    <button type="button" class="btn-nav" id="btn-next">&#8250;</button>
+                                </div>
+                            </div>
+                            <div class="field-row">
+                                <label>Nombre de almacén:</label>
+                                <input type="text" id="alm-nombre" class="input-name" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/almacenes.js"></script>
+</body>
+
+</html>

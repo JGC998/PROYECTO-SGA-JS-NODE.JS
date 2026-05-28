@@ -1,0 +1,252 @@
+/* ── REGULARIZACIONES — namespace rg- ────────────────────────────────────────
+   Mismo estilo base que entrada-de-mercancia / salida-de-mercancia.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── LAYOUT ──────────────────────────────────────────────────────────────── */
+
+.rg-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.rg-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* ── PANEL FILTROS ───────────────────────────────────────────────────────── */
+
+.rg-filters-panel {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 20px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rg-filters-panel-title {
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--sga-primary);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--sga-info-bg);
+}
+
+.rg-filters-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rg-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rg-label {
+    font-size: .7rem;
+    font-weight: 700;
+    color: var(--sga-text-muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    display: block;
+}
+
+.rg-input {
+    height: 40px;
+    padding: 0 12px;
+    border: 1.5px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: .88rem;
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition), box-shadow var(--sga-transition);
+    font-family: inherit;
+    box-sizing: border-box;
+    min-width: 160px;
+}
+.rg-input:focus {
+    outline: 2px solid var(--sga-accent);
+    outline-offset: 1px;
+    border-color: var(--sga-accent);
+}
+
+.rg-input--date { min-width: 150px; }
+
+.rg-filter-actions {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0;
+}
+
+.rg-btn-buscar {
+    height: 40px;
+    padding: 0 20px;
+    background: var(--sga-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--sga-radius-sm);
+    font-size: .88rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: background var(--sga-transition), transform .06s;
+    font-family: inherit;
+    white-space: nowrap;
+}
+.rg-btn-buscar:hover  { background: var(--sga-primary-light); }
+.rg-btn-buscar:active { transform: scale(.99); }
+.rg-btn-buscar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── STATUS ──────────────────────────────────────────────────────────────── */
+
+.rg-status {
+    padding: 8px 12px;
+    border-radius: var(--sga-radius-sm);
+    font-size: .82rem;
+    font-weight: 600;
+    background: var(--sga-info-bg);
+    color: var(--sga-primary);
+    border: 1px solid #bfdbfe;
+}
+
+/* ── TABLA ───────────────────────────────────────────────────────────────── */
+
+.rg-table-card {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.table-wrapper { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .84rem;
+}
+
+thead th {
+    background: var(--sga-surface-alt);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--sga-border);
+    white-space: nowrap;
+    color: var(--sga-text-muted);
+    font-weight: 700;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--sga-border);
+    color: var(--sga-text);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--sga-surface-hover); }
+
+.placeholder-row td {
+    text-align: center;
+    color: var(--sga-text-muted);
+    padding: 32px 20px;
+    font-size: .875rem;
+}
+
+.col-num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ── BADGE TIPO ──────────────────────────────────────────────────────────── */
+
+.rg-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+    background: var(--sga-surface-alt);
+    color: var(--sga-text-muted);
+    border: 1px solid var(--sga-border);
+}
+
+.rg-badge--entrada {
+    background: var(--sga-success-bg);
+    color: var(--sga-success);
+    border-color: #bbf7d0;
+}
+
+.rg-badge--salida {
+    background: var(--sga-danger-bg);
+    color: var(--sga-danger);
+    border-color: #fecaca;
+}
+
+.rg-badge--traspaso {
+    background: var(--sga-info-bg);
+    color: var(--sga-primary);
+    border-color: #bfdbfe;
+}
+
+/* ── SPINNER DE CARGA ────────────────────────────────────────────────────── */
+
+.rg-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 24px;
+    color: var(--sga-text-muted);
+    font-size: .875rem;
+}
+
+.rg-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--sga-border);
+    border-top-color: var(--sga-accent);
+    border-radius: 50%;
+    animation: rg-spin .7s linear infinite;
+}
+
+@keyframes rg-spin { to { transform: rotate(360deg); } }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1023px) {
+    .rg-inner { padding: 16px; }
+}
+
+@media (max-width: 640px) {
+    .rg-inner { padding: 12px; gap: 12px; }
+    .rg-filters-panel { padding: 16px; }
+    .rg-filters-row { flex-direction: column; align-items: stretch; }
+    .rg-filter-group { width: 100%; }
+    .rg-input { min-width: 0; width: 100%; }
+    .rg-filter-actions { width: 100%; }
+    .rg-btn-buscar { width: 100%; height: 46px; font-size: .95rem; }
+}

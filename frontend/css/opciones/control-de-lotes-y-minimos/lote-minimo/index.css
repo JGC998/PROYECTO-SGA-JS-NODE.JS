@@ -1,0 +1,61 @@
+/* Módulo: Lote Mínimo — estilos específicos (globales en components.css) */
+
+.lm-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.lm-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.lm-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+
+.filter-bar label {
+    font-weight: 600;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text-muted);
+    white-space: nowrap;
+}
+
+.input-desc {
+    width: 240px;
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+}
+
+.btn-browse {
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    cursor: pointer;
+    font-size: var(--sga-text-xs);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    transition: background var(--sga-transition);
+}
+.btn-browse:hover { background: var(--sga-surface-hover); }

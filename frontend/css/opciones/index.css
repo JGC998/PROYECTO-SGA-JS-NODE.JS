@@ -1,0 +1,65 @@
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    margin-bottom: 40px;
+    border-left: 5px solid var(--sga-info);
+    padding-left: 15px;
+}
+
+.section-header h1 {
+    color: var(--sga-primary);
+    margin: 0;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.option-group {
+    background: var(--sga-surface);
+    padding: 25px;
+    border-radius: var(--sga-radius-lg);
+    box-shadow: var(--sga-shadow);
+    border-top: 4px solid var(--sga-info);
+}
+
+.option-group h2 {
+    font-size: 1.1rem;
+    color: var(--sga-primary);
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--sga-border-light);
+    padding-bottom: 10px;
+}
+
+.option-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+}
+
+.option-group li {
+    margin-bottom: 10px;
+}
+
+.option-group a {
+    text-decoration: none;
+    color: var(--sga-text-muted);
+    font-size: 0.95rem;
+    display: block;
+    padding: 5px 0;
+    transition: color var(--sga-transition);
+}
+
+.option-group a:hover {
+    color: var(--sga-info);
+    padding-left: 5px;
+}

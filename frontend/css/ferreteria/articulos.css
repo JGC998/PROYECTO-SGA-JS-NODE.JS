@@ -1,0 +1,44 @@
+/* Módulo: Artículos — estilos específicos (globales en components.css) */
+
+.art-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.art-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.art-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+
+.art-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+.art-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

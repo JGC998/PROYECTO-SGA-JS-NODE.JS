@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Almacén 3D</title>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <link rel="stylesheet" href="mapa-3d.css">
+</head>
+
+<body>
+    <canvas id="c"></canvas>
+
+    <div id="load">
+        <div class="spin"></div>
+        <div class="load-t" id="load-t">Construyendo almacén 3D…</div>
+    </div>
+
+    <div id="start">
+        <div class="start-logo">Almacén 3D <small>SGA LIN · Modo inmersivo</small></div>
+        <button id="btn-enter">&#9654;&nbsp; Entrar al almacén</button>
+        <div class="start-keys">
+            <span><kbd>W A S D</kbd> Moverse</span>
+            <span><kbd>Ratón</kbd> Mirar</span>
+            <span><kbd>Clic / E</kbd> Ver estantería</span>
+            <span><kbd>Shift</kbd> Correr</span>
+            <span><kbd>F</kbd> Buscar ubicación</span>
+            <span><kbd>P</kbd> Lista de picking</span>
+            <span><kbd>R</kbd> Actualizar datos</span>
+            <span><kbd>ESC</kbd> Pausar / salir</span>
+            <span><kbd>G</kbd> Guardar ruta</span>
+            <span><kbd>T</kbd> Asignar a trabajador</span>
+            <span><kbd>X</kbd> Cancelar ruta</span>
+            <span><kbd>B</kbd> Escáner</span>
+        </div>
+        <div class="start-note">El cursor se bloqueará en pantalla — pulsa ESC para liberarlo</div>
+    </div>
+
+    <div id="pause">
+        <div class="pause-box">
+            <h2>&#9208; Pausado</h2>
+            <button class="p-btn resume" id="btn-resume">&#9654; Continuar</button>
+            <button class="p-btn history" id="btn-history">&#128203; Historial de rutas</button>
+            <button class="p-btn refresh" id="btn-refresh-pause">&#8635; Actualizar datos</button>
+            <button class="p-btn view2d" id="btn-export-map">&#128444; Exportar mapa PNG</button>
+            <button class="p-btn view2d" id="btn-editor">&#9881; Editor de almacén</button>
+            <button class="p-btn view2d" id="btn-supervisor">&#128203; Supervisor picking</button>
+            <button class="p-btn view2d" id="btn-hub-almacen">&#127963; Hub Almacén</button>
+            <button class="p-btn view2d" id="btn-sga-main">&#8617; SGA principal</button>
+            <div class="p-thresh">
+                <label for="thresh-input">Alerta stock &lt;</label>
+                <input id="thresh-input" type="number" min="1" max="9999" value="10">
+                <span>uds.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="xhair"></div>
+    <div id="prompt">&#128230; <strong>Clic</strong> — Ver detalle de estantería</div>
+
+    <!-- PEEK PANEL (info instantánea al apuntar a una estantería) -->
+    <div id="peek-panel">
+        <div class="peek-code" id="peek-code"></div>
+        <div class="peek-levels" id="peek-levels"></div>
+    </div>
+
+    <div id="hud">
+        <div class="hud-b">
+            <div class="hud-v" id="hud-tot">—</div>
+            <div class="hud-l">Estanterías</div>
+        </div>
+        <div class="hud-b">
+            <div class="hud-v" id="hud-stk" style="color:#4ade80">—</div>
+            <div class="hud-l">Con stock</div>
+        </div>
+        <div class="hud-b">
+            <div class="hud-v" id="hud-emp" style="color:#f87171">—</div>
+            <div class="hud-l">Vacías</div>
+        </div>
+    </div>
+
+    <!-- Leyenda de atajos de teclado (solo visible cuando el cursor está bloqueado) -->
+    <div id="hud-btns">
+        <div class="hk"><kbd>F</kbd> Buscar</div>
+        <div class="hk"><kbd>P</kbd> Picking</div>
+        <div class="hk"><kbd>R</kbd> Actualizar</div>
+        <div class="hk"><kbd>ESC</kbd> Menú</div>
+        <div class="hk"><kbd>B</kbd> Escáner</div>
+        <div class="hk hk-pick" id="hk-pick" style="display:none"><kbd>C</kbd> Marcar parada&nbsp; <kbd>G</kbd> Guardar&nbsp; <kbd>T</kbd> Asignar&nbsp; <kbd>X</kbd> Cancelar</div>
+    </div>
+
+    <div id="legend">
+        <div class="leg"><div class="leg-d" style="background:#22c55e"></div>Con stock</div>
+        <div class="leg"><div class="leg-d" style="background:#ef4444"></div>Vacía</div>
+        <div class="leg"><div class="leg-d" style="background:#64748b"></div>Sin datos</div>
+    </div>
+
+    <!-- MINIMAP -->
+    <div id="minimap-wrap">
+        <canvas id="minimap" width="220" height="220"></canvas>
+    </div>
+
+    <!-- TELEPORT OVERLAY -->
+    <div id="teleport">
+        <div class="tp-box">
+            <div class="tp-hdr">
+                <span class="tp-title">Ir a ubicación</span>
+                <button class="tp-cls" id="tp-cls" aria-label="Cerrar">&times;</button>
+            </div>
+            <input id="tp-input" type="text" placeholder="P01 · P01-I-X05 · código · nombre artículo" autocomplete="off" spellcheck="false">
+            <div id="tp-results"></div>
+            <div class="tp-hint">&#8593;&#8595; navegar · Enter seleccionar · ESC cerrar</div>
+        </div>
+    </div>
+
+    <!-- PICKING PANEL -->
+    <div id="pick-panel">
+        <div class="pp-box">
+            <div class="pp-hdr">
+                <span class="pp-title">&#128722; Lista de picking</span>
+                <button class="pp-cls" id="pp-cls" aria-label="Cerrar">&times;</button>
+            </div>
+
+            <!-- Buscador de artículos -->
+            <div class="pp-search-wrap">
+                <label class="sr-only" for="pp-search">Buscar artículos</label>
+                <span class="pp-search-icon">&#128269;</span>
+                <input id="pp-search" type="text" placeholder="Buscar por código o nombre de artículo…" autocomplete="off" spellcheck="false">
+            </div>
+            <div id="pp-art-results" class="pp-art-results"></div>
+
+            <!-- Lista actual -->
+            <div class="pp-items-hdr">
+                En lista <span id="pp-items-count"></span>
+            </div>
+            <div id="pp-items-list" class="pp-items-list"></div>
+
+            <div class="pp-footer">
+                <div class="pp-actions">
+                    <button id="pp-clear" class="pp-btn pp-btn-ghost">&#128465; Limpiar</button>
+                    <button id="pp-start" class="pp-btn pp-btn-primary" disabled>&#9654; Calcular ruta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PICKING HUD — revisión de ruta -->
+    <div id="pick-hud">
+        <div class="ph-header">
+            <span class="ph-icon">&#128722;</span>
+            <div class="ph-summary">
+                <span class="ph-title">Ruta de picking</span>
+                <span class="ph-meta" id="ph-meta">—</span>
+            </div>
+            <button class="ph-btn ph-stop" id="ph-stop" title="Cancelar">&#10005;</button>
+        </div>
+        <div class="ph-stops" id="ph-stops"></div>
+        <div class="ph-actions">
+            <button class="ph-btn ph-mark"   id="ph-mark">&#10003; Marcar parada</button>
+            <button class="ph-btn ph-qr"     id="ph-qr"  title="Mostrar QR de la ruta">&#9646;&#9646; QR</button>
+            <button class="ph-btn ph-save"   id="ph-save">&#128190; Guardar</button>
+            <button class="ph-btn ph-assign" id="ph-assign">&#128119; Asignar</button>
+        </div>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div id="detail">
+        <div class="det-box">
+            <div class="det-hdr">
+                <div class="det-hdr-top">
+                    <div>
+                        <div class="det-code-small" id="det-cod"></div>
+                        <div class="det-title" id="det-tit"></div>
+                        <div class="det-subtitle" id="det-sub"></div>
+                    </div>
+                    <div class="det-hdr-actions">
+                        <button class="det-cls" id="det-cls" aria-label="Cerrar">&times;</button>
+                    </div>
+                </div>
+                <div class="det-stats">
+                    <div class="det-stat ds-tot">
+                        <div class="det-stat-v" id="ds-tot">—</div>
+                        <div class="det-stat-l">Niveles</div>
+                    </div>
+                    <div class="det-stat ds-stk">
+                        <div class="det-stat-v" id="ds-stk">—</div>
+                        <div class="det-stat-l">Con stock</div>
+                    </div>
+                    <div class="det-stat ds-emp">
+                        <div class="det-stat-v" id="ds-emp">—</div>
+                        <div class="det-stat-l">Vacías</div>
+                    </div>
+                    <div class="det-stat ds-units">
+                        <div class="det-stat-v" id="ds-units">—</div>
+                        <div class="det-stat-l">Uds. totales</div>
+                    </div>
+                </div>
+            </div>
+            <div class="det-body" id="det-body"></div>
+            <div class="det-other-locs" id="det-other-locs" style="display:none">
+                <div class="det-other-title">Otras ubicaciones de estos artículos</div>
+                <div id="det-other-body"></div>
+            </div>
+            <div class="det-hint">Clic izq. · <strong>E</strong> · o &times; para abrir — <strong>ESC</strong> para pausar</div>
+        </div>
+    </div>
+
+<!-- RESUMEN DE SESIÓN -->
+    <div id="session-summary" style="display:none">
+        <div class="sum-box">
+            <div class="sum-icon">✓</div>
+            <div class="sum-title">Ruta completada</div>
+            <div class="sum-grid">
+                <div class="sum-stat"><div class="sum-v" id="sum-stops">—</div><div class="sum-l">Paradas</div></div>
+                <div class="sum-stat"><div class="sum-v" id="sum-items">—</div><div class="sum-l">Uds. recogidas</div></div>
+                <div class="sum-stat"><div class="sum-v" id="sum-dist">—</div><div class="sum-l">Distancia est.</div></div>
+                <div class="sum-stat"><div class="sum-v" id="sum-time">—</div><div class="sum-l">Tiempo</div></div>
+            </div>
+            <div class="sum-actions">
+                <button id="sum-pdf" class="sum-btn sum-secondary">⬇ Exportar PDF</button>
+                <button id="sum-cls" class="sum-btn sum-primary">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY PANEL -->
+    <div id="history-panel">
+        <div class="hp-box">
+            <div class="hp-hdr">
+                <span class="hp-title">&#128203; Historial de rutas</span>
+                <button class="hp-cls" id="hp-cls" aria-label="Cerrar">&times;</button>
+            </div>
+            <div id="hp-list" class="hp-list"></div>
+            <div class="hp-footer">
+                <button id="hp-clear-all" class="hp-btn hp-ghost">&#128465; Limpiar historial</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCANNER PANEL -->
+    <div id="scanner-panel" style="display:none">
+        <div class="sc-box">
+            <div class="sc-hdr">
+                <span class="sc-title">&#128247; Modo escáner</span>
+                <button class="sc-cls" id="sc-cls" aria-label="Cerrar">&times;</button>
+            </div>
+            <p class="sc-hint">Apunta la pistola y escanea — el artículo se añade a la lista de picking</p>
+            <input id="scanner-input" class="sc-input" type="text" autocomplete="off" spellcheck="false" placeholder="Esperando código…">
+            <div class="sc-log-hdr">Últimos escaneados</div>
+            <div class="sc-log" id="scanner-log"></div>
+            <div class="sc-footer"><kbd>ESC</kbd> cerrar &nbsp;·&nbsp; <kbd>B</kbd> abrir/cerrar</div>
+        </div>
+    </div>
+
+    <!-- WORKER ASSIGNMENT MODAL -->
+    <div id="worker-modal" style="display:none">
+        <div class="wm-box">
+            <div class="wm-hdr">
+                <span class="wm-title">&#128119; Asignar ruta a trabajador</span>
+                <button class="wm-cls" id="wm-cls" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="wm-grid" id="wm-grid"></div>
+        </div>
+    </div>
+
+    <!-- SIMULATION CONFIRM MODAL -->
+    <div id="sim-modal" style="display:none">
+        <div class="sim-box">
+            <div class="sim-icon">&#128119;</div>
+            <div class="sim-worker"><span id="sim-worker-name"></span> asignado/a a la ruta</div>
+            <div class="sim-desc">¿Quieres ver la simulación del recorrido en 3D?</div>
+            <div class="sim-btns">
+                <button id="sim-yes" class="sim-btn sim-yes">&#9654; Sí, simular</button>
+                <button id="sim-no"  class="sim-btn sim-no">&#10005; Solo asignar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR MODAL -->
+    <div id="qr-modal" style="display:none">
+        <div class="qrm-box">
+            <div class="qrm-hdr">
+                <span class="qrm-title">&#9646;&#9646; Ruta en el m&oacute;vil</span>
+                <button class="qrm-cls" id="qr-cls" aria-label="Cerrar">&times;</button>
+            </div>
+            <img id="qr-img" class="qrm-img" src="" alt="QR">
+            <div class="qrm-hint">Escanea con la c&aacute;mara del m&oacute;vil</div>
+            <div class="qrm-url" id="qr-url-text"></div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script type="module" src="src/3d/escena.js"></script>
+</body>
+
+</html>

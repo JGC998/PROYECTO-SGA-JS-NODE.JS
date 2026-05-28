@@ -1,0 +1,3242 @@
+[
+  {
+    "ubicacion": "P001 D X001 Y01",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 D X001 Y02",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P001 D X001 Y03",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P001 D X001 Y04",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P001 D X001 Y05",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P001 D X002 Y01",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P001 D X002 Y02",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P001 D X002 Y03",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P001 D X002 Y04",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P001 D X002 Y05",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P001 D X003 Y01",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P001 D X003 Y02",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P001 D X003 Y03",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 D X003 Y04",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P001 D X003 Y05",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P001 D X004 Y01",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P001 D X004 Y02",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P001 D X004 Y03",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P001 D X004 Y04",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P001 D X004 Y05",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P001 D X005 Y01",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P001 D X005 Y02",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P001 D X005 Y03",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P001 D X005 Y04",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P001 D X005 Y05",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P001 D X006 Y01",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P001 D X006 Y02",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P001 D X006 Y03",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P001 D X006 Y04",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P001 D X006 Y05",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P001 D X007 Y01",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 D X007 Y02",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P001 D X007 Y03",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P001 D X007 Y04",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P001 D X007 Y05",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P001 D X008 Y01",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P001 D X008 Y02",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P001 D X008 Y03",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P001 D X008 Y04",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P001 D X008 Y05",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P001 D X009 Y01",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P001 D X009 Y02",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P001 D X009 Y03",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 D X009 Y04",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P001 D X009 Y05",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P001 I X001 Y01",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P001 I X001 Y02",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P001 I X001 Y03",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P001 I X001 Y04",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P001 I X001 Y05",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P001 I X002 Y01",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P001 I X002 Y02",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 I X002 Y03",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P001 I X002 Y04",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P001 I X002 Y05",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P001 I X003 Y01",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P001 I X003 Y02",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P001 I X003 Y03",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P001 I X003 Y04",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P001 I X003 Y05",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P001 I X004 Y01",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P001 I X004 Y02",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P001 I X004 Y03",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P001 I X004 Y04",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P001 I X004 Y05",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 I X005 Y01",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P001 I X005 Y02",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P001 I X005 Y03",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P001 I X005 Y04",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P001 I X005 Y05",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P001 I X006 Y01",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P001 I X006 Y02",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P001 I X006 Y03",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P001 I X006 Y04",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P001 I X006 Y05",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P001 I X007 Y01",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P001 I X007 Y02",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P001 I X007 Y03",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P001 I X007 Y04",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P001 I X007 Y05",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P001 I X008 Y01",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P001 I X008 Y02",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P001 I X008 Y03",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P001 I X008 Y04",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P001 I X008 Y05",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P001 I X009 Y01",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P001 I X009 Y02",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P001 I X009 Y03",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P001 I X009 Y04",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P001 I X009 Y05",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P002 D X001 Y01",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P002 D X001 Y02",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P002 D X001 Y03",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P002 D X001 Y04",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P002 D X001 Y05",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P002 D X002 Y01",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P002 D X002 Y02",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P002 D X002 Y03",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P002 D X002 Y04",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P002 D X002 Y05",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P002 D X003 Y01",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P002 D X003 Y02",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P002 D X003 Y03",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P002 D X003 Y04",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P002 D X003 Y05",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P002 D X004 Y01",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P002 D X004 Y02",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P002 D X004 Y03",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P002 D X004 Y04",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P002 D X004 Y05",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P002 D X005 Y01",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P002 D X005 Y02",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P002 D X005 Y03",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P002 D X005 Y04",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P002 D X005 Y05",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P002 D X006 Y01",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P002 D X006 Y02",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P002 D X006 Y03",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P002 D X006 Y04",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P002 D X006 Y05",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P002 D X007 Y01",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P002 D X007 Y02",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P002 D X007 Y03",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P002 D X007 Y04",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P002 D X007 Y05",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P002 D X008 Y01",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P002 D X008 Y02",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P002 D X008 Y03",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P002 D X008 Y04",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P002 D X008 Y05",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P002 D X009 Y01",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P002 D X009 Y02",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P002 D X009 Y03",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P002 D X009 Y04",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P002 D X009 Y05",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P002 I X001 Y01",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P002 I X001 Y02",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P002 I X001 Y03",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P002 I X001 Y04",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P002 I X001 Y05",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P002 I X002 Y01",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P002 I X002 Y02",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P002 I X002 Y03",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P002 I X002 Y04",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P002 I X002 Y05",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P002 I X003 Y01",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P002 I X003 Y02",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P002 I X003 Y03",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P002 I X003 Y04",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P002 I X003 Y05",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P002 I X004 Y01",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P002 I X004 Y02",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P002 I X004 Y03",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P002 I X004 Y04",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P002 I X004 Y05",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P002 I X005 Y01",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P002 I X005 Y02",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P002 I X005 Y03",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P002 I X005 Y04",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P002 I X005 Y05",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P002 I X006 Y01",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P002 I X006 Y02",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P002 I X006 Y03",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P002 I X006 Y04",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P002 I X006 Y05",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P002 I X007 Y01",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P002 I X007 Y02",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P002 I X007 Y03",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P002 I X007 Y04",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P002 I X007 Y05",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P002 I X008 Y01",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P002 I X008 Y02",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P002 I X008 Y03",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P002 I X008 Y04",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P002 I X008 Y05",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P002 I X009 Y01",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P002 I X009 Y02",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P002 I X009 Y03",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P002 I X009 Y04",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P002 I X009 Y05",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P003 D X001 Y01",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P003 D X001 Y02",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P003 D X001 Y03",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 D X001 Y04",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P003 D X001 Y05",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P003 D X002 Y01",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P003 D X002 Y02",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P003 D X002 Y03",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P003 D X002 Y04",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P003 D X002 Y05",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P003 D X003 Y01",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P003 D X003 Y02",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P003 D X003 Y03",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P003 D X003 Y04",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P003 D X003 Y05",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 D X004 Y01",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P003 D X004 Y02",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P003 D X004 Y03",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P003 D X004 Y04",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P003 D X004 Y05",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P003 D X005 Y01",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P003 D X005 Y02",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P003 D X005 Y03",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P003 D X005 Y04",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P003 D X005 Y05",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P003 D X006 Y01",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P003 D X006 Y02",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P003 D X006 Y03",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P003 D X006 Y04",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P003 D X006 Y05",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P003 D X007 Y01",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P003 D X007 Y02",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P003 D X007 Y03",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 D X007 Y04",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P003 D X007 Y05",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P003 D X008 Y01",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P003 D X008 Y02",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P003 D X008 Y03",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P003 D X008 Y04",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P003 D X008 Y05",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P003 D X009 Y01",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P003 D X009 Y02",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P003 D X009 Y03",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P003 D X009 Y04",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P003 D X009 Y05",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 I X001 Y01",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P003 I X001 Y02",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P003 I X001 Y03",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P003 I X001 Y04",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P003 I X001 Y05",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P003 I X002 Y01",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P003 I X002 Y02",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P003 I X002 Y03",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P003 I X002 Y04",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 I X002 Y05",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P003 I X003 Y01",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P003 I X003 Y02",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P003 I X003 Y03",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P003 I X003 Y04",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P003 I X003 Y05",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P003 I X004 Y01",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P003 I X004 Y02",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P003 I X004 Y03",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P003 I X004 Y04",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P003 I X004 Y05",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P003 I X005 Y01",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P003 I X005 Y02",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P003 I X005 Y03",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P003 I X005 Y04",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P003 I X005 Y05",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P003 I X006 Y01",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P003 I X006 Y02",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 I X006 Y03",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P003 I X006 Y04",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P003 I X006 Y05",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P003 I X007 Y01",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P003 I X007 Y02",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P003 I X007 Y03",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P003 I X007 Y04",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P003 I X007 Y05",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P003 I X008 Y01",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P003 I X008 Y02",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P003 I X008 Y03",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P003 I X008 Y04",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P003 I X008 Y05",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P003 I X009 Y01",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P003 I X009 Y02",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P003 I X009 Y03",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P003 I X009 Y04",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P003 I X009 Y05",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P004 D X001 Y01",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P004 D X001 Y02",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P004 D X001 Y03",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P004 D X001 Y04",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P004 D X001 Y05",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P004 D X002 Y01",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 D X002 Y02",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P004 D X002 Y03",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P004 D X002 Y04",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P004 D X002 Y05",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P004 D X003 Y01",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P004 D X003 Y02",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P004 D X003 Y03",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P004 D X003 Y04",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P004 D X003 Y05",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P004 D X004 Y01",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P004 D X004 Y02",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P004 D X004 Y03",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P004 D X004 Y04",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 D X004 Y05",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P004 D X005 Y01",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P004 D X005 Y02",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P004 D X005 Y03",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P004 D X005 Y04",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P004 D X005 Y05",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P004 D X006 Y01",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P004 D X006 Y02",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P004 D X006 Y03",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P004 D X006 Y04",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P004 D X006 Y05",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P004 D X007 Y01",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P004 D X007 Y02",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P004 D X007 Y03",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P004 D X007 Y04",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P004 D X007 Y05",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P004 D X008 Y01",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 D X008 Y02",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P004 D X008 Y03",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P004 D X008 Y04",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P004 D X008 Y05",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P004 D X009 Y01",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P004 D X009 Y02",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P004 D X009 Y03",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P004 D X009 Y04",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P004 D X009 Y05",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P004 I X001 Y01",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P004 I X001 Y02",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P004 I X001 Y03",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P004 I X001 Y04",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P004 I X001 Y05",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P004 I X002 Y01",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P004 I X002 Y02",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P004 I X002 Y03",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P004 I X002 Y04",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P004 I X002 Y05",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P004 I X003 Y01",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P004 I X003 Y02",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P004 I X003 Y03",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 I X003 Y04",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P004 I X003 Y05",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P004 I X004 Y01",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P004 I X004 Y02",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P004 I X004 Y03",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P004 I X004 Y04",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P004 I X004 Y05",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P004 I X005 Y01",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P004 I X005 Y02",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P004 I X005 Y03",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P004 I X005 Y04",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P004 I X005 Y05",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 I X006 Y01",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P004 I X006 Y02",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P004 I X006 Y03",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P004 I X006 Y04",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P004 I X006 Y05",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P004 I X007 Y01",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P004 I X007 Y02",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P004 I X007 Y03",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P004 I X007 Y04",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P004 I X007 Y05",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P004 I X008 Y01",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P004 I X008 Y02",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P004 I X008 Y03",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P004 I X008 Y04",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P004 I X008 Y05",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P004 I X009 Y01",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P004 I X009 Y02",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P004 I X009 Y03",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P004 I X009 Y04",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P004 I X009 Y05",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P005 D X001 Y01",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P005 D X001 Y02",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P005 D X001 Y03",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P005 D X001 Y04",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P005 D X001 Y05",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P005 D X002 Y01",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P005 D X002 Y02",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P005 D X002 Y03",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P005 D X002 Y04",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P005 D X002 Y05",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P005 D X003 Y01",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P005 D X003 Y02",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P005 D X003 Y03",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P005 D X003 Y04",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P005 D X003 Y05",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P005 D X004 Y01",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P005 D X004 Y02",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P005 D X004 Y03",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P005 D X004 Y04",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P005 D X004 Y05",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P005 D X005 Y01",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P005 D X005 Y02",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P005 D X005 Y03",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P005 D X005 Y04",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P005 D X005 Y05",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P005 D X006 Y01",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P005 D X006 Y02",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P005 D X006 Y03",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P005 D X006 Y04",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P005 D X006 Y05",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P005 D X007 Y01",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P005 D X007 Y02",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P005 D X007 Y03",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P005 D X007 Y04",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P005 D X007 Y05",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P005 D X008 Y01",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P005 D X008 Y02",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P005 D X008 Y03",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P005 D X008 Y04",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P005 D X008 Y05",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P005 D X009 Y01",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P005 D X009 Y02",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P005 D X009 Y03",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P005 D X009 Y04",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P005 D X009 Y05",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P005 I X001 Y01",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P005 I X001 Y02",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P005 I X001 Y03",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P005 I X001 Y04",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P005 I X001 Y05",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P005 I X002 Y01",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P005 I X002 Y02",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P005 I X002 Y03",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P005 I X002 Y04",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P005 I X002 Y05",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P005 I X003 Y01",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P005 I X003 Y02",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P005 I X003 Y03",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P005 I X003 Y04",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P005 I X003 Y05",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P005 I X004 Y01",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P005 I X004 Y02",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P005 I X004 Y03",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P005 I X004 Y04",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P005 I X004 Y05",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P005 I X005 Y01",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P005 I X005 Y02",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P005 I X005 Y03",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P005 I X005 Y04",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P005 I X005 Y05",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P005 I X006 Y01",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P005 I X006 Y02",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P005 I X006 Y03",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P005 I X006 Y04",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P005 I X006 Y05",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P005 I X007 Y01",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P005 I X007 Y02",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P005 I X007 Y03",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P005 I X007 Y04",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P005 I X007 Y05",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P005 I X008 Y01",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P005 I X008 Y02",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P005 I X008 Y03",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P005 I X008 Y04",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P005 I X008 Y05",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P005 I X009 Y01",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P005 I X009 Y02",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P005 I X009 Y03",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P005 I X009 Y04",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P005 I X009 Y05",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P006 D X001 Y01",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P006 D X001 Y02",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P006 D X001 Y03",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P006 D X001 Y04",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P006 D X001 Y05",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P006 D X002 Y01",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P006 D X002 Y02",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P006 D X002 Y03",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 D X002 Y04",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P006 D X002 Y05",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P006 D X003 Y01",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P006 D X003 Y02",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P006 D X003 Y03",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P006 D X003 Y04",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P006 D X003 Y05",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P006 D X004 Y01",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P006 D X004 Y02",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P006 D X004 Y03",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P006 D X004 Y04",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P006 D X004 Y05",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P006 D X005 Y01",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P006 D X005 Y02",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P006 D X005 Y03",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P006 D X005 Y04",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P006 D X005 Y05",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P006 D X006 Y01",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 D X006 Y02",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P006 D X006 Y03",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P006 D X006 Y04",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P006 D X006 Y05",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P006 D X007 Y01",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P006 D X007 Y02",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P006 D X007 Y03",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P006 D X007 Y04",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P006 D X007 Y05",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P006 D X008 Y01",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P006 D X008 Y02",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P006 D X008 Y03",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 D X008 Y04",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P006 D X008 Y05",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P006 D X009 Y01",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P006 D X009 Y02",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P006 D X009 Y03",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P006 D X009 Y04",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P006 D X009 Y05",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P006 I X001 Y01",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P006 I X001 Y02",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 I X001 Y03",
+    "articulo": "TRC-AUTO-M10",
+    "nombre": "Tuerca autoblocante M10 acero cl.8",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P006 I X001 Y04",
+    "articulo": "TRC-HEX-M12",
+    "nombre": "Tuerca hexagonal M12 acero zincado",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P006 I X001 Y05",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P006 I X002 Y01",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P006 I X002 Y02",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P006 I X002 Y03",
+    "articulo": "PAS-COR-8",
+    "nombre": "Pasador conico 8x60 zincado",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P006 I X002 Y04",
+    "articulo": "BRD-COR-25",
+    "nombre": "Brida correa 25mm inox A2",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P006 I X002 Y05",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P006 I X003 Y01",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P006 I X003 Y02",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P006 I X003 Y03",
+    "articulo": "CON-JST-2P",
+    "nombre": "Conector JST 2 pines macho",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P006 I X003 Y04",
+    "articulo": "CAS-SEC-V",
+    "nombre": "Casco seguridad clase V blanco",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P006 I X003 Y05",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 I X004 Y01",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 2400
+  },
+  {
+    "ubicacion": "P006 I X004 Y02",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 1730
+  },
+  {
+    "ubicacion": "P006 I X004 Y03",
+    "articulo": "TRN-M4-15",
+    "nombre": "Tornillo cab.cilindrica M4x15 zinc",
+    "stock": 280
+  },
+  {
+    "ubicacion": "P006 I X004 Y04",
+    "articulo": "TRN-M6-40",
+    "nombre": "Tornillo cab.hexagonal M6x40 zincado",
+    "stock": 890
+  },
+  {
+    "ubicacion": "P006 I X004 Y05",
+    "articulo": "TRN-M10-60",
+    "nombre": "Tornillo cab.hexagonal M10x60 galv.",
+    "stock": 2050
+  },
+  {
+    "ubicacion": "P006 I X005 Y01",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 1420
+  },
+  {
+    "ubicacion": "P006 I X005 Y02",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 560
+  },
+  {
+    "ubicacion": "P006 I X005 Y03",
+    "articulo": "TRN-M12-80",
+    "nombre": "Tornillo cab.hexagonal M12x80 galv.",
+    "stock": 1180
+  },
+  {
+    "ubicacion": "P006 I X005 Y04",
+    "articulo": "TRC-HEX-M6",
+    "nombre": "Tuerca hexagonal M6 acero zincado",
+    "stock": 790
+  },
+  {
+    "ubicacion": "P006 I X005 Y05",
+    "articulo": "AND-DIN-M6",
+    "nombre": "Arandela DIN125 M6 galvanizada",
+    "stock": 1240
+  },
+  {
+    "ubicacion": "P006 I X006 Y01",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 440
+  },
+  {
+    "ubicacion": "P006 I X006 Y02",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 1560
+  },
+  {
+    "ubicacion": "P006 I X006 Y03",
+    "articulo": "AND-DIN-M8",
+    "nombre": "Arandela DIN125 M8 galvanizada",
+    "stock": 875
+  },
+  {
+    "ubicacion": "P006 I X006 Y04",
+    "articulo": "REM-ALU-4",
+    "nombre": "Remache aluminio 4x10 caja/500",
+    "stock": 2100
+  },
+  {
+    "ubicacion": "P006 I X006 Y05",
+    "articulo": "BRD-COR-32",
+    "nombre": "Brida correa 32mm inox A2",
+    "stock": 1380
+  },
+  {
+    "ubicacion": "P006 I X007 Y01",
+    "articulo": "AND-PRES-M8",
+    "nombre": "Arandela presion M8 acero",
+    "stock": 432
+  },
+  {
+    "ubicacion": "P006 I X007 Y02",
+    "articulo": "REM-ALU-6",
+    "nombre": "Remache aluminio 6x16 caja/250",
+    "stock": 610
+  },
+  {
+    "ubicacion": "P006 I X007 Y03",
+    "articulo": "CAB-H07-1.5",
+    "nombre": "Cable H07V-K 1.5mm2 negro 100m",
+    "stock": 780
+  },
+  {
+    "ubicacion": "P006 I X007 Y04",
+    "articulo": "GUA-NIT-L",
+    "nombre": "Guante nitrilo talla L caja-100",
+    "stock": 1920
+  },
+  {
+    "ubicacion": "P006 I X007 Y05",
+    "articulo": "BOT-S3-42",
+    "nombre": "Bota seguridad S3 talla 42",
+    "stock": 390
+  },
+  {
+    "ubicacion": "P006 I X008 Y01",
+    "articulo": "CAB-H07-2.5",
+    "nombre": "Cable H07V-K 2.5mm2 negro 100m",
+    "stock": 250
+  },
+  {
+    "ubicacion": "P006 I X008 Y02",
+    "articulo": "GUA-MEC-09",
+    "nombre": "Guante mecanico talla 9 par",
+    "stock": 540
+  },
+  {
+    "ubicacion": "P006 I X008 Y03",
+    "articulo": "ARN-2P-A",
+    "nombre": "Arnes seguridad 2 puntos anclaje",
+    "stock": 1650
+  },
+  {
+    "ubicacion": "P006 I X008 Y04",
+    "articulo": "TRN-M4-30",
+    "nombre": "Tornillo cab.cilindrica M4x30 zinc",
+    "stock": 480
+  },
+  {
+    "ubicacion": "P006 I X008 Y05",
+    "articulo": "TRN-M8-30",
+    "nombre": "Tornillo cab.hexagonal M8x30 zincado",
+    "stock": 760
+  },
+  {
+    "ubicacion": "P006 I X009 Y01",
+    "articulo": "EPI-VIS-AMR",
+    "nombre": "Chaleco alta visibilidad amarillo",
+    "stock": 820
+  },
+  {
+    "ubicacion": "P006 I X009 Y02",
+    "articulo": "TRN-M6-20",
+    "nombre": "Tornillo cab.hexagonal M6x20 zincado",
+    "stock": 1100
+  },
+  {
+    "ubicacion": "P006 I X009 Y03",
+    "articulo": "TRN-M8-60",
+    "nombre": "Tornillo cab.hexagonal M8x60 galv.",
+    "stock": 330
+  },
+  {
+    "ubicacion": "P006 I X009 Y04",
+    "articulo": "TRC-AUTO-M8",
+    "nombre": "Tuerca autoblocante M8 acero cl.8",
+    "stock": 950
+  },
+  {
+    "ubicacion": "P006 I X009 Y05",
+    "articulo": "TRC-HEX-M8",
+    "nombre": "Tuerca hexagonal M8 acero zincado",
+    "stock": 610
+  }
+]

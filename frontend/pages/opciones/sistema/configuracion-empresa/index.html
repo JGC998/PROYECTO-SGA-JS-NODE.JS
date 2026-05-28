@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Configuración de Empresa</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/sistema/configuracion-empresa/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Sistema</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Configuración de Empresa</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <main class="ce-inner">
+
+                <div class="ce-page-header">
+                    <h1 class="sga-page-title">Configuración de Empresa</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
+
+                <form class="ce-form-card" id="form-empresa">
+                    <div class="form-row">
+                        <label>Nombre empresa</label>
+                        <input type="text" name="nombre">
+                    </div>
+                    <div class="form-row">
+                        <label>CIF / NIF</label>
+                        <input type="text" name="cif">
+                    </div>
+                    <div class="form-row">
+                        <label>Dirección</label>
+                        <input type="text" name="direccion">
+                    </div>
+                    <div class="form-row">
+                        <label>Localidad</label>
+                        <input type="text" name="localidad">
+                    </div>
+                    <div class="form-row">
+                        <label>Teléfono</label>
+                        <input type="text" name="telefono">
+                    </div>
+                    <div class="form-row">
+                        <label>Email</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="form-actions">
+                    </div>
+                    <div class="msg" id="msg-config" role="status" aria-live="polite"></div>
+                </form>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/sistema/configuracion-empresa.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+/* ── OVERLAY (solo visible cuando sidebar está abierta en móvil) ─────────── */
+.sga-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);
+    z-index: 199;
+}
+.sga-overlay.active { display: block; }
+
+/* ── TABLET (≤ 900px) ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .sga-sidebar {
+        transform: translateX(-240px);
+        transition: transform .24s ease;
+    }
+    .sga-sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0,0,0,.22);
+    }
+
+    .sga-main {
+        margin-left: 0;
+    }
+
+    .sga-hamburger {
+        display: inline-flex;
+    }
+
+    .sga-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .sga-filter-row {
+        flex-wrap: wrap;
+    }
+
+    .sga-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+
+/* ── MÓVIL (≤ 600px) ─────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .sga-header {
+        padding: 0 14px;
+    }
+
+    .sga-cards-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sga-page-title {
+        font-size: 1.2rem;
+    }
+
+    .sga-btn {
+        padding: 9px 13px;
+    }
+
+    .sga-kpi-value {
+        font-size: 1.3rem;
+    }
+
+    .sga-header-right .sga-btn span:not(.sga-btn-icon) {
+        display: none;
+    }
+}

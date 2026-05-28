@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Consulta de Stock</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/tables.css">
+    <link rel="stylesheet" href="../../../../css/cards.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/consulta-de-stock/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Consulta de Stock</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">
+                    Actualizar (F5)
+                </button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">
+                    📤 Exportar CSV
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="cs-inner">
+
+                <!-- CABECERA DE PÁGINA -->
+                <div class="cs-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Consulta de Stock</h1>
+                        <p class="sga-page-description">Almacén · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- PANEL DE FILTROS -->
+                <div class="cs-filters">
+
+                    <!-- Fila primaria -->
+                    <div class="cs-filters-primary">
+                        <div class="cs-filter-field">
+                            <label class="sga-label" for="f-articulo">Artículo</label>
+                            <input type="text" id="f-articulo" class="cs-input" placeholder="Código...">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label class="sga-label" for="f-ubicacion">Ubicación</label>
+                            <input type="text" id="f-ubicacion" class="cs-input" placeholder="Código...">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label class="sga-label" for="f-lote">Lote</label>
+                            <input type="text" id="f-lote" class="cs-input cs-input--sm" placeholder="Lote...">
+                        </div>
+                        <div class="cs-filter-field">
+                            <label class="sga-label" for="f-existencias">Mostrar</label>
+                            <select id="f-existencias" class="cs-select">
+                                <option value="1">Solo con existencias</option>
+                                <option value="0">Todas las ubicaciones</option>
+                                <option value="-1">Sin existencias</option>
+                            </select>
+                        </div>
+                        <div class="cs-filter-actions">
+                            <button class="sga-btn sga-btn-primary" id="btn-buscar">Buscar</button>
+                        </div>
+                    </div>
+
+                </div><!-- /.cs-filters -->
+
+                <!-- BARRA DE ESTADO -->
+                <div class="cs-statusbar" role="status" aria-live="polite">
+                    <span id="cs-count" class="cs-count">—</span>
+                    <span id="cs-timestamp" class="cs-timestamp"></span>
+                    <span id="cs-limit-warn" class="cs-limit-warn" hidden>
+                        ⚠ Límite de 500 registros alcanzado — refine los filtros
+                    </span>
+                </div>
+
+                <!-- ZONA TABLA + PANEL LATERAL -->
+                <div class="cs-workspace" id="cs-workspace">
+
+                    <!-- TABLA -->
+                    <div class="cs-table-wrapper" id="cs-table-wrapper">
+                        <div class="cs-table-scroll">
+                            <table class="cs-table" id="tabla-stock">
+                                <thead>
+                                    <tr>
+                                        <th class="cs-th cs-th--ubicacion">Ubicación</th>
+                                        <th class="cs-th cs-th--articulo">Artículo</th>
+                                        <th class="cs-th cs-th--nombre">Nombre</th>
+                                        <th class="cs-th cs-th--lote">Lote</th>
+                                        <th class="cs-th cs-th--num">Stock</th>
+                                        <th class="cs-th cs-th--num">Palets</th>
+                                        <th class="cs-th cs-th--num">Múlt.</th>
+                                        <th class="cs-th cs-th--actions"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-stock">
+                                    <tr class="cs-placeholder">
+                                        <td colspan="8">
+                                            Introduzca los filtros y pulse Buscar para cargar el stock.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Cards móvil (ocultas en desktop) -->
+                        <div class="cs-cards" id="cs-cards" hidden></div>
+                    </div><!-- /.cs-table-wrapper -->
+
+                    <!-- PANEL LATERAL DE DETALLE -->
+                    <aside class="cs-detail" id="cs-detail" hidden>
+                        <div class="cs-detail-header">
+                            <span class="cs-detail-title">Detalle</span>
+                            <button class="cs-detail-close" id="cs-detail-close"
+                                    aria-label="Cerrar panel">✕</button>
+                        </div>
+                        <div class="cs-detail-body" id="cs-detail-body">
+                            <!-- Inyectado por JS -->
+                        </div>
+                        <div class="cs-detail-actions">
+                            <a class="sga-btn sga-btn-secondary sga-btn-sm"
+                               id="cs-btn-movimientos" href="#">
+                                Ver movimientos ↗
+                            </a>
+                        </div>
+                    </aside>
+
+                    <!-- Backdrop para overlay en tablet/móvil -->
+                    <div class="cs-detail-backdrop" id="cs-detail-backdrop" hidden></div>
+
+                </div><!-- /.cs-workspace -->
+
+                <!-- FOOTER DE TOTALES -->
+                <footer class="cs-footer">
+                    <div class="cs-footer-totals">
+                        <span class="cs-total-label">Total stock:</span>
+                        <span class="cs-total-value" id="total-stock">—</span>
+                    </div>
+                </footer>
+
+            </div><!-- /.cs-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/consulta-de-stock.js"></script>
+
+</body>
+
+</html>

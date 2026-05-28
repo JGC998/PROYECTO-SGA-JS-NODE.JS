@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Ubicaciones</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/ubicaciones/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Ubicaciones</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-anular">Anular selección</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-seleccionar-todo">Seleccionar todo</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-cambiar-tipo">Cambiar tipo</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">📤 Exportar CSV</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="ubi-inner">
+
+                <!-- CABECERA -->
+                <div class="ubi-page-header">
+                    <h1 class="sga-page-title">Ubicaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
+
+                <!-- BÚSQUEDA DIRECTA -->
+                <div class="ubi-search-bar">
+                    <input type="text" id="f-ubicacion" class="ubi-search-input" placeholder="Buscar ubicación...">
+                    <button class="sga-btn sga-btn-primary" id="btn-buscar">Buscar</button>
+                </div>
+
+                <!-- PASILLOS -->
+                <div class="ubi-pasillos-section">
+                    <span class="ubi-pasillos-label">Pasillos</span>
+                    <div class="ubi-pasillos-grid" id="pasillos-grid">
+                        <span class="ubi-pasillos-loading">Cargando pasillos…</span>
+                    </div>
+                </div>
+
+                <!-- BARRA DE ESTADO -->
+                <div class="ubi-statusbar" role="status" aria-live="polite">
+                    <span id="ubi-count" class="ubi-count">—</span>
+                </div>
+
+                <!-- TABLA -->
+                <div class="ubi-table-card">
+                    <div class="ubi-table-scroll">
+                        <table id="tabla-ubicaciones">
+                            <thead>
+                                <tr>
+                                    <th class="col-contador">#</th>
+                                    <th class="col-check">Sel</th>
+                                    <th>Ubicación</th>
+                                    <th>Etiqueta</th>
+                                    <th>Descripción</th>
+                                    <th class="col-num">Ancho</th>
+                                    <th class="col-num">Alto</th>
+                                    <th class="col-num">Palets</th>
+                                    <th class="col-check">Picking</th>
+                                    <th class="col-check">Múltiple</th>
+                                    <th>Tipo ubi.</th>
+                                    <th class="col-check">Exclusiva</th>
+                                    <th class="col-check">No av.</th>
+                                    <th>Artículo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-ubicaciones">
+                                <tr class="ubi-placeholder">
+                                    <td colspan="14">Selecciona un pasillo o busca una ubicación.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FOOTER DE ACCIONES -->
+                <footer class="ubi-footer">
+                    <div class="ubi-footer-left">
+                        <div class="ubi-footer-field">
+                            <label class="sga-label" for="f-ancho">Ancho</label>
+                            <input type="number" class="ubi-input ubi-input--xs" id="f-ancho" value="0">
+                        </div>
+                        <div class="ubi-footer-field">
+                            <label class="sga-label" for="f-alto">Alto</label>
+                            <input type="number" class="ubi-input ubi-input--xs" id="f-alto" value="0">
+                        </div>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar-ubi">Actualizar ubi.</button>
+                    </div>
+                    <div class="ubi-footer-right">
+                        <span class="ubi-footer-section-title">Etiquetas</span>
+                        <div class="ubi-footer-row">
+                            <label class="sga-label" for="f-et-inicio">Et. inicio</label>
+                            <input type="number" class="ubi-input ubi-input--xs" id="f-et-inicio" value="1">
+                            <label class="ubi-checkbox-label">
+                                <input type="checkbox" id="f-vista-previa"> Mostrar vista previa
+                            </label>
+                        </div>
+                        <div class="ubi-footer-row">
+                            <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-etiquetas">Etiquetas</button>
+                            <select class="sga-select" id="f-formato-etiq">
+                                <option>A4</option>
+                                <option>Zebra</option>
+                            </select>
+                        </div>
+                        <div class="ubi-footer-row">
+                            <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-ubi-multiple">Ubicación asignada como múltiple</button>
+                        </div>
+                    </div>
+                </footer>
+
+            </div><!-- /.ubi-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/ubicaciones.js"></script>
+</body>
+
+</html>

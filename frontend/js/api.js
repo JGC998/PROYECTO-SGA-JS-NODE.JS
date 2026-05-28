@@ -1,0 +1,198 @@
+const API = '';
+
+function _apiKey() {
+    try { return localStorage.getItem('sga-api-key') || ''; } catch { return ''; }
+}
+
+async function _get(path) {
+    const res = await fetch(`${API}${path}`);
+    if (!res.ok) throw new Error(`GET ${path} → ${res.status}`);
+    return res.json();
+}
+
+async function _post(path, body) {
+    const key = _apiKey();
+    const headers = { 'Content-Type': 'application/json' };
+    if (key) headers['x-api-key'] = key;
+    const res = await fetch(`${API}${path}`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+        let msg = `POST ${path} → ${res.status}`;
+        try {
+            const data = await res.json();
+            if (data.message) msg = data.message;
+        } catch (_) { /* respuesta sin JSON */ }
+        const err = new Error(msg);
+        err.status = res.status;
+        err.pendiente = res.status === 501;
+        throw err;
+    }
+    return res.json();
+}
+
+const SGA = {
+    articulos: {
+        list: (q = '') => _get(`/articulos${q ? '?q=' + encodeURIComponent(q) : ''}`),
+        get: cod => _get(`/articulos/${encodeURIComponent(cod)}`),
+    },
+    proveedores: {
+        list: () => _get('/proveedores'),
+        get: cod => _get(`/proveedores/${encodeURIComponent(cod)}`),
+    },
+    clientes: {
+        list: () => _get('/clientes'),
+        get: cod => _get(`/clientes/${encodeURIComponent(cod)}`),
+    },
+    operarios: {
+        list: () => _get('/operarios'),
+        get: cod => _get(`/operarios/${encodeURIComponent(cod)}`),
+    },
+    almacenes: {
+        list: () => _get('/almacenes'),
+        save: data => _post('/almacenes', data),
+    },
+    ubicaciones: {
+        list:      (params = {}) => _get('/ubicaciones?' + new URLSearchParams(params)),
+        filtrosPyl: ()           => _get('/ubicaciones/filtros-pyl'),
+        save:      data          => _post('/ubicaciones', data),
+    },
+    stock: {
+        get: cod => _get(`/stock/${encodeURIComponent(cod)}`),
+    },
+    movimientos: {
+        list: (params = {}) => _get('/movimientos-por-articulo?' + new URLSearchParams(params)),
+    },
+articulosSinReposicion: {
+        list: () => _get('/articulos-sin-reposicion'),
+        save: data => _post('/articulos-sin-reposicion', data),
+    },
+    consultaStock: {
+        list: (params = {}) => _get('/consulta-de-stock?' + new URLSearchParams(params)),
+    },
+    minimosMaximos: {
+        list: (params = {}) => _get('/minimos-maximos?' + new URLSearchParams(params)),
+        save: filas => _post('/minimos-maximos', filas),
+    },
+    subfamilias: {
+        list: () => _get('/subfamilias'),
+        save: filas => _post('/subfamilias', filas),
+    },
+    observaciones: {
+        list: (params = {}) => _get('/observaciones-articulo-lote?' + new URLSearchParams(params)),
+        save: filas => _post('/observaciones-articulo-lote', filas),
+    },
+    loteExclusivo: {
+        list: (params = {}) => _get('/lote-exclusivo?' + new URLSearchParams(params)),
+        save: filas => _post('/lote-exclusivo', filas),
+    },
+    loteMinimo: {
+        list: (params = {}) => _get('/lote-minimo?' + new URLSearchParams(params)),
+        save: filas => _post('/lote-minimo', filas),
+    },
+    loteNoUtilizado: {
+        list: (params = {}) => _get('/lote-no-utilizado?' + new URLSearchParams(params)),
+        save: filas => _post('/lote-no-utilizado', filas),
+    },
+    loteCuarentena: {
+        list: (params = {}) => _get('/lote-cuarentena?' + new URLSearchParams(params)),
+    },
+    terminales: {
+        list: () => _get('/terminales-pda'),
+        save: data => _post('/terminales-pda', data),
+    },
+    entradas: {
+        save: data => _post('/entrada', data),
+    },
+    entradaMercancia: {
+        save: data => _post('/entrada-mercancia', data),
+    },
+    salidas: {
+        save: data => _post('/salida', data),
+    },
+    traspasos: {
+        save: data => _post('/traspaso', data),
+    },
+    visor: {
+        articulos: () => _get('/visor/articulos'),
+        proveedores: () => _get('/visor/proveedores'),
+        clientes: () => _get('/visor/clientes'),
+    },
+    regularizaciones: {
+        list: (params = {}) => _get('/regularizaciones?' + new URLSearchParams(params)),
+    },
+    expediciones: {
+        list: (params = {}) => _get('/expediciones?' + new URLSearchParams(params)),
+    },
+    picking: {
+        list:         (params = {}) => _get('/picking?' + new URLSearchParams(params)),
+        confirmar:    body => _post('/picking/confirmar',    body),
+        desconfirmar: body => _post('/picking/desconfirmar', body),
+    },
+    situacionPedidos: {
+        list: (params = {}) => _get('/situacion-pedidos-venta?' + new URLSearchParams(params)),
+    },
+    usuarios: {
+        list:   (params = {}) => _get('/usuarios?' + new URLSearchParams(params)),
+        save:   data => _post('/usuarios', data),
+        delete: cod  => {
+            const key = _apiKey();
+            const headers = {};
+            if (key) headers['x-api-key'] = key;
+            return fetch(`/operarios/${encodeURIComponent(cod)}`, { method: 'DELETE', headers })
+                .then(r => { if (!r.ok) throw new Error(`DELETE /operarios → ${r.status}`); return r.json(); });
+        },
+    },
+    configuracionEmpresa: {
+        get: () => _get('/configuracion-empresa'),
+        save: data => _post('/configuracion-empresa', data),
+    },
+    contadores: {
+        get: () => _get('/contadores'),
+    },
+    generarUbicaciones: {
+        generar: data => _post('/generar-ubicaciones', data),
+    },
+    borrarPicking: {
+        borrar: data => _post('/borrar-picking', data),
+    },
+    ponerCeroCarrusel: {
+        poner: () => _post('/poner-cero-carrusel', {}),
+    },
+    copiaSeguridad: {
+        crear: () => _post('/copia-seguridad', {}),
+    },
+    estadisticas: {
+        resumen:              (p={}) => _get('/estadisticas/resumen?'              + new URLSearchParams(p)),
+        movimientosPorDia:    (p={}) => _get('/estadisticas/movimientos-por-dia?' + new URLSearchParams(p)),
+        topArticulos:         (p={}) => _get('/estadisticas/top-articulos?'       + new URLSearchParams(p)),
+        entradasVsSalidas:    (p={}) => _get('/estadisticas/entradas-vs-salidas?' + new URLSearchParams(p)),
+        alertasStock:         (p={}) => _get('/estadisticas/alertas-stock?'       + new URLSearchParams(p)),
+        trabajadores:         (p={}) => _get('/estadisticas/trabajadores?'        + new URLSearchParams(p)),
+        almacen:              (p={}) => _get('/estadisticas/almacen?'             + new URLSearchParams(p)),
+        porTipo:              (p={}) => _get('/estadisticas/por-tipo?'            + new URLSearchParams(p)),
+        proveedoresActividad: (p={}) => _get('/estadisticas/proveedores-actividad?' + new URLSearchParams(p)),
+        articulosAnalisis:    (p={}) => _get('/estadisticas/articulos-analisis?'  + new URLSearchParams(p)),
+    },
+    dashboard: {
+        get: (desde, hasta) => {
+            const p = new URLSearchParams();
+            if (desde) p.set('desde', desde);
+            if (hasta) p.set('hasta', hasta);
+            return _get('/estadisticas/dashboard?' + p);
+        },
+        alertas: () => _get('/estadisticas/alertas'),
+    },
+    traspasoInventario: {
+        traspasar: data => _post('/traspasar-inventarios', data),
+        importarRegularizaciones: data => _post('/importar-regularizaciones', data),
+        asignarFechaStock: data => _post('/asignar-fecha-stock-inicial', data),
+    },
+    mapaAlmacen: {
+        ubicaciones:    ()         => _get('/ubicaciones/todas'),
+        stock:          ()         => _get('/consulta-de-stock?existencias=1&limit=9999'),
+        minimosMaximos: ()         => _get('/minimos-maximos'),
+    },
+};

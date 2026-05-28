@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "start": "node api.js",
+    "test": "jest --runInBand --forceExit",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "test:ci": "jest --runInBand --forceExit tests/dynamic-sql.test.js tests/services.test.js tests/stubs.test.js tests/arch.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.1",
+    "helmet": "^8.1.0",
+    "msnodesqlv8": "^5.1.9",
+    "mssql": "^12.3.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "eslint": "^10.3.0",
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
+}

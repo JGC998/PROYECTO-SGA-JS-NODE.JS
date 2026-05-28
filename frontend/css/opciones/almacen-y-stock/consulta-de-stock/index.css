@@ -1,0 +1,576 @@
+/* ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────── */
+.cs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.cs-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* ── FILTROS ─────────────────────────────────────────────────────────────── */
+.cs-filters {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cs-filters-primary {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cs-filters-secondary {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid var(--sga-border);
+}
+
+.cs-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cs-filter-field label {
+    font-size: .7rem;
+    font-weight: 700;
+    color: var(--sga-text-muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    white-space: nowrap;
+}
+
+.cs-input {
+    height: 34px;
+    width: 160px;
+    padding: 0 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: .83rem;
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition), outline var(--sga-transition);
+}
+
+.cs-input--sm { width: 120px; }
+
+.cs-input:focus {
+    outline: 2px solid var(--sga-accent);
+    outline-offset: 1px;
+    border-color: var(--sga-accent);
+}
+
+.cs-select {
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: .83rem;
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    cursor: pointer;
+}
+
+.cs-select--sm { width: 150px; }
+
+.cs-select:focus {
+    outline: 2px solid var(--sga-accent);
+    outline-offset: 1px;
+}
+
+.cs-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cs-toggle-secondary {
+    background: none;
+    border: none;
+    font-size: .78rem;
+    color: var(--sga-text-muted);
+    cursor: pointer;
+    padding: 6px 4px;
+    transition: color var(--sga-transition);
+    white-space: nowrap;
+}
+
+.cs-toggle-secondary:hover { color: var(--sga-primary); }
+.cs-toggle-secondary[aria-expanded="true"] { color: var(--sga-primary); font-weight: 600; }
+
+/* ── SPINNERS ────────────────────────────────────────────────────────────── */
+.cs-btn-spinner,
+.cs-loading-spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(255,255,255,.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: cs-spin .7s linear infinite;
+    vertical-align: middle;
+}
+
+.cs-loading-spinner {
+    border-color: var(--sga-border);
+    border-top-color: var(--sga-accent);
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes cs-spin    { to { transform: rotate(360deg); } }
+@keyframes cs-fadein  { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cs-slidein { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ── BARRA DE ESTADO ─────────────────────────────────────────────────────── */
+.cs-statusbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: .78rem;
+    min-height: 24px;
+    flex-wrap: wrap;
+}
+
+.cs-count {
+    font-weight: 600;
+    color: var(--sga-text);
+}
+
+.cs-timestamp {
+    color: var(--sga-text-muted);
+}
+
+.cs-limit-warn {
+    background: var(--sga-warning-bg);
+    color: var(--sga-warning);
+    border: 1px solid var(--sga-warning);
+    border-radius: var(--sga-radius-sm);
+    padding: 2px 10px;
+    font-weight: 600;
+    font-size: .75rem;
+}
+
+/* ── WORKSPACE (tabla + panel lateral) ───────────────────────────────────── */
+.cs-workspace {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+    position: relative;
+}
+
+.cs-workspace.cs-detail-open {
+    grid-template-columns: 1fr 300px;
+}
+
+/* ── TABLA ───────────────────────────────────────────────────────────────── */
+.cs-table-wrapper {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+    min-width: 0;
+}
+
+.cs-table-scroll {
+    overflow-x: auto;
+}
+
+.cs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .83rem;
+}
+
+.cs-th {
+    background: var(--sga-info-bg);
+    padding: 9px 12px;
+    text-align: left;
+    color: var(--sga-primary);
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--sga-accent);
+}
+
+.cs-th--num    { text-align: right; }
+.cs-th--ubicacion { min-width: 130px; }
+.cs-th--articulo  { min-width: 100px; }
+.cs-th--nombre    { min-width: 180px; }
+.cs-th--lote      { min-width: 90px; }
+.cs-th--actions   { width: 44px; text-align: center; }
+
+/* ── FILAS ───────────────────────────────────────────────────────────────── */
+.cs-row td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--sga-border);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.cs-row:last-child td      { border-bottom: none; }
+.cs-row:hover td           { background: var(--sga-surface-alt); }
+.cs-row--selected td       { background: var(--sga-info-bg); }
+.cs-row--selected:hover td { background: var(--sga-border); }
+
+.cs-td--num    { text-align: right; font-variant-numeric: tabular-nums; }
+.cs-td--nombre {
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cs-td--actions { text-align: center; }
+
+/* Animación entrada de fila */
+.cs-row--fadein {
+    animation: cs-fadein .2s ease both;
+}
+
+/* ── ESTADOS DE FILA ─────────────────────────────────────────────────────── */
+.cs-placeholder td,
+.cs-state-row td {
+    text-align: center;
+    color: var(--sga-text-muted);
+    font-style: italic;
+    padding: 40px 18px;
+    white-space: normal;
+}
+
+.cs-state-row--error td {
+    color: var(--sga-danger);
+    background: var(--sga-danger-bg);
+    font-style: normal;
+    border-left: 3px solid var(--sga-danger);
+}
+
+/* ── BADGES ──────────────────────────────────────────────────────────────── */
+.cs-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 1px 5px;
+    line-height: 1.6;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.cs-badge--libre {
+    background: var(--sga-success-bg);
+    color: var(--sga-success);
+    border: 1px solid var(--sga-success);
+}
+
+/* ── VALORES DE STOCK ────────────────────────────────────────────────────── */
+.cs-stock--neg  { color: var(--sga-danger); font-weight: 700; }
+.cs-stock--zero { color: var(--sga-text-muted); }
+.cs-stock--pos  { color: var(--sga-text); }
+
+/* ── BOTÓN DE ACCIÓN EN TABLA ────────────────────────────────────────────── */
+.cs-btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: transparent;
+    cursor: pointer;
+    font-size: .78rem;
+    color: var(--sga-text-muted);
+    transition: background var(--sga-transition), border-color var(--sga-transition), color var(--sga-transition);
+}
+
+.cs-btn-action:hover {
+    background: var(--sga-info-bg);
+    border-color: var(--sga-accent);
+    color: var(--sga-primary);
+}
+
+/* ── PANEL LATERAL DE DETALLE ────────────────────────────────────────────── */
+
+/* Asegurar que hidden prevalece sobre display:flex */
+.cs-detail[hidden] { display: none !important; }
+
+.cs-workspace.cs-detail-open .cs-detail {
+    animation: cs-slidein .2s ease both;
+}
+
+.cs-detail {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--sga-header-h) + 16px);
+}
+
+.cs-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--sga-border);
+    background: var(--sga-surface-alt);
+}
+
+.cs-detail-title {
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.cs-detail-close {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--sga-text-muted);
+    cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    transition: color var(--sga-transition);
+}
+
+.cs-detail-close:hover { color: var(--sga-danger); }
+
+.cs-detail-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.cs-detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cs-detail-lbl {
+    font-size: .62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--sga-text-muted);
+}
+
+.cs-detail-val {
+    font-size: .88rem;
+    color: var(--sga-text);
+    word-break: break-word;
+}
+
+.cs-detail-stock {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--sga-primary);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.cs-detail-stock.cs-stock--neg  { color: var(--sga-danger); }
+.cs-detail-stock.cs-stock--zero { color: var(--sga-text-muted); }
+
+.cs-detail-actions {
+    padding: 12px 16px;
+    border-top: 1px solid var(--sga-border);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* ── BACKDROP (overlay tablet/móvil) ─────────────────────────────────────── */
+.cs-detail-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    z-index: 199;
+}
+
+/* ── CARDS MÓVIL ─────────────────────────────────────────────────────────── */
+.cs-cards {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+}
+
+.cs-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color var(--sga-transition);
+    animation: cs-fadein .2s ease both;
+}
+
+.cs-card:hover     { border-color: var(--sga-accent); }
+.cs-card--selected { border-color: var(--sga-accent); background: var(--sga-info-bg); }
+
+.cs-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.cs-card-ubi {
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+}
+
+.cs-card-stock {
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--sga-text);
+    white-space: nowrap;
+}
+
+.cs-card-articulo {
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--sga-text);
+}
+
+.cs-card-nombre {
+    font-size: .78rem;
+    color: var(--sga-text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cs-card-meta {
+    font-size: .72rem;
+    color: var(--sga-text-muted);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+.cs-footer {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.cs-footer-totals {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cs-total-label {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+    white-space: nowrap;
+}
+
+.cs-total-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--sga-text);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+
+/* Tablet: panel lateral como overlay fijo */
+@media (max-width: 1023px) {
+    .cs-workspace.cs-detail-open {
+        grid-template-columns: 1fr;
+    }
+
+    .cs-detail {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 300px;
+        z-index: 200;
+        border-radius: 0;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, .18);
+        transform: translateX(100%);
+        transition: transform .2s ease;
+    }
+
+    .cs-workspace.cs-detail-open .cs-detail {
+        transform: translateX(0);
+    }
+}
+
+/* Ocultar backdrop en desktop */
+@media (min-width: 1024px) {
+    .cs-detail-backdrop { display: none !important; }
+}
+
+/* Móvil: cards en lugar de tabla */
+@media (max-width: 640px) {
+    .cs-inner { padding: 12px 12px 32px; gap: 12px; }
+
+    .cs-filters-primary { gap: 10px; }
+
+    .cs-input { width: 130px; }
+    .cs-input--sm { width: 100px; }
+
+    .cs-table-scroll { display: none; }
+    .cs-cards         { display: flex; }
+
+    .cs-detail { width: 100%; }
+
+    .cs-filters-primary .cs-filter-field:nth-child(3) { display: none; }
+}
+
+@media (max-width: 480px) {
+    .cs-filters-primary .cs-filter-field { width: 100%; }
+    .cs-input, .cs-input--sm { width: 100%; }
+    .cs-filter-actions { width: 100%; justify-content: flex-end; }
+}

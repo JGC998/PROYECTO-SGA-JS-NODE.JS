@@ -1,0 +1,77 @@
+/* ── HEADER SUPERIOR ─────────────────────────────────────────────────────── */
+.sga-header {
+    height: var(--sga-header-h);
+    background: var(--sga-surface);
+    border-bottom: 1px solid var(--sga-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--sga-shadow);
+    flex-shrink: 0;
+}
+
+.sga-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.sga-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* ── BOTÓN HAMBURGUESA (solo visible en móvil/tablet) ────────────────────── */
+.sga-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    padding: 5px 7px;
+    color: var(--sga-text);
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: background .12s;
+}
+.sga-hamburger:hover { background: var(--sga-bg); }
+
+/* ── BREADCRUMB ──────────────────────────────────────────────────────────── */
+.sga-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .82rem;
+    color: var(--sga-text-muted);
+    flex-wrap: wrap;
+}
+
+.sga-breadcrumb a {
+    color: var(--sga-text-muted);
+    text-decoration: none;
+    transition: color .12s;
+}
+.sga-breadcrumb a:hover {
+    color: var(--sga-primary);
+    opacity: 1;
+    text-decoration: none;
+}
+
+.sga-breadcrumb-sep {
+    color: var(--sga-border);
+    font-size: .9rem;
+}
+
+.sga-breadcrumb-current {
+    color: var(--sga-text);
+    font-weight: 600;
+}

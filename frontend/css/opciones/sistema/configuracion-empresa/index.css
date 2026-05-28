@@ -1,0 +1,67 @@
+/* Módulo: Configuración Empresa — estilos específicos (globales en components.css) */
+
+.ce-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.ce-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.ce-form-card {
+    max-width: 640px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    padding: 24px 28px 28px;
+}
+
+#form-empresa .form-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    margin-bottom: var(--sga-sp-sm);
+}
+
+#form-empresa .form-row label {
+    font-size: var(--sga-text-sm);
+    font-weight: 600;
+    color: var(--sga-text);
+    white-space: nowrap;
+}
+
+#form-empresa .form-row input {
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+#form-empresa .form-row input:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+.form-actions { margin-top: 20px; }
+
+/* Mensajes de feedback */
+.msg {
+    padding: 8px 12px;
+    border-radius: var(--sga-radius-sm);
+    display: none;
+    font-size: var(--sga-text-base);
+    font-weight: 500;
+    margin-top: 12px;
+    animation: sga-fadein .18s ease both;
+}
+.msg.ok    { display: block; background: var(--sga-success-bg); color: var(--sga-success); border: 1px solid var(--sga-success-bg); }
+.msg.error { display: block; background: var(--sga-danger-bg);  color: var(--sga-danger);  border: 1px solid var(--sga-danger-bg); }
+
+@media (max-width: 600px) {
+    #form-empresa .form-row { grid-template-columns: 1fr; }
+}

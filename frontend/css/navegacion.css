@@ -1,0 +1,74 @@
+/* ── LEGACY — NO USAR EN PÁGINAS NUEVAS ──────────────────────────────────── */
+/* navbar-global / nav-container son de páginas legacy (visor, ferreteria).  */
+/* Las páginas nuevas usan .sga-header (header.css) y .sga-sidebar           */
+/* (sidebar.css). El reset con !important puede interferir con el sistema     */
+/* moderno si se carga junto a base.css en páginas nuevas.                   */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+/* RESET GLOBAL PARA TODAS LAS PÁGINAS */
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* NAVBAR */
+.navbar-global {
+    background-color: #1e3a8a;
+    width: 100vw;
+    /* Ocupa el 100% del ancho visual */
+    height: 60px;
+    /* Altura fija para que no cambie */
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.nav-logo {
+    color: white !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: sans-serif;
+    transition: opacity 0.2s;
+}
+
+.nav-menu a:hover {
+    opacity: 0.7;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Copia de Seguridad</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/sistema/copia-seguridad/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Sistema</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Copia de Seguridad</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="cs-inner">
+
+                <div class="cs-page-header">
+                    <h1 class="sga-page-title">Copia de Seguridad</h1>
+                    <p class="sga-page-description">Sistema · SGA LIN</p>
+                </div>
+
+                <div class="action-panel">
+                    <div class="action-block">
+                        <p>Genera una copia de seguridad de la base de datos <strong>LIN</strong>. Se recomienda realizarla:</p>
+                        <ul>
+                            <li>Al final de cada jornada laboral</li>
+                            <li>Antes de actualizaciones del sistema</li>
+                            <li>Antes de operaciones masivas de datos</li>
+                        </ul>
+                        <button class="btn-primary" id="btn-backup">💾 Iniciar copia de seguridad</button>
+                        <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+                    </div>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/sistema/copia-seguridad.js"></script>
+</body>
+
+</html>

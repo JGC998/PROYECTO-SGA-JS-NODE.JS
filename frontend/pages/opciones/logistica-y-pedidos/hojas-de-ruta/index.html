@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Albaranes de Expedición</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/hojas-de-ruta/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Albaranes de Expedición</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">
+                    📤 Exportar CSV
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="hr-inner">
+
+                <!-- CABECERA -->
+                <div class="hr-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Albaranes de Expedición</h1>
+                        <p class="sga-page-description">Preparación de rutas y hojas de ruta · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="hr-filters">
+                    <div class="hr-filters-row">
+                        <span class="hr-date-label">Desde</span>
+                        <input type="date" id="hr-f-desde" class="sga-input hr-date-input" aria-label="Fecha desde">
+                        <span class="hr-date-label">Hasta</span>
+                        <input type="date" id="hr-f-hasta" class="sga-input hr-date-input" aria-label="Fecha hasta">
+                        <input type="text" id="hr-f-buscar" class="sga-input hr-search-input"
+                               placeholder="Albarán, cliente…" autocomplete="off" aria-label="Buscar">
+                        <select id="hr-f-status" class="sga-select hr-status-select" aria-label="Estado">
+                            <option value="todos">Todos</option>
+                        </select>
+                        <div class="hr-quick-btns">
+                            <button class="hr-quick-btn" data-days="0">Hoy</button>
+                            <button class="hr-quick-btn" data-days="7">7d</button>
+                            <button class="hr-quick-btn hr-quick-btn--active" data-days="30">30d</button>
+                            <button class="hr-quick-btn" data-days="90">90d</button>
+                        </div>
+                        <button class="hr-btn-buscar" id="hr-btn-buscar" type="button">Buscar</button>
+                    </div>
+                </div>
+
+                <!-- CONTADORES -->
+                <div class="hr-counters" role="status" aria-live="polite" aria-atomic="true">
+                    <div class="hr-counter hr-counter--total">
+                        <span class="hr-counter__val" id="hr-cnt-total">—</span>
+                        <span class="hr-counter__label">Total albaranes</span>
+                    </div>
+                    <div class="hr-counter hr-counter--clientes">
+                        <span class="hr-counter__val" id="hr-cnt-clientes">—</span>
+                        <span class="hr-counter__label">Clientes</span>
+                    </div>
+                    <div class="hr-counter hr-counter--lineas">
+                        <span class="hr-counter__val" id="hr-cnt-lineas">—</span>
+                        <span class="hr-counter__label">Líneas</span>
+                    </div>
+                    <div class="hr-counter hr-counter--pick">
+                        <span class="hr-counter__val" id="hr-cnt-pick">—</span>
+                        <span class="hr-counter__label">Con picking</span>
+                    </div>
+                </div>
+
+                <!-- TABS + TABLA -->
+                <div class="hr-tabs-card">
+                    <nav class="hr-tab-nav" role="tablist">
+                        <button class="hr-tab-btn hr-tab-btn--active" role="tab" aria-selected="true"
+                                aria-controls="tab-pedidos-cliente" data-tab="pedidos-cliente">
+                            Pedidos de cliente
+                        </button>
+                        <button class="hr-tab-btn" role="tab" aria-selected="false"
+                                aria-controls="tab-hojas-ruta" data-tab="hojas-ruta">
+                            Hojas de ruta
+                        </button>
+                    </nav>
+
+                    <!-- TAB: Pedidos de cliente -->
+                    <div class="hr-tab-panel hr-tab-panel--active" id="tab-pedidos-cliente" role="tabpanel">
+                        <div class="hr-table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Serie</th>
+                                        <th>Albarán</th>
+                                        <th>Cliente</th>
+                                        <th>Nombre de cliente</th>
+                                        <th>Pick</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-pedidos">
+                                    <tr class="hr-placeholder-row">
+                                        <td colspan="6">Introduce los filtros y pulsa <strong>Buscar</strong>.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB: Hojas de ruta -->
+                    <div class="hr-tab-panel" id="tab-hojas-ruta" role="tabpanel">
+                        <div class="hr-table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="col-star">*</th>
+                                        <th>S</th>
+                                        <th>Hoja de ruta</th>
+                                        <th>Fecha</th>
+                                        <th>Agencia</th>
+                                        <th>Bultos</th>
+                                        <th>Kilos</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-hojas">
+                                    <tr class="hr-placeholder-row">
+                                        <td colspan="8">Sin hojas de ruta en el periodo seleccionado.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- /.hr-tabs-card -->
+
+            </div><!-- /.hr-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/logistica-y-pedidos/hojas-de-ruta.js"></script>
+</body>
+
+</html>

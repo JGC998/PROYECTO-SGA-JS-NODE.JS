@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Poner a Cero Carrusel</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/poner-cero-carrusel/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Poner a Cero Carrusel</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="container">
+
+                <header class="page-toolbar">
+                    <div class="toolbar-left">
+                        <h1>🔄 Poner a Cero Carrusel</h1>
+                    </div>
+                </header>
+
+                <div class="action-panel">
+                    <div class="action-block">
+                        <p class="action-description">
+                            Esta acción pone a cero el contador del carrusel. Se recomienda realizarla únicamente cuando el sistema lo requiera o bajo indicación del administrador.
+                        </p>
+                        <button class="btn-danger" id="btn-poner-cero">Poner a cero</button>
+                        <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+                    </div>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/opciones/logistica-y-pedidos/poner-cero-carrusel.js"></script>
+</body>
+
+</html>

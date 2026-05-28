@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Logística y Pedidos</title>
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/layout.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/animations.css">
+    <link rel="stylesheet" href="../../../css/components.css">
+    <link rel="stylesheet" href="../../../css/cards.css">
+    <link rel="stylesheet" href="../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../css/opciones/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Logística y Pedidos</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="container">
+
+                <header class="section-header">
+                    <h1>Logística y Pedidos</h1>
+                    <p>Gestión de expediciones, picking y pedidos de venta</p>
+                </header>
+
+                <div class="options-grid">
+                    <section class="option-group">
+                        <h2><span class="icon">🚛</span> Expediciones</h2>
+                        <ul>
+                            <li><a href="expediciones/index.html">Expediciones desde Pedido</a></li>
+                            <li><a href="picking/index.html">Preparación / Picking</a></li>
+                            <li><a href="entrada-mercancia/index.html">Entrada de Mercancía</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="option-group">
+                        <h2><span class="icon">📦</span> Pedidos</h2>
+                        <ul>
+                            <li><a href="situacion-pedidos-venta/index.html">Situación de Pedidos de Venta</a></li>
+                            <li><a href="hojas-de-ruta/index.html">Hojas de Ruta</a></li>
+                        </ul>
+                    </section>
+
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../js/ui/sidebar.js"></script>
+    <script src="../../../js/ui/layout.js"></script>
+</body>
+
+</html>

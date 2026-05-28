@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Visor de Proveedores</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/visor/proveedores.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Visor proveedores</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">Listado contactos</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <main class="vp-inner">
+
+                <div class="vp-page-header">
+                    <h1 class="sga-page-title">Consulta de Proveedores</h1>
+                    <p class="sga-page-description">Utilidades avanzadas · SGA LIN</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="sga-input vp-search search-bar"
+                        placeholder="Buscar proveedor...">
+                </div>
+
+                <div class="vp-table-card">
+                <div class="table-wrapper" id="proveedores-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table id="tabla-visor-proveedores">
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Cód.</th>
+                                <th>Razón social</th>
+                                <th>CIF/NIF</th>
+                                <th>Teléfono</th>
+                                <th>Localidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-visor-proveedores">
+                            <tr class="placeholder-row">
+                                <td colspan="6">Pulse Actualizar para cargar los proveedores.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div><!-- /.vp-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/visor/proveedores.js"></script>
+</body>
+
+</html>

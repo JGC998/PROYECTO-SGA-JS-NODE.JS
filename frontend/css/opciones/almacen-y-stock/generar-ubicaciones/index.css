@@ -1,0 +1,125 @@
+/* Módulo: Generar Ubicaciones — estilos específicos (globales en components.css) */
+
+.gu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.gu-page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Layout dos paneles */
+.main-layout { display: grid; grid-template-columns: 1fr 380px; gap: var(--sga-sp-md); align-items: start; }
+
+.left-panel  { display: flex; flex-direction: column; gap: var(--sga-sp-sm); }
+.right-panel { display: flex; flex-direction: column; gap: var(--sga-sp-md); padding-top: 64px; }
+
+.check-row      { display: flex; flex-direction: column; gap: var(--sga-sp-sm); padding: var(--sga-sp-sm) 0; }
+.checkbox-label { display: flex; align-items: center; gap: 6px; font-size: var(--sga-text-base); color: var(--sga-text); cursor: pointer; }
+
+/* Panel de parámetros */
+.form-section {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.form-section-title {
+    padding: 12px 16px;
+    font-weight: 700;
+    color: var(--sga-primary);
+    font-size: var(--sga-text-sm);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    background: var(--sga-surface-alt);
+    border-bottom: 1px solid var(--sga-border);
+}
+
+.params-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px var(--sga-sp-sm);
+    align-items: center;
+    padding: 16px 16px 4px;
+}
+.params-grid label {
+    font-size: var(--sga-text-sm);
+    font-weight: 600;
+    color: var(--sga-text);
+    white-space: nowrap;
+}
+.input-param {
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-base);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    width: 100%;
+    transition: border-color var(--sga-transition);
+}
+.input-param:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+.picking-row { padding: 0 16px; margin-top: var(--sga-sp-sm); }
+.select-picking {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-base);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    cursor: pointer;
+}
+
+/* Botón OK circular */
+.ok-row { display: flex; justify-content: center; padding: var(--sga-sp-md) 16px; }
+.btn-ok {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    background: var(--sga-success);
+    color: var(--sga-surface);
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--sga-shadow-md);
+    transition: transform var(--sga-transition), box-shadow var(--sga-transition), opacity var(--sga-transition);
+}
+.btn-ok:hover { transform: scale(1.05); box-shadow: var(--sga-shadow-lg); opacity: .9; }
+
+/* Botones de acción secundarios */
+.action-buttons { display: flex; flex-direction: column; gap: var(--sga-sp-sm); }
+.btn-action {
+    width: 100%;
+    padding: 11px var(--sga-sp-md);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface);
+    color: var(--sga-text);
+    cursor: pointer;
+    font-size: var(--sga-text-sm);
+    font-weight: 500;
+    font-family: var(--sga-font);
+    transition: background var(--sga-transition), border-color var(--sga-transition), color var(--sga-transition);
+    text-align: left;
+}
+.btn-action:hover  { background: var(--sga-info-bg); border-color: var(--sga-accent); color: var(--sga-primary); }
+.btn-action.danger { border-color: var(--sga-danger-bg); color: var(--sga-danger); }
+.btn-action.danger:hover { background: var(--sga-danger-bg); border-color: var(--sga-danger); }
+
+@media (max-width: 900px) {
+    .main-layout { grid-template-columns: 1fr; }
+}

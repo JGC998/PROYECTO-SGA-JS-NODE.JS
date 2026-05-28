@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Control de Lotes y Mínimos</title>
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/layout.css">
+    <link rel="stylesheet" href="../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../css/animations.css">
+    <link rel="stylesheet" href="../../../css/components.css">
+    <link rel="stylesheet" href="../../../css/cards.css">
+    <link rel="stylesheet" href="../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../css/opciones/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Control de Lotes y Mínimos</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <main class="container">
+
+                <header class="section-header">
+                    <h1>Control de Lotes y Mínimos</h1>
+                    <p>Gestión de lotes, mínimos, máximos, exclusivos y observaciones</p>
+                </header>
+
+                <div class="options-grid">
+                    <section class="option-group">
+                        <h2><span class="icon">🏷️</span> Lotes</h2>
+                        <ul>
+                            <li><a href="lote-minimo/index.html">Lote Mínimo por Cliente</a></li>
+                            <li><a href="lote-cuarentena/index.html">Lote en Cuarentena por Artículo</a></li>
+                            <li><a href="lote-exclusivo/index.html">Lote Exclusivo por Cliente y Artículo</a></li>
+                            <li><a href="lote-no-utilizado/index.html">Lote NO Utilizado por Cliente y Artículo</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="option-group">
+                        <h2><span class="icon">📊</span> Mínimos y Control</h2>
+                        <ul>
+                            <li><a href="minimos-maximos/index.html">Mínimos y Máximos por Artículo</a></li>
+                            <li><a href="observaciones-por-articulo-lote/index.html">Observaciones por Artículo y Lote</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="option-group">
+                        <h2><span class="icon">🗂️</span> Maestros</h2>
+                        <ul>
+                            <li><a href="subfamilias/index.html">Subfamilias</a></li>
+                        </ul>
+                    </section>
+                </div>
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../js/ui/sidebar.js"></script>
+    <script src="../../../js/ui/layout.js"></script>
+</body>
+
+</html>

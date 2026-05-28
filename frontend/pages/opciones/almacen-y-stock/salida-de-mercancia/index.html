@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Salida de Mercancía</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/tables.css">
+    <link rel="stylesheet" href="../../../../css/cards.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/salida-de-mercancia/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Salida de Mercancía</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar">
+                    Limpiar (F5)
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="sm-inner">
+
+                <!-- CABECERA DE PÁGINA -->
+                <div class="sm-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Salida de Mercancía</h1>
+                        <p class="sga-page-description">Retirada de stock · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- ZONA PRINCIPAL -->
+                <div class="sm-workspace" id="sm-workspace">
+
+                    <!-- FORMULARIO SALIDA RÁPIDA -->
+                    <section class="sm-form">
+                        <div class="sm-form-title">Salida rápida</div>
+
+                        <!-- ARTÍCULO -->
+                        <div class="sm-field-group" id="fg-articulo">
+                            <label for="sm-art-cod" class="sm-label">Artículo</label>
+                            <div class="sm-input-row">
+                                <input type="text" id="sm-art-cod" class="sm-input sm-input--lg"
+                                       placeholder="Código de artículo..." autocomplete="off">
+                                <button class="sm-btn-buscar" id="btn-art-buscar"
+                                        type="button" aria-label="Buscar artículo">Buscar</button>
+                                <button class="sm-btn-clear" id="btn-art-clear"
+                                        type="button" aria-label="Limpiar artículo" hidden>✕</button>
+                            </div>
+                            <div class="sm-pill" id="sm-art-pill" hidden></div>
+                        </div>
+
+                        <!-- SELECTOR DE STOCK (clave FASE 4B) -->
+                        <div class="sm-field-group sm-field-group--stock" id="fg-stock">
+                            <div class="sm-stock-header">
+                                <span class="sm-label">Stock disponible</span>
+                                <span class="sm-stock-hint" id="sm-stock-hint">Busque un artículo primero</span>
+                            </div>
+                            <div class="sm-stock-selector" id="sm-stock-selector">
+                                <div class="sm-stock-placeholder" id="sm-stock-placeholder">
+                                    Introduzca un código de artículo para ver el stock disponible.
+                                </div>
+                                <div class="sm-stock-lista" id="sm-stock-lista" hidden
+                                     role="listbox" aria-label="Líneas de stock disponibles"></div>
+                                <div class="sm-stock-empty" id="sm-stock-empty" hidden>
+                                    Sin stock disponible para este artículo.
+                                </div>
+                                <div class="sm-stock-loading" id="sm-stock-loading" role="status" aria-live="polite" hidden>
+                                    Consultando stock…
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CANTIDAD (activo tras selección de línea) -->
+                        <div class="sm-field-group sm-field-group--cant" id="fg-cantidad">
+                            <label for="sm-cant" class="sm-label">Cantidad</label>
+                            <div class="sm-disponible-tag" id="sm-disponible-tag" hidden></div>
+                            <div class="sm-cant-row">
+                                <button class="sm-stepper" id="btn-menos" type="button"
+                                        aria-label="Disminuir cantidad" disabled>−</button>
+                                <input type="number" id="sm-cant" class="sm-input sm-input--cant"
+                                       value="1" min="0.001" step="1" autocomplete="off" disabled>
+                                <button class="sm-stepper" id="btn-mas" type="button"
+                                        aria-label="Aumentar cantidad" disabled>+</button>
+                            </div>
+                            <div class="sm-cant-warn" id="sm-cant-warn" hidden></div>
+                        </div>
+
+                        <!-- ESTADO / NOTIFICACIÓN -->
+                        <div class="sm-form-status" id="sm-form-status" role="alert" aria-live="assertive" hidden></div>
+
+                        <!-- BOTÓN AÑADIR -->
+                        <div class="sm-form-actions">
+                            <button class="sm-btn-add" id="btn-anadir" type="button" disabled>
+                                + Añadir línea
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- CARRITO DE SALIDA -->
+                    <aside class="sm-carrito" id="sm-carrito">
+                        <div class="sm-carrito-header">
+                            <span class="sm-carrito-title">Carrito de salida</span>
+                            <span class="sm-carrito-badge" id="sm-carrito-count" aria-live="polite">0 líneas</span>
+                        </div>
+                        <div class="sm-carrito-body" id="sm-carrito-body">
+                            <div class="sm-carrito-empty" id="sm-carrito-empty">
+                                Añada artículos para comenzar la salida.
+                            </div>
+                        </div>
+                        <div class="sm-carrito-footer">
+                            <div class="sm-carrito-totales" id="sm-carrito-totales"></div>
+                            <button class="sm-btn-confirm" id="btn-confirmar" type="button" disabled>
+                                Confirmar salida ▶
+                            </button>
+                        </div>
+                    </aside>
+
+                </div><!-- /.sm-workspace -->
+
+            </div><!-- /.sm-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <!-- Modal resultado salida -->
+    <div class="sm-result-overlay" id="sm-result-overlay" role="dialog" aria-modal="true"
+         aria-labelledby="sm-result-title">
+        <div class="sm-result-modal">
+            <div class="sm-result-modal-header" id="sm-result-title">Resultado de la salida</div>
+            <div class="sm-result-modal-body" id="sm-result-modal-body"></div>
+            <div class="sm-result-modal-footer">
+                <a class="sga-btn sga-btn-secondary sga-btn-sm" id="link-ver-stock"
+                   href="../consulta-de-stock/index.html">
+                    Ver stock ↗
+                </a>
+                <button class="sga-btn sga-btn-primary sga-btn-sm"
+                        id="sm-result-close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/salida-de-mercancia.js"></script>
+
+</body>
+
+</html>
