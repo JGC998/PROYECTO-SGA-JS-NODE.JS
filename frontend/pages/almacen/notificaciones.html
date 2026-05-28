@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA — Notificaciones</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <style>
+        .notif-page { max-width: 760px; margin: 0 auto; padding: 24px 16px; }
+        .notif-page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .notif-page-title { font-size: 1.3rem; font-weight: 700; color: var(--text, #e2e8f0); }
+        .notif-list { display: flex; flex-direction: column; gap: 8px; }
+        .notif-card {
+            display: grid; grid-template-columns: 32px 1fr auto;
+            gap: 10px; align-items: start;
+            background: var(--card-bg, #0f172a);
+            border: 1px solid var(--border, #1e293b);
+            border-left: 4px solid #334155;
+            border-radius: 8px; padding: 12px 16px; font-size: .875rem;
+        }
+        .notif-picking    { border-left-color: #3b82f6; }
+        .notif-incidencia { border-left-color: #f59e0b; }
+        .notif-backup     { border-left-color: #10b981; }
+        .notif-stock      { border-left-color: #ef4444; }
+        .notif-icon  { font-size: 1.1rem; line-height: 1.4; }
+        .notif-titulo{ font-weight: 600; color: var(--text, #e2e8f0); margin-bottom: 2px; }
+        .notif-desc  { color: var(--muted, #94a3b8); font-size: .82rem; line-height: 1.4; }
+        .notif-ts    { color: #475569; font-size: .78rem; white-space: nowrap; margin-top: 2px; }
+        .notif-empty { color: var(--muted, #6b7280); text-align: center; padding: 40px 0; font-size: .9rem; }
+        .notif-count { color: var(--muted, #6b7280); font-size: .85rem; }
+    </style>
+</head>
+<body class="sga-layout">
+
+    <div class="sga-main" id="sgaMain">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Notificaciones</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar">
+                    🗑 Limpiar todo
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="notif-page">
+                <div class="notif-page-header">
+                    <span class="notif-page-title">🔔 Notificaciones</span>
+                    <span class="notif-count" id="notif-count"></span>
+                </div>
+                <div class="notif-list" id="notif-list">
+                    <p class="notif-empty">Cargando…</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
+    <script src="notificaciones.js"></script>
+</body>
+</html>

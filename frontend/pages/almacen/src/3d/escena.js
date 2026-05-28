@@ -248,6 +248,25 @@ document.getElementById('btn-export-map').addEventListener('click', () => {
 document.getElementById('btn-editor').addEventListener('click', () => { window.location.href = 'editor.html'; });
 document.getElementById('btn-supervisor').addEventListener('click', () => { window.open('supervisor.html', '_blank'); });
 document.getElementById('btn-hub-almacen').addEventListener('click', () => { window.location.href = 'index.html'; });
+document.getElementById('btn-regenerar-layout').addEventListener('click', async () => {
+    if (!confirm('¿Regenerar el layout desde la tabla UBICACION de la BD?\nEl visor se recargará con la estructura real de pasillos.')) return;
+    const btn = document.getElementById('btn-regenerar-layout');
+    const prev = btn.textContent;
+    btn.disabled = true; btn.textContent = '⏳ Regenerando…';
+    try {
+        const k = (() => { try { return sessionStorage.getItem('sga-api-key') || localStorage.getItem('sga-api-key') || ''; } catch { return ''; } })();
+        const headers = { 'Content-Type': 'application/json' };
+        if (k) headers['x-api-key'] = k;
+        const r = await fetch('/api/almacen/regenerar-layout', { method: 'POST', headers });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const { pasillos, objetos } = await r.json();
+        showToast(`✓ Layout regenerado — ${pasillos} pasillos, ${objetos} objetos. Recargando…`, 3000);
+        setTimeout(() => location.reload(), 2500);
+    } catch (e) {
+        showToast(`✗ Error al regenerar: ${e.message}`, 5000);
+        btn.disabled = false; btn.textContent = prev;
+    }
+});
 document.getElementById('btn-sga-main').addEventListener('click', () => { window.location.href = '../../index.html'; });
 document.getElementById('thresh-input').addEventListener('change', e => {
     S.LOW_STOCK_THRESH = Math.max(1, parseInt(e.target.value, 10) || 10);

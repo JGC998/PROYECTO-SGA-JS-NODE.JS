@@ -143,8 +143,10 @@ export async function toggleStockPreview() {
     showStatus('📊 Cargando datos de stock…');
     try {
         const ts   = `?t=${Date.now()}`;
-        const stks = await fetch(`./datos/articulos.json${ts}`, { cache: 'no-store' })
-            .then(r => r.ok ? r.json() : []).catch(() => []);
+        const stks = await fetch(`/api/almacen/articulos${ts}`, { cache: 'no-store' })
+            .then(r => r.ok ? r.json() : null).catch(() => null)
+            .then(d => d ?? fetch(`./datos/articulos.json${ts}`, { cache: 'no-store' })
+                .then(r => r.ok ? r.json() : []).catch(() => []));
 
         const stockIdx = {};
         for (const s of stks) {
@@ -190,14 +192,22 @@ export async function toggleStockPreview() {
     }
 }
 
-// ── CARGAR DESDE SERVIDOR (distribucion.json) ────────────────
+// ── CARGAR DESDE SERVIDOR (backend/data/distribucion.json vía API) ───────────
 export async function cargarDesdeServidor() {
-    showStatus('Cargando desde distribucion.json…');
+    showStatus('Cargando layout desde servidor…');
     try {
-        const r = await fetch(`./datos/distribucion.json?t=${Date.now()}`, { cache: 'no-store' });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const data = await r.json();
-        if (!data?.objetos?.length) throw new Error('distribucion.json vacío o sin objetos');
+        const ts = `?t=${Date.now()}`;
+        let data = null;
+        try {
+            const r = await fetch(`/api/almacen/load-config${ts}`, { cache: 'no-store' });
+            if (r.ok) data = await r.json();
+        } catch (_) {}
+        if (!data) {
+            const r = await fetch(`./datos/distribucion.json${ts}`, { cache: 'no-store' });
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            data = await r.json();
+        }
+        if (!data?.objetos?.length) throw new Error('No hay objetos en el layout guardado');
         renderizarAlmacen(data);
         _saveEditorState();
         showStatus(`✓ Layout cargado desde servidor — ${data.objetos.length} objetos`);
@@ -214,13 +224,20 @@ export function _parseUbiEtq(etq) {
     return { pasillo: +p[1], lado: l ? l[1].toUpperCase() : 'I', col: +x[1], nivel: +y[1] };
 }
 
-// ── IMPORTAR DESDE UBICACIONES.JSON ──────────────────────────
+// ── IMPORTAR DESDE UBICACIONES (API → fallback JSON estático) ────────────────
 export async function importarDesdeUbicaciones() {
-    showStatus('Cargando ubicaciones.json…');
+    showStatus('Cargando ubicaciones desde servidor…');
     try {
-        const r = await fetch('./datos/ubicaciones.json');
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const ubis = await r.json();
+        let ubis = null;
+        try {
+            const r = await fetch('/api/ubicaciones', { cache: 'no-store' });
+            if (r.ok) ubis = await r.json();
+        } catch (_) {}
+        if (!ubis) {
+            const r = await fetch('./datos/ubicaciones.json', { cache: 'no-store' });
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            ubis = await r.json();
+        }
 
         const pasillos = {};
         for (const u of ubis) {

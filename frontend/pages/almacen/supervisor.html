@@ -21,6 +21,9 @@
         <button class="tab-btn" data-tab="finalizadas" role="tab" aria-selected="false">
             &#10003; Finalizadas <span class="tab-badge" id="badge-fin">0</span>
         </button>
+        <button class="tab-btn" data-tab="notificaciones" role="tab" aria-selected="false">
+            &#128276; Notificaciones <span class="tab-badge hidden" id="badge-notif-sup">0</span>
+        </button>
     </nav>
 
     <div class="top-right">
@@ -107,6 +110,19 @@
     </div>
     <div id="fin-grid" class="route-grid">
         <div class="grid-empty">Sin rutas finalizadas</div>
+    </div>
+</section>
+
+<!-- ── TAB: NOTIFICACIONES ────────────────────────────────────────── -->
+<section id="tab-notificaciones" class="tab-panel" role="tabpanel" style="display:none">
+    <div class="tab-toolbar">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button class="action-btn" id="btn-limpiar-notif">&#128465; Limpiar todo</button>
+            <span class="stat-l" id="notif-count" style="margin-left:8px;color:#6b7280;font-size:.85rem;"></span>
+        </div>
+    </div>
+    <div id="notif-list" class="notif-list">
+        <div class="grid-empty">Sin notificaciones</div>
     </div>
 </section>
 

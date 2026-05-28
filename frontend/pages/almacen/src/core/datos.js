@@ -136,10 +136,13 @@ export async function cargar() {
             .then(r => r.ok ? r.json() : null).catch(() => null)
             .then(data => data ?? _fetchWithTimeout(`./datos/articulos.json${ts}`)
                 .then(r => r.ok ? r.json() : []).catch(() => []));
-        const [stks, layoutConfig] = await Promise.all([
-            stksPromise,
-            _fetchWithTimeout(`./datos/distribucion.json${ts}`).then(r => r.ok ? r.json() : null).catch(() => null),
-        ]);
+        // Layout: intentar primero el endpoint del servidor (backend/data/), fallback al estático
+        const layoutPromise = _fetchWithTimeout(`/api/almacen/load-config${ts}`)
+            .then(r => r.ok ? r.json() : null).catch(() => null)
+            .then(d => d ?? _fetchWithTimeout(`./datos/distribucion.json${ts}`)
+                .then(r => r.ok ? r.json() : null).catch(() => null));
+
+        const [stks, layoutConfig] = await Promise.all([stksPromise, layoutPromise]);
 
         const allWarns = [..._validateDistribucion(layoutConfig), ..._validateArticulos(stks)];
         if (allWarns.length) {
@@ -148,6 +151,11 @@ export async function cargar() {
         }
 
         if (layoutConfig?.objetos?.length) {
+            // Detectar si el layout no tiene estanterías vinculadas a BD (sin meta.pasillo)
+            const estsBD = layoutConfig.objetos.filter(o => o.tipo === 'estanteria' && o.meta?.pasillo);
+            if (!estsBD.length) {
+                showToast('⚠ El layout no tiene estanterías vinculadas a la BD. Usa "Regenerar layout desde BD" en el menú de pausa.', 8000);
+            }
             const layoutUbis = _ubisFromLayoutConfig(layoutConfig);
             const { stockIdx, unidades, pasillosMap } = parseDatosJson(layoutUbis, stks);
             S.globalStockIdx = stockIdx;
@@ -156,12 +164,27 @@ export async function cargar() {
             _computeStats(unidades, stockIdx);
             buildLowStockAlerts();
         } else {
-            loadT.textContent = 'Sin distribucion.json — diseña el layout en el Editor de almacén.';
-            const btn = document.createElement('button');
-            btn.className = 'load-retry';
-            btn.textContent = '⚙ Abrir Editor';
-            btn.onclick = () => { window.location.href = 'editor.html'; };
-            loadEl.appendChild(btn);
+            loadT.textContent = 'Sin layout guardado — regenera desde la BD o diseña en el editor.';
+            const btnRegen = document.createElement('button');
+            btnRegen.className = 'load-retry';
+            btnRegen.textContent = '⟳ Regenerar desde BD';
+            btnRegen.onclick = async () => {
+                btnRegen.disabled = true; btnRegen.textContent = '⏳ Regenerando…';
+                try {
+                    const r = await fetch('/api/almacen/regenerar-layout', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                    location.reload();
+                } catch (e) {
+                    loadT.textContent = `Error al regenerar: ${e.message}`;
+                    btnRegen.disabled = false; btnRegen.textContent = '⟳ Regenerar desde BD';
+                }
+            };
+            loadEl.appendChild(btnRegen);
+            const btnEditor = document.createElement('button');
+            btnEditor.className = 'load-retry';
+            btnEditor.textContent = '⚙ Abrir Editor';
+            btnEditor.onclick = () => { window.location.href = 'editor.html'; };
+            loadEl.appendChild(btnEditor);
             return;
         }
     } catch (err) {

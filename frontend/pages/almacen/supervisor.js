@@ -17,7 +17,7 @@
     async function init() {
         renderItemsList();
         bindEvents();
-        await Promise.all([loadArticles(), loadPickings(), loadWorkers()]);
+        await Promise.all([loadArticles(), loadPickings(), loadWorkers(), loadNotifs()]);
         connectSSE();
         fetchServerInfo();
     }
@@ -50,13 +50,23 @@
         document.querySelectorAll('.tab-panel').forEach(p => {
             p.style.display = p.id === `tab-${tab}` ? '' : 'none';
         });
-        if (tab === 'curso')       renderCurso();
-        if (tab === 'finalizadas') renderFinalizadas();
+        if (tab === 'curso')            renderCurso();
+        if (tab === 'finalizadas')      renderFinalizadas();
+        if (tab === 'notificaciones')   {
+            renderNotifs();
+            // Resetear badge al abrir la pestaña
+            const badgeSup = document.getElementById('badge-notif-sup');
+            if (badgeSup) { badgeSup.textContent = '0'; badgeSup.classList.add('hidden'); }
+            try { localStorage.setItem('sga-notif-unread', '0'); } catch {}
+        }
     }
 
     async function fetchServerInfo() {
         try {
-            const r = await fetch('/api/almacen/server-info');
+            const k = sessionStorage.getItem('sga-api-key') || localStorage.getItem('sga-api-key') || '';
+            const headers = {};
+            if (k) headers['x-api-key'] = k;
+            const r = await fetch('/api/almacen/server-info', { headers });
             if (!r.ok) return;
             const { ip, port } = await r.json();
             if (ip && ip !== 'localhost') _mobileBase = `http://${ip}:${port}`;
@@ -715,7 +725,7 @@ window.onload = function() {
         let es;
 
         function connect() {
-            const _k = (() => { try { return localStorage.getItem('sga-api-key') || ''; } catch { return ''; } })();
+            const _k = (() => { try { return sessionStorage.getItem('sga-api-key') || localStorage.getItem('sga-api-key') || ''; } catch { return ''; } })();
             es = new EventSource('/api/almacen/events' + (_k ? '?token=' + encodeURIComponent(_k) : ''));
             es.addEventListener('open', () => dotEl?.classList.add('dot-live'));
             es.addEventListener('error', () => {
@@ -774,8 +784,72 @@ window.onload = function() {
                     }
                 } catch {}
             });
+
+            es.addEventListener('notificacion', e => {
+                try {
+                    const notif = JSON.parse(e.data);
+                    _onNewNotif(notif);
+                } catch {}
+            });
         }
         connect();
+    }
+
+    // ── NOTIFICACIONES ────────────────────────────────────────────
+    let _notifs = [];
+
+    async function loadNotifs() {
+        try {
+            const r = await fetch('/api/almacen/notificaciones');
+            if (r.ok) _notifs = await r.json();
+        } catch {}
+        renderNotifs();
+    }
+
+    function _onNewNotif(notif) {
+        _notifs.unshift(notif);
+        if (_notifs.length > 50) _notifs.length = 50;
+        // Actualizar badge en pestaña
+        const badgeSup = document.getElementById('badge-notif-sup');
+        if (badgeSup) {
+            const cur = parseInt(badgeSup.textContent || '0', 10);
+            const next = (isNaN(cur) ? 0 : cur) + 1;
+            badgeSup.textContent = String(next);
+            badgeSup.classList.remove('hidden');
+        }
+        // Actualizar badge global en localStorage (para sidebar de otras páginas)
+        try {
+            const cur = parseInt(localStorage.getItem('sga-notif-unread') || '0', 10);
+            localStorage.setItem('sga-notif-unread', String((isNaN(cur) ? 0 : cur) + 1));
+        } catch {}
+        // Si la pestaña está activa, renderizar directamente
+        if (_activeTab === 'notificaciones') renderNotifs();
+        showToast(`🔔 ${notif.titulo}: ${notif.descripcion.slice(0, 60)}`, 4000);
+    }
+
+    function renderNotifs() {
+        const el = document.getElementById('notif-list');
+        const cnt = document.getElementById('notif-count');
+        if (!el) return;
+        if (cnt) cnt.textContent = _notifs.length ? `${_notifs.length} evento${_notifs.length !== 1 ? 's' : ''}` : '';
+        if (!_notifs.length) { el.innerHTML = '<div class="grid-empty">Sin notificaciones</div>'; return; }
+        const iconos = { picking: '📋', incidencia: '⚠️', backup: '💾', stock: '📦' };
+        el.innerHTML = _notifs.map(n => `
+            <div class="notif-card notif-${esc(n.tipo)}">
+                <span class="notif-icon">${iconos[n.tipo] ?? '🔔'}</span>
+                <div class="notif-body">
+                    <div class="notif-titulo">${esc(n.titulo)}</div>
+                    <div class="notif-desc">${esc(n.descripcion)}</div>
+                </div>
+                <time class="notif-ts" title="${esc(n.ts)}">${_fmtTs(n.ts)}</time>
+            </div>`).join('');
+    }
+
+    function _fmtTs(iso) {
+        try {
+            const d = new Date(iso);
+            return d.toLocaleString('es-ES', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+        } catch { return ''; }
     }
 
     // ── UTILIDADES ────────────────────────────────────────────────
@@ -826,6 +900,19 @@ window.onload = function() {
 
         document.getElementById('btn-refresh').addEventListener('click', loadPickings);
         document.getElementById('btn-csv').addEventListener('click', exportCSV);
+
+        document.getElementById('btn-limpiar-notif').addEventListener('click', async () => {
+            if (!confirm('¿Limpiar el historial de notificaciones?')) return;
+            try {
+                await fetch('/api/almacen/notificaciones/limpiar', { method: 'POST',
+                    headers: { 'x-api-key': sessionStorage.getItem('sga-api-key') || localStorage.getItem('sga-api-key') || '' } });
+                _notifs = [];
+                renderNotifs();
+                const badgeSup = document.getElementById('badge-notif-sup');
+                if (badgeSup) { badgeSup.textContent = '0'; badgeSup.classList.add('hidden'); }
+                try { localStorage.setItem('sga-notif-unread', '0'); } catch {}
+            } catch { showToast('Error al limpiar notificaciones', 2000); }
+        });
 
         document.getElementById('dd-cls').addEventListener('click', closeRouteDetail);
         document.getElementById('detail-overlay').addEventListener('click', closeRouteDetail);

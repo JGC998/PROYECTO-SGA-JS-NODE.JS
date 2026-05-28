@@ -741,12 +741,21 @@ function initKeyboard() {
 
 // ── CARGA / GUARDADO ──────────────────────────────────────────────
 async function cargar() {
-    showStatus('Cargando distribucion.json…');
+    showStatus('Cargando layout desde servidor…');
     try {
-        const r = await fetch(`./datos/distribucion.json?t=${Date.now()}`, { cache: 'no-store' });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const data = await r.json();
-        if (!data?.objetos) throw new Error('JSON inválido');
+        const ts = `?t=${Date.now()}`;
+        // Intentar primero el endpoint del backend (backend/data/distribucion.json),
+        // fallback al JSON estático del frontend si el servidor no responde
+        let data = null;
+        try {
+            const r = await fetch(`/api/almacen/load-config${ts}`, { cache: 'no-store' });
+            if (r.ok) data = await r.json();
+        } catch (_) {}
+        if (!data) {
+            const r = await fetch(`./datos/distribucion.json${ts}`, { cache: 'no-store' });
+            if (r.ok) data = await r.json();
+        }
+        if (!data?.objetos) throw new Error('No se encontró ningún layout guardado');
         st.config = data;
         st.config.dimensiones ??= { ancho: 50, profundidad: 50 };
         st.config.objetos     ??= [];
@@ -757,6 +766,33 @@ async function cargar() {
         showStatus(`✓ ${st.config.objetos.length} objetos cargados`);
     } catch (err) {
         showStatus(`✗ Error al cargar: ${err.message}`, true);
+    }
+}
+
+async function regenerarDesdeDB() {
+    const btn = document.getElementById('btn-regenerar');
+    if (btn?.disabled) return;
+    if (!confirm('¿Regenerar el layout desde la tabla UBICACION de la base de datos?\n\nEsto sustituirá el layout actual por la estructura real de pasillos y estanterías de la BD.\nLas zonas decorativas (puertas, oficinas, columnas) se perderán y habrá que añadirlas de nuevo.')) return;
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Regenerando…'; }
+    showStatus('Regenerando layout desde BD…');
+    try {
+        const k = (() => { try { return sessionStorage.getItem('sga-api-key') || localStorage.getItem('sga-api-key') || ''; } catch { return ''; } })();
+        const headers = { 'Content-Type': 'application/json' };
+        if (k) headers['x-api-key'] = k;
+        const r = await fetch('/api/almacen/regenerar-layout', { method: 'POST', headers });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const { layout, pasillos, objetos } = await r.json();
+        st.config = layout;
+        st.config.dimensiones ??= { ancho: 50, profundidad: 50 };
+        st.selectedId = null;
+        pushHistory();
+        syncUI();
+        fitScene();
+        showStatus(`✓ Layout regenerado desde BD — ${pasillos} pasillos, ${objetos} objetos`);
+    } catch (err) {
+        showStatus(`✗ Error al regenerar: ${err.message}`, true);
+    } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '⟳ Desde BD'; }
     }
 }
 
@@ -844,8 +880,11 @@ async function toggleStock() {
     }
     showStatus('Cargando stock…');
     try {
-        const stks = await fetch(`./datos/articulos.json?t=${Date.now()}`, { cache: 'no-store' })
-            .then(r => r.ok ? r.json() : []).catch(() => []);
+        const ts = `?t=${Date.now()}`;
+        const stks = await fetch(`/api/almacen/articulos${ts}`, { cache: 'no-store' })
+            .then(r => r.ok ? r.json() : null).catch(() => null)
+            .then(d => d ?? fetch(`./datos/articulos.json${ts}`, { cache: 'no-store' })
+                .then(r => r.ok ? r.json() : []).catch(() => []));
         const stockIdx = {};
         for (const s of stks) {
             const k = s.ubicacion ?? s.STOUBI; if (!k) continue;
@@ -1012,6 +1051,7 @@ function init() {
     document.getElementById('btn-nuevo').addEventListener('click', nuevoLayout);
     document.getElementById('btn-cargar').addEventListener('click', cargar);
     document.getElementById('btn-guardar').addEventListener('click', guardar);
+    document.getElementById('btn-regenerar').addEventListener('click', regenerarDesdeDB);
     document.getElementById('btn-sincronizar').addEventListener('click', sincronizarConVisor);
     document.getElementById('btn-undo').addEventListener('click', undo);
     document.getElementById('btn-redo').addEventListener('click', redo);

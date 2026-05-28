@@ -34,7 +34,10 @@
     }
 
     function _apiKey() {
-        try { return localStorage.getItem('sga-api-key') || ''; } catch { return ''; }
+        try {
+            return sessionStorage.getItem('sga-api-key')
+                || localStorage.getItem('sga-api-key') || '';
+        } catch { return ''; }
     }
 
     function _authHeaders() {

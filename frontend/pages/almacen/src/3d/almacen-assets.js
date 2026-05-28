@@ -3,15 +3,18 @@ import { LH, UW, UD, FT } from '../../js/shared/configuracion.js';
 
 // ── TEXTURAS (singletons) ─────────────────────────────────────
 const tLoader = new THREE.TextureLoader();
+
 function _loadTex(url, rx, ry) {
     const t = tLoader.load(url);
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(rx, ry);
     return t;
 }
+
 export function cloneRepeat(base, rx, ry) {
     const t = base.clone(); t.needsUpdate = true; t.repeat.set(rx, ry); return t;
 }
+
 export const texSuelo = _loadTex('texturas/suelo.jpg',      30, 30);
 export const texTecho = _loadTex('texturas/techo.jpg',      30, 30);
 export const texPared = _loadTex('texturas/pared.jpg',      12,  4);
