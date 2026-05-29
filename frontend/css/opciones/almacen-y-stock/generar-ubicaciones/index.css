@@ -44,18 +44,84 @@
     border-bottom: 1px solid var(--sga-border);
 }
 
-.params-grid {
+/* Nueva rejilla de rangos Desde/Hasta */
+.gu-range-grid {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 10px var(--sga-sp-sm);
+    grid-template-columns: auto 1fr 1fr;
+    gap: 8px 10px;
     align-items: center;
-    padding: 16px 16px 4px;
+    padding: 16px 16px 8px;
 }
-.params-grid label {
+
+.gu-range-head {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sga-text-muted);
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--sga-border);
+}
+
+.gu-range-label {
     font-size: var(--sga-text-sm);
     font-weight: 600;
     color: var(--sga-text);
     white-space: nowrap;
+}
+
+/* Grid extras: Ancho, Alto, Palets */
+.gu-extra-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto 1fr;
+    gap: 8px 10px;
+    align-items: center;
+    padding: 8px 16px;
+    border-top: 1px solid var(--sga-border-light);
+    margin-top: 4px;
+}
+
+/* Fila inferior: checkbox + picking */
+.gu-bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--sga-border-light);
+}
+
+.gu-bottom-row .select-picking { width: auto; min-width: 130px; }
+
+/* Preview de ubicaciones a generar */
+.gu-preview {
+    margin: 4px 16px 0;
+    padding: 8px 12px;
+    background: var(--sga-info-bg);
+    color: var(--sga-primary);
+    border-radius: var(--sga-radius-sm);
+    font-size: .78rem;
+    font-weight: 600;
+    min-height: 0;
+}
+.gu-preview:empty { display: none; }
+
+/* Botón OK — ahora rectangular */
+.ok-row { display: flex; justify-content: center; padding: var(--sga-sp-md) 16px; }
+.btn-ok {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    padding: 12px 24px;
+    border-radius: var(--sga-radius-sm);
+    border: none;
+    background: var(--sga-success);
+    color: var(--sga-surface);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--sga-shadow-md);
+    transition: transform var(--sga-transition), box-shadow var(--sga-transition), opacity var(--sga-transition);
 }
 .input-param {
     padding: 6px 10px;
@@ -83,22 +149,8 @@
     cursor: pointer;
 }
 
-/* Botón OK circular */
-.ok-row { display: flex; justify-content: center; padding: var(--sga-sp-md) 16px; }
-.btn-ok {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: none;
-    background: var(--sga-success);
-    color: var(--sga-surface);
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: var(--sga-shadow-md);
-    transition: transform var(--sga-transition), box-shadow var(--sga-transition), opacity var(--sga-transition);
-}
-.btn-ok:hover { transform: scale(1.05); box-shadow: var(--sga-shadow-lg); opacity: .9; }
+.btn-ok:hover { transform: scale(1.02); box-shadow: var(--sga-shadow-lg); opacity: .9; }
+.btn-ok:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
 /* Botones de acción secundarios */
 .action-buttons { display: flex; flex-direction: column; gap: var(--sga-sp-sm); }

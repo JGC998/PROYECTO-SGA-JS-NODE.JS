@@ -78,6 +78,61 @@ router.get('/ubicaciones', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
+router.post('/generar-ubicaciones', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const {
+            desde_pasillo = 1, hasta_pasillo = 1,
+            desde_lateral = 11, hasta_lateral = 21,
+            desde_x = 1, hasta_x = 1,
+            desde_y = 1, hasta_y = 1,
+            ancho = 0, alto = 0, palets = 0,
+            multiple = 0, picking = 'Picking'
+        } = req.body;
+
+        const lados = [];
+        if (Number(desde_lateral) <= 11 && 11 <= Number(hasta_lateral)) lados.push('I');
+        if (Number(desde_lateral) <= 21 && 21 <= Number(hasta_lateral)) lados.push('D');
+        if (!lados.length) lados.push('I', 'D');
+
+        const lib = picking === 'Picking' ? 1 : 0;
+        const mul = Number(multiple) ? 1 : 0;
+        let creadas = 0;
+        const listaExistentes = [];
+
+        for (let p = Number(desde_pasillo); p <= Number(hasta_pasillo); p++) {
+            const ps = String(p).padStart(3, '0');
+            for (const lado of lados) {
+                for (let x = Number(desde_x); x <= Number(hasta_x); x++) {
+                    const xs = String(x).padStart(3, '0');
+                    for (let y = Number(desde_y); y <= Number(hasta_y); y++) {
+                        const ys = String(y).padStart(3, '0');
+                        const lat = lado === 'I' ? '11' : '21';
+                        const cod = '001' + ps + lat + xs + ys;
+                        const eti = 'P' + ps + ' ' + lado + ' X' + xs + ' Y' + ys;
+                        const r = await pool.request()
+                            .input('cod', cod).input('eti', eti).input('nom', eti)
+                            .input('anc', Number(ancho)).input('alt', Number(alto))
+                            .input('pal', Number(palets)).input('mul', mul)
+                            .input('alm', '').input('lib', lib)
+                            .query(`IF NOT EXISTS (SELECT 1 FROM UBICACION WHERE UBICODUBI=@cod)
+                                BEGIN
+                                    INSERT INTO UBICACION (UBICODUBI,UBIETI,UBINOM,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBIALMCOD,UBILIB)
+                                    VALUES (@cod,@eti,@nom,@anc,@alt,@pal,@mul,@alm,@lib)
+                                    SELECT 1 AS insertada
+                                END
+                                ELSE SELECT 0 AS insertada`);
+                        if (r.recordset[0]?.insertada) creadas++;
+                        else listaExistentes.push(eti);
+                    }
+                }
+            }
+        }
+
+        res.json({ ok: true, creadas, existentes: listaExistentes.length, listaExistentes });
+    } catch (err) { serverError(res, err); }
+});
+
 router.post('/ubicaciones', async (req, res) => {
     try {
         const pool = await getPool();
