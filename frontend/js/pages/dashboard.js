@@ -343,7 +343,7 @@
 
     // ── INIT ──────────────────────────────────────────────────────────────────
 
-    document.addEventListener('DOMContentLoaded', function () {
+    function initDashboard() {
         var hoy    = new Date();
         var hace30 = new Date(hoy);
         hace30.setDate(hace30.getDate() - 30);
@@ -364,6 +364,26 @@
                     inpHasta ? inpHasta.value : iso(hoy)
                 );
             });
+        }
+    }
+
+    // Exponer para uso desde graficas (tab actividad)
+    window.loadDashboard = function () {
+        var hoy    = new Date();
+        var hace30 = new Date(hoy);
+        hace30.setDate(hace30.getDate() - 30);
+        var iso = function (d) { return d.toISOString().slice(0, 10); };
+        loadDashboard(iso(hace30), iso(hoy));
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Solo auto-inicializar si estamos en el dashboard (index.html)
+        if (document.getElementById('db-desde') !== null || document.getElementById('db-actividad') !== null) {
+            // En graficas.html el tab activo al cargar es resumen, no actividad
+            // Solo auto-inicializar si NO hay pestañas de informes
+            if (!document.querySelector('.tab-btn-inf')) {
+                initDashboard();
+            }
         }
     });
 

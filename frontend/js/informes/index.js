@@ -36,6 +36,7 @@ document.querySelectorAll('.tab-btn-inf').forEach(btn => {
 function cargarTab(tab) {
     loaded[tab] = true;
     switch (tab) {
+        case 'actividad':    if (typeof loadDashboard === 'function') loadDashboard(); break;
         case 'trabajadores': cargarTrabajadores(); break;
         case 'almacen':      cargarAlmacen();      break;
         case 'movimientos':  cargarMovimientos();  break;
@@ -205,9 +206,9 @@ async function cargarTrabajadores() {
                 datasets: [{ label: 'Movimientos', data: data.map(r => r.movimientos),
                     backgroundColor: data.map((_, i) => PAL[i % PAL.length] + 'cc'),
                     borderColor: data.map((_, i) => PAL[i % PAL.length]),
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
@@ -218,9 +219,9 @@ async function cargarTrabajadores() {
                 labels,
                 datasets: [{ label: 'Unidades', data: data.map(r => r.unidades),
                     backgroundColor: 'rgba(124,58,237,.7)', borderColor: PURPLE,
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
@@ -266,9 +267,9 @@ async function cargarAlmacen() {
                 datasets: [{ label: 'Stock total', data: d.por_almacen.map(r => r.stock_total),
                     backgroundColor: PAL.slice(0, d.por_almacen.length).map(c => c + 'cc'),
                     borderColor: PAL.slice(0, d.por_almacen.length),
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
 
@@ -281,7 +282,7 @@ async function cargarAlmacen() {
                     backgroundColor: [GREEN + 'cc', '#e5e7eb'],
                     borderColor: [GREEN, '#d1d5db'], borderWidth: 2 }],
             },
-            options: { responsive: true, cutout: '62%',
+            options: { responsive: true, maintainAspectRatio: false, cutout: '62%',
                 plugins: { legend: { position: 'bottom' } } },
         });
 
@@ -365,12 +366,12 @@ async function cargarProveedores() {
                 labels: data.map(r => trunc(r.nombre || r.codigo, 22)),
                 datasets: [
                     { label: 'Movimientos', data: data.map(r => r.movimientos),
-                        backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4 },
+                        backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 },
                     { label: 'Unidades',    data: data.map(r => r.unidades),
-                        backgroundColor: 'rgba(5,150,105,.6)', borderColor: GREEN, borderWidth: 1, borderRadius: 4 },
+                        backgroundColor: 'rgba(5,150,105,.6)', borderColor: GREEN, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 },
                 ],
             },
-            options: { responsive: true,
+            options: { responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
@@ -403,9 +404,9 @@ async function cargarArticulos() {
             data: {
                 labels: d.rotacion.map(r => trunc(r.nombre || r.articulo, 18)),
                 datasets: [{ label: 'Unidades movidas', data: d.rotacion.map(r => r.unidades_movidas),
-                    backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4 }],
+                    backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 }],
             },
-            options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { beginAtZero: true, grid: { color: '#f3f4f6' } },
                           y: { grid: { display: false }, ticks: { font: { size: 10 } } } } },
         });
@@ -420,7 +421,7 @@ async function cargarArticulos() {
                     backgroundColor: PAL.slice(0, topFamilias.length).map(c => c + 'cc'),
                     borderColor: PAL.slice(0, topFamilias.length), borderWidth: 2 }],
             },
-            options: { responsive: true, cutout: '50%',
+            options: { responsive: true, maintainAspectRatio: false, cutout: '50%',
                 plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, padding: 8 } } } },
         });
 
@@ -450,7 +451,7 @@ function recargarTodo() {
     Object.keys(loaded).forEach(k => delete loaded[k]);
     cargarResumen();
     const activeTab = document.querySelector('.tab-btn-inf.active')?.dataset.tab;
-    if (activeTab && activeTab !== 'resumen') { cargarTab(activeTab); }
+    if (activeTab && activeTab !== 'resumen') cargarTab(activeTab);
 }
 
 document.getElementById('btn-refresh').addEventListener('click', recargarTodo);

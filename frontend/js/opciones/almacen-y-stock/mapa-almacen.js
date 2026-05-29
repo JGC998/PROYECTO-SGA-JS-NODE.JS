@@ -222,7 +222,7 @@
         var map = {};
         rows.forEach(function (r) {
             var art = String(r.ARTCOD || r.articulo || '').trim();
-            if (art) map[art] = Number(r.MINIMO || r.minimo || 0);
+            if (art) map[art] = Number(r.MINIMO || r.minimo || r.stock_minimo || 0);
         });
         return map;
     }

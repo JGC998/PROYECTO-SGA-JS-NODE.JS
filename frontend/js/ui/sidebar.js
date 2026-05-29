@@ -4,54 +4,44 @@
     /* ── GRUPOS DE NAVEGACIÓN ────────────────────────────────────────────── */
     var NAV_GROUPS = [
         {
-            label: 'Inicio',
+            label: '',
             links: [
-                { icon: '🏠', text: 'Panel de control', href: 'index.html' },
-                { icon: '📈', text: 'Informes',         href: 'pages/informes/index.html' }
-            ]
-        },
-        {
-            label: 'Almacén 3D',
-            links: [
-                { icon: '🏗️', text: 'Visor 3D',             href: 'pages/almacen/mapa-3d.html' },
-                { icon: '📡', text: 'Supervisor picking',    href: 'pages/almacen/supervisor.html' },
-                { icon: '🗺️', text: 'Mapa aéreo 2D',        href: 'pages/almacen/planta.html' }
-            ]
-        },
-        {
-            label: 'Stock',
-            links: [
-                { icon: '📦', text: 'Consulta de stock',       href: 'pages/opciones/almacen-y-stock/consulta-de-stock/index.html' },
-                { icon: '📊', text: 'Movimientos',             href: 'pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html' },
-{ icon: '⚠️', text: 'Alertas de stock',        href: 'pages/opciones/almacen-y-stock/alertas-stock/index.html', badgeId: 'badge-sin-reposicion' }
-            ]
-        },
-        {
-            label: 'Operaciones',
-            links: [
-                { icon: '⬇️', text: 'Entrada mercancía',  href: 'pages/opciones/almacen-y-stock/entrada-de-mercancia/index.html' },
-                { icon: '⬆️', text: 'Salida mercancía',   href: 'pages/opciones/almacen-y-stock/salida-de-mercancia/index.html' },
-                { icon: '↔️', text: 'Traspasos',          href: 'pages/opciones/almacen-y-stock/traspasos/index.html' },
-                { icon: '📋', text: 'Regularizaciones',   href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' }
-            ]
-        },
-        {
-            label: 'Logística',
-            links: [
-                { icon: '🚛', text: 'Expediciones desde pedido',   href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
-                { icon: '📋', text: 'Preparación / Picking',      href: 'pages/opciones/logistica-y-pedidos/picking/index.html' },
-                { icon: '📦', text: 'Situación pedidos de venta', href: 'pages/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.html' },
-                { icon: '🗺️', text: 'Albaranes de expedición',    href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' }
+                { icon: '🏠', text: 'Inicio', href: 'index.html' }
             ]
         },
         {
             label: 'Almacén',
             links: [
-                { icon: '🗺️', text: 'Mapa aéreo',            href: 'pages/opciones/almacen-y-stock/mapa-almacen/index.html' },
-                { icon: '🏗️', text: 'Almacenes',             href: 'pages/opciones/almacen-y-stock/almacenes/index.html' },
-                { icon: '📌', text: 'Ubicaciones',            href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
-                { icon: '🔧', text: 'Generar ubicaciones',    href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' },
-                { icon: '📋', text: 'Regularizaciones',       href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' }
+                { icon: '🏗️', text: 'Visor 3D',             href: 'pages/almacen/mapa-3d.html' },
+                { icon: '📡', text: 'Supervisor picking',    href: 'pages/almacen/supervisor.html' },
+                { icon: '🗺️', text: 'Mapa aéreo',           href: 'pages/opciones/almacen-y-stock/mapa-almacen/index.html' },
+                { icon: '🔧', text: 'Generar ubicaciones',   href: 'pages/opciones/almacen-y-stock/generar-ubicaciones/index.html' }
+            ]
+        },
+        {
+            label: 'Operaciones',
+            links: [
+                { icon: '⬇️', text: 'Entrada mercancía',   href: 'pages/opciones/almacen-y-stock/entrada-de-mercancia/index.html' },
+                { icon: '⬆️', text: 'Salida mercancía',    href: 'pages/opciones/almacen-y-stock/salida-de-mercancia/index.html' },
+                { icon: '↔️', text: 'Traspasos',           href: 'pages/opciones/almacen-y-stock/traspasos/index.html' },
+                { icon: '📋', text: 'Regularizaciones',    href: 'pages/opciones/almacen-y-stock/regularizaciones/index.html' },
+                { icon: '📋', text: 'Preparación / Picking', href: 'pages/opciones/logistica-y-pedidos/picking/index.html' }
+            ]
+        },
+        {
+            label: 'Consultas',
+            links: [
+                { icon: '🔩', text: 'Artículos',               href: 'pages/ferreteria/articulos.html' },
+                { icon: '📦', text: 'Consulta de stock',       href: 'pages/opciones/almacen-y-stock/consulta-de-stock/index.html' },
+                { icon: '🏭', text: 'Proveedores',             href: 'pages/ferreteria/proveedores.html' },
+                { icon: '👥', text: 'Clientes',                href: 'pages/visor/clientes.html' },
+                { icon: '📌', text: 'Ubicaciones',             href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
+                { icon: '📊', text: 'Movimientos',             href: 'pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html' },
+                { icon: '📍', text: 'Artículos por ubicación', href: 'pages/opciones/almacen-y-stock/articulos-sin-reposicion/index.html' },
+                { icon: '🚛', text: 'Expediciones desde pedido', href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
+                { icon: '📦', text: 'Histórico de ventas',    href: 'pages/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.html' },
+                { icon: '🗺️', text: 'Albaranes de expedición', href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' },
+                { icon: '⚠️', text: 'Alertas de stock',        href: 'pages/opciones/almacen-y-stock/alertas-stock/index.html', badgeId: 'badge-sin-reposicion' }
             ]
         },
         {
@@ -61,16 +51,6 @@
                 { icon: '🚫', text: 'Cuarentena',         href: 'pages/opciones/control-de-lotes-y-minimos/lote-cuarentena/index.html' },
                 { icon: '🔒', text: 'Exclusivo',          href: 'pages/opciones/control-de-lotes-y-minimos/lote-exclusivo/index.html' },
                 { icon: '📈', text: 'Mínimos y máximos',  href: 'pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html' }
-            ]
-        },
-        {
-            label: 'Maestros',
-            links: [
-                { icon: '🔩', text: 'Artículos',    href: 'pages/ferreteria/articulos.html' },
-                { icon: '🏭', text: 'Proveedores',  href: 'pages/ferreteria/proveedores.html' },
-                { icon: '👥', text: 'Clientes',     href: 'pages/visor/clientes.html' },
-                { icon: '📌', text: 'Ubicaciones',  href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
-                { icon: '🏗️', text: 'Almacenes',   href: 'pages/opciones/almacen-y-stock/almacenes/index.html' }
             ]
         },
         {
@@ -106,18 +86,36 @@
     /* ── CONSTRUIR HTML DE SIDEBAR ───────────────────────────────────────── */
     function buildSidebar(root) {
         var nav = '';
-        NAV_GROUPS.forEach(function (group) {
-            nav += '<div class="sga-nav-group-label">' + group.label + '</div>';
+        NAV_GROUPS.forEach(function (group, idx) {
+            var links = '';
+            var hasActive = false;
             group.links.forEach(function (link) {
                 var href = root + link.href;
                 var active = isActive(href) ? ' active' : '';
+                if (active) hasActive = true;
                 var badgeId = link.badgeId ? ' id="' + link.badgeId + '"' : '';
-                nav += '<a class="sga-nav-link' + active + '" href="' + href + '">'
+                links += '<a class="sga-nav-link' + active + '" href="' + href + '">'
                     + '<span class="sga-nav-icon">' + link.icon + '</span>'
                     + '<span>' + link.text + '</span>'
                     + (link.badgeId ? '<span class="sga-nav-badge hidden"' + badgeId + '></span>' : '')
                     + '</a>';
             });
+
+            if (!group.label) {
+                // Inicio — sin desplegable
+                nav += links;
+            } else {
+                var esInicio = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html') && window.location.pathname.split('/').length <= 2;
+                var open = (!esInicio && hasActive) ? ' open' : '';
+                var groupId = 'nav-group-' + idx;
+                nav += '<div class="sga-nav-group' + open + '" id="' + groupId + '">'
+                    + '<button class="sga-nav-group-toggle" data-group="' + groupId + '">'
+                    +   '<span>' + group.label + '</span>'
+                    +   '<span class="sga-nav-group-arrow">›</span>'
+                    + '</button>'
+                    + '<div class="sga-nav-group-items">' + links + '</div>'
+                    + '</div>';
+            }
         });
 
         return '<aside class="sga-sidebar" id="sgaSidebar">'
@@ -142,20 +140,8 @@
         function aplicar(data) {
             var bajo = data.stock_bajo_total != null ? data.stock_bajo_total : (data.stock_bajo || []).length;
             var neg  = (data.stock_negativo || []).length;
-            var total = bajo + neg;
-            if (total === 0) return;
 
-            var strip = document.getElementById('sidebar-alert-strip');
-            var txt   = document.getElementById('sidebar-alert-txt');
             var badge = document.getElementById('badge-sin-reposicion');
-
-            if (strip && txt) {
-                var partes = [];
-                if (bajo > 0) partes.push(bajo + ' art. bajo mínimo');
-                if (neg  > 0) partes.push(neg  + ' stock negativo');
-                txt.textContent = partes.join(' · ');
-                strip.classList.remove('hidden');
-            }
             if (badge && bajo > 0) {
                 badge.textContent = bajo;
                 badge.classList.remove('hidden');
@@ -216,6 +202,14 @@
                 overlay.classList.remove('active');
             });
         }
+
+        // Desplegables
+        document.querySelectorAll('.sga-nav-group-toggle').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var group = document.getElementById(btn.dataset.group);
+                if (group) group.classList.toggle('open');
+            });
+        });
 
         cargarAlertas(root);
     });

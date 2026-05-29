@@ -58,6 +58,46 @@
     padding: 14px 16px 4px;
 }
 
+/* ── GRUPOS DESPLEGABLES ─────────────────────────────────────────────────── */
+
+.sga-nav-group-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: .62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: rgba(255,255,255,.35);
+    padding: 14px 16px 4px;
+    transition: color var(--sga-transition);
+}
+
+.sga-nav-group-toggle:hover { color: rgba(255,255,255,.6); }
+
+.sga-nav-group-arrow {
+    font-size: .85rem;
+    transition: transform .2s ease;
+    transform: rotate(0deg);
+}
+
+.sga-nav-group.open .sga-nav-group-arrow {
+    transform: rotate(90deg);
+}
+
+.sga-nav-group-items {
+    display: none;
+    overflow: hidden;
+}
+
+.sga-nav-group.open .sga-nav-group-items {
+    display: block;
+}
+
 .sga-nav-link {
     display: flex;
     align-items: center;

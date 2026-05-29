@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Gráficas</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/tables.css">
+    <link rel="stylesheet" href="../../css/cards.css">
+    <link rel="stylesheet" href="../../css/badges.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/pages/dashboard.css">
+    <link rel="stylesheet" href="../../css/pages/informes.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Gráficas</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-refresh">↻ Actualizar</button>
+            </div>
+        </header>
+
+        <!-- CABECERA KPIs -->
+        <div class="inf-header">
+            <div class="inf-header-top">
+                <div>
+                    <div class="inf-title">Gráficas y Estadísticas</div>
+                    <div class="inf-subtitle">Datos en tiempo real · Base de datos LIN</div>
+                </div>
+                <div class="period-pills" id="period-pills">
+                    <button class="period-pill" data-dias="30">30 días</button>
+                    <button class="period-pill" data-dias="90">90 días</button>
+                    <button class="period-pill active" data-dias="365">1 año</button>
+                    <button class="period-pill" data-dias="9999">Todo</button>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi-cell">
+                    <div class="kpi-num" id="kpi-articulos">—</div>
+                    <div class="kpi-label">Artículos</div>
+                </div>
+                <div class="kpi-cell success">
+                    <div class="kpi-num" id="kpi-ubicaciones">—</div>
+                    <div class="kpi-label">Ubicaciones con stock</div>
+                </div>
+                <div class="kpi-cell amber">
+                    <div class="kpi-num" id="kpi-movimientos">—</div>
+                    <div class="kpi-label" id="kpi-movimientos-label">Movimientos este año</div>
+                </div>
+                <div class="kpi-cell danger">
+                    <div class="kpi-num" id="kpi-alertas">—</div>
+                    <div class="kpi-label">⚠ Alertas stock</div>
+                </div>
+            </div>
+
+            <!-- PESTAÑAS -->
+            <nav class="tab-nav-inf">
+                <button class="tab-btn-inf active" data-tab="resumen">📈 Resumen</button>
+                <button class="tab-btn-inf" data-tab="actividad">🕐 Actividad</button>
+                <button class="tab-btn-inf" data-tab="trabajadores">👷 Trabajadores</button>
+                <button class="tab-btn-inf" data-tab="almacen">🏗️ Almacén</button>
+                <button class="tab-btn-inf" data-tab="movimientos">🔄 Movimientos</button>
+                <button class="tab-btn-inf" data-tab="proveedores">🏭 Proveedores</button>
+                <button class="tab-btn-inf" data-tab="articulos">📦 Artículos</button>
+            </nav>
+        </div>
+
+        <!-- ── TAB: RESUMEN ────────────────────────────────────────────── -->
+        <div class="tab-panel-inf active" id="tab-resumen">
+            <div class="charts-2col">
+                <div class="chart-card">
+                    <div class="chart-title">📈 Movimientos por día — últimos 30 días</div>
+                    <canvas id="chart-movimientos" style="height:460px;width:100%"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">🏆 Top 10 artículos más movidos</div>
+                    <canvas id="chart-top" style="height:460px;width:100%"></canvas>
+                </div>
+            </div>
+            <div class="charts-full chart-card">
+                <div class="chart-title">📊 Entradas vs Salidas — últimas 8 semanas</div>
+                <canvas id="chart-evs" height="100"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">⚠️ Artículos con stock por debajo del mínimo</div>
+                <div id="tabla-alertas"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: ACTIVIDAD (del dashboard) ────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-actividad">
+            <div class="charts-2col" style="margin-bottom:16px">
+                <div class="chart-card">
+                    <div class="chart-title">⚠️ Alertas de stock</div>
+                    <div id="db-alertas-stock"><div class="loading-msg">Cargando...</div></div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">🏆 Top artículos movidos</div>
+                    <div id="db-top-articulos"><div class="loading-msg">Cargando...</div></div>
+                </div>
+            </div>
+            <div class="chart-card" style="margin-bottom:16px">
+                <div class="chart-title">🕐 Actividad reciente</div>
+                <div id="db-actividad"><div class="loading-msg">Cargando...</div></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📦 Stock por almacén</div>
+                <div id="db-stock-almacen"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: TRABAJADORES ──────────────────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-trabajadores">
+            <div class="mini-kpi-row" id="mkpi-trabajadores">
+                <div class="loading-msg" style="grid-column:span 3">Cargando...</div>
+            </div>
+            <div class="charts-2col">
+                <div class="chart-card">
+                    <div class="chart-title">👷 Movimientos por trabajador — últimos 30 días</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-trabajadores-mov"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📦 Unidades movidas por trabajador</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-trabajadores-uni"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🏅 Ranking de eficiencia — últimos 30 días</div>
+                <div id="tabla-trabajadores"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: ALMACÉN ───────────────────────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-almacen">
+            <div class="mini-kpi-row" id="mkpi-almacen">
+                <div class="loading-msg" style="grid-column:span 3">Cargando...</div>
+            </div>
+            <div class="charts-2col">
+                <div class="chart-card">
+                    <div class="chart-title">🏗️ Stock total por almacén</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-almacen-stock"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📍 Ocupación del almacén</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-almacen-ocu"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🔥 Ubicaciones más activas — últimos 30 días</div>
+                <div id="tabla-ubicaciones"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: MOVIMIENTOS ───────────────────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-movimientos">
+            <div class="charts-2col" style="margin-bottom:16px">
+                <div class="chart-card">
+                    <div class="chart-title">🔄 Distribución por tipo de movimiento</div>
+                    <div style="height:320px;display:flex;align-items:center;justify-content:center">
+                        <div style="width:320px;height:320px;position:relative">
+                            <canvas id="chart-mov-tipo"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📅 Actividad por día de la semana</div>
+                    <div style="height:320px;position:relative">
+                        <canvas id="chart-mov-semana"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">🕐 Últimos 20 movimientos registrados</div>
+                <div id="tabla-ultimos"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: PROVEEDORES ───────────────────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-proveedores">
+            <div class="charts-full chart-card" style="margin-bottom:16px">
+                <div class="chart-title">🏭 Top proveedores por entradas — últimos 90 días</div>
+                <div style="height:280px;position:relative">
+                    <canvas id="chart-prov-mov"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">📋 Ranking de proveedores</div>
+                <div id="tabla-proveedores"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+        <!-- ── TAB: ARTÍCULOS ─────────────────────────────────────────── -->
+        <div class="tab-panel-inf" id="tab-articulos">
+            <div class="charts-2col" style="margin-bottom:16px">
+                <div class="chart-card">
+                    <div class="chart-title">🔄 Rotación: top artículos por unidades movidas</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-art-rotacion"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📂 Stock por grupo de artículo</div>
+                    <div style="height:280px;position:relative">
+                        <canvas id="chart-art-familia"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">⏸️ Artículos con stock pero sin movimiento en los últimos 30 días</div>
+                <div id="tabla-sin-mov"><div class="loading-msg">Cargando...</div></div>
+            </div>
+        </div>
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="../../js/informes/index.js"></script>
+    <script src="../../js/pages/dashboard.js"></script>
+</body>
+
+</html>

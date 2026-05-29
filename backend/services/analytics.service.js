@@ -592,8 +592,8 @@ async function getTrabajadores(dias) {
         .input('desde', desde).input('hasta', hasta)
         .query(`
             SELECT TOP 20
-                ISNULL(NULLIF(RTRIM(ACSEMPCOD),''), 'Sin empleado') AS terminal,
-                ISNULL(NULLIF(RTRIM(ACSEMPCOD),''), 'Sin empleado') AS nombre,
+                ISNULL(NULLIF(RTRIM(ACSREPCOD),''), 'Sin operario') AS terminal,
+                ISNULL(NULLIF(RTRIM(ACSREPCOD),''), 'Sin operario') AS nombre,
                 COUNT(*) AS movimientos,
                 ISNULL(SUM(ABS(ISNULL(ACSCAN,0))),0) AS unidades,
                 ISNULL(SUM(CASE WHEN ACSMOV IN ('PP','RG') THEN 1 ELSE 0 END),0) AS entradas,
@@ -602,8 +602,8 @@ async function getTrabajadores(dias) {
                 CONVERT(varchar, MAX(CAST(ACSFEC AS DATE)), 23) AS ultima_actividad
             FROM ALBARANCS
             WHERE CAST(ACSFEC AS DATE) BETWEEN @desde AND @hasta
-              AND ACSEMPCOD IS NOT NULL AND RTRIM(ACSEMPCOD) <> ''
-            GROUP BY RTRIM(ACSEMPCOD)
+              AND ACSREPCOD IS NOT NULL AND RTRIM(ACSREPCOD) <> ''
+            GROUP BY RTRIM(ACSREPCOD)
             ORDER BY movimientos DESC
         `);
     return r.recordset;
