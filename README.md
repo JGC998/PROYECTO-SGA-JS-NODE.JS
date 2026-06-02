@@ -23,6 +23,7 @@ SGA/
 │   │   ├── ubicaciones.routes.js
 │   │   ├── lotes.routes.js
 │   │   ├── escrituras.routes.js
+│   │   ├── picking.routes.js
 │   │   ├── admin.routes.js
 │   │   ├── health.routes.js
 │   │   └── system.routes.js
@@ -32,22 +33,16 @@ SGA/
 │   │   ├── terceros.service.js
 │   │   └── visor.service.js
 │   └── tests/              # Tests automatizados (Jest + Supertest)
-│       ├── dynamic-sql.test.js   # ← único test que corre en CI (sin BD)
-│       ├── health.test.js
-│       ├── movimientos.test.js
-│       ├── nucleo.test.js
-│       ├── security.test.js
-│       ├── services.test.js
-│       └── stock.test.js
 └── frontend/
-    ├── index.html          # Dashboard principal
-    ├── css/                # Estilos CSS modulares (espejo de pages/)
-    ├── js/                 # Módulos JavaScript (api.js, navegacion.js, ...)
+    ├── index.html          # Página de inicio con estadísticas
+    ├── css/                # Estilos CSS modulares
+    ├── js/                 # Módulos JavaScript (api.js, ui/, ferreteria/, opciones/, ...)
     └── pages/
-        ├── ferreteria/             # Módulo principal de operaciones
-        ├── visor/                  # Visor de datos maestros
-        ├── acerca_de/              # Información del sistema
-        └── opciones/               # Configuración y ajustes avanzados
+        ├── ferreteria/             # Consultas de datos maestros
+        ├── almacen/                # Visor 3D y supervisor de picking
+        ├── visor/                  # Visor de clientes
+        ├── graficas/               # Gráficas de stock y movimientos
+        └── opciones/               # Configuración y operaciones
             ├── almacen-y-stock/
             ├── logistica-y-pedidos/
             ├── control-de-lotes-y-minimos/
@@ -58,10 +53,10 @@ SGA/
 
 | Capa | Responsabilidad | Lo que NO debe hacer |
 |---|---|---|
-| `routes/` | Extraer params de req, validar input, responder HTTP, decidir 404 | Contener SQL, lógica de negocio |
+| `routes/` | Extraer params de req, validar input, responder HTTP | Contener SQL, lógica de negocio |
 | `services/` | SQL queries, lógica de negocio, cálculos | Conocer req/res, lanzar errores HTTP |
 
-> Los routes de `stock`, `articulos`, `ubicaciones`, `lotes`, `escrituras` y `admin` todavía contienen su SQL directamente (no se han extraído a servicios). El núcleo `movimientos.routes.js` permanece intencionadamente sin tocar.
+> Los routes de `stock`, `articulos`, `ubicaciones`, `lotes`, `escrituras`, `picking` y `admin` todavía contienen su SQL directamente. El núcleo `movimientos.routes.js` permanece intencionadamente sin tocar.
 
 ---
 
@@ -88,7 +83,7 @@ Los tests de cobertura del núcleo están en `tests/movimientos.test.js` y `test
 | Frontend | HTML5 + CSS3 + Vanilla JS |
 | Comunicación | REST API + Fetch |
 | Puerto API | 3000 |
-| Puerto frontend | 5500 (Live Server) |
+| Puerto frontend | 5500 (Live Server) o directamente desde `localhost:3000` |
 
 ---
 
@@ -109,7 +104,7 @@ Los tests de cobertura del núcleo están en `tests/movimientos.test.js` y `test
 ```bash
 # Todos los tests (requiere BD LIN local activa)
 cd backend
-npm test          # 80 tests
+npm test          # ~254 tests
 
 # Solo tests sin BD (los que corre CI)
 npm run test:ci   # tests/dynamic-sql.test.js
@@ -128,11 +123,14 @@ npm run lint
 | `stock.test.js` | Consultas de stock contra BD real |
 | `movimientos.test.js` | Flujo entrada/salida/traspaso con BD real |
 | `nucleo.test.js` | Validaciones del núcleo crítico |
-| `services.test.js` | Funciones puras de `analytics.service` (`normalizeDate`, `daysAgo`) |
+| `services.test.js` | Funciones puras de `analytics.service` |
+| `config.test.js` | Endpoints de configuración (almacenes, usuarios, terminales...) |
+| `lotes.test.js` | Endpoints de lotes (exclusivo, mínimo, cuarentena...) |
+| `escrituras.test.js` | Endpoints de escritura (mínimos/máximos, artículos sin reposición) |
 
 ### Qué NO cubren todavía
 
-- Los endpoints de `config`, `terceros`, `visor`, `articulos`, `ubicaciones`, `lotes` no tienen tests de integración propios.
+- Los endpoints de `terceros`, `visor`, `articulos`, `ubicaciones` no tienen tests de integración propios.
 - Los tests de BD dependen de datos reales en la instancia local — no hay fixtures ni BD de test aislada.
 
 ---
@@ -141,7 +139,7 @@ npm run lint
 
 Fichero: `.github/workflows/ci.yml`
 
-Se ejecuta en push y PR a `main` y `paco-dev`.
+Se ejecuta en push y PR a `main`.
 
 ```
 1. checkout
@@ -164,13 +162,14 @@ npm install
 # 2. Arrancar el servidor API
 node api.js
 # → Escucha en http://localhost:3000
+# → El frontend se sirve estáticamente desde /frontend
 
 # 3. Abrir el frontend
-# Usar Live Server de VS Code o cualquier servidor estático
-# → http://127.0.0.1:5500/frontend/index.html
+# → http://localhost:3000
+# O con Live Server de VS Code: http://127.0.0.1:5500/frontend/index.html
 ```
 
-**Requisito previo:** La BD LIN debe estar accesible con autenticación Windows. Configurar `backend/db.js` usando `backend/db.js.md` como plantilla.
+**Requisito previo:** La BD LIN debe estar accesible con autenticación Windows. Configurar `backend/db.js` con la cadena de conexión ODBC correspondiente.
 
 ---
 
@@ -222,16 +221,29 @@ Estos riesgos están documentados y conocidos. No afectan en el uso normal de un
 
 ## Módulos implementados
 
-### Ferretería (operaciones diarias)
+### Inicio y Gráficas
 | Pantalla | Descripción |
 |---|---|
-| `ferreteria/index.html` | Dashboard con estadísticas de stock en tiempo real |
-| `ferreteria/entradas.html` | Registro de entrada de mercancía (crea artículo si no existe) |
-| `ferreteria/salidas.html` | Registro de salida con validación de stock disponible |
-| `ferreteria/traspasos.html` | Movimiento de stock entre ubicaciones (transaccional) |
+| `index.html` | Inicio con estadísticas de stock en tiempo real |
+| `graficas/` | Gráficas de movimientos y stock por artículo/ubicación |
+
+### Ferretería (consultas de datos maestros)
+| Pantalla | Descripción |
+|---|---|
 | `ferreteria/articulos.html` | Maestro de artículos con búsqueda |
-| `ferreteria/proveedores.html` | Gestión de proveedores |
+| `ferreteria/proveedores.html` | Gestión de proveedores con historial de entradas |
 | `ferreteria/operarios.html` | Gestión de operarios |
+
+### Almacén
+| Pantalla | Descripción |
+|---|---|
+| `almacen/mapa-3d.html` | Visor 3D del almacén |
+| `almacen/supervisor.html` | Supervisor de picking en tiempo real |
+
+### Visor
+| Pantalla | Descripción |
+|---|---|
+| `visor/clientes.html` | Consulta de clientes de solo lectura |
 
 ### Opciones — Almacén y Stock
 | Pantalla | Descripción |
@@ -239,35 +251,42 @@ Estos riesgos están documentados y conocidos. No afectan en el uso normal de un
 | `almacenes` | Maestro de almacenes |
 | `ubicaciones` | Gestión de ubicaciones (ancho, alto, palets, exclusiva...) |
 | `generar-ubicaciones` | Generación automática de ubicaciones por rango |
-| `articulos-por-ubicacion` | Consulta de artículos agrupados por ubicación |
-| `articulos-sin-reposicion` | Artículos sin reposición automática configurada |
+| `mapa-almacen` | Mapa aéreo del almacén |
+| `entrada-de-mercancia` | Registro de entrada de mercancía |
+| `salida-de-mercancia` | Registro de salida con validación de stock disponible |
+| `traspasos` | Movimiento de stock entre ubicaciones (transaccional) |
+| `regularizaciones` | Regularizaciones de inventario |
 | `movimientos-por-articulo` | Histórico de movimientos filtrado por artículo/lote/periodo |
-| `traspaso-inventario-regularizacion` | Importación de inventarios desde Excel y regularizaciones |
-| `consulta-de-stock` | Consulta avanzada de stock con pestañas (tabla, gráfico, informe) |
+| `consulta-de-stock` | Consulta avanzada de stock |
+| `alertas-stock` | Alertas de stock bajo o negativo |
 
 ### Opciones — Logística y Pedidos
 | Pantalla | Descripción |
 |---|---|
 | `expediciones` | Expediciones desde pedido de venta |
-| `hojas-de-ruta` | Gestión de hojas de ruta para reparto |
+| `situacion-pedidos-venta` | Histórico de ventas y situación de pedidos |
+| `hojas-de-ruta` | Albaranes de expedición y hojas de ruta |
+| `picking` | Preparación y confirmación de picking |
 
 ### Opciones — Control de Lotes y Mínimos
 | Pantalla | Descripción |
 |---|---|
+| `lote-minimo` | Días mínimos de lote por cliente |
 | `lote-cuarentena` | Lotes en cuarentena por artículo |
 | `lote-exclusivo` | Lotes exclusivos por cliente y artículo |
-| `lote-minimo` | Control de stock mínimo |
-| `lote-no-utilizado` | Artículos sin movimiento |
+| `minimos-maximos` | Stock mínimo y máximo por artículo |
+| `lote-no-utilizado` | Lotes no utilizados por cliente y artículo |
 | `observaciones-por-articulo-lote` | Observaciones vinculadas a artículo y lote |
 | `subfamilias` | Maestro de subfamilias de artículos |
 
 ### Opciones — Sistema
 | Pantalla | Descripción |
 |---|---|
-| `terminales-pda` | Configuración de terminales PDA (serie, rutas de sincronización) |
-
-### Visor
-Consulta de datos maestros de solo lectura: artículos, proveedores, clientes.
+| `usuarios` | Gestión de usuarios del sistema |
+| `configuracion-empresa` | Datos de la empresa |
+| `terminales-pda` | Configuración de terminales PDA |
+| `contadores` | Contadores del sistema |
+| `copia-seguridad` | Generación de copia de seguridad |
 
 ---
 
@@ -277,6 +296,4 @@ SQL Server local — base de datos `LIN` — autenticación Windows (sin usuario
 
 **Requisito:** ODBC Driver 17 for SQL Server instalado en el equipo.
 
-Tablas principales: `ARTICULO`, `STOCK`, `UBICACION`, `PROVEEDOR`, `CLIENTE`, `SGAUSUARIO`, `ALMACENES`, `SUBFAMILIA`, `terminalpda`, `LOG`.
-
-La cadena de conexión se mantiene en `backend/db.js` (no versionado). Usar `backend/db.js.md` como plantilla.
+Tablas principales: `ARTICULO`, `STOCK`, `UBICACION`, `PROVEEDOR`, `CLIENTE`, `SGAUSUARIO`, `ALMACENES`, `SUBFAMILIA`, `terminalpda`, `LOG`, `ARTICULOSTOMIN`, `ARTICULOLOTCLI`, `ARTICULOEXCLOTCLI`, `ARTICULOLOTOBS`.
