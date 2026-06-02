@@ -132,9 +132,8 @@
                 return !l.picking && !l.confirmado_sga && l.stock_ubi === 0 && l.stock_total === 0;
             }).length;
 
-            alb.numPicking = conPick
-                ? alb.lineas.find(function (l) { return !!l.picking; }).picking
-                : null;
+            var lineaPick  = alb.lineas.find(function (l) { return !!l.picking; });
+            alb.numPicking = lineaPick ? lineaPick.picking : null;
             alb.faltantes = faltantes;
             alb.progreso  = {
                 total     : total,
@@ -164,21 +163,30 @@
 
     var _ultimaFechaDisponible = null;
     var _limitAlcanzado        = false;
+    var _page                  = 0;
+    var PAGE_SIZE              = 500;
 
-    function cargar() {
+    function cargar(acumular) {
         if (_loading) return;
         _loading = true;
         setLoading(true);
 
         SGA.picking.list({
-            buscar : _filters.buscar,
-            desde  : _filters.desde,
-            hasta  : _filters.hasta
+            buscar   : _filters.buscar,
+            desde    : _filters.desde,
+            hasta    : _filters.hasta,
+            page     : _page,
+            pageSize : PAGE_SIZE
         }).then(function (data) {
-            _rows      = Array.isArray(data) ? data : [];
+            var nuevas = Array.isArray(data) ? data : [];
+            if (acumular) {
+                _rows = _rows.concat(nuevas);
+            } else {
+                _rows = nuevas;
+            }
             _albaranes = groupByAlbaran(_rows);
             _loading   = false;
-            _limitAlcanzado = _rows.length >= 500;
+            _limitAlcanzado = nuevas.length >= PAGE_SIZE;
             if (_rows.length > 0) {
                 var fechas = _rows.map(function (r) { return r.fecha || ''; })
                     .filter(Boolean).sort();
@@ -194,12 +202,23 @@
         });
     }
 
+    var _scrollAntes = 0;
+
+    function cargarMas() {
+        _scrollAntes = window.scrollY || document.documentElement.scrollTop;
+        _page++;
+        cargar(true);
+    }
+
     /* ── RENDER PRINCIPAL ────────────────────────────────────────────────── */
 
     function filterAndRender() {
         var lista = filterAlbaranes();
+        var scroll = _scrollAntes;
+        _scrollAntes = 0;
         renderList(lista);
         updateCounters();
+        if (scroll > 0) { window.scrollTo(0, scroll); }
         updateKpiStrip();
     }
 
@@ -245,21 +264,20 @@
             elList.appendChild(ph);
             return;
         }
-        if (_limitAlcanzado) {
-            var notice = document.createElement('div');
-            notice.className = 'pk-limit-notice';
-            notice.id = 'pk-limit-notice';
-            var icon = document.createElement('span');
-            icon.textContent = '⚠';
-            notice.appendChild(icon);
-            var txt = document.createElement('span');
-            txt.textContent = 'Mostrando las primeras 500 líneas. Amplía los filtros de fecha o usa el buscador para acotar resultados.';
-            notice.appendChild(txt);
-            elList.appendChild(notice);
-        }
         lista.forEach(function (alb) {
             elList.appendChild(buildCard(alb));
         });
+        if (_limitAlcanzado) {
+            var btnMas = document.createElement('button');
+            btnMas.className = 'pk-cargar-mas';
+            btnMas.textContent = '↓ Cargar más albaranes';
+            btnMas.addEventListener('click', function () {
+                btnMas.disabled = true;
+                btnMas.textContent = 'Cargando...';
+                cargarMas();
+            });
+            elList.appendChild(btnMas);
+        }
     }
 
     /* ── TARJETA OPERATIVA ───────────────────────────────────────────────── */
@@ -530,19 +548,23 @@
             wrap.appendChild(btnConf);
         }
 
-        var aMov = document.createElement('a');
-        aMov.className = 'pk-linea-link';
-        aMov.textContent = '→ Movimientos';
-        aMov.href = '../../almacen-y-stock/movimientos-por-articulo/index.html?articulo='
-            + encodeURIComponent(linea.articulo);
-        wrap.appendChild(aMov);
+        if (estado !== 'confirmada') {
+            var btnCambiarUbi = document.createElement('button');
+            btnCambiarUbi.className = 'pk-linea-link';
+            btnCambiarUbi.textContent = '📍 Cambiar ubicación';
+            btnCambiarUbi.addEventListener('click', function (e) {
+                e.stopPropagation();
+                abrirSelectorUbicacion(linea, wrap);
+            });
+            wrap.appendChild(btnCambiarUbi);
 
-        var aStock = document.createElement('a');
-        aStock.className = 'pk-linea-link';
-        aStock.textContent = '→ Stock';
-        aStock.href = '../../almacen-y-stock/consulta-de-stock/index.html?articulo='
-            + encodeURIComponent(linea.articulo);
-        wrap.appendChild(aStock);
+            var aMov = document.createElement('a');
+            aMov.className = 'pk-linea-link';
+            aMov.textContent = '→ Movimientos';
+            aMov.href = '../../almacen-y-stock/movimientos-por-articulo/index.html?articulo='
+                + encodeURIComponent(linea.articulo);
+            wrap.appendChild(aMov);
+        }
 
         return wrap;
     }
@@ -589,27 +611,128 @@
         if (_selected === lineaKey) renderDetalle(alb);
     }
 
+    function abrirSelectorUbicacion(linea, actionsWrap) {
+        var overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center';
+
+        var modal = document.createElement('div');
+        modal.style.cssText = 'background:#fff;border-radius:10px;padding:24px;width:380px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,.18);font-family:inherit';
+
+        modal.innerHTML = '<div style="font-weight:700;font-size:1rem;margin-bottom:4px">Cambiar ubicación</div>'
+            + '<div style="font-size:.82rem;color:#6b7280;margin-bottom:12px">' + (linea.nombre_articulo || linea.articulo) + ' · ' + linea.articulo + '</div>'
+            + '<div style="font-size:.78rem;color:#6b7280;margin-bottom:8px">Ubicaciones con stock disponible:</div>'
+            + '<div id="pk-ubi-lista" style="flex:1;overflow-y:auto;border:1px solid #e5e7eb;border-radius:6px;margin-bottom:16px;min-height:60px">'
+            + '<div style="text-align:center;padding:20px;color:#9ca3af;font-size:.82rem">Cargando...</div>'
+            + '</div>'
+            + '<div style="display:flex;gap:8px;justify-content:flex-end">'
+            + '<button id="pk-ubi-cancel" style="padding:8px 16px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;font-size:.85rem">Cancelar</button>'
+            + '</div>';
+
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        function cerrar() { document.body.removeChild(overlay); }
+        modal.querySelector('#pk-ubi-cancel').addEventListener('click', cerrar);
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) cerrar(); });
+
+        // Cargar ubicaciones con stock del artículo
+        SGA.consultaStock.list({ articulo: (linea.articulo || '').trim(), existencias: 1, pageSize: 100 })
+            .then(function (rows) {
+                var lista = modal.querySelector('#pk-ubi-lista');
+                var conStock = (Array.isArray(rows) ? rows : rows.data || rows.rows || [])
+                    .filter(function (r) { return Number(r.stock || 0) > 0; });
+
+                if (!conStock.length) {
+                    lista.innerHTML = '<div style="text-align:center;padding:20px;color:#9ca3af;font-size:.82rem">Sin stock disponible en ninguna ubicación.</div>';
+                    return;
+                }
+
+                lista.innerHTML = '';
+                conStock.forEach(function (r) {
+                    var ubiCod = (r.ubicacion || '').trim();
+                    var ubiEti = (r.etiqueta || r.nom_ubicacion || '').trim();
+                    var cant   = Number(r.stock || 0);
+                    var esActual = ubiCod === (linea.ubicacion || '').trim();
+
+                    var item = document.createElement('div');
+                    item.style.cssText = 'padding:10px 14px;cursor:pointer;border-bottom:1px solid #f3f4f6;display:flex;justify-content:space-between;align-items:center'
+                        + (esActual ? ';background:#eff6ff' : '');
+                    item.innerHTML = '<div>'
+                        + '<div style="font-size:.85rem;font-weight:600;color:#1e3a5f">' + (ubiEti || ubiCod) + '</div>'
+                        + '<div style="font-size:.75rem;color:#6b7280">' + ubiCod + (esActual ? ' · <em>actual</em>' : '') + '</div>'
+                        + '</div>'
+                        + '<span style="font-size:.85rem;font-weight:700;color:#059669">' + cant + ' ud</span>';
+
+                    item.addEventListener('mouseenter', function () { item.style.background = '#f0fdf4'; });
+                    item.addEventListener('mouseleave', function () { item.style.background = esActual ? '#eff6ff' : ''; });
+
+                    item.addEventListener('click', function () {
+                        linea.ubicacion     = ubiCod;
+                        linea.nom_ubicacion = ubiEti;
+                        linea.ubi_etiqueta  = ubiEti;
+                        linea.stock_ubi     = cant;
+                        // Actualizar también en _albaranes para que recalcProgreso funcione
+                        var lineaKey = String(linea._albaran) + '|' + linea._serie;
+                        var alb = _albaranes[lineaKey];
+                        if (alb) {
+                            var lineaEnAlb = alb.lineas.find(function (l) {
+                                return l.articulo === linea.articulo && l.lote === linea.lote;
+                            });
+                            if (lineaEnAlb) {
+                                lineaEnAlb.ubicacion     = ubiCod;
+                                lineaEnAlb.nom_ubicacion = ubiEti;
+                                lineaEnAlb.ubi_etiqueta  = ubiEti;
+                                lineaEnAlb.stock_ubi     = cant;
+                            }
+                        }
+                        // Actualizar texto de ubicación en la tarjeta
+                        var ubiEl = actionsWrap.closest('.pk-linea').querySelector('.pk-linea-ubi');
+                        if (ubiEl) ubiEl.textContent = '📍 ' + (ubiEti ? ubiEti + ' — ' + ubiCod : ubiCod);
+                        var stockEl = actionsWrap.closest('.pk-linea').querySelector('.pk-linea-stock');
+                        if (stockEl) {
+                            stockEl.textContent = 'Ubi: ' + cant + ' ud · Total: ' + linea.stock_total + ' ud';
+                            stockEl.className = cant >= linea.cantidad_pedida ? 'pk-linea-stock' : 'pk-linea-stock pk-linea-stock--bajo';
+                        }
+                        cerrar();
+                    });
+
+                    lista.appendChild(item);
+                });
+            })
+            .catch(function () {
+                modal.querySelector('#pk-ubi-lista').innerHTML = '<div style="text-align:center;padding:20px;color:#ef4444;font-size:.82rem">Error al cargar ubicaciones.</div>';
+            });
+    }
+
     function confirmarLinea(linea, btn) {
         btn.disabled    = true;
         btn.textContent = '…';
+        var ubiConfirmada = linea.ubicacion;
         SGA.picking.confirmar({
             albaran  : linea._albaran,
             serie    : linea._serie,
             articulo : linea.articulo,
-            ubicacion: linea.ubicacion,
+            ubicacion: ubiConfirmada,
             lote     : linea.lote || null
         }).then(function () {
+            // Actualizar la línea en el albarán en memoria para que recalcProgreso lo detecte
+            var lineaKey = String(linea._albaran) + '|' + linea._serie;
+            var alb = _albaranes[lineaKey];
+            if (alb) {
+                var lineaEnAlb = alb.lineas.find(function (l) {
+                    return l.articulo === linea.articulo && l.lote === linea.lote;
+                });
+                if (lineaEnAlb) {
+                    lineaEnAlb.confirmado_sga = true;
+                    lineaEnAlb.ubicacion      = ubiConfirmada;
+                }
+            }
             linea.confirmado_sga = true;
             _actualizarTrasConfirm(linea);
         }).catch(function (err) {
             console.error('[PK] error al confirmar:', err);
-            btn.textContent = '⚠ Error';
-            setTimeout(function () {
-                if (!linea.confirmado_sga) {
-                    btn.disabled    = false;
-                    btn.textContent = '✓ Confirmar';
-                }
-            }, 2000);
+            btn.disabled    = false;
+            btn.textContent = '✓ Confirmar';
         });
     }
 
@@ -851,7 +974,8 @@
         _filters.desde  = elDesde.value;
         _filters.hasta  = elHasta.value;
         _filters.buscar = elBuscar.value.trim();
-        cargar();
+        _page = 0;
+        cargar(false);
     }
 
     function wireEvents() {

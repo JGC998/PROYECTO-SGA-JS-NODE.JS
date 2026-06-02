@@ -10,6 +10,15 @@ async function _get(path) {
     return res.json();
 }
 
+async function _patch(path, body) {
+    const key = _apiKey();
+    const headers = { 'Content-Type': 'application/json' };
+    if (key) headers['x-api-key'] = key;
+    const res = await fetch(`${API}${path}`, { method: 'PATCH', headers, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(`PATCH ${path} → ${res.status}`);
+    return res.json();
+}
+
 async function _post(path, body) {
     const key = _apiKey();
     const headers = { 'Content-Type': 'application/json' };
@@ -39,12 +48,14 @@ const SGA = {
         get: cod => _get(`/articulos/${encodeURIComponent(cod)}`),
     },
     proveedores: {
-        list: () => _get('/proveedores'),
-        get: cod => _get(`/proveedores/${encodeURIComponent(cod)}`),
+        list:   ()         => _get(`/proveedores`),
+        get:    cod        => _get(`/proveedores/${encodeURIComponent(cod)}`),
+        update: (cod, data) => _patch(`/proveedores/${encodeURIComponent(cod)}`, data),
     },
     clientes: {
-        list: () => _get('/clientes'),
-        get: cod => _get(`/clientes/${encodeURIComponent(cod)}`),
+        list:   ()          => _get(`/clientes`),
+        get:    cod         => _get(`/clientes/${encodeURIComponent(cod)}`),
+        update: (cod, data) => _patch(`/clientes/${encodeURIComponent(cod)}`, data),
     },
     operarios: {
         list: () => _get('/operarios'),
@@ -65,16 +76,13 @@ const SGA = {
     movimientos: {
         list: (params = {}) => _get('/movimientos-por-articulo?' + new URLSearchParams(params)),
     },
-articulosSinReposicion: {
-        list: () => _get('/articulos-sin-reposicion'),
-        save: data => _post('/articulos-sin-reposicion', data),
-    },
     consultaStock: {
         list: (params = {}) => _get('/consulta-de-stock?' + new URLSearchParams(params)),
     },
     minimosMaximos: {
         list: (params = {}) => _get('/minimos-maximos?' + new URLSearchParams(params)),
         save: filas => _post('/minimos-maximos', filas),
+        delete: articulo => fetch('/minimos-maximos/' + encodeURIComponent(articulo), { method: 'DELETE' }).then(r => r.json()),
     },
     subfamilias: {
         list: () => _get('/subfamilias'),
@@ -87,6 +95,7 @@ articulosSinReposicion: {
     loteExclusivo: {
         list: (params = {}) => _get('/lote-exclusivo?' + new URLSearchParams(params)),
         save: filas => _post('/lote-exclusivo', filas),
+        delete: id => fetch('/lote-exclusivo/' + id, { method: 'DELETE' }).then(r => r.json()),
     },
     loteMinimo: {
         list: (params = {}) => _get('/lote-minimo?' + new URLSearchParams(params)),
@@ -98,6 +107,8 @@ articulosSinReposicion: {
     },
     loteCuarentena: {
         list: (params = {}) => _get('/lote-cuarentena?' + new URLSearchParams(params)),
+        save: filas => _post('/lote-cuarentena', filas),
+        delete: id => fetch('/lote-cuarentena/' + id, { method: 'DELETE' }).then(r => r.json()),
     },
     terminales: {
         list: () => _get('/terminales-pda'),

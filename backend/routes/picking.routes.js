@@ -110,13 +110,11 @@ router.post('/picking/confirmar', async (req, res) => {
             .input('alb', albNum)
             .input('ser', String(serie))
             .input('art', String(articulo))
-            .input('ubi', String(ubicacion))
             .input('lot', loteVal)
             .query(`SELECT COUNT(*) AS cnt FROM ALBARANCS
                 WHERE ACSNUM    = @alb
                   AND ACSSER    = @ser
                   AND ACSARTCOD = @art
-                  AND ACSUBI    = @ubi
                   AND ACSMOV    IN ('E','PC')
                   AND ISNULL(ACSLOT,'') = @lot`);
         if (existe.recordset[0].cnt === 0) {

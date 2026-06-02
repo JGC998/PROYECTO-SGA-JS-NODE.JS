@@ -204,19 +204,26 @@
 @keyframes pk-spin   { to { transform: rotate(360deg); } }
 @keyframes pk-fadein { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ── AVISO LÍMITE TOP 500 ────────────────────────────────────────────────── */
+/* ── BOTÓN CARGAR MÁS ────────────────────────────────────────────────────── */
 
-.pk-limit-notice {
-    background: var(--sga-warning-bg);
-    border: 1px solid var(--sga-warning);
+.pk-cargar-mas {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--sga-surface);
+    border: 1px dashed var(--sga-border);
     border-radius: var(--sga-radius);
-    padding: 10px var(--sga-sp-md);
+    color: var(--sga-primary);
     font-size: var(--sga-text-sm);
-    color: var(--sga-warning);
-    display: flex;
-    align-items: center;
-    gap: var(--sga-sp-sm);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background var(--sga-transition), border-color var(--sga-transition);
+    margin-top: 4px;
 }
+
+.pk-cargar-mas:hover { background: var(--sga-surface-alt); border-color: var(--sga-accent); }
+.pk-cargar-mas:disabled { opacity: .5; cursor: not-allowed; }
 
 /* ── TARJETA OPERATIVA ───────────────────────────────────────────────────── */
 

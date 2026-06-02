@@ -59,11 +59,22 @@ router.post('/minimos-maximos', async (req, res) => {
         const rows = Array.isArray(req.body) ? req.body : [req.body];
         for (const r of rows) {
             if (!r.articulo) continue;
-            await q(pool).input('art', r.articulo).input('min', r.stock_minimo || 0).input('max', r.stock_maximo || 0)
+            const min = Number.isFinite(Number(r.stock_minimo)) ? Math.max(0, Number(r.stock_minimo)) : 0;
+            const max = Number.isFinite(Number(r.stock_maximo)) ? Math.max(0, Number(r.stock_maximo)) : 0;
+            await q(pool).input('art', r.articulo).input('min', min).input('max', max)
                 .query(`IF EXISTS (SELECT 1 FROM ARTICULOSTOMIN WHERE MINARTCOD=@art)
                     UPDATE ARTICULOSTOMIN SET MINSTOMIN=@min, MINSTOMAX=@max WHERE MINARTCOD=@art
                 ELSE INSERT INTO ARTICULOSTOMIN (MINARTCOD,MINSTOMIN,MINSTOMAX) VALUES (@art,@min,@max)`);
         }
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
+});
+
+router.delete('/minimos-maximos/:articulo', async (req, res) => {
+    try {
+        const pool = await getPool();
+        await q(pool).input('art', req.params.articulo)
+            .query(`DELETE FROM ARTICULOSTOMIN WHERE MINARTCOD=@art`);
         res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });

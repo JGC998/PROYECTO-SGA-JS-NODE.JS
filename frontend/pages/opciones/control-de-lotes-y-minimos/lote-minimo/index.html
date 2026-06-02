@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN — Lote Mínimo por Cliente</title>
+    <title>SGA LIN — Días Mínimos de Lote por Cliente</title>
     <link rel="stylesheet" href="../../../../css/base.css">
     <link rel="stylesheet" href="../../../../css/layout.css">
     <link rel="stylesheet" href="../../../../css/sidebar.css">
@@ -32,14 +32,11 @@
                     <span class="sga-breadcrumb-sep">›</span>
                     <a href="../index.html">Control de Lotes y Mínimos</a>
                     <span class="sga-breadcrumb-sep">›</span>
-                    <span class="sga-breadcrumb-current">Lote Mínimo</span>
+                    <span class="sga-breadcrumb-current">Días Mínimos de Lote por Cliente</span>
                 </nav>
             </div>
             <div class="sga-header-right">
                 <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
-                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
-                <button class="sga-btn sga-btn-secondary sga-btn-sm">Importar</button>
             </div>
         </header>
 
@@ -47,15 +44,13 @@
             <main class="lm-inner">
 
                 <div class="lm-page-header">
-                    <h1 class="sga-page-title">Lote Mínimo por Cliente</h1>
+                    <h1 class="sga-page-title">Días Mínimos de Lote por Cliente</h1>
                     <p class="sga-page-description">Lotes · SGA LIN</p>
                 </div>
 
                 <div class="filter-bar">
                     <label>Código cliente:</label>
                     <input type="text" class="sga-input input-code" id="f-cliente">
-                    <button class="btn-browse">...</button>
-                    <input type="text" class="sga-input input-desc" readonly>
                 </div>
 
                 <div class="lm-table-card">
@@ -67,11 +62,12 @@
                                 <th>Cliente</th>
                                 <th>Nombre de cliente</th>
                                 <th>Días</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody-lminimo">
                             <tr class="placeholder-row">
-                                <td colspan="4">Pulse Actualizar para cargar los datos.</td>
+                                <td colspan="5">Cargando...</td>
                             </tr>
                         </tbody>
                     </table>

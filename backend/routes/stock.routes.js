@@ -43,6 +43,7 @@ router.get('/consulta-de-stock', async (req, res) => {
         const r = await qb.query(`SELECT
                 s.STOARTCOD AS articulo, a.ARTNOM AS nombre,
                 s.STOUBI AS ubicacion, u.UBINOM AS nom_ubicacion,
+                ISNULL(RTRIM(u.UBIETI),'') AS etiqueta,
                 s.STOLOT AS lote, s.STOCAN AS stock,
                 ISNULL(u.UBINUMPAL,0) AS palets,
                 ISNULL(u.UBIMUL,0) AS multiple,

@@ -70,6 +70,12 @@ async function upsertUsuario(codigo, nombre, tipo, nivel) {
         ELSE INSERT INTO SGAUSUARIO (USUCOD,USUNOM,USUTIP,USUNIV) VALUES (@cod,@nom,@tip,@niv)`);
 }
 
+async function deleteUsuario(codigo) {
+    const pool = await getPool();
+    await pool.request().input('cod', codigo)
+        .query(`DELETE FROM SGAUSUARIO WHERE USUCOD=@cod`);
+}
+
 async function getConfiguracionEmpresa() {
     const pool = await getPool();
     const r = await pool.request().query(`
@@ -116,6 +122,6 @@ module.exports = {
     getAlmacenes, upsertAlmacen,
     getSubfamilias, upsertSubfamilias,
     getTerminalesPda, upsertTerminalPda,
-    getUsuarios, upsertUsuario,
+    getUsuarios, upsertUsuario, deleteUsuario,
     getConfiguracionEmpresa, upsertConfiguracionEmpresa
 };

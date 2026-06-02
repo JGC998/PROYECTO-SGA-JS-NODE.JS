@@ -84,6 +84,13 @@ router.post('/usuarios', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
+router.delete('/usuarios/:codigo', async (req, res) => {
+    try {
+        await configService.deleteUsuario(req.params.codigo);
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
+});
+
 // ─── CONFIGURACIÓN DE EMPRESA ─────────────────────────────────────────────────
 
 router.get('/configuracion-empresa', async (req, res) => {

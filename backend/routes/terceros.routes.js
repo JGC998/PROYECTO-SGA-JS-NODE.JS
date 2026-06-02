@@ -26,6 +26,13 @@ router.get('/proveedores/:cod', async (req, res) => {
     } catch (err) { serverError(res, err); }
 });
 
+router.patch('/proveedores/:cod', requireAuth, async (req, res) => {
+    try {
+        await tercerosService.updateProveedor(req.params.cod, req.body);
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
+});
+
 // ─── CLIENTES ─────────────────────────────────────────────────────────────────
 
 router.get('/clientes', async (req, res) => {
@@ -41,6 +48,13 @@ router.get('/clientes/:cod', async (req, res) => {
         const data = await tercerosService.getCliente(req.params.cod);
         if (!data) return res.status(404).json({ error: 'No encontrado' });
         res.json(data);
+    } catch (err) { serverError(res, err); }
+});
+
+router.patch('/clientes/:cod', requireAuth, async (req, res) => {
+    try {
+        await tercerosService.updateCliente(req.params.cod, req.body);
+        res.json({ ok: true });
     } catch (err) { serverError(res, err); }
 });
 

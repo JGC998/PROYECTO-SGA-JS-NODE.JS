@@ -49,6 +49,44 @@ async function getCliente(cod) {
     return r.recordset[0] || null;
 }
 
+async function updateProveedor(cod, datos) {
+    const pool = await getPool();
+    await pool.request()
+        .input('cod',  cod)
+        .input('nom',  datos.nombre      || '')
+        .input('raz',  datos.razon_social || '')
+        .input('dir',  datos.direccion   || '')
+        .input('loc',  datos.localidad   || '')
+        .input('nif',  datos.cif         || '')
+        .input('tel',  datos.telefono    || '')
+        .input('per',  datos.contacto    || '')
+        .input('ema',  datos.email       || '')
+        .query(`UPDATE PROVEEDOR SET
+            CLINOM=@nom, CLIRAZ=@raz, CLIDIR=@dir,
+            CLIPOSCIU=@loc, CLINIF=@nif, CLITEL=@tel,
+            CLIPERCON=@per, CLIEMA=@ema
+            WHERE CLICOD=@cod`);
+}
+
+async function updateCliente(cod, datos) {
+    const pool = await getPool();
+    await pool.request()
+        .input('cod', cod)
+        .input('nom', datos.nombre       || '')
+        .input('raz', datos.razon_social || '')
+        .input('dir', datos.direccion    || '')
+        .input('loc', datos.localidad    || '')
+        .input('nif', datos.cif          || '')
+        .input('tel', datos.telefono     || '')
+        .input('per', datos.contacto     || '')
+        .input('ema', datos.email        || '')
+        .query(`UPDATE CLIENTE SET
+            CLINOM=@nom, CLIRAZ=@raz, CLIDIR=@dir,
+            CLIPOSCIU=@loc, CLINIF=@nif, CLITEL=@tel,
+            CLIPERCON=@per, CLIEMA=@ema
+            WHERE CLICOD=@cod`);
+}
+
 async function getOperarios(buscar) {
     const pool = await getPool();
     const r = await pool.request().input('b', `%${buscar}%`)
@@ -73,4 +111,4 @@ async function deleteOperario(cod) {
         .query('DELETE FROM SGAUSUARIO WHERE USUCOD = @cod');
 }
 
-module.exports = { getProveedores, getProveedor, getClientes, getCliente, getOperarios, getOperario, deleteOperario };
+module.exports = { getProveedores, getProveedor, updateProveedor, getClientes, getCliente, updateCliente, getOperarios, getOperario, deleteOperario };

@@ -37,7 +37,6 @@
                 { icon: '👥', text: 'Clientes',                href: 'pages/visor/clientes.html' },
                 { icon: '📌', text: 'Ubicaciones',             href: 'pages/opciones/almacen-y-stock/ubicaciones/index.html' },
                 { icon: '📊', text: 'Movimientos',             href: 'pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html' },
-                { icon: '📍', text: 'Artículos por ubicación', href: 'pages/opciones/almacen-y-stock/articulos-sin-reposicion/index.html' },
                 { icon: '🚛', text: 'Expediciones desde pedido', href: 'pages/opciones/logistica-y-pedidos/expediciones/index.html' },
                 { icon: '📦', text: 'Histórico de ventas',    href: 'pages/opciones/logistica-y-pedidos/situacion-pedidos-venta/index.html' },
                 { icon: '🗺️', text: 'Albaranes de expedición', href: 'pages/opciones/logistica-y-pedidos/hojas-de-ruta/index.html' },
@@ -47,7 +46,7 @@
         {
             label: 'Lotes',
             links: [
-                { icon: '🏷️', text: 'Lote mínimo',       href: 'pages/opciones/control-de-lotes-y-minimos/lote-minimo/index.html' },
+                { icon: '🏷️', text: 'Días mínimos de lote', href: 'pages/opciones/control-de-lotes-y-minimos/lote-minimo/index.html' },
                 { icon: '🚫', text: 'Cuarentena',         href: 'pages/opciones/control-de-lotes-y-minimos/lote-cuarentena/index.html' },
                 { icon: '🔒', text: 'Exclusivo',          href: 'pages/opciones/control-de-lotes-y-minimos/lote-exclusivo/index.html' },
                 { icon: '📈', text: 'Mínimos y máximos',  href: 'pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html' }
