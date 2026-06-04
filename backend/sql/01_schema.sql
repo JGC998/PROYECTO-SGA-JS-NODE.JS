@@ -281,5 +281,18 @@ CREATE TABLE terminalpda (
 );
 GO
 
+-- ── SGANOTIFICACION ───────────────────────────────────────────
+IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE name='SGANOTIFICACION' AND type='U')
+CREATE TABLE SGANOTIFICACION (
+    NOTID     INT           IDENTITY(1,1) PRIMARY KEY,
+    NOTEXTID  VARCHAR(40)   NOT NULL,
+    NOTTIPO   VARCHAR(20)   NOT NULL,
+    NOTTITULO VARCHAR(200)  NOT NULL,
+    NOTDESC   VARCHAR(500)  NULL,
+    NOTTS     DATETIME      NOT NULL DEFAULT GETDATE(),
+    NOTLEIDA  BIT           NOT NULL DEFAULT 0
+);
+GO
+
 PRINT 'Schema creado correctamente.';
 GO

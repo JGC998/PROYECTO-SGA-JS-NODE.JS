@@ -33,7 +33,6 @@ router.use((req, res, next) => {
 const DATA_DIR     = path.join(__dirname, '../data');
 const DATOS_DIR    = path.join(__dirname, '../../frontend/pages/almacen/datos'); // fallback estático
 const PICKING_FILE = path.join(DATA_DIR, 'picking.json');
-const NOTIF_FILE   = path.join(DATA_DIR, 'notificaciones.json');
 const MAX_NOTIFS   = 50;
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
@@ -468,39 +467,38 @@ async function savePickings(list) {
 
 // ── NOTIFICACIONES ────────────────────────────────────────────────────────────
 
-function _loadNotifs() {
-    const data = readJson(NOTIF_FILE);
-    return Array.isArray(data) ? data : [];
+async function _loadNotifs() {
+    try {
+        const pool = await getPool();
+        const r = await pool.request().query(
+            `SELECT TOP ${MAX_NOTIFS} NOTEXTID AS id, NOTTIPO AS tipo, NOTTITULO AS titulo,
+                    NOTDESC AS descripcion, NOTTS AS ts
+             FROM SGANOTIFICACION ORDER BY NOTTS DESC`);
+        return r.recordset.map(n => ({ ...n, ts: new Date(n.ts).toISOString() }));
+    } catch (err) {
+        console.error('[notificaciones] Error al leer BD:', err.message);
+        return [];
+    }
 }
 
-let _notifLock = Promise.resolve();
-
-// BUG-01: lectura Y escritura dentro del mismo slot del lock para evitar
-// lost-update cuando dos eventos generan notificaciones simultáneamente
 function pushNotif(tipo, titulo, descripcion) {
     const notif = {
         id:          `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        tipo,        // 'picking' | 'incidencia' | 'backup' | 'stock'
+        tipo,
         titulo,
         descripcion,
         ts:          new Date().toISOString(),
     };
-    _notifLock = _notifLock.then(async () => {
-        try {
-            await fs.promises.mkdir(DATA_DIR, { recursive: true });
-            let list = [];
-            try {
-                const raw = await fs.promises.readFile(NOTIF_FILE, 'utf8');
-                const parsed = JSON.parse(raw);
-                if (Array.isArray(parsed)) list = parsed;
-            } catch {}
-            list.unshift(notif);
-            if (list.length > MAX_NOTIFS) list.length = MAX_NOTIFS;
-            await fs.promises.writeFile(NOTIF_FILE, JSON.stringify(list, null, 2), 'utf8');
-        } catch (err) {
-            console.error('[notificaciones] Error al guardar:', err.message);
-        }
-    });
+    getPool().then(pool => pool.request()
+        .input('extid', notif.id)
+        .input('tipo',  tipo)
+        .input('tit',   titulo)
+        .input('desc',  descripcion || '')
+        .query(`INSERT INTO SGANOTIFICACION (NOTEXTID,NOTTIPO,NOTTITULO,NOTDESC)
+                VALUES (@extid,@tipo,@tit,@desc);
+                DELETE FROM SGANOTIFICACION WHERE NOTID NOT IN
+                    (SELECT TOP ${MAX_NOTIFS} NOTID FROM SGANOTIFICACION ORDER BY NOTTS DESC)`)
+    ).catch(err => console.error('[notificaciones] Error al guardar:', err.message));
     broadcast('notificacion', notif);
     return notif;
 }
@@ -621,20 +619,25 @@ router.patch('/api/almacen/picking/:id/incidencia/:idx', async (req, res) => {
 
 // ── NOTIFICACIONES — endpoints ────────────────────────────────────────────────
 
-router.get('/api/almacen/notificaciones', (req, res) => {
-    res.json(_loadNotifs());
+router.get('/api/almacen/notificaciones', async (req, res) => {
+    res.json(await _loadNotifs());
 });
 
-router.post('/api/almacen/notificaciones/limpiar', (req, res) => {
-    // Sobrescribir directamente sin leer (operación de reset)
-    fs.promises.writeFile(NOTIF_FILE, '[]', 'utf8').catch(() => {});
-    res.json({ ok: true });
+router.post('/api/almacen/notificaciones/limpiar', async (req, res) => {
+    try {
+        const pool = await getPool();
+        await pool.request().query('DELETE FROM SGANOTIFICACION');
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
 });
 
 // API-02: alias REST DELETE para notificaciones
-router.delete('/api/almacen/notificaciones', (req, res) => {
-    fs.promises.writeFile(NOTIF_FILE, '[]', 'utf8').catch(() => {});
-    res.json({ ok: true });
+router.delete('/api/almacen/notificaciones', async (req, res) => {
+    try {
+        const pool = await getPool();
+        await pool.request().query('DELETE FROM SGANOTIFICACION');
+        res.json({ ok: true });
+    } catch (err) { serverError(res, err); }
 });
 
 // ── REDIRECT /movil → página móvil estática ───────────────────────────────────
