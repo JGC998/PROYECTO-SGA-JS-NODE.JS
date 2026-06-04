@@ -19,7 +19,7 @@
 .main-layout { display: grid; grid-template-columns: 1fr 380px; gap: var(--sga-sp-md); align-items: start; }
 
 .left-panel  { display: flex; flex-direction: column; gap: var(--sga-sp-sm); }
-.right-panel { display: flex; flex-direction: column; gap: var(--sga-sp-md); padding-top: 64px; }
+.right-panel { display: flex; flex-direction: column; gap: var(--sga-sp-md); }
 
 .check-row      { display: flex; flex-direction: column; gap: var(--sga-sp-sm); padding: var(--sga-sp-sm) 0; }
 .checkbox-label { display: flex; align-items: center; gap: 6px; font-size: var(--sga-text-base); color: var(--sga-text); cursor: pointer; }
@@ -171,6 +171,10 @@
 .btn-action:hover  { background: var(--sga-info-bg); border-color: var(--sga-accent); color: var(--sga-primary); }
 .btn-action.danger { border-color: var(--sga-danger-bg); color: var(--sga-danger); }
 .btn-action.danger:hover { background: var(--sga-danger-bg); border-color: var(--sga-danger); }
+
+/* Fila de ubicación recién creada en esta sesión */
+.gu-row-nueva td { background: #f0fdf4; color: #15803d; font-weight: 600; }
+.gu-row-nueva td:first-child { border-left: 3px solid #16a34a; }
 
 @media (max-width: 900px) {
     .main-layout { grid-template-columns: 1fr; }

@@ -36,11 +36,13 @@ router.get('/ubicaciones/todas', async (req, res) => {
     try {
         const pool = await getPool();
         const r = await q(pool).query(`
-            SELECT UBICODUBI, UBIETI, UBINOM,
+            SELECT UBICODUBI AS ubicacion, UBIETI AS etiqueta, UBINOM AS descripcion,
                    UBIANC AS ancho, UBIALT AS alto, UBINUMPAL AS palets,
                    ISNULL(UBILIB,0) AS picking, ISNULL(UBIMUL,0) AS multiple,
                    UBIALMCOD AS ubicacion_tipo, ISNULL(UBINOROT,0) AS exclusiva,
-                   ISNULL(UBINOAVIINV,0) AS no_av_inv, UBICON AS articulo
+                   ISNULL(UBINOAVIINV,0) AS no_av_inv, UBICON AS articulo,
+                   ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOUBI=UBICODUBI),0) AS stock,
+                   CASE WHEN EXISTS(SELECT 1 FROM STOCK WHERE STOUBI=UBICODUBI) THEN 1 ELSE 0 END AS existe
             FROM UBICACION
             WHERE UBIETI IS NOT NULL AND LTRIM(RTRIM(UBIETI)) <> ''
             ORDER BY UBICODUBI
@@ -66,7 +68,9 @@ router.get('/ubicaciones', async (req, res) => {
                 UBIANC AS ancho, UBIALT AS alto, UBINUMPAL AS palets,
                 ISNULL(UBILIB,0) AS picking, ISNULL(UBIMUL,0) AS multiple,
                 UBIALMCOD AS ubicacion_tipo, ISNULL(UBINOROT,0) AS exclusiva,
-                ISNULL(UBINOAVIINV,0) AS no_av_inv, UBICON AS articulo
+                ISNULL(UBINOAVIINV,0) AS no_av_inv, UBICON AS articulo,
+                ISNULL((SELECT SUM(STOCAN) FROM STOCK WHERE STOUBI=UBICODUBI),0) AS stock,
+                CASE WHEN EXISTS(SELECT 1 FROM STOCK WHERE STOUBI=UBICODUBI) THEN 1 ELSE 0 END AS existe
                 FROM UBICACION
                 WHERE (UBICODUBI LIKE @b OR UBINOM LIKE @b OR UBIETI LIKE @b)
                 AND UBIALMCOD LIKE @alm
@@ -100,6 +104,9 @@ router.post('/generar-ubicaciones', async (req, res) => {
         let creadas = 0;
         const listaExistentes = [];
 
+        const maxRes = await pool.request().query('SELECT ISNULL(MAX(UBICON),0) AS maxcon FROM UBICACION');
+        let nextCon = Number(maxRes.recordset[0].maxcon) + 1;
+
         for (let p = Number(desde_pasillo); p <= Number(hasta_pasillo); p++) {
             const ps = String(p).padStart(3, '0');
             for (const lado of lados) {
@@ -114,15 +121,15 @@ router.post('/generar-ubicaciones', async (req, res) => {
                             .input('cod', cod).input('eti', eti).input('nom', eti)
                             .input('anc', Number(ancho)).input('alt', Number(alto))
                             .input('pal', Number(palets)).input('mul', mul)
-                            .input('alm', '').input('lib', lib)
+                            .input('alm', '').input('lib', lib).input('con', nextCon)
                             .query(`IF NOT EXISTS (SELECT 1 FROM UBICACION WHERE UBICODUBI=@cod)
                                 BEGIN
-                                    INSERT INTO UBICACION (UBICODUBI,UBIETI,UBINOM,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBIALMCOD,UBILIB)
-                                    VALUES (@cod,@eti,@nom,@anc,@alt,@pal,@mul,@alm,@lib)
+                                    INSERT INTO UBICACION (UBICODUBI,UBIETI,UBINOM,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBIALMCOD,UBILIB,UBICON)
+                                    VALUES (@cod,@eti,@nom,@anc,@alt,@pal,@mul,@alm,@lib,@con)
                                     SELECT 1 AS insertada
                                 END
                                 ELSE SELECT 0 AS insertada`);
-                        if (r.recordset[0]?.insertada) creadas++;
+                        if (r.recordset[0]?.insertada) { creadas++; nextCon++; }
                         else listaExistentes.push(eti);
                     }
                 }

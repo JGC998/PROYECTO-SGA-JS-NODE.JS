@@ -325,12 +325,16 @@ router.get('/api/almacen/articulos', async (req, res) => {
 router.get('/api/almacen/server-info', requireAuth, (req, res) => {
     const nets = os.networkInterfaces();
     let ip = 'localhost';
+    // Preferir IPs en rangos de red doméstica/WiFi (192.168.0.x, 10.x, 172.16-31.x)
+    // excluyendo rangos típicos de VirtualBox/VMware (192.168.56.x, 192.168.126.x)
+    const candidates = [];
     for (const ifaces of Object.values(nets)) {
         for (const iface of ifaces) {
-            if (iface.family === 'IPv4' && !iface.internal) { ip = iface.address; break; }
+            if (iface.family === 'IPv4' && !iface.internal) candidates.push(iface.address);
         }
-        if (ip !== 'localhost') break;
     }
+    const preferred = candidates.find(a => !a.startsWith('192.168.56.') && !a.startsWith('192.168.126.'));
+    ip = preferred ?? candidates[0] ?? 'localhost';
     const port = req.socket.localPort ?? process.env.PORT ?? 3000;
     res.json({ ip, port });
 });

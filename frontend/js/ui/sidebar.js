@@ -119,7 +119,7 @@
 
         return '<aside class="sga-sidebar" id="sgaSidebar">'
             + '<div class="sga-sidebar-header">'
-            +   '<a href="' + root + 'index.html" class="sga-sidebar-logo">📦 SGA LIN</a>'
+            +   '<a href="' + root + 'index.html" class="sga-sidebar-logo">📦 <span id="sidebar-empresa-nombre">SGA LIN</span></a>'
             +   '<div class="sga-sidebar-subtitle">Sistema de Gestión de Almacén</div>'
             + '</div>'
             + '<a class="sga-sidebar-alert hidden" id="sidebar-alert-strip" href="' + root + 'pages/opciones/almacen-y-stock/alertas-stock/index.html">'
@@ -211,5 +211,33 @@
         });
 
         cargarAlertas(root);
+        cargarNombreEmpresa();
     });
+
+    function cargarNombreEmpresa() {
+        var CACHE_KEY = 'sga_empresa_nombre';
+        var CACHE_TTL = 30 * 60 * 1000; // 30 minutos
+
+        function aplicar(nombre) {
+            var el = document.getElementById('sidebar-empresa-nombre');
+            if (el && nombre && nombre.trim()) el.textContent = nombre.trim();
+        }
+
+        try {
+            var cached = sessionStorage.getItem(CACHE_KEY);
+            if (cached) {
+                var entry = JSON.parse(cached);
+                if (Date.now() - entry.ts < CACHE_TTL) { aplicar(entry.nombre); return; }
+            }
+        } catch (_) {}
+
+        fetch('/configuracion-empresa')
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (data) {
+                if (!data || !data.nombre) return;
+                try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), nombre: data.nombre })); } catch (_) {}
+                aplicar(data.nombre);
+            })
+            .catch(function () {});
+    }
 })();

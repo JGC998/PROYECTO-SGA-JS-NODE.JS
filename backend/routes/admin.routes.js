@@ -70,19 +70,22 @@ router.post('/poner-cero-carrusel', async (req, res) => {
 // ─── COPIA DE SEGURIDAD ────────────────────────────────────────────────────────
 
 const BACKUP_TABLES = [
-    { name: 'ALMACENES',   sql: 'SELECT * FROM ALMACENES' },
-    { name: 'EMPRESA',     sql: 'SELECT * FROM EMPRESA' },
-    { name: 'ARTICULO',    sql: 'SELECT * FROM ARTICULO' },
-    { name: 'UBICACION',   sql: 'SELECT * FROM UBICACION' },
-    { name: 'STOCK',       sql: 'SELECT * FROM STOCK' },
-    { name: 'STOCKLOTE',   sql: 'SELECT * FROM STOCKLOTE' },
-    { name: 'ARTICULOUBI', sql: 'SELECT * FROM ARTICULOUBI' },
-    { name: 'ARTICULOSTOMIN', sql: 'SELECT * FROM ARTICULOSTOMIN' },
-    { name: 'CLIENTE',     sql: 'SELECT * FROM CLIENTE' },
-    { name: 'PROVEEDOR',   sql: 'SELECT * FROM PROVEEDOR' },
-    { name: 'SUBFAMILIA',  sql: 'SELECT * FROM SUBFAMILIA' },
-    { name: 'SGAUSUARIO',  sql: 'SELECT * FROM SGAUSUARIO' },
-    { name: 'CONTADOR',    sql: 'SELECT * FROM CONTADOR' },
+    { name: 'SGAEMPRESA',        sql: 'SELECT * FROM SGAEMPRESA' },
+    { name: 'ALMACENES',         sql: 'SELECT * FROM ALMACENES' },
+    { name: 'ARTICULO',          sql: 'SELECT * FROM ARTICULO' },
+    { name: 'UBICACION',         sql: 'SELECT * FROM UBICACION' },
+    { name: 'STOCK',             sql: 'SELECT * FROM STOCK' },
+    { name: 'STOCKLOTE',         sql: 'SELECT * FROM STOCKLOTE' },
+    { name: 'ARTICULOUBI',       sql: 'SELECT * FROM ARTICULOUBI' },
+    { name: 'ARTICULOSTOMIN',    sql: 'SELECT * FROM ARTICULOSTOMIN' },
+    { name: 'ARTICULOLOTCLI',    sql: 'SELECT * FROM ARTICULOLOTCLI' },
+    { name: 'ARTICULOEXCLOTCLI', sql: 'SELECT * FROM ARTICULOEXCLOTCLI' },
+    { name: 'ARTICULOLOTOBS',    sql: 'SELECT * FROM ARTICULOLOTOBS' },
+    { name: 'CLIENTE',           sql: 'SELECT * FROM CLIENTE' },
+    { name: 'PROVEEDOR',         sql: 'SELECT * FROM PROVEEDOR' },
+    { name: 'SUBFAMILIA',        sql: 'SELECT * FROM SUBFAMILIA' },
+    { name: 'SGAUSUARIO',        sql: 'SELECT * FROM SGAUSUARIO' },
+    { name: 'CONTADOR',          sql: 'SELECT * FROM CONTADOR' },
 ];
 
 router.post('/copia-seguridad', async (req, res) => {

@@ -196,7 +196,8 @@ router.post('/lote-cuarentena', async (req, res) => {
                     .query(`UPDATE ARTICULOLOTOBS SET HISOBS=@obs WHERE HISCON=@id`);
             } else {
                 await q(pool).input('art', r.articulo).input('lot', r.lote).input('obs', obs)
-                    .query(`INSERT INTO ARTICULOLOTOBS (HISARTCOD, HISLOT, HISOBS) VALUES (@art, @lot, @obs)`);
+                    .query(`INSERT INTO ARTICULOLOTOBS (HISCON, HISARTCOD, HISLOT, HISOBS)
+                        VALUES (ISNULL((SELECT MAX(HISCON) FROM ARTICULOLOTOBS), 0) + 1, @art, @lot, @obs)`);
             }
         }
         res.json({ ok: true });

@@ -49,20 +49,11 @@
                 <div class="main-layout">
                     <!-- Panel izquierdo: tabla de ubicaciones generadas -->
                     <div class="left-panel">
-                        <div class="check-row">
-                            <label class="checkbox-label">
-                                <input type="checkbox"> Mostrar ubicaciones no existentes con movimientos
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox"> Solo con existencias
-                            </label>
-                        </div>
                         <div class="table-wrapper">
                             <table>
                                 <thead>
                                     <tr>
                                         <th class="col-num">#</th>
-                                        <th>Sel</th>
                                         <th>Ubicación</th>
                                         <th>Etiqueta</th>
                                     </tr>
@@ -84,54 +75,38 @@
                         <div class="form-section">
                             <div class="form-section-title">Parámetros de generación</div>
 
-                            <div class="gu-range-grid">
-                                <!-- Cabecera -->
-                                <div class="gu-range-head"></div>
-                                <div class="gu-range-head">Desde</div>
-                                <div class="gu-range-head">Hasta</div>
-
+                            <div class="gu-range-grid" style="grid-template-columns: auto 1fr">
                                 <!-- Pasillo -->
                                 <div class="gu-range-label">Pasillo</div>
-                                <input type="number" class="input-param sga-input" id="gu-desde-pasillo" placeholder="ej. P001 → 1" min="1">
-                                <input type="number" class="input-param sga-input" id="gu-hasta-pasillo" placeholder="ej. P010 → 10" min="1">
+                                <select class="input-param sga-input" id="gu-desde-pasillo"><option value="">Cargando...</option></select>
 
                                 <!-- Lateral -->
                                 <div class="gu-range-label">Lateral</div>
-                                <select class="input-param sga-input" id="gu-lateral">
-                                    <option value="ambos">Ambos (I y D)</option>
-                                    <option value="I">Izquierda (I)</option>
-                                    <option value="D">Derecha (D)</option>
+                                <select class="input-param sga-input" id="gu-lateral" disabled>
+                                    <option value="">— elige pasillo —</option>
                                 </select>
-                                <div></div>
 
                                 <!-- X (columna) -->
                                 <div class="gu-range-label">Columna (X)</div>
-                                <input type="number" class="input-param sga-input" id="gu-desde-x" placeholder="ej. 1" min="1" value="1">
-                                <input type="number" class="input-param sga-input" id="gu-hasta-x" placeholder="ej. 5" min="1" value="1">
+                                <select class="input-param sga-input" id="gu-desde-x" disabled><option value="">—</option></select>
 
                                 <!-- Y (altura) -->
                                 <div class="gu-range-label">Altura (Y)</div>
-                                <input type="number" class="input-param sga-input" id="gu-desde-y" placeholder="ej. 1" min="1" value="1">
-                                <input type="number" class="input-param sga-input" id="gu-hasta-y" placeholder="ej. 4" min="1" value="1">
+                                <select class="input-param sga-input" id="gu-desde-y" disabled><option value="">—</option></select>
                             </div>
 
-                            <div class="gu-extra-grid">
-                                <div class="gu-range-label">Ancho</div>
-                                <input type="number" class="input-param sga-input" id="gu-ancho" value="0" min="0">
-                                <div class="gu-range-label">Alto</div>
-                                <input type="number" class="input-param sga-input" id="gu-alto" value="0" min="0">
-                                <div class="gu-range-label">Palets</div>
-                                <input type="number" class="input-param sga-input" id="gu-palets" value="0" min="0">
+                            <input type="hidden" id="gu-ancho" value="0">
+                            <input type="hidden" id="gu-alto" value="0">
+                            <div style="padding:8px 16px;border-top:1px solid var(--sga-border-light)">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="gu-palets"> Ubicación de palets
+                                </label>
                             </div>
 
                             <div class="gu-bottom-row">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="gu-multiple"> Ubicación múltiple
-                                </label>
                                 <select class="select-picking sga-input" id="gu-picking">
                                     <option value="Picking">Picking</option>
-                                    <option value="Reserva">Reserva</option>
-                                    <option value="Suelo">Suelo</option>
+                                    <option value="NoPicking">No Picking</option>
                                 </select>
                             </div>
 
@@ -142,9 +117,6 @@
                             </div>
                         </div><!-- /.form-section -->
 
-                        <div class="action-buttons">
-                            <button class="btn-action danger">Eliminar ubicaciones y movimientos</button>
-                        </div>
                     </div>
                 </div>
 

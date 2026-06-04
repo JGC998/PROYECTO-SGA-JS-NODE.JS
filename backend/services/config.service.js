@@ -80,41 +80,39 @@ async function getConfiguracionEmpresa() {
     const pool = await getPool();
     const r = await pool.request().query(`
         SELECT TOP 1
-            EMPNOM    AS nombre,
-            EMPCIF    AS cif,
-            EMPDIR    AS direccion,
-            EMPPOB    AS localidad,
-            EMPTEL    AS telefono,
-            EMPEML    AS email,
-            EMPALMCOD AS almacen_cod,
-            EMPTIPEMP AS tipo_empresa
-        FROM EMPRESA`);
+            EMPNOM AS nombre,
+            EMPNIF AS cif,
+            EMPDIR AS direccion,
+            EMPPOB AS localidad,
+            EMPTEL AS telefono,
+            EMPCOR AS email
+        FROM SGAEMPRESA`);
     return r.recordset[0] || {};
 }
 
 async function upsertConfiguracionEmpresa(data) {
     const pool = await getPool();
-    const exists = await pool.request().query('SELECT COUNT(*) AS cnt FROM EMPRESA');
+    const exists = await pool.request().query('SELECT COUNT(*) AS cnt FROM SGAEMPRESA');
     if (exists.recordset[0].cnt === 0) {
         await pool.request()
             .input('nom', data.nombre    || '')
-            .input('cif', data.cif       || '')
+            .input('nif', data.cif       || '')
             .input('dir', data.direccion || '')
             .input('pob', data.localidad || '')
             .input('tel', data.telefono  || '')
-            .input('eml', data.email     || '')
-            .query(`INSERT INTO EMPRESA (EMPCOD,EMPNOM,EMPALMCOD,EMPTIPEMP,EMPCIF,EMPDIR,EMPPOB,EMPTEL,EMPEML)
-                    VALUES ('LIN',@nom,'',0,@cif,@dir,@pob,@tel,@eml)`);
+            .input('cor', data.email     || '')
+            .query(`INSERT INTO SGAEMPRESA (EMPCOD,EMPNOM,EMPNIF,EMPDIR,EMPPOB,EMPTEL,EMPCOR)
+                    VALUES ('LIN',@nom,@nif,@dir,@pob,@tel,@cor)`);
     } else {
         await pool.request()
             .input('nom', data.nombre    || '')
-            .input('cif', data.cif       || '')
+            .input('nif', data.cif       || '')
             .input('dir', data.direccion || '')
             .input('pob', data.localidad || '')
             .input('tel', data.telefono  || '')
-            .input('eml', data.email     || '')
-            .query(`UPDATE TOP(1) EMPRESA
-                    SET EMPNOM=@nom, EMPCIF=@cif, EMPDIR=@dir, EMPPOB=@pob, EMPTEL=@tel, EMPEML=@eml`);
+            .input('cor', data.email     || '')
+            .query(`UPDATE TOP(1) SGAEMPRESA
+                    SET EMPNOM=@nom, EMPNIF=@nif, EMPDIR=@dir, EMPPOB=@pob, EMPTEL=@tel, EMPCOR=@cor`);
     }
 }
 

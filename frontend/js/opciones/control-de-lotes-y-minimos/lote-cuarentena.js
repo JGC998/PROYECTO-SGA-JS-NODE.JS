@@ -128,7 +128,7 @@ function abrirModal(r) {
         errEl.style.display = 'none';
 
         try {
-            await SGA.loteCuarentena.save([{ id: r?.id ?? 'new', articulo, lote, observaciones }]);
+            await SGA.loteCuarentena.save([{ id: r?.id ?? 'new-0', articulo, lote, observaciones }]);
             await cargarDatos();
             cerrar();
         } catch (e) {

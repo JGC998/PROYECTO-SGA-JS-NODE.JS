@@ -1,87 +1,149 @@
 "use strict";
 
-const tbody      = document.querySelector('.left-panel tbody');
-const btnOk      = document.querySelector('.btn-ok');
-const preview    = document.getElementById('gu-preview');
+const tbody       = document.querySelector('.left-panel tbody');
+const btnOk       = document.querySelector('.btn-ok');
+const preview     = document.getElementById('gu-preview');
 
-// Inputs
-const inDesdePas = document.getElementById('gu-desde-pasillo');
-const inHastaPas = document.getElementById('gu-hasta-pasillo');
-const inLateral  = document.getElementById('gu-lateral');
-const inDesdeX   = document.getElementById('gu-desde-x');
-const inHastaX   = document.getElementById('gu-hasta-x');
-const inDesdeY   = document.getElementById('gu-desde-y');
-const inHastaY   = document.getElementById('gu-hasta-y');
-const inAncho    = document.getElementById('gu-ancho');
-const inAlto     = document.getElementById('gu-alto');
-const inPalets   = document.getElementById('gu-palets');
-const inMultiple = document.getElementById('gu-multiple');
-const inPicking  = document.getElementById('gu-picking');
+const selDesdePas = document.getElementById('gu-desde-pasillo');
+const selLateral  = document.getElementById('gu-lateral');
+const selDesdeX   = document.getElementById('gu-desde-x');
+const selDesdeY   = document.getElementById('gu-desde-y');
+const inAncho     = document.getElementById('gu-ancho');
+const inAlto      = document.getElementById('gu-alto');
+const inPalets    = document.getElementById('gu-palets'); // checkbox
+const inPicking   = document.getElementById('gu-picking');
 
-function calcTotal() {
-    const dp = parseInt(inDesdePas.value) || 0;
-    const hp = parseInt(inHastaPas.value) || 0;
-    const dx = parseInt(inDesdeX.value)   || 1;
-    const hx = parseInt(inHastaX.value)   || 1;
-    const dy = parseInt(inDesdeY.value)   || 1;
-    const hy = parseInt(inHastaY.value)   || 1;
-    const lados = inLateral.value === 'ambos' ? 2 : 1;
-    if (!dp || !hp || dp > hp) return 0;
-    return Math.max(hp - dp + 1, 0) * lados * Math.max(hx - dx + 1, 0) * Math.max(hy - dy + 1, 0);
+let estructura = {}; // { pasillo: { lateral: { x_min, x_max, y_min, y_max } } }
+const recienCreadas = new Set(); // etiquetas creadas en esta sesión, para resaltarlas en verde
+
+function fillSelect(sel, values, placeholder) {
+    sel.innerHTML = (placeholder ? `<option value="">${placeholder}</option>` : '') +
+        values.map(v => `<option value="${v}">${v}</option>`).join('');
+    sel.disabled = values.length === 0;
+}
+
+function numRange(min, max) {
+    const arr = [];
+    for (let i = min; i <= max; i++) arr.push(i);
+    return arr;
+}
+
+function actualizarLateral() {
+    const p = selDesdePas.value;
+    if (!p || !estructura[p] || p === '') {
+        selLateral.innerHTML = '<option value="">— elige pasillo —</option>';
+        selLateral.disabled = true;
+        limpiarXY();
+        return;
+    }
+    const lados = Object.keys(estructura[p]).sort();
+    const opciones = lados.length === 2
+        ? [{ v: 'ambos', t: 'Ambos (I y D)' }, { v: 'I', t: 'Izquierda (I)' }, { v: 'D', t: 'Derecha (D)' }]
+        : lados.map(l => ({ v: l, t: l === 'I' ? 'Izquierda (I)' : 'Derecha (D)' }));
+    selLateral.innerHTML = opciones.map(o => `<option value="${o.v}">${o.t}</option>`).join('');
+    selLateral.disabled = false;
+    actualizarXY();
+}
+
+function actualizarXY() {
+    const p = selDesdePas.value;
+    const lat = selLateral.value;
+    if (!p || !lat || !estructura[p]) { limpiarXY(); return; }
+
+    const lados = lat === 'ambos' ? Object.keys(estructura[p]) : [lat];
+    const xsSet = new Set();
+    lados.forEach(l => {
+        if (!estructura[p][l]) return;
+        estructura[p][l].xs.forEach(x => xsSet.add(x));
+    });
+
+    const xs = [...xsSet].sort((a, b) => a - b);
+    if (!xs.length) {
+        limpiarXY();
+        preview.textContent = 'No hay posiciones libres para este pasillo y lateral.';
+        return;
+    }
+
+    fillSelect(selDesdeX, xs, '— elige columna —');
+    selDesdeX.disabled = false;
+    selDesdeY.innerHTML = '<option value="">— elige columna primero —</option>';
+    selDesdeY.disabled = true;
+    actualizarPreview();
+}
+
+function actualizarY() {
+    const p = selDesdePas.value;
+    const lat = selLateral.value;
+    const x = +selDesdeX.value;
+    if (!p || !lat || !x || !estructura[p]) { selDesdeY.innerHTML = '<option value="">—</option>'; selDesdeY.disabled = true; return; }
+
+    const lados = lat === 'ambos' ? Object.keys(estructura[p]) : [lat];
+    const ysLibres = new Set();
+    lados.forEach(l => {
+        if (!estructura[p][l]) return;
+        const ocup = new Set(estructura[p][l].ocup || []);
+        estructura[p][l].ys.forEach(y => {
+            if (!ocup.has(`${x}-${y}`)) ysLibres.add(y);
+        });
+    });
+
+    const ys = [...ysLibres].sort((a, b) => a - b);
+    if (!ys.length) {
+        selDesdeY.innerHTML = '<option value="">Sin alturas libres</option>';
+        selDesdeY.disabled = true;
+        preview.textContent = 'No hay alturas libres para esta columna.';
+        return;
+    }
+    fillSelect(selDesdeY, ys, '— elige altura —');
+    selDesdeY.disabled = false;
+    actualizarPreview();
+}
+
+function limpiarXY() {
+    [selDesdeX, selDesdeY].forEach(s => {
+        s.innerHTML = '<option value="">—</option>';
+        s.disabled = true;
+    });
+    preview.textContent = '';
+}
+
+function actualizarHastaPasillo() {
+    actualizarLateral();
 }
 
 function actualizarPreview() {
-    const total = calcTotal();
-    if (!total) { preview.textContent = ''; return; }
-    const dp = String(parseInt(inDesdePas.value) || 1).padStart(3, '0');
-    const hp = String(parseInt(inHastaPas.value) || 1).padStart(3, '0');
-    const lat = inLateral.value === 'ambos' ? 'I y D' : inLateral.value;
-    preview.textContent = `Se generarán ${total.toLocaleString('es-ES')} ubicaciones — P${dp}→P${hp} · Lateral: ${lat} · X${inDesdeX.value||1}→X${inHastaX.value||1} · Y${inDesdeY.value||1}→Y${inHastaY.value||1}`;
+    const p = selDesdePas.value;
+    const lat = selLateral.value;
+    const x = +selDesdeX.value;
+    const y = +selDesdeY.value;
+    if (!p || !lat || !x || !y) { preview.textContent = ''; return; }
+    preview.textContent = `Ubicación a generar: P${p} ${lat === 'ambos' ? 'I y D' : lat} X${String(x).padStart(3,'0')} Y${String(y).padStart(3,'0')}`;
 }
 
-[inDesdePas, inHastaPas, inLateral, inDesdeX, inHastaX, inDesdeY, inHastaY]
-    .forEach(el => el.addEventListener('input', actualizarPreview));
-
-async function cargarUbicaciones() {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Cargando...</td></tr>';
-    try {
-        const data = await SGA.ubicaciones.list({ buscar: '' });
-        if (!data.length) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Sin ubicaciones.</td></tr>';
-            return;
-        }
-        tbody.innerHTML = data.map((r, i) => `
-            <tr>
-                <td class="col-num">${i + 1}</td>
-                <td><input type="checkbox"></td>
-                <td>${r.ubicacion ?? ''}</td>
-                <td>${r.etiqueta ?? ''}</td>
-            </tr>`).join('');
-    } catch {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Error al cargar.</td></tr>';
-    }
-}
+selDesdePas.addEventListener('change', actualizarHastaPasillo);
+selLateral.addEventListener('change', actualizarXY);
+selDesdeX.addEventListener('change', () => { actualizarY(); actualizarPreview(); });
+selDesdeY.addEventListener('change', actualizarPreview);
 
 btnOk.addEventListener('click', async () => {
-    const total = calcTotal();
-    if (!total) { alert('Rellena los campos de pasillo correctamente.'); return; }
-    if (!confirm(`¿Generar ${total.toLocaleString('es-ES')} ubicaciones?`)) return;
+    const p = selDesdePas.value;
+    const lat = selLateral.value;
+    const x = +selDesdeX.value;
+    const y = +selDesdeY.value;
+    if (!p || !lat || !x || !y) { alert('Selecciona pasillo, lateral, columna y altura.'); return; }
+    if (!confirm(`¿Generar la ubicación P${p} ${lat === 'ambos' ? 'I y D' : lat} X${String(x).padStart(3,'0')} Y${String(y).padStart(3,'0')}?`)) return;
 
-    const lateral = inLateral.value;
     const params = {
-        desde_pasillo: parseInt(inDesdePas.value) || 1,
-        hasta_pasillo: parseInt(inHastaPas.value) || 1,
-        desde_lateral: lateral === 'D' ? 21 : 11,
-        hasta_lateral: lateral === 'I' ? 11 : 21,
-        desde_x:  parseInt(inDesdeX.value)  || 1,
-        hasta_x:  parseInt(inHastaX.value)  || 1,
-        desde_y:  parseInt(inDesdeY.value)  || 1,
-        hasta_y:  parseInt(inHastaY.value)  || 1,
-        ancho:    parseInt(inAncho.value)   || 0,
-        alto:     parseInt(inAlto.value)    || 0,
-        palets:   parseInt(inPalets.value)  || 0,
-        multiple: inMultiple.checked ? 1 : 0,
-        picking:  inPicking.value,
+        desde_pasillo: +p, hasta_pasillo: +p,
+        desde_lateral: lat === 'D' ? 21 : 11,
+        hasta_lateral: lat === 'I' ? 11 : 21,
+        desde_x: x, hasta_x: x,
+        desde_y: y, hasta_y: y,
+        ancho: +inAncho.value || 0,
+        alto: +inAlto.value || 0,
+        palets: inPalets.checked ? 1 : 0,
+        multiple: 0,
+        picking: inPicking.value,
     };
 
     btnOk.disabled = true;
@@ -90,11 +152,16 @@ btnOk.addEventListener('click', async () => {
         const res = await SGA.generarUbicaciones.generar(params);
         let msg = `✅ Proceso completado.\n\nCreadas: ${res.creadas ?? 0}`;
         if (res.listaExistentes && res.listaExistentes.length) {
-            msg += `\n\nLas siguientes ${res.listaExistentes.length} ya existían y no se han modificado:\n`;
-            msg += res.listaExistentes.join('\n');
+            msg += `\n\nLas siguientes ${res.listaExistentes.length} ya existían:\n` + res.listaExistentes.join('\n');
+        }
+        if (res.creadas > 0) {
+            const eti = `P${String(+p).padStart(3,'0')} ${lat === 'ambos' ? 'I' : lat} X${String(x).padStart(3,'0')} Y${String(y).padStart(3,'0')}`;
+            recienCreadas.add(eti);
+            if (lat === 'ambos') recienCreadas.add(`P${String(+p).padStart(3,'0')} D X${String(x).padStart(3,'0')} Y${String(y).padStart(3,'0')}`);
         }
         alert(msg);
         cargarUbicaciones();
+        await cargarEstructura();
     } catch {
         alert('Error al generar ubicaciones.');
     } finally {
@@ -103,4 +170,39 @@ btnOk.addEventListener('click', async () => {
     }
 });
 
+async function cargarEstructura() {
+    try {
+        estructura = await fetch('/generar-ubicaciones/estructura').then(r => r.json());
+        const pasillos = Object.keys(estructura).sort((a, b) => +a - +b);
+        fillSelect(selDesdePas, pasillos, '— elige pasillo —');
+        selLateral.innerHTML = '<option value="">— elige pasillo —</option>';
+        selLateral.disabled = true;
+        limpiarXY();
+    } catch {
+        selDesdePas.innerHTML = '<option value="">Error al cargar</option>';
+    }
+}
+
+async function cargarUbicaciones() {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center">Cargando...</td></tr>';
+    try {
+        const data = await SGA.mapaAlmacen.ubicaciones();
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center">Sin ubicaciones.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.map((r, i) => {
+            const nueva = recienCreadas.has((r.etiqueta ?? '').trim());
+            return `<tr${nueva ? ' class="gu-row-nueva"' : ''}>
+                <td class="col-num">${i + 1}</td>
+                <td>${r.ubicacion ?? ''}</td>
+                <td>${r.etiqueta ?? ''}</td>
+            </tr>`;
+        }).join('');
+    } catch {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center">Error al cargar.</td></tr>';
+    }
+}
+
+cargarEstructura();
 cargarUbicaciones();

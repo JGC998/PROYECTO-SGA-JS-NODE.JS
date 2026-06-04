@@ -1,35 +1,67 @@
-async function cargarConfig() {
-    try {
-        const data = await SGA.configuracionEmpresa.get();
-        const form = document.getElementById('form-empresa');
-        for (const [key, val] of Object.entries(data)) {
-            const el = form.querySelector(`[name="${key}"]`);
-            if (el) el.value = val ?? '';
-        }
-    } catch {
-        document.getElementById('msg-config').textContent = 'Error al cargar la configuración.';
-    }
+"use strict";
+
+let datosOriginales = {};
+
+const btnEditar   = document.getElementById('btn-editar');
+const btnGuardar  = document.getElementById('btn-guardar');
+const btnCancelar = document.getElementById('btn-cancelar');
+const form        = document.getElementById('form-empresa');
+const msgEl       = document.getElementById('msg-config');
+
+function setModoVista() {
+    form.querySelectorAll('input').forEach(el => el.setAttribute('readonly', ''));
+    btnEditar.classList.remove('hidden');
+    btnGuardar.classList.add('hidden');
+    btnCancelar.classList.add('hidden');
+    msgEl.textContent = '';
+    msgEl.className = 'msg';
 }
 
-document.getElementById('btn-guardar').addEventListener('click', async () => {
-    const form = document.getElementById('form-empresa');
+function setModoEdicion() {
+    form.querySelectorAll('input').forEach(el => el.removeAttribute('readonly'));
+    btnEditar.classList.add('hidden');
+    btnGuardar.classList.remove('hidden');
+    btnCancelar.classList.remove('hidden');
+}
+
+async function cargarConfig() {
+    try {
+        datosOriginales = await SGA.configuracionEmpresa.get();
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(el => { el.value = String(datosOriginales[el.name] ?? '').trim(); });
+    } catch {
+        msgEl.textContent = 'Error al cargar la configuración.';
+        msgEl.className = 'msg error';
+    }
+    setModoVista();
+}
+
+btnEditar.addEventListener('click', setModoEdicion);
+
+btnCancelar.addEventListener('click', () => {
+    form.querySelectorAll('input').forEach(el => { el.value = String(datosOriginales[el.name] ?? '').trim(); });
+    setModoVista();
+});
+
+btnGuardar.addEventListener('click', async () => {
     const data = {};
-    form.querySelectorAll('input, select, textarea').forEach(el => {
-        if (el.name) data[el.name] = el.value;
-    });
-    const btn = document.getElementById('btn-guardar');
-    btn.disabled = true;
+    form.querySelectorAll('input').forEach(el => { if (el.name) data[el.name] = el.value; });
+    btnGuardar.disabled = true;
+    btnGuardar.textContent = 'Guardando...';
     try {
         await SGA.configuracionEmpresa.save(data);
-        document.getElementById('msg-config').textContent = 'Configuración guardada correctamente.';
-        document.getElementById('msg-config').className = 'msg ok';
-    } catch (err) {
-        const msg = err.pendiente ? err.message : 'Error al guardar la configuración.';
-        const cls = err.pendiente ? 'msg pendiente' : 'msg error';
-        document.getElementById('msg-config').textContent = msg;
-        document.getElementById('msg-config').className = cls;
+        datosOriginales = { ...data };
+        sessionStorage.removeItem('sga_empresa_nombre');
+        msgEl.textContent = 'Configuración guardada correctamente.';
+        msgEl.className = 'msg ok';
+        setModoVista();
+        setTimeout(() => location.reload(), 800);
+    } catch {
+        msgEl.textContent = 'Error al guardar la configuración.';
+        msgEl.className = 'msg error';
     } finally {
-        btn.disabled = false;
+        btnGuardar.disabled = false;
+        btnGuardar.textContent = '💾 Guardar';
     }
 });
 

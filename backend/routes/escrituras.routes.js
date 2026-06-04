@@ -1,7 +1,7 @@
 "use strict";
 
 const { Router } = require('express');
-const { getPool } = require('../db');
+const { getPool, sql } = require('../db');
 const { serverError } = require('../middleware/error');
 const { requireAuth } = require('../middleware/auth');
 
@@ -80,6 +80,73 @@ router.delete('/minimos-maximos/:articulo', async (req, res) => {
 });
 
 
+// ─── RESUMEN ESTRUCTURA UBICACIONES ──────────────────────────────────────────
+
+router.get('/generar-ubicaciones/estructura', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const r = await pool.request().query(
+            `SELECT LTRIM(RTRIM(UBIETI)) AS etiqueta FROM UBICACION
+             WHERE UBIETI IS NOT NULL AND LTRIM(RTRIM(UBIETI)) <> '' AND UBIETI LIKE 'P%'`);
+
+        // Construir mapa de ocupadas: { pasillo: { lateral: Set de "X-Y" } }
+        const ocupadas = {};
+        r.recordset.forEach(({ etiqueta }) => {
+            const m = etiqueta.match(/P(\d+)\s+([ID])\s+X(\d+)\s+Y(\d+)/);
+            if (!m) return;
+            const [, p, l, x, y] = m;
+            if (!ocupadas[p]) ocupadas[p] = {};
+            if (!ocupadas[p][l]) ocupadas[p][l] = new Set();
+            ocupadas[p][l].add(`${+x}-${+y}`);
+        });
+
+        // Calcular rango máximo global de X e Y por pasillo+lateral
+        const rangos = {};
+        r.recordset.forEach(({ etiqueta }) => {
+            const m = etiqueta.match(/P(\d+)\s+([ID])\s+X(\d+)\s+Y(\d+)/);
+            if (!m) return;
+            const [, p, l, x, y] = m;
+            if (!rangos[p]) rangos[p] = {};
+            if (!rangos[p][l]) rangos[p][l] = { x_max: 0, y_max: 0 };
+            rangos[p][l].x_max = Math.max(rangos[p][l].x_max, +x);
+            rangos[p][l].y_max = Math.max(rangos[p][l].y_max, +y);
+        });
+
+        const result = {};
+        Object.keys(rangos).sort((a, b) => +a - +b).forEach(p => {
+            result[p] = {};
+            Object.keys(rangos[p]).sort().forEach(l => {
+                const { x_max, y_max } = rangos[p][l];
+                const ocup = ocupadas[p]?.[l] || new Set();
+
+                // X disponible = al menos un Y de ese X no está ocupado
+                const libres_x = [];
+                for (let x = 1; x <= x_max + 5; x++) {
+                    let alguno_libre = false;
+                    for (let y = 1; y <= y_max + 3; y++) {
+                        if (!ocup.has(`${x}-${y}`)) { alguno_libre = true; break; }
+                    }
+                    if (alguno_libre) libres_x.push(x);
+                }
+
+                // Y libre = para el X seleccionado esa Y no existe
+                // Devolvemos todos los Y posibles; el frontend filtrará según X elegido
+                const libres_y = [];
+                for (let y = 1; y <= y_max + 3; y++) {
+                    libres_y.push(y);
+                }
+
+                result[p][l] = {
+                    xs: libres_x,
+                    ys: libres_y,
+                    ocup: [...ocup], // enviamos ocupadas para filtrar Y en frontend
+                };
+            });
+        });
+        res.json(result);
+    } catch (err) { serverError(res, err); }
+});
+
 // ─── GENERAR UBICACIONES ──────────────────────────────────────────────────────
 
 router.post('/generar-ubicaciones', async (req, res) => {
@@ -100,19 +167,24 @@ router.post('/generar-ubicaciones', async (req, res) => {
         }
         const pool = await getPool();
         const lib = picking === 'Picking' ? 1 : 0;
+        // Obtener el MAX(UBICON) una sola vez antes del bucle
+        const maxRes = await pool.request().query('SELECT ISNULL(MAX(UBICON),0) AS maxcon FROM UBICACION');
+        let nextCon = maxRes.recordset[0].maxcon + 1;
         let creadas = 0;
         for (let p = +desde_pasillo; p <= +hasta_pasillo; p++) {
             for (let l = +desde_lateral; l <= +hasta_lateral; l++) {
                 for (let x = +desde_x; x <= +hasta_x; x++) {
                     for (let y = +desde_y; y <= +hasta_y; y++) {
                         const cod = String(p).padStart(3,'0') + String(l).padStart(2,'0') + String(x).padStart(3,'0') + String(y).padStart(3,'0');
-                        await q(pool)
-                            .input('cod', cod).input('anc', ancho).input('alt', alto)
+                        const r = await q(pool)
+                            .input('cod', cod).input('con', sql.Float, nextCon).input('anc', ancho).input('alt', alto)
                             .input('pal', palets).input('mul', multiple ? 1 : 0).input('lib', lib)
                             .query(`IF NOT EXISTS (SELECT 1 FROM UBICACION WHERE UBICODUBI=@cod)
-                                INSERT INTO UBICACION (UBICODUBI,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBILIB)
-                                VALUES (@cod,@anc,@alt,@pal,@mul,@lib)`);
-                        creadas++;
+                                BEGIN
+                                    INSERT INTO UBICACION (UBICON,UBICODUBI,UBIANC,UBIALT,UBINUMPAL,UBIMUL,UBILIB)
+                                    VALUES (@con,@cod,@anc,@alt,@pal,@mul,@lib)
+                                END`);
+                        if (r.rowsAffected[0] > 0) { creadas++; nextCon++; }
                     }
                 }
             }
