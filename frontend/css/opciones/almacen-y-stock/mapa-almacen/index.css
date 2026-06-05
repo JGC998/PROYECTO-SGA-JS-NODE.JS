@@ -1,0 +1,478 @@
+/* ── MAPA AÉREO — LAYOUT INTERNO ──────────────────────────────────────────── */
+.ma-inner {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--sga-header-h));
+    padding: 12px 16px 8px;
+    gap: 8px;
+    overflow: hidden;
+}
+
+/* ── CABECERA DE PÁGINA ────────────────────────────────────────────────────── */
+.ma-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.ma-page-header .sga-page-title  { margin-bottom: 2px; }
+.ma-page-header .sga-page-description { margin-bottom: 0; }
+
+/* ── BARRA DE HERRAMIENTAS ────────────────────────────────────────────────── */
+.ma-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 8px 12px;
+    flex-shrink: 0;
+    box-shadow: var(--sga-shadow);
+}
+
+/* Búsqueda */
+.ma-search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ma-search-input {
+    width: 220px;
+}
+
+/* Filtros */
+.ma-filters-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.ma-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text-muted);
+    cursor: pointer;
+    padding: 3px 6px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-surface-alt);
+    transition: background var(--sga-transition), border-color var(--sga-transition);
+    user-select: none;
+}
+.ma-filter-chip:hover {
+    background: var(--sga-surface-hover);
+    border-color: var(--sga-accent);
+}
+.ma-filter-chip input[type="checkbox"] {
+    accent-color: var(--sga-accent);
+    margin: 0;
+}
+.ma-filter-chip:has(input:checked) {
+    background: var(--sga-info-bg);
+    border-color: var(--sga-info);
+    color: var(--sga-info);
+}
+
+/* Controles de zoom */
+.ma-zoom-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.ma-zoom-btn {
+    width: 28px;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.ma-zoom-label {
+    font-size: var(--sga-text-sm);
+    color: var(--sga-text-muted);
+    min-width: 40px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── WORKSPACE (mapa + panel detalle) ─────────────────────────────────────── */
+.ma-workspace {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    gap: 8px;
+    position: relative;
+}
+
+/* ── CONTENEDOR DEL MAPA ─────────────────────────────────────────────────── */
+.ma-map-container {
+    flex: 1;
+    min-width: 0;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+}
+.ma-map-container:active { cursor: grabbing; }
+
+/* SVG dinámico */
+.ma-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    user-select: none;
+}
+
+/* ── ESTADO CARGA / ERROR ─────────────────────────────────────────────────── */
+
+/* display:flex en estos elementos anula el atributo hidden — forzar display:none */
+.ma-loading[hidden],
+.ma-error[hidden],
+.ma-detail[hidden],
+.ma-detail-backdrop[hidden] { display: none !important; }
+
+.ma-loading,
+.ma-error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    z-index: 10;
+    background: var(--sga-surface);
+    color: var(--sga-text-muted);
+    font-size: var(--sga-text-sm);
+}
+
+.ma-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--sga-border);
+    border-top-color: var(--sga-accent);
+    border-radius: 50%;
+    animation: ma-spin .7s linear infinite;
+}
+
+@keyframes ma-spin { to { transform: rotate(360deg); } }
+
+.ma-error { background: rgba(255,255,255,.96); }
+.ma-error-icon { font-size: 2rem; }
+
+/* ── PANEL LATERAL DE DETALLE ─────────────────────────────────────────────── */
+.ma-detail {
+    width: 280px;
+    flex-shrink: 0;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ma-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--sga-border);
+    flex-shrink: 0;
+    background: var(--sga-surface-alt);
+}
+
+.ma-detail-title {
+    font-weight: 700;
+    font-size: var(--sga-text-sm);
+    color: var(--sga-primary);
+}
+
+.ma-detail-close {
+    background: none;
+    border: none;
+    padding: 2px 6px;
+    font-size: .9rem;
+    color: var(--sga-text-muted);
+    border-radius: var(--sga-radius-sm);
+    transition: background var(--sga-transition);
+}
+.ma-detail-close:hover {
+    background: var(--sga-surface-hover);
+    color: var(--sga-text);
+}
+
+.ma-detail-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 14px;
+    font-size: var(--sga-text-sm);
+}
+
+.ma-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--sga-border-light);
+    gap: 8px;
+}
+.ma-detail-row:last-child { border-bottom: none; }
+
+.ma-detail-key {
+    color: var(--sga-text-muted);
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: var(--sga-text-xs);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.ma-detail-val {
+    text-align: right;
+    color: var(--sga-text);
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.ma-detail-section-title {
+    font-size: var(--sga-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sga-text-muted);
+    margin: 10px 0 4px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--sga-border);
+}
+
+/* Backdrop móvil */
+.ma-detail-backdrop {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.38);
+    z-index: 30;
+    border-radius: var(--sga-radius);
+}
+
+/* ── LEYENDA ──────────────────────────────────────────────────────────────── */
+.ma-legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+    font-size: var(--sga-text-xs);
+    color: var(--sga-text-muted);
+    padding: 4px 2px;
+}
+
+.ma-legend-title {
+    font-weight: 700;
+    color: var(--sga-text);
+}
+
+.ma-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ma-legend-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+.ma-legend-dot--libre        { background: var(--sga-success); }
+.ma-legend-dot--ocupada      { background: var(--sga-accent); }
+.ma-legend-dot--bajo         { background: var(--sga-warning); }
+.ma-legend-dot--incidencia   { background: var(--sga-danger); }
+.ma-legend-dot--deshabilitada { background: var(--sga-secondary); }
+
+/* ── BARRA DE ESTADO ──────────────────────────────────────────────────────── */
+.ma-statusbar {
+    flex-shrink: 0;
+    font-size: var(--sga-text-xs);
+    color: var(--sga-text-muted);
+    display: flex;
+    gap: 12px;
+    padding: 2px 0;
+}
+
+/* ── ELEMENTOS SVG DEL MAPA ──────────────────────────────────────────────── */
+
+/* Pasillo (corredor) */
+.ma-aisle {
+    fill: var(--sga-border-light);
+    stroke: var(--sga-border);
+    stroke-width: 0.5;
+}
+
+/* Módulo / estantería */
+.ma-module {
+    fill: var(--sga-surface-alt);
+    stroke: var(--sga-border);
+    stroke-width: 1;
+}
+
+.ma-module-label {
+    font-size: 10px;
+    fill: var(--sga-text-muted);
+    font-weight: 600;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+}
+
+/* Ubicaciones */
+.ma-ubi {
+    stroke-width: 1.5;
+    rx: 2;
+    ry: 2;
+    transition: opacity .1s;
+    cursor: pointer;
+}
+
+.ma-ubi--libre {
+    fill: var(--sga-success-bg);
+    stroke: var(--sga-success);
+}
+.ma-ubi--ocupada {
+    fill: var(--sga-info-bg);
+    stroke: var(--sga-accent);
+}
+.ma-ubi--bajo {
+    fill: var(--sga-warning-bg);
+    stroke: var(--sga-warning);
+}
+.ma-ubi--incidencia {
+    fill: var(--sga-danger-bg);
+    stroke: var(--sga-danger);
+}
+.ma-ubi--deshabilitada {
+    fill: var(--sga-surface-alt);
+    stroke: var(--sga-secondary);
+    opacity: .55;
+}
+.ma-ubi--oculta {
+    opacity: .12;
+    cursor: default;
+}
+.ma-ubi--resaltada {
+    stroke-width: 3;
+    filter: drop-shadow(0 0 4px rgba(59,130,246,.5));
+}
+
+.ma-ubi-label {
+    font-size: 6px;
+    fill: var(--sga-text);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    font-weight: 600;
+}
+
+/* Etiquetas de ubicación — visibilidad controlada por JS según viewState.scale */
+.map-label-simple,
+.map-label-detail {
+    fill: #0f172a;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    user-select: none;
+    font-family: var(--sga-font);
+    font-weight: 600;
+}
+
+/* Visible desde zoom ≥ 2.2 — muestra X024 / Y003 */
+.map-label-simple { font-size: 5px; }
+
+/* Visible desde zoom ≥ 3.5 — muestra detalle adicional */
+.map-label-detail { font-size: 3.5px; fill: #475569; }
+
+/* Marco exterior del almacén */
+.ma-warehouse-border {
+    fill: none;
+    stroke: var(--sga-primary);
+    stroke-width: 2;
+    rx: 4;
+    ry: 4;
+}
+
+/* Etiqueta de pasillo */
+.ma-aisle-label {
+    font-size: 8px;
+    fill: var(--sga-text-muted);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+}
+
+/* ── MODO PANTALLA AMPLIA ─────────────────────────────────────────────────── */
+body.map-fullscreen-mode .sga-sidebar {
+    transform: translateX(-240px);
+}
+body.map-fullscreen-mode #sgaMain {
+    margin-left: 0;
+}
+body.map-fullscreen-mode #mapaHeader {
+    padding: 0 12px;
+}
+body.map-fullscreen-mode .ma-inner {
+    height: calc(100vh - var(--sga-header-h));
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .ma-detail {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        bottom: 8px;
+        width: 260px;
+        z-index: 40;
+        box-shadow: var(--sga-shadow-lg);
+    }
+    .ma-detail-backdrop {
+        display: block;
+    }
+    .ma-filters-wrap {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .ma-toolbar {
+        padding: 6px 10px;
+    }
+    .ma-search-input {
+        width: 160px;
+    }
+    .ma-detail {
+        right: 4px;
+        top: 4px;
+        bottom: 4px;
+        width: calc(100% - 8px);
+    }
+    .ma-legend {
+        gap: 6px;
+    }
+}

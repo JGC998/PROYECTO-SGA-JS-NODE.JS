@@ -1,119 +1,108 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Ubicaciones</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Ubicaciones</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/ubicaciones/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>Ubicaciones</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Ubicaciones</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary" id="btn-exportar">Exportar a CSV</button>
-                <button class="btn-tool secondary" id="btn-anular">Anular selección</button>
-                <button class="btn-tool secondary" id="btn-seleccionar-todo">Seleccionar todo</button>
-                <button class="btn-tool secondary" id="btn-cambiar-tipo">Cambiar tipo ubicación</button>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">📤 Exportar CSV</button>
             </div>
         </header>
 
-        <div class="filter-panel">
-            <div class="filter-row">
-                <label>Ubicación:</label>
-                <input type="text" class="input-sm" id="f-ubicacion">
-                <span class="filter-tag">ETIQUETA</span>
-                <label>P:</label><input type="text" class="input-xs" id="f-p">
-                <label>L:</label><input type="text" class="input-xs" id="f-l">
-                <select class="input-xs-sel"><option></option></select>
-                <label>X:</label><input type="text" class="input-xs" id="f-x">
-                <label>Y:</label><input type="text" class="input-xs" id="f-y">
-                <input type="text" class="input-sm" id="f-y2">
-            </div>
-        </div>
+        <div class="sga-content">
+            <div class="ubi-inner">
 
-        <div class="table-wrapper">
-            <table id="tabla-ubicaciones">
-                <thead>
-                    <tr>
-                        <th class="col-contador">CONTADOR</th>
-                        <th class="col-check">Sel</th>
-                        <th>Ubicación</th>
-                        <th>Etiqueta</th>
-                        <th>Descripción</th>
-                        <th>Ancho</th>
-                        <th>Alto</th>
-                        <th>Palets</th>
-                        <th>Picking</th>
-                        <th>Múltiple</th>
-                        <th>Ubicación</th>
-                        <th>Exclusiva</th>
-                        <th>No av. inv.</th>
-                        <th>Artículo</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-ubicaciones">
-                    <tr class="edit-row" data-id="new-1">
-                        <td class="col-contador">1</td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                        <td><input type="text" class="cell-input" placeholder="Ubicación"></td>
-                        <td><input type="text" class="cell-input" placeholder="Etiqueta"></td>
-                        <td><input type="text" class="cell-input cell-wide" placeholder="Descripción"></td>
-                        <td><input type="number" class="cell-input cell-num" value="0"></td>
-                        <td><input type="number" class="cell-input cell-num" value="0"></td>
-                        <td><input type="number" class="cell-input cell-num" value="0"></td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                        <td><input type="text" class="cell-input" placeholder=""></td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                        <td><input type="text" class="cell-input" placeholder=""></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                <!-- CABECERA -->
+                <div class="ubi-page-header">
+                    <h1 class="sga-page-title">Ubicaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
+                </div>
 
-        <footer class="ubi-footer">
-            <div class="footer-left">
-                <div class="footer-field">
-                    <label>Ancho:</label>
-                    <input type="number" class="input-xs" id="f-ancho" value="0">
+                <!-- BÚSQUEDA DIRECTA -->
+                <div class="ubi-search-bar">
+                    <input type="text" id="f-ubicacion" class="ubi-search-input" placeholder="Buscar ubicación...">
+                    <button class="sga-btn sga-btn-primary" id="btn-buscar">Buscar</button>
                 </div>
-                <div class="footer-field">
-                    <label>Alto:</label>
-                    <input type="number" class="input-xs" id="f-alto" value="0">
-                </div>
-                <button class="btn-foot" id="btn-actualizar-ubi">Actualizar ubi.</button>
-            </div>
-            <div class="footer-right etiquetas-panel">
-                <span class="panel-title">Etiquetas</span>
-                <div class="etiq-row">
-                    <label>Et. inicio:</label>
-                    <input type="number" class="input-xs" id="f-et-inicio" value="1">
-                    <label class="checkbox-label"><input type="checkbox" id="f-vista-previa"> Mostrar vista previa</label>
-                </div>
-                <div class="etiq-row">
-                    <button class="btn-foot" id="btn-etiquetas">Etiquetas</button>
-                    <select class="select-sm" id="f-formato-etiq"><option>A4</option><option>Zebra</option></select>
-                </div>
-                <div class="etiq-row">
-                    <button class="btn-foot" id="btn-ubi-multiple">Ubicación asignada como múltiple</button>
-                </div>
-            </div>
-        </footer>
-    </main>
 
-    <script src="../../../../js/navegacion.js"></script>
+                <!-- PASILLOS -->
+                <div class="ubi-pasillos-section">
+                    <span class="ubi-pasillos-label">Pasillos</span>
+                    <div class="ubi-pasillos-grid" id="pasillos-grid">
+                        <span class="ubi-pasillos-loading">Cargando pasillos…</span>
+                    </div>
+                </div>
+
+                <!-- BARRA DE ESTADO -->
+                <div class="ubi-statusbar" role="status" aria-live="polite">
+                    <span id="ubi-count" class="ubi-count">—</span>
+                </div>
+
+                <!-- TABLA -->
+                <div class="ubi-table-card">
+                    <div class="ubi-table-scroll">
+                        <table id="tabla-ubicaciones">
+                            <thead>
+                                <tr>
+                                    <th class="col-contador">#</th>
+                                    <th>Ubicación</th>
+                                    <th>Etiqueta</th>
+                                    <th class="col-num">Palets</th>
+                                    <th class="col-check">Picking</th>
+                                    <th class="col-check">Múltiple</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-ubicaciones">
+                                <tr class="ubi-placeholder">
+                                    <td colspan="7">Selecciona un pasillo o busca una ubicación.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div><!-- /.ubi-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/almacen-y-stock/ubicaciones.js"></script>
 </body>
 
 </html>
-

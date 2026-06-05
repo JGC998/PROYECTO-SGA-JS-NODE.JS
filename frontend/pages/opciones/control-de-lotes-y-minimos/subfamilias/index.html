@@ -1,54 +1,88 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Subfamilias</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Subfamilias</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/subfamilias/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>Subfamilias</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Control de Lotes y Mínimos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Subfamilias</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
             </div>
         </header>
 
-        <div class="table-wrapper">
-            <table id="tabla-subfamilias">
-                <thead>
-                    <tr>
-                        <th class="col-num">#</th>
-                        <th>Subfamilia</th>
-                        <th>Nombre de subfamilia</th>
-                        <th class="col-check">Sin control de lote</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-subfamilias">
-                    <tr class="edit-row" data-id="new-1">
-                        <td class="col-num">1</td>
-                        <td><input type="text" class="cell-input cell-code" placeholder="Código"></td>
-                        <td><input type="text" class="cell-input cell-wide" placeholder="Nombre de subfamilia"></td>
-                        <td class="col-check"><input type="checkbox" class="cell-check"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+        <div class="sga-content">
+            <main class="sf-inner">
 
-    <script src="../../../../js/navegacion.js"></script>
+                <div class="sf-page-header">
+                    <h1 class="sga-page-title">Subfamilias</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
+
+                <div class="sf-table-card">
+                <div class="table-wrapper" id="subfamilias-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table id="tabla-subfamilias">
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Subfamilia</th>
+                                <th>Nombre de subfamilia</th>
+                                <th class="col-check">Sin control de lote</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-subfamilias">
+                            <tr class="edit-row" data-id="new-1">
+                                <td class="col-num">1</td>
+                                <td><input type="text" class="cell-input cell-code" placeholder="Código"></td>
+                                <td><input type="text" class="cell-input cell-wide" placeholder="Nombre de subfamilia"></td>
+                                <td class="col-check"><input type="checkbox" class="cell-check"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                </div><!-- /.sf-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/control-de-lotes-y-minimos/subfamilias.js"></script>
 </body>
 
 </html>
-

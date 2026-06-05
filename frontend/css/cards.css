@@ -1,0 +1,51 @@
+/* ── TARJETA GENÉRICA ────────────────────────────────────────────────────── */
+.sga-card {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 20px;
+    box-shadow: var(--sga-shadow);
+}
+
+.sga-card-header {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--sga-text-muted);
+    margin-bottom: 8px;
+}
+
+.sga-card-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--sga-text);
+    line-height: 1.1;
+}
+
+/* ── KPI CARD (números grandes en dashboard) ─────────────────────────────── */
+.sga-kpi-card {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 14px 18px;
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sga-kpi-label {
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--sga-text-muted);
+}
+
+.sga-kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+    line-height: 1.2;
+}

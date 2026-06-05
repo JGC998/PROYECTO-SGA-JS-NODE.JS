@@ -1,3 +1,13 @@
+/* ── LEGACY — NO USAR EN PÁGINAS NUEVAS ──────────────────────────────────── */
+/* Este archivo es legacy del prototipo inicial. Solo sigue activo en:        */
+/*   pages/visor/, pages/ferreteria/, pages/informes/, pages/util/            */
+/* Las páginas nuevas usan base.css + layout.css + components.css + ...       */
+/* Variables equivalentes modernas: --primary → --sga-primary                */
+/*                                  --accent  → --sga-primary-light           */
+/*                                  --success → --sga-success                 */
+/*                                  --danger  → --sga-danger                  */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 :root {
     --primary: #2c3e50;
     --accent: #3498db;

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Alertas de Stock Mínimo</title>
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../../css/opciones/almacen-y-stock/alertas-stock/index.css">
+</head>
+<body class="sga-layout">
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Alertas de Stock</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">📤 Exportar CSV</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar</button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="as-inner">
+
+                <div class="cs-page-header" style="margin-bottom:16px">
+                    <div>
+                        <h1 class="sga-page-title">⚠️ Alertas de Stock Mínimo</h1>
+                        <p class="sga-page-description">Artículos con stock por debajo del mínimo configurado</p>
+                    </div>
+                </div>
+
+                <!-- KPIs -->
+                <div class="as-kpis" id="as-kpis">
+                    <div class="as-kpi total"><span class="as-kpi-val" id="kpi-total">—</span><span class="as-kpi-lbl">Total bajo mínimo</span></div>
+                    <div class="as-kpi critico"><span class="as-kpi-val" id="kpi-critico">—</span><span class="as-kpi-lbl">Sin stock (crítico)</span></div>
+                    <div class="as-kpi alto"><span class="as-kpi-val" id="kpi-alto">—</span><span class="as-kpi-lbl">Bajo 50 % del mínimo</span></div>
+                    <div class="as-kpi medio"><span class="as-kpi-val" id="kpi-medio">—</span><span class="as-kpi-lbl">Entre 50–99 % del mínimo</span></div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="as-filters">
+                    <div class="as-filter-field">
+                        <label for="f-buscar">Artículo</label>
+                        <input type="text" id="f-buscar" class="as-input" placeholder="Código o nombre...">
+                    </div>
+                    <div class="as-filter-field">
+                        <label for="f-severidad">Severidad</label>
+                        <select id="f-severidad" class="as-select">
+                            <option value="">Todas</option>
+                            <option value="critico">🔴 Crítico (sin stock)</option>
+                            <option value="alto">🟠 Alto (&lt; 50 % mínimo)</option>
+                            <option value="medio">🟡 Medio (50–99 % mínimo)</option>
+                        </select>
+                    </div>
+                    <div class="as-filter-field" style="align-self:flex-end">
+                        <button class="sga-btn sga-btn-primary" id="btn-buscar">Buscar</button>
+                    </div>
+                </div>
+
+                <!-- Statusbar -->
+                <div class="as-statusbar">
+                    <span id="as-count">—</span>
+                    <span id="as-ts"></span>
+                    <span class="as-auto-badge" id="as-auto-badge">↻ Auto 5 min</span>
+                </div>
+
+                <!-- Tabla -->
+                <div class="as-table-wrap">
+                    <table class="as-table" id="as-tabla">
+                        <thead>
+                            <tr>
+                                <th data-col="articulo">Artículo <span class="sort-arrow">▲</span></th>
+                                <th data-col="nombre">Nombre <span class="sort-arrow">▲</span></th>
+                                <th data-col="stock_minimo" class="num">Mínimo <span class="sort-arrow">▲</span></th>
+                                <th data-col="stock_maximo" class="num">Máximo <span class="sort-arrow">▲</span></th>
+                                <th data-col="stock_actual" class="num">Actual <span class="sort-arrow">▲</span></th>
+                                <th data-col="deficit" class="num sorted">Déficit <span class="sort-arrow">▼</span></th>
+                                <th>Cobertura</th>
+                                <th>Ubicaciones</th>
+                                <th data-col="severidad">Nivel</th>
+                            </tr>
+                        </thead>
+                        <tbody id="as-tbody">
+                            <tr class="as-placeholder"><td colspan="9">Cargando alertas...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../../../../js/api.js"></script>
+    <script src="../../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../../js/ui/layout.js"></script>
+    <script src="../../../../../js/opciones/almacen-y-stock/alertas-stock.js"></script>
+</body>
+</html>

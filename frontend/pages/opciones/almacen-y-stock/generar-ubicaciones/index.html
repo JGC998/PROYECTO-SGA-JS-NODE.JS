@@ -1,116 +1,134 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Generar Ubicaciones</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Generar Ubicaciones</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/generar-ubicaciones/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>📍 Generar Ubicaciones</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Generar Ubicaciones</span>
+                </nav>
             </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="main-layout">
-            <!-- Panel izquierdo: tabla de ubicaciones generadas -->
-            <div class="left-panel">
-                <div class="check-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Mostrar ubicaciones no existentes con movimientos
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox"> Solo con existencias
-                    </label>
+        <div class="sga-content">
+            <main class="gu-inner">
+
+                <div class="gu-page-header">
+                    <h1 class="sga-page-title">Generar Ubicaciones</h1>
+                    <p class="sga-page-description">Almacén · SGA LIN</p>
                 </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="col-num">#</th>
-                                <th>Sel</th>
-                                <th>Ubicación</th>
-                                <th>Etiqueta</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-num">1</td>
-                                <td><input type="checkbox"></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <!-- Panel derecho: formulario de generación -->
-            <div class="right-panel">
-                <fieldset class="form-section">
-                    <legend>Parámetros de generación</legend>
-                    <div class="params-grid">
-                        <label>Desde pasillo:</label>
-                        <input type="text" class="input-param">
-                        <label>Desde lateral:</label>
-                        <input type="text" class="input-param" value="11">
-                        <label>Desde X:</label>
-                        <input type="text" class="input-param">
-                        <label>Desde Y:</label>
-                        <input type="text" class="input-param">
-
-                        <label>Hasta pasillo:</label>
-                        <input type="text" class="input-param">
-                        <label>Hasta lateral:</label>
-                        <input type="text" class="input-param" value="21">
-                        <label>Hasta X:</label>
-                        <input type="text" class="input-param">
-                        <label>Hasta Y:</label>
-                        <input type="text" class="input-param">
-
-                        <label>Ancho:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label>Alto:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label>Palets:</label>
-                        <input type="number" class="input-param" value="0">
-                        <label></label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Ubicación múltiple
-                        </label>
+                <div class="main-layout">
+                    <!-- Panel izquierdo: tabla de ubicaciones generadas -->
+                    <div class="left-panel">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="col-num">#</th>
+                                        <th>Ubicación</th>
+                                        <th>Etiqueta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-num">1</td>
+                                        <td><input type="checkbox"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="picking-row">
-                        <select class="select-picking">
-                            <option>Picking</option>
-                            <option>Reserva</option>
-                            <option>Suelo</option>
-                        </select>
-                    </div>
+                    <!-- Panel derecho: formulario de generación -->
+                    <div class="right-panel">
+                        <div class="form-section">
+                            <div class="form-section-title">Parámetros de generación</div>
 
-                    <div class="ok-row">
-                        <button class="btn-ok" type="button">OK</button>
-                    </div>
-                </fieldset>
+                            <div class="gu-range-grid" style="grid-template-columns: auto 1fr">
+                                <!-- Pasillo -->
+                                <div class="gu-range-label">Pasillo</div>
+                                <select class="input-param sga-input" id="gu-desde-pasillo"><option value="">Cargando...</option></select>
 
-                <div class="action-buttons">
-                    <button class="btn-action danger">Eliminar ubicaciones y movimientos</button>
-                    <button class="btn-action">Asignar picking CLIN 1995</button>
+                                <!-- Lateral -->
+                                <div class="gu-range-label">Lateral</div>
+                                <select class="input-param sga-input" id="gu-lateral" disabled>
+                                    <option value="">— elige pasillo —</option>
+                                </select>
+
+                                <!-- X (columna) -->
+                                <div class="gu-range-label">Columna (X)</div>
+                                <select class="input-param sga-input" id="gu-desde-x" disabled><option value="">—</option></select>
+
+                                <!-- Y (altura) -->
+                                <div class="gu-range-label">Altura (Y)</div>
+                                <select class="input-param sga-input" id="gu-desde-y" disabled><option value="">—</option></select>
+                            </div>
+
+                            <input type="hidden" id="gu-ancho" value="0">
+                            <input type="hidden" id="gu-alto" value="0">
+                            <div style="padding:8px 16px;border-top:1px solid var(--sga-border-light)">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="gu-palets"> Ubicación de palets
+                                </label>
+                            </div>
+
+                            <div class="gu-bottom-row">
+                                <select class="select-picking sga-input" id="gu-picking">
+                                    <option value="Picking">Picking</option>
+                                    <option value="NoPicking">No Picking</option>
+                                </select>
+                            </div>
+
+                            <div class="gu-preview" id="gu-preview"></div>
+
+                            <div class="ok-row">
+                                <button class="btn-ok" type="button">Generar ubicaciones</button>
+                            </div>
+                        </div><!-- /.form-section -->
+
+                    </div>
                 </div>
-            </div>
-        </div>
-    </main>
 
-    <script src="../../../../js/navegacion.js"></script>
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/almacen-y-stock/generar-ubicaciones.js"></script>
 </body>
 
 </html>
-

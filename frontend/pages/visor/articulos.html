@@ -4,37 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor - Artículos</title>
-    <link rel="stylesheet" href="../../css/navegacion.css">
-    <link rel="stylesheet" href="../../css/visor/tablas_visor.css">
+    <title>SGA LIN — Visor de Artículos</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/buttons.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/visor/articulos.css">
 </head>
 
-<body>
-    <main class="container">
-        <header class="visor-header">
-            <h1>Consulta General de Artículos</h1>
-            <button class="btn-export">📊 Exportar a Excel</button>
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Visor artículos</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">Exportar a Excel</button>
+            </div>
         </header>
-        <input type="text" class="search-bar" placeholder="Filtrar artículos por cualquier campo...">
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Familia</th>
-                        <th>Stock Actual</th>
-                        <th>Ubicación</th>
-                        <th>Últ. Movimiento</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-visor-articulos">
-                    <tr><td colspan="6" style="text-align:center;padding:20px">Cargando...</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-    <script src="../../js/navegacion.js"></script>
+
+        <div class="sga-content">
+            <main class="va-inner">
+
+                <div class="va-page-header">
+                    <h1 class="sga-page-title">Consulta General de Artículos</h1>
+                    <p class="sga-page-description">Utilidades avanzadas · SGA LIN</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="sga-input va-search search-bar"
+                        placeholder="Filtrar artículos por cualquier campo...">
+                </div>
+
+                <div class="va-table-card">
+                <div class="table-wrapper" id="articulos-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table id="tabla-visor-articulos">
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Familia</th>
+                                <th>Stock actual</th>
+                                <th>Ubicación</th>
+                                <th>Últ. movimiento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-visor-articulos">
+                            <tr class="placeholder-row">
+                                <td colspan="7">Cargando artículos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div><!-- /.va-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../js/ui/sidebar.js"></script>
+    <script src="../../js/ui/layout.js"></script>
     <script src="../../js/api.js"></script>
     <script src="../../js/visor/articulos.js"></script>
 </body>

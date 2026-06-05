@@ -36,6 +36,7 @@ document.querySelectorAll('.tab-btn-inf').forEach(btn => {
 function cargarTab(tab) {
     loaded[tab] = true;
     switch (tab) {
+        case 'actividad':    if (typeof loadDashboard === 'function') loadDashboard(); break;
         case 'trabajadores': cargarTrabajadores(); break;
         case 'almacen':      cargarAlmacen();      break;
         case 'movimientos':  cargarMovimientos();  break;
@@ -85,18 +86,31 @@ function pintarKPIs(d) {
 }
 
 // ── RESUMEN: CHARTS ───────────────────────────────────────────────────────────
+function rellenarDias(data, dias) {
+    const map = {};
+    data.forEach(r => { map[r.fecha.slice(0, 10)] = r.total || 0; });
+    const result = [];
+    for (let i = dias - 1; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000);
+        const key = d.toISOString().slice(0, 10);
+        result.push({ fecha: key, total: map[key] || 0 });
+    }
+    return result;
+}
+
 function pintarMovimientosDia(data) {
+    const filled = rellenarDias(data, 30);
     destroy('movimientos');
     charts.movimientos = new Chart(get('chart-movimientos'), {
         type: 'line',
         data: {
-            labels: data.map(r => r.fecha.slice(5)),
-            datasets: [{ label: 'Movimientos', data: data.map(r => r.total),
+            labels: filled.map(r => r.fecha.slice(5)),
+            datasets: [{ label: 'Movimientos', data: filled.map(r => r.total),
                 borderColor: BLUE, backgroundColor: LBLUE,
                 borderWidth: 2, pointRadius: 2, pointHoverRadius: 5,
                 fill: true, tension: .35 }],
         },
-        options: { responsive: true, plugins: { legend: { display: false } },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
             scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
     });
 }
@@ -111,10 +125,17 @@ function pintarTopArticulos(data) {
                 backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE,
                 borderWidth: 1, borderRadius: 4 }],
         },
-        options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
             scales: { x: { beginAtZero: true, grid: { color: '#f3f4f6' } },
                       y: { grid: { display: false }, ticks: { font: { size: 10 } } } } },
     });
+}
+
+function labelSemana(isoLunes) {
+    const d = new Date(isoLunes + 'T00:00:00');
+    const fin = new Date(d); fin.setDate(fin.getDate() + 6);
+    const pad = n => String(n).padStart(2, '0');
+    return pad(d.getDate()) + '-' + pad(d.getMonth()+1) + ' › ' + pad(fin.getDate()) + '-' + pad(fin.getMonth()+1);
 }
 
 function pintarEntradasVsSalidas(data) {
@@ -122,7 +143,7 @@ function pintarEntradasVsSalidas(data) {
     charts.evs = new Chart(get('chart-evs'), {
         type: 'bar',
         data: {
-            labels: data.map(r => 'Sem.' + r.semana.slice(5)),
+            labels: data.map(r => labelSemana(r.semana)),
             datasets: [
                 { label: 'Entradas', data: data.map(r => r.entradas),
                     backgroundColor: 'rgba(5,150,105,.75)', borderColor: GREEN, borderWidth: 1, borderRadius: 4 },
@@ -139,16 +160,23 @@ function pintarEntradasVsSalidas(data) {
 function pintarTablaAlertas(data) {
     const el = document.getElementById('tabla-alertas');
     if (!data.length) { el.innerHTML = '<div class="placeholder-msg">✅ No hay artículos bajo mínimo.</div>'; return; }
-    const maxD = Math.max(...data.map(r => r.deficit), 1);
+    const top10 = data.slice(0, 10);
+    const resto = data.length - 10;
+    const urlAlertas = '../../pages/opciones/almacen-y-stock/alertas-stock/index.html';
     el.innerHTML = `<div class="data-table-wrap"><table>
         <thead><tr><th>Código</th><th>Artículo</th><th class="num">Mínimo</th><th class="num">Stock</th><th>Cobertura</th><th class="num">Déficit</th></tr></thead>
-        <tbody>${data.map(r => `<tr>
-            <td><strong>${r.articulo}</strong></td><td>${r.nombre ?? ''}</td>
-            <td class="num">${r.minimo}</td><td class="num">${r.stock_actual}</td>
-            <td><div class="mini-bar"><div class="mini-bar-fill" style="width:${Math.min(100,Math.round(r.stock_actual/r.minimo*100))}%;background:${r.stock_actual===0?RED:AMBER}"></div></div></td>
-            <td class="num"><span class="badge badge-red">−${r.deficit}</span></td>
+        <tbody>${top10.map(r => `<tr>
+            <td><strong>${r.articulo.trim()}</strong></td><td>${r.nombre.trim() ?? ''}</td>
+            <td class="num">${fmt(r.stock_minimo)}</td><td class="num">${fmt(r.stock_actual)}</td>
+            <td><div class="mini-bar"><div class="mini-bar-fill" style="width:${Math.min(100,Math.round(r.stock_actual/r.stock_minimo*100))}%;background:${r.stock_actual===0?RED:AMBER}"></div></div></td>
+            <td class="num"><span class="badge badge-red">−${fmt(r.deficit)}</span></td>
         </tr>`).join('')}</tbody>
-    </table></div>`;
+    </table></div>
+    <div style="padding:12px 0 4px;text-align:center">
+        <a href="${urlAlertas}" class="sga-btn sga-btn-secondary sga-btn-sm">
+            Ver todos los artículos bajo mínimo ${resto > 0 ? '(+' + fmt(resto) + ' más)' : ''}  ↗
+        </a>
+    </div>`;
 }
 
 // ── TRABAJADORES ──────────────────────────────────────────────────────────────
@@ -156,7 +184,10 @@ async function cargarTrabajadores() {
     try {
         const data = await SGA.estadisticas.trabajadores({ dias: DIAS });
         if (!data.length) {
-            document.getElementById('mkpi-trabajadores').innerHTML = '<div class="placeholder-msg" style="grid-column:span 3">Sin datos de actividad por terminal en los últimos 30 días.</div>';
+            document.getElementById('mkpi-trabajadores').innerHTML = '<div class="placeholder-msg" style="grid-column:span 3">Sin datos de actividad por terminal en este periodo.</div>';
+            get('chart-trabajadores-mov').style.display = 'none';
+            get('chart-trabajadores-uni').style.display = 'none';
+            document.getElementById('tabla-trabajadores').innerHTML = '<div class="placeholder-msg">Sin datos de actividad.</div>';
             return;
         }
         const top = data[0];
@@ -175,9 +206,9 @@ async function cargarTrabajadores() {
                 datasets: [{ label: 'Movimientos', data: data.map(r => r.movimientos),
                     backgroundColor: data.map((_, i) => PAL[i % PAL.length] + 'cc'),
                     borderColor: data.map((_, i) => PAL[i % PAL.length]),
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
@@ -188,9 +219,9 @@ async function cargarTrabajadores() {
                 labels,
                 datasets: [{ label: 'Unidades', data: data.map(r => r.unidades),
                     backgroundColor: 'rgba(124,58,237,.7)', borderColor: PURPLE,
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
@@ -210,7 +241,11 @@ async function cargarTrabajadores() {
                 <td>${r.ultima_actividad ?? '—'}</td>
             </tr>`).join('')}</tbody>
         </table></div>`;
-    } catch (e) { console.error(e); }
+    } catch (e) {
+        console.error('[trabajadores]', e);
+        document.getElementById('mkpi-trabajadores').innerHTML = '<div class="placeholder-msg" style="grid-column:span 3">Error al cargar datos.</div>';
+        document.getElementById('tabla-trabajadores').innerHTML = '<div class="placeholder-msg">Error al cargar datos.</div>';
+    }
 }
 
 // ── ALMACÉN ───────────────────────────────────────────────────────────────────
@@ -232,9 +267,9 @@ async function cargarAlmacen() {
                 datasets: [{ label: 'Stock total', data: d.por_almacen.map(r => r.stock_total),
                     backgroundColor: PAL.slice(0, d.por_almacen.length).map(c => c + 'cc'),
                     borderColor: PAL.slice(0, d.por_almacen.length),
-                    borderWidth: 1, borderRadius: 4 }],
+                    borderWidth: 1, borderRadius: 4, maxBarThickness: 60 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
 
@@ -247,7 +282,7 @@ async function cargarAlmacen() {
                     backgroundColor: [GREEN + 'cc', '#e5e7eb'],
                     borderColor: [GREEN, '#d1d5db'], borderWidth: 2 }],
             },
-            options: { responsive: true, cutout: '62%',
+            options: { responsive: true, maintainAspectRatio: false, cutout: '62%',
                 plugins: { legend: { position: 'bottom' } } },
         });
 
@@ -265,8 +300,8 @@ async function cargarAlmacen() {
 }
 
 // ── MOVIMIENTOS ───────────────────────────────────────────────────────────────
-const TIPO_LABEL = { E:'Entrada', S:'Salida', T:'Traspaso', R:'Regularización', I:'Inventario', P:'Pedido' };
-const TIPO_COLOR = { E: GREEN, S: RED, T: BLUE, R: AMBER, I: PURPLE, P: '#0891b2' };
+const TIPO_LABEL = { PC:'Picking/Venta', PP:'Compra', RG:'Regularización', SA:'Salida almacén', E:'Entrada', S:'Salida', T:'Traspaso', R:'Regularización', I:'Inventario', P:'Pedido' };
+const TIPO_COLOR = { PC: RED, PP: GREEN, RG: AMBER, SA: PURPLE, E: GREEN, S: RED, T: BLUE, R: AMBER, I: PURPLE, P: '#0891b2' };
 
 async function cargarMovimientos() {
     try {
@@ -284,7 +319,7 @@ async function cargarMovimientos() {
                     borderColor:     tipos.map(r => TIPO_COLOR[r.tipo] || '#9ca3af'),
                     borderWidth: 2 }],
             },
-            options: { responsive: true, cutout: '55%',
+            options: { responsive: true, maintainAspectRatio: false, cutout: '55%',
                 plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } },
         });
 
@@ -297,7 +332,7 @@ async function cargarMovimientos() {
                     backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE,
                     borderWidth: 1, borderRadius: 4 }],
             },
-            options: { responsive: true, plugins: { legend: { display: false } },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
         });
 
@@ -331,12 +366,12 @@ async function cargarProveedores() {
                 labels: data.map(r => trunc(r.nombre || r.codigo, 22)),
                 datasets: [
                     { label: 'Movimientos', data: data.map(r => r.movimientos),
-                        backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4 },
+                        backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 },
                     { label: 'Unidades',    data: data.map(r => r.unidades),
-                        backgroundColor: 'rgba(5,150,105,.6)', borderColor: GREEN, borderWidth: 1, borderRadius: 4 },
+                        backgroundColor: 'rgba(5,150,105,.6)', borderColor: GREEN, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 },
                 ],
             },
-            options: { responsive: true,
+            options: { responsive: true, maintainAspectRatio: false,
                 plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
                 scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } },
                           y: { beginAtZero: true, grid: { color: '#f3f4f6' } } } },
@@ -369,9 +404,9 @@ async function cargarArticulos() {
             data: {
                 labels: d.rotacion.map(r => trunc(r.nombre || r.articulo, 18)),
                 datasets: [{ label: 'Unidades movidas', data: d.rotacion.map(r => r.unidades_movidas),
-                    backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4 }],
+                    backgroundColor: 'rgba(37,99,192,.7)', borderColor: BLUE, borderWidth: 1, borderRadius: 4, maxBarThickness: 40 }],
             },
-            options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
                 scales: { x: { beginAtZero: true, grid: { color: '#f3f4f6' } },
                           y: { grid: { display: false }, ticks: { font: { size: 10 } } } } },
         });
@@ -386,7 +421,7 @@ async function cargarArticulos() {
                     backgroundColor: PAL.slice(0, topFamilias.length).map(c => c + 'cc'),
                     borderColor: PAL.slice(0, topFamilias.length), borderWidth: 2 }],
             },
-            options: { responsive: true, cutout: '50%',
+            options: { responsive: true, maintainAspectRatio: false, cutout: '50%',
                 plugins: { legend: { position: 'bottom', labels: { font: { size: 10 }, padding: 8 } } } },
         });
 
@@ -416,7 +451,7 @@ function recargarTodo() {
     Object.keys(loaded).forEach(k => delete loaded[k]);
     cargarResumen();
     const activeTab = document.querySelector('.tab-btn-inf.active')?.dataset.tab;
-    if (activeTab && activeTab !== 'resumen') { cargarTab(activeTab); }
+    if (activeTab && activeTab !== 'resumen') cargarTab(activeTab);
 }
 
 document.getElementById('btn-refresh').addEventListener('click', recargarTodo);

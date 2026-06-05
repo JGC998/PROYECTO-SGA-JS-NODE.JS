@@ -4,229 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN — Sistema de Gestión de Almacén</title>
-    <link rel="stylesheet" href="css/navegacion.css">
-    <style>
-        body {
-            background: #eef2f7;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            margin: 0;
-        }
-
-        /* ── HERO ───────────────────────────────────────────────── */
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563c0 100%);
-            color: white;
-            padding: 40px 40px 34px;
-            text-align: center;
-        }
-        .hero h1 { font-size: 2.2rem; margin: 0 0 6px; font-weight: 800; }
-        .hero p  { font-size: 1rem; margin: 0; opacity: .78; }
-
-        /* ── STATS BAR ──────────────────────────────────────────── */
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            background: #16286b;
-            border-top: 1px solid rgba(255,255,255,.1);
-        }
-        .stat-item {
-            flex: 1;
-            max-width: 180px;
-            padding: 14px 12px;
-            text-align: center;
-            border-right: 1px solid rgba(255,255,255,.08);
-            color: white;
-        }
-        .stat-item:last-child { border-right: none; }
-        .stat-num   { font-size: 1.55rem; font-weight: 700; line-height: 1; }
-        .stat-label { font-size: .68rem; opacity: .6; text-transform: uppercase; letter-spacing: .06em; margin-top: 5px; }
-
-        /* ── CARDS GRID ─────────────────────────────────────────── */
-        .sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            padding: 28px 32px 24px;
-            max-width: 1080px;
-            margin: 0 auto;
-        }
-        @media (max-width: 800px) {
-            .sections-grid { grid-template-columns: 1fr; }
-        }
-
-        .section-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.07);
-            overflow: hidden;
-        }
-
-        /* ── CARD HEADER (clickable) ────────────────────────────── */
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 18px;
-            background: #f7f9fc;
-            border-bottom: 2px solid #e4ebf5;
-            text-decoration: none;
-            color: #1e3a8a;
-            transition: background .15s;
-        }
-        .card-header:hover { background: #edf2fb; }
-        .card-icon  { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            flex: 1;
-        }
-        .card-arrow {
-            font-size: .9rem;
-            color: #9db5d8;
-            font-weight: 700;
-        }
-
-        /* ── CARD LINKS ─────────────────────────────────────────── */
-        .card-links {
-            padding: 4px 0;
-        }
-        .card-links a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 18px;
-            font-size: .875rem;
-            color: #374151;
-            text-decoration: none;
-            border-bottom: 1px solid #f3f4f6;
-            transition: background .1s, color .1s, padding-left .1s;
-        }
-        .card-links a:last-child { border-bottom: none; }
-        .card-links a:hover {
-            background: #f0f5ff;
-            color: #1e5faa;
-            padding-left: 22px;
-        }
-        .link-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #c5d4ed;
-            flex-shrink: 0;
-        }
-        .card-links a:hover .link-dot { background: #3b7edd; }
-
-        /* ── FOOTER ─────────────────────────────────────────────── */
-        .footer-note {
-            text-align: center;
-            padding: 16px;
-            color: #b0bec8;
-            font-size: .75rem;
-            border-top: 1px solid #dde4ed;
-        }
-    </style>
+    <title>SGA LIN — Inicio</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/badges.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pages/dashboard.css">
 </head>
 
-<body>
-    <div class="hero">
-        <h1>📦 SGA LIN</h1>
-        <p>Sistema de Gestión de Almacén · Panel de control</p>
-    </div>
+<body class="sga-layout">
 
-    <div class="stats-bar">
-        <div class="stat-item"><div class="stat-num" id="s-articulos">—</div><div class="stat-label">Artículos</div></div>
-        <div class="stat-item"><div class="stat-num" id="s-stock">—</div><div class="stat-label">Líneas de stock</div></div>
-        <div class="stat-item"><div class="stat-num" id="s-ubicaciones">—</div><div class="stat-label">Ubicaciones</div></div>
-        <div class="stat-item"><div class="stat-num" id="s-movimientos">—</div><div class="stat-label">Movimientos</div></div>
-        <div class="stat-item"><div class="stat-num" id="s-clientes">—</div><div class="stat-label">Clientes</div></div>
-        <div class="stat-item"><div class="stat-num" id="s-proveedores">—</div><div class="stat-label">Proveedores</div></div>
-    </div>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
 
-    <div class="sections-grid">
+    <div class="sga-main">
 
-        <!-- Ferretería -->
-        <div class="section-card">
-            <a class="card-header" href="pages/ferreteria/index.html">
-                <span class="card-icon">🔩</span>
-                <span class="card-title">Ferretería</span>
-                <span class="card-arrow">›</span>
-            </a>
-            <div class="card-links">
-                <a href="pages/ferreteria/articulos.html"><span class="link-dot"></span>Artículos</a>
-                <a href="pages/ferreteria/entradas.html"><span class="link-dot"></span>Entrada de mercancía</a>
-                <a href="pages/ferreteria/salidas.html"><span class="link-dot"></span>Salida de mercancía</a>
-                <a href="pages/ferreteria/traspasos.html"><span class="link-dot"></span>Traspasos entre ubicaciones</a>
-                <a href="pages/ferreteria/proveedores.html"><span class="link-dot"></span>Proveedores</a>
-                <a href="pages/ferreteria/operarios.html"><span class="link-dot"></span>Operarios</a>
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <span class="sga-breadcrumb-current">Inicio</span>
+                </nav>
             </div>
-        </div>
+            <div class="sga-header-right"></div>
+        </header>
 
-        <!-- Opciones -->
-        <div class="section-card">
-            <a class="card-header" href="pages/opciones/index.html">
-                <span class="card-icon">⚙️</span>
-                <span class="card-title">Opciones</span>
-                <span class="card-arrow">›</span>
-            </a>
-            <div class="card-links">
-                <a href="pages/opciones/almacen-y-stock/consulta-de-stock/index.html"><span class="link-dot"></span>Consulta de stock</a>
-                <a href="pages/opciones/almacen-y-stock/movimientos-por-articulo/index.html"><span class="link-dot"></span>Movimientos por artículo</a>
-                <a href="pages/opciones/almacen-y-stock/ubicaciones/index.html"><span class="link-dot"></span>Gestión de ubicaciones</a>
-                <a href="pages/opciones/control-de-lotes-y-minimos/minimos-maximos/index.html"><span class="link-dot"></span>Mínimos y máximos</a>
-                <a href="pages/opciones/logistica-y-pedidos/expediciones/index.html"><span class="link-dot"></span>Expediciones desde pedido</a>
-                <a href="pages/opciones/sistema/contadores/index.html"><span class="link-dot"></span>Contadores del sistema</a>
-            </div>
-        </div>
+        <div class="sga-content">
+            <div class="db-inner">
 
-        <!-- Informes -->
-        <div class="section-card">
-            <a class="card-header" href="pages/informes/index.html">
-                <span class="card-icon">📊</span>
-                <span class="card-title">Informes</span>
-                <span class="card-arrow">›</span>
-            </a>
-            <div class="card-links">
-                <a href="pages/informes/index.html"><span class="link-dot"></span>KPIs generales</a>
-                <a href="pages/informes/index.html"><span class="link-dot"></span>Movimientos por día</a>
-                <a href="pages/informes/index.html"><span class="link-dot"></span>Top artículos</a>
-                <a href="pages/informes/index.html"><span class="link-dot"></span>Alertas de stock</a>
-            </div>
-        </div>
+                <!-- ZONA 1 — Cabecera con filtro de periodo -->
+                <div class="db-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Inicio</h1>
+                        <p class="sga-page-description">Centro operativo · SGA LIN</p>
+                    </div>
+                    <div class="db-period">
+                        <label class="sga-label" for="db-desde">Desde</label>
+                        <input class="sga-input" type="date" id="db-desde">
+                        <label class="sga-label" for="db-hasta">Hasta</label>
+                        <input class="sga-input" type="date" id="db-hasta">
+                        <button class="sga-btn sga-btn-primary sga-btn-sm" id="db-btn-actualizar">Actualizar</button>
+                    </div>
+                </div>
 
-        <!-- Visor -->
-        <div class="section-card">
-            <a class="card-header" href="pages/visor/index.html">
-                <span class="card-icon">🔍</span>
-                <span class="card-title">Visor</span>
-                <span class="card-arrow">›</span>
-            </a>
-            <div class="card-links">
-                <a href="pages/visor/articulos.html"><span class="link-dot"></span>Visor de artículos</a>
-                <a href="pages/visor/proveedores.html"><span class="link-dot"></span>Visor de proveedores</a>
-                <a href="pages/visor/clientes.html"><span class="link-dot"></span>Visor de clientes</a>
-            </div>
-        </div>
+                <!-- ZONA 2 — KPIs principales -->
+                <div class="db-kpi-row">
 
-    </div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">🔩</span>
+                        <div class="db-kpi-label">Artículos</div>
+                        <div class="db-kpi-value" id="db-v-articulos">—</div>
+                    </div>
 
-    <div class="footer-note">SGA LIN · v1.0 · Base de datos SQL Server LIN</div>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📦</span>
+                        <div class="db-kpi-label">Líneas de stock</div>
+                        <div class="db-kpi-value" id="db-v-lineas">—</div>
+                        <div class="db-kpi-sub" id="db-v-lineas-sub"></div>
+                    </div>
 
-    <script src="js/navegacion.js"></script>
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📍</span>
+                        <div class="db-kpi-label">Ocupación almacén</div>
+                        <div class="db-kpi-value" id="db-v-ocupacion">—</div>
+                        <div class="db-kpi-sub" id="db-v-ocupacion-sub"></div>
+                    </div>
+
+                    <div class="db-kpi">
+                        <span class="db-kpi-icon">📊</span>
+                        <div class="db-kpi-label">Movimientos del periodo</div>
+                        <div class="db-kpi-value" id="db-v-movimientos">—</div>
+                        <div class="db-kpi-sub" id="db-v-movimientos-sub"></div>
+                    </div>
+
+                </div>
+
+                <!-- ZONA 3 — Alertas operativas -->
+                <div class="db-alert-row">
+
+                    <div class="db-kpi db-kpi--zero" id="db-card-stockbajo">
+                        <span class="db-kpi-icon">⚠️</span>
+                        <div class="db-kpi-label">Stock bajo mínimo</div>
+                        <div class="db-kpi-value" id="db-v-stockbajo">—</div>
+                        <div class="db-kpi-sub">artículos por debajo del mínimo</div>
+                    </div>
+
+                    <div class="db-kpi db-kpi--zero" id="db-card-stockneg">
+                        <span class="db-kpi-icon">🔴</span>
+                        <div class="db-kpi-label">Stock negativo</div>
+                        <div class="db-kpi-value" id="db-v-stockneg">—</div>
+                        <div class="db-kpi-sub">líneas con stock &lt; 0</div>
+                    </div>
+
+                    <div class="db-kpi db-kpi--zero" id="db-card-sinmovto">
+                        <span class="db-kpi-icon">💤</span>
+                        <div class="db-kpi-label">Sin movimiento (90 días)</div>
+                        <div class="db-kpi-value" id="db-v-sinmovto">—</div>
+                        <div class="db-kpi-sub">artículos con stock parado</div>
+                    </div>
+
+                </div>
+
+                <a href="pages/graficas/index.html" class="sga-btn sga-btn-primary" style="display:block;width:100%;text-align:center;padding:14px;font-size:1rem;margin-bottom:16px">📈 Gráficas</a>
+
+                <div class="db-footer">SGA LIN · v1.0 · Base de datos SQL Server LIN</div>
+
+            </div><!-- /.db-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
     <script src="js/api.js"></script>
-    <script>
-        SGA.contadores.get().then(data => {
-            document.getElementById('s-articulos').textContent    = Number(data.articulos    ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-stock').textContent        = Number(data.stock_activo ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-ubicaciones').textContent  = Number(data.ubicaciones  ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-movimientos').textContent  = Number(data.movimientos  ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-clientes').textContent     = Number(data.clientes     ?? 0).toLocaleString('es-ES');
-            document.getElementById('s-proveedores').textContent  = Number(data.proveedores  ?? 0).toLocaleString('es-ES');
-        }).catch(() => {
-            document.querySelectorAll('.stat-num').forEach(el => el.textContent = '—');
-        });
-    </script>
+    <script src="js/ui/sidebar.js"></script>
+    <script src="js/ui/layout.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+
 </body>
 
 </html>

@@ -77,12 +77,20 @@ function renderError() {
 }
 
 document.getElementById('btn-exportar').addEventListener('click', () => {
-    const rows = [...document.querySelectorAll('#tabla-movimientos tbody tr:not(.placeholder-row)')];
-    if (!rows.length) return;
-    const headers = [...document.querySelectorAll('#tabla-movimientos thead th')].map(th => th.textContent).join(';');
-    const csv = [headers, ...rows.map(tr => [...tr.querySelectorAll('td')].map(td => td.textContent).join(';'))].join('\n');
+    const params = {
+        articulo:  document.getElementById('f-articulo').value,
+        lote:      document.getElementById('f-lote').value,
+        desde:     document.getElementById('f-fecha-desde').value,
+        hasta:     document.getElementById('f-fecha-hasta').value,
+        movimiento: document.getElementById('f-movimiento').value,
+        ubicacion: document.getElementById('f-ubicacion').value,
+        cliente:   document.getElementById('f-cliente').value,
+        format:    'csv',
+    };
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.href = '/movimientos-por-articulo?' + new URLSearchParams(params).toString();
     a.download = `movimientos_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
 });

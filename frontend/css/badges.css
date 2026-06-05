@@ -1,0 +1,17 @@
+/* ── BADGES ──────────────────────────────────────────────────────────────── */
+.sga-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    font-size: .7rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.sga-badge-success { background: var(--sga-success-bg); color: var(--sga-success); }
+.sga-badge-warning { background: var(--sga-warning-bg); color: var(--sga-warning); }
+.sga-badge-danger  { background: var(--sga-danger-bg);  color: var(--sga-danger); }
+.sga-badge-info    { background: var(--sga-info-bg);    color: var(--sga-info); }
+.sga-badge-neutral { background: var(--sga-surface-alt); color: var(--sga-text-muted); }

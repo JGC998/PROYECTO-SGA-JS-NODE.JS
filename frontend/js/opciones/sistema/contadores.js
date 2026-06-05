@@ -1,25 +1,39 @@
 async function cargarContadores() {
     const grid = document.getElementById('grid-contadores');
-    grid.innerHTML = '<p style="padding:20px">Cargando contadores...</p>';
+    const loading = document.createElement('p');
+    loading.style.padding = '20px';
+    loading.textContent = 'Cargando contadores...';
+    grid.replaceChildren(loading);
     try {
         const data = await SGA.contadores.get();
         const labels = {
-            articulos: 'Artículos',
-            proveedores: 'Proveedores',
-            clientes: 'Clientes',
-            operarios: 'Operarios',
-            almacenes: 'Almacenes',
-            ubicaciones: 'Ubicaciones',
+            articulos:    'Artículos',
+            proveedores:  'Proveedores',
+            clientes:     'Clientes',
+            operarios:    'Operarios',
+            almacenes:    'Almacenes',
+            ubicaciones:  'Ubicaciones',
             stock_activo: 'Líneas de stock activo',
-            movimientos: 'Movimientos registrados',
+            movimientos:  'Movimientos registrados',
         };
-        grid.innerHTML = Object.entries(data).map(([key, val]) => `
-            <div class="contador-card">
-                <div class="contador-valor">${Number(val).toLocaleString('es-ES')}</div>
-                <div class="contador-label">${labels[key] ?? key}</div>
-            </div>`).join('');
+        const cards = Object.entries(data).map(([key, val]) => {
+            const card  = document.createElement('div');
+            card.className = 'contador-card';
+            const valor = document.createElement('div');
+            valor.className = 'contador-valor';
+            valor.textContent = Number(val).toLocaleString('es-ES');
+            const label = document.createElement('div');
+            label.className = 'contador-label';
+            label.textContent = labels[key] ?? key;
+            card.append(valor, label);
+            return card;
+        });
+        grid.replaceChildren(...cards);
     } catch {
-        grid.innerHTML = '<p style="padding:20px;color:red">Error al cargar los contadores.</p>';
+        const err = document.createElement('p');
+        err.style.cssText = 'padding:20px;color:red';
+        err.textContent = 'Error al cargar los contadores.';
+        grid.replaceChildren(err);
     }
 }
 

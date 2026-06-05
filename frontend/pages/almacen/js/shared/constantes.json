@@ -1,0 +1,5 @@
+{
+  "_comment": "Fuente única de verdad para constantes de layout compartidas entre server.js (CJS) y configuracion.js (ESM).",
+  "UW": 1.5,
+  "CG": 0.1
+}

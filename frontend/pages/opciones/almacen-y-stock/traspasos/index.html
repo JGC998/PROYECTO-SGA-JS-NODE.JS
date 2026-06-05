@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Traspasos</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/traspasos/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Traspasos entre Ubicaciones</span>
+                </nav>
+            </div>
+            <div class="sga-header-right"></div>
+        </header>
+
+        <div class="sga-content">
+            <div class="tp-inner">
+
+                <!-- CABECERA -->
+                <div class="tp-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Traspasos entre Ubicaciones</h1>
+                        <p class="sga-page-description">Mueve stock de forma segura · SGA LIN</p>
+                    </div>
+                    <div class="tp-header-actions">
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm tp-panel-open-btn"
+                                id="btn-tp-panel-open" aria-label="Ver carrito">
+                            Carrito <span class="tp-panel-open-badge" id="tp-panel-badge">0</span>
+                        </button>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm"
+                                id="tp-btn-vaciar">Vaciar todo</button>
+                    </div>
+                </div>
+
+                <!-- WORKSPACE -->
+                <div class="tp-workspace">
+
+                    <!-- ZONA PRINCIPAL -->
+                    <div class="tp-main-col">
+
+                        <!-- Panel búsqueda de artículo -->
+                        <section class="tp-form-panel">
+                            <div class="tp-form-panel-title">Traspaso rápido</div>
+
+                            <div class="tp-form-field-group">
+                                <label class="tp-form-label" for="tp-f-articulo">Artículo</label>
+                                <div class="tp-form-input-row">
+                                    <input type="text" id="tp-f-articulo" class="tp-form-input tp-form-input--lg"
+                                           placeholder="Código de artículo…" autocomplete="off">
+                                    <button class="tp-form-btn-buscar" id="tp-btn-buscar">Buscar</button>
+                                </div>
+                            </div>
+
+                            <!-- Stock disponible (selector de origen) -->
+                            <div class="tp-form-field-group tp-form-field-group--stock">
+                                <div class="tp-form-stock-header">
+                                    <span class="tp-form-label">Stock disponible — selecciona origen</span>
+                                    <span class="tp-form-stock-hint" id="tp-stock-hint">Busca un artículo primero</span>
+                                </div>
+                                <div id="tp-stock-section" aria-live="polite" aria-atomic="false">
+                                    <div class="tp-placeholder" id="tp-placeholder">
+                                        <span class="tp-placeholder-icon">📦</span>
+                                        Introduce un código de artículo y pulsa <strong>Buscar</strong>
+                                        para ver el stock disponible por ubicación.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Zona destino + cantidad (oculto hasta seleccionar origen) -->
+                            <div class="tp-dest-zone" id="tp-dest-zone" hidden>
+
+                                <div class="tp-dest-zone-title">Mover hacia</div>
+
+                                <div class="tp-field-group">
+                                    <label class="tp-field-label" for="tp-dest-input">
+                                        Ubicación destino
+                                    </label>
+                                    <div class="tp-dest-input-row">
+                                        <input type="text" id="tp-dest-input" class="tp-dest-input"
+                                               placeholder="Código de ubicación destino…"
+                                               autocomplete="off">
+                                    </div>
+                                    <div class="tp-dest-pill" id="tp-dest-pill" hidden></div>
+                                    <span class="tp-field-error" id="tp-dest-error"></span>
+                                </div>
+
+                                <div class="tp-field-group">
+                                    <label class="tp-field-label" for="tp-qty-input">Cantidad</label>
+                                    <div class="tp-qty-row">
+                                        <button class="tp-stepper" id="tp-btn-menos" type="button"
+                                                aria-label="Disminuir cantidad">−</button>
+                                        <input type="number" id="tp-qty-input" class="tp-qty-input"
+                                               min="1" step="1" placeholder="0">
+                                        <button class="tp-stepper" id="tp-btn-mas" type="button"
+                                                aria-label="Aumentar cantidad">+</button>
+                                        <span class="tp-qty-hint" id="tp-qty-hint"></span>
+                                    </div>
+                                    <span class="tp-field-error" id="tp-qty-error"></span>
+                                </div>
+
+                                <div class="tp-form-actions">
+                                    <button class="tp-btn-add-full" id="tp-btn-add">+ Añadir al carrito</button>
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                    </div><!-- /.tp-main-col -->
+
+                    <!-- PANEL RESUMEN -->
+                    <aside class="tp-panel" id="tp-panel" aria-label="Resumen de traspaso">
+
+                        <div class="tp-panel-header">
+                            <span class="tp-panel-title">
+                                Carrito
+                                <span class="tp-panel-badge" id="tp-panel-count" aria-live="polite">0</span>
+                            </span>
+                            <button class="tp-panel-close" id="btn-tp-panel-close"
+                                    aria-label="Cerrar panel">×</button>
+                        </div>
+
+                        <div class="tp-panel-empty" id="tp-panel-empty">
+                            <span class="tp-panel-empty-icon">🛒</span>
+                            Añade líneas al carrito para confirmar el traspaso.
+                        </div>
+
+                        <div class="tp-panel-body" id="tp-panel-body" hidden>
+                            <!-- Líneas del carrito — rellenado por JS -->
+                        </div>
+
+                        <div class="tp-panel-footer" id="tp-panel-footer" hidden>
+                            <button class="sga-btn sga-btn-primary tp-confirm-btn"
+                                    id="tp-btn-confirmar">
+                                Confirmar traspaso
+                            </button>
+                        </div>
+
+                    </aside>
+
+                </div><!-- /.tp-workspace -->
+
+                <!-- Backdrop overlay tablet/móvil -->
+                <div class="tp-panel-backdrop" id="tp-panel-backdrop"></div>
+
+            </div><!-- /.tp-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <!-- Modal de resultado -->
+    <div class="tp-result-overlay" id="tp-result-overlay" role="dialog" aria-modal="true"
+         aria-labelledby="tp-result-title">
+        <div class="tp-result-modal">
+            <div class="tp-result-header" id="tp-result-title">Resultado del traspaso</div>
+            <div class="tp-result-body" id="tp-result-body"></div>
+            <div class="tp-result-footer">
+                <button class="sga-btn sga-btn-primary sga-btn-sm"
+                        id="tp-result-close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/traspasos.js"></script>
+
+</body>
+
+</html>

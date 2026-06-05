@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Almacén 3D</title>
+    <link rel="stylesheet" href="../../css/navegacion.css">
+    <link rel="stylesheet" href="almacen-hub.css">
+</head>
+<body>
+
+    <main class="dashboard-container">
+        <header class="section-header">
+            <h1>&#127963; Almacén 3D</h1>
+            <p>Visualiza, diseña y gestiona la distribución física del almacén</p>
+        </header>
+
+        <div class="card-grid">
+
+            <a href="mapa-3d.html" class="menu-card card-3d">
+                <div class="icon">&#127922;</div>
+                <h3>Visor 3D</h3>
+                <p>Navega el almacén en primera persona. Consulta stock en tiempo real, crea rutas de picking y simula recorridos.</p>
+                <div class="card-tags">
+                    <span class="tag">Three.js</span>
+                    <span class="tag">FPS</span>
+                    <span class="tag">Picking</span>
+                </div>
+            </a>
+
+            <a href="editor.html" class="menu-card card-editor">
+                <div class="icon">&#9881;</div>
+                <h3>Editor 3D</h3>
+                <p>Diseña la distribución en perspectiva 3D. Añade estanterías, pasillos, zonas y columnas con herramientas de arrastre.</p>
+                <div class="card-tags">
+                    <span class="tag">3D</span>
+                    <span class="tag">Layout</span>
+                    <span class="tag">Exportar</span>
+                </div>
+            </a>
+
+            <a href="planta.html" class="menu-card card-planta">
+                <div class="icon">&#9783;</div>
+                <h3>Editor de Planta 2D</h3>
+                <p>Diseña el almacén en vista de planta con un canvas puro. Más rápido y ligero, sin dependencias externas.</p>
+                <div class="card-tags">
+                    <span class="tag">Canvas 2D</span>
+                    <span class="tag">Top-down</span>
+                    <span class="tag">Snap</span>
+                </div>
+            </a>
+
+            <a href="supervisor.html" class="menu-card card-super">
+                <div class="icon">&#128203;</div>
+                <h3>Supervisor de Picking</h3>
+                <p>Crea rutas de picking, genera PDF y QR para el operario de almacén, y monitoriza el progreso en tiempo real.</p>
+                <div class="card-tags">
+                    <span class="tag">Tiempo real</span>
+                    <span class="tag">PDF</span>
+                    <span class="tag tag-qr">QR móvil</span>
+                </div>
+            </a>
+
+        </div>
+
+        <section class="almacen-info">
+            <div class="info-item">
+                <span class="info-label">Layout activo</span>
+                <span class="info-val" id="info-nombre">—</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Dimensiones</span>
+                <span class="info-val" id="info-dims">—</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Objetos</span>
+                <span class="info-val" id="info-objs">—</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Estanterías ERP</span>
+                <span class="info-val" id="info-erp">—</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/navegacion.js"></script>
+    <script src="hub-info.js"></script>
+</body>
+</html>

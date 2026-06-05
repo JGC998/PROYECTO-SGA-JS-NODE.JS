@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Entrada de Mercancía</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/tables.css">
+    <link rel="stylesheet" href="../../../../css/cards.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/entrada-de-mercancia/index.css">
+</head>
+
+<body class="sga-layout">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Entrada de Mercancía</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar">
+                    Limpiar (F5)
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="em-inner">
+
+                <!-- CABECERA DE PÁGINA -->
+                <div class="em-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Entrada de Mercancía</h1>
+                        <p class="sga-page-description">Recepción de stock · SGA LIN</p>
+                    </div>
+                </div>
+
+                <!-- CABECERA ALBARÁN (colapsable) -->
+                <div class="em-cabecera">
+                    <button class="em-cabecera-toggle" id="btn-toggle-cabecera"
+                            type="button" aria-expanded="false" aria-controls="em-cabecera-body">
+                        ▸ Datos del albarán — proveedor, fecha, nº albarán (opcional)
+                    </button>
+                    <div class="em-cabecera-body" id="em-cabecera-body" hidden>
+                        <div class="em-cab-row">
+                            <div class="em-cab-field">
+                                <label for="ent-fecha" class="em-label">Fecha</label>
+                                <input type="date" id="ent-fecha" class="em-input">
+                            </div>
+                            <div class="em-cab-field">
+                                <label for="ent-prov-cod" class="em-label">Cod. Proveedor</label>
+                                <input type="text" id="ent-prov-cod" class="em-input"
+                                       placeholder="Código..." autocomplete="off">
+                            </div>
+                            <div class="em-cab-field em-cab-field--wide">
+                                <label for="ent-prov-nombre" class="em-label">Proveedor</label>
+                                <input type="text" id="ent-prov-nombre" class="em-input em-input--readonly"
+                                       readonly placeholder="Nombre del proveedor">
+                            </div>
+                            <div class="em-cab-field">
+                                <label for="ent-albaran" class="em-label">Nº Albarán</label>
+                                <input type="text" id="ent-albaran" class="em-input"
+                                       placeholder="ALB-0000" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZONA PRINCIPAL -->
+                <div class="em-workspace" id="em-workspace">
+
+                    <!-- FORMULARIO ENTRADA RÁPIDA -->
+                    <section class="em-form">
+                        <div class="em-form-title">Entrada rápida</div>
+
+                        <!-- ARTÍCULO -->
+                        <div class="em-field-group" id="fg-articulo">
+                            <label for="ent-art-cod" class="em-label">Artículo</label>
+                            <div class="em-input-row">
+                                <input type="text" id="ent-art-cod" class="em-input em-input--lg"
+                                       placeholder="Código de artículo..." autocomplete="off">
+<button class="em-btn-clear" id="btn-art-clear"
+                                        type="button" aria-label="Limpiar artículo" hidden>✕</button>
+                            </div>
+                            <div class="em-pill" id="em-art-pill" hidden></div>
+                        </div>
+
+                        <!-- LOTE -->
+                        <div class="em-field-group" id="fg-lote">
+                            <label for="ent-lot" class="em-label">Lote</label>
+                            <div class="em-lote-row">
+                                <input type="text" id="ent-lot" class="em-input"
+                                       placeholder="Código de lote..." autocomplete="off"
+                                       maxlength="10">
+                                <button class="em-btn-tag" id="btn-sin-lote" type="button">SIN LOTE</button>
+                            </div>
+                        </div>
+
+                        <!-- UBICACIÓN DESTINO -->
+                        <div class="em-field-group" id="fg-ubicacion">
+                            <label for="ent-ubi" class="em-label">Ubicación destino</label>
+                            <div class="em-input-row">
+                                <input type="text" id="ent-ubi" class="em-input em-input--lg"
+                                       placeholder="Código de ubicación..." autocomplete="off">
+                            </div>
+                            <div class="em-pill" id="em-ubi-pill" hidden></div>
+                        </div>
+
+                        <!-- CANTIDAD -->
+                        <div class="em-field-group" id="fg-cantidad">
+                            <label for="ent-cant" class="em-label">Cantidad</label>
+                            <div class="em-cant-row">
+                                <button class="em-stepper" id="btn-menos" type="button"
+                                        aria-label="Disminuir cantidad">−</button>
+                                <input type="number" id="ent-cant" class="em-input em-input--cant"
+                                       value="1" min="0.001" step="1" autocomplete="off">
+                                <button class="em-stepper" id="btn-mas" type="button"
+                                        aria-label="Aumentar cantidad">+</button>
+                            </div>
+                        </div>
+
+                        <!-- ESTADO / NOTIFICACIÓN -->
+                        <div class="em-form-status" id="em-form-status" role="alert" aria-live="assertive" hidden></div>
+
+                        <!-- BOTÓN AÑADIR -->
+                        <div class="em-form-actions">
+                            <button class="em-btn-add" id="btn-anadir" type="button" disabled>
+                                + Añadir línea
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- CARRITO DE ENTRADA -->
+                    <aside class="em-carrito" id="em-carrito">
+                        <div class="em-carrito-header">
+                            <span class="em-carrito-title">Carrito de entrada</span>
+                            <span class="em-carrito-badge" id="em-carrito-count" aria-live="polite">0 líneas</span>
+                        </div>
+                        <div class="em-carrito-body" id="em-carrito-body">
+                            <div class="em-carrito-empty" id="em-carrito-empty">
+                                Añada artículos para comenzar la entrada.
+                            </div>
+                        </div>
+                        <div class="em-carrito-footer">
+                            <div class="em-carrito-totales" id="em-carrito-totales"></div>
+                            <button class="em-btn-confirm" id="btn-confirmar" type="button" disabled>
+                                Confirmar entrada ▶
+                            </button>
+                        </div>
+                    </aside>
+
+                </div><!-- /.em-workspace -->
+
+            </div><!-- /.em-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <!-- Modal resultado entrada -->
+    <div class="em-result-overlay" id="em-result-overlay" role="dialog" aria-modal="true"
+         aria-labelledby="em-result-title">
+        <div class="em-result-modal">
+            <div class="em-result-modal-header" id="em-result-title">Resultado de la entrada</div>
+            <div class="em-result-modal-body" id="em-result-modal-body"></div>
+            <div class="em-result-modal-footer">
+                <a class="sga-btn sga-btn-secondary sga-btn-sm" id="link-ver-stock"
+                   href="../consulta-de-stock/index.html">
+                    Ver stock ↗
+                </a>
+                <button class="sga-btn sga-btn-primary sga-btn-sm"
+                        id="em-result-close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/entrada-de-mercancia.js"></script>
+
+</body>
+
+</html>

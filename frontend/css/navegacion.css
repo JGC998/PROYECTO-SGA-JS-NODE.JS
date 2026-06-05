@@ -1,3 +1,10 @@
+/* ── LEGACY — NO USAR EN PÁGINAS NUEVAS ──────────────────────────────────── */
+/* navbar-global / nav-container son de páginas legacy (visor, ferreteria).  */
+/* Las páginas nuevas usan .sga-header (header.css) y .sga-sidebar           */
+/* (sidebar.css). El reset con !important puede interferir con el sistema     */
+/* moderno si se carga junto a base.css en páginas nuevas.                   */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 /* RESET GLOBAL PARA TODAS LAS PÁGINAS */
 html,
 body {

@@ -1,0 +1,41 @@
+/* Módulo: Contadores — estilos específicos (globales en components.css) */
+
+.cnt-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.cnt-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+/* #grid-contadores definido globalmente en components.css */
+
+.contador-card {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: var(--sga-shadow);
+    transition: box-shadow var(--sga-transition);
+}
+.contador-card:hover { box-shadow: var(--sga-shadow-md); }
+
+.contador-valor {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--sga-primary-light);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.contador-label {
+    font-size: var(--sga-text-xs);
+    color: var(--sga-text-muted);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}

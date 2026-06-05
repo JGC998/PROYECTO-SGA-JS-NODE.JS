@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA — Editor de Planta 2D</title>
+    <link rel="stylesheet" href="planta.css">
+</head>
+<body>
+
+<!-- ── TOPBAR ──────────────────────────────────────────────────── -->
+<header class="pl-topbar">
+    <span class="pl-logo">&#9783; Planta 2D</span>
+    <div class="pl-sep"></div>
+
+    <button class="tb" id="btn-nuevo" title="Nuevo layout vacío">Nuevo</button>
+    <button class="tb" id="btn-cargar" title="Cargar desde distribucion.json (servidor)">Cargar</button>
+    <button class="tb save" id="btn-guardar" title="Guardar en servidor (distribucion.json)">Guardar</button>
+    <button class="tb" id="btn-regenerar" title="Regenerar layout desde la tabla UBICACION de la BD" style="color:#fbbf24;">⟳ Desde BD</button>
+    <button class="tb" id="btn-sincronizar" title="Sincronizar pasillos con el visor 3D">Sincronizar</button>
+
+    <div class="pl-sep"></div>
+
+    <!-- Nombre de escena -->
+    <input id="scene-name" type="text" value="Almacén" title="Nombre del almacén"
+           style="width:130px;padding:3px 7px;border-radius:5px;border:1px solid var(--border);background:#0a1420;color:var(--text);font-size:12px;">
+
+    <div class="pl-sep"></div>
+
+    <!-- Dimensiones del suelo -->
+    <span style="font-size:11px;color:var(--muted);">W</span>
+    <input id="scene-w" type="number" value="50" min="10" max="500"
+           style="width:52px;padding:3px 5px;border-radius:5px;border:1px solid var(--border);background:#0a1420;color:var(--text);font-size:11px;"
+           title="Anchura del almacén (m)">
+    <span style="font-size:11px;color:var(--muted);">D</span>
+    <input id="scene-d" type="number" value="50" min="10" max="500"
+           style="width:52px;padding:3px 5px;border-radius:5px;border:1px solid var(--border);background:#0a1420;color:var(--text);font-size:11px;"
+           title="Profundidad del almacén (m)">
+
+    <div class="pl-sep"></div>
+
+    <!-- Snap -->
+    <div class="pl-snap-row">
+        <label for="snap-val" style="color:var(--muted);font-size:11px;">Snap</label>
+        <input id="snap-val" type="number" value="0.5" min="0.1" max="5" step="0.1" title="Cuadrícula de snap (m)">
+        <span style="font-size:11px;color:var(--muted);">m</span>
+        <button class="tb" id="btn-snap-toggle" title="Activar/desactivar snap">Snap ON</button>
+    </div>
+
+    <div class="pl-sep"></div>
+
+    <!-- Herramientas -->
+    <button class="tb active" id="tool-select"   data-tool="select"   title="Seleccionar / mover (V)">&#9654; Sel</button>
+    <button class="tb"         id="tool-shelf"    data-tool="estanteria"  title="Dibujar estantería (E)">&#9776; Estantería</button>
+    <button class="tb"         id="tool-aisle"    data-tool="pasillo"     title="Dibujar pasillo (P)">&#11835; Pasillo</button>
+    <button class="tb"         id="tool-zona"     data-tool="zona_carga"  title="Zona de carga/oficina (Z)">&#9632; Zona</button>
+    <button class="tb"         id="tool-column"   data-tool="columna"     title="Colocar columna (C)">&#9679; Columna</button>
+    <button class="tb"         id="tool-door"     data-tool="puerta"      title="Dibujar puerta (D)">&#128682; Puerta</button>
+
+    <div class="pl-sep"></div>
+
+    <button class="tb" id="btn-undo" title="Deshacer (Ctrl+Z)">&#8617; Deshacer</button>
+    <button class="tb" id="btn-redo" title="Rehacer (Ctrl+Y)">&#8618; Rehacer</button>
+    <button class="tb" id="btn-stock-preview" title="Vista previa de stock">&#128200; Stock</button>
+
+    <div class="pl-sep"></div>
+    <a class="tb tb-link" href="editor.html" title="Ir al editor 3D">Editor 3D</a>
+    <a class="tb tb-link" href="mapa-3d.html" title="Ir al visor 3D">Visor 3D</a>
+    <a class="tb tb-link" href="index.html">Almacén</a>
+    <a class="tb tb-link" href="../../index.html">&#8617; SGA</a>
+
+    <div class="pl-coords-bar" id="pl-coords">X — &nbsp; Z —</div>
+</header>
+
+<!-- ── WORKSPACE ───────────────────────────────────────────────── -->
+<div class="pl-workspace">
+
+    <!-- SIDEBAR -->
+    <aside class="pl-sidebar">
+
+        <!-- Catálogo -->
+        <div class="pl-section">
+            <div class="pl-section-hdr">Catálogo</div>
+            <div class="pl-section-body">
+                <div class="cat-grid">
+                    <button class="cat-btn" data-tool="estanteria">
+                        <span class="ci">&#9776;</span>Estantería
+                    </button>
+                    <button class="cat-btn" data-tool="pasillo">
+                        <span class="ci">&#11835;</span>Pasillo
+                    </button>
+                    <button class="cat-btn" data-tool="zona_carga">
+                        <span class="ci">&#9632;</span>Zona carga
+                    </button>
+                    <button class="cat-btn" data-tool="zona_oficina">
+                        <span class="ci">&#127970;</span>Zona oficina
+                    </button>
+                    <button class="cat-btn" data-tool="columna">
+                        <span class="ci">&#9679;</span>Columna
+                    </button>
+                    <button class="cat-btn" data-tool="puerta">
+                        <span class="ci">&#128682;</span>Puerta
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Propiedades -->
+        <div class="pl-section">
+            <div class="pl-section-hdr">Propiedades</div>
+            <div class="pl-props" id="pl-props">
+                <p class="no-sel">Sin selección</p>
+            </div>
+        </div>
+
+        <!-- Lista de objetos -->
+        <div class="pl-section" style="flex:1;min-height:0;display:flex;flex-direction:column;">
+            <div class="pl-section-hdr">
+                Objetos
+                <span id="obj-count" style="font-size:10px;font-weight:400;color:var(--muted);">0</span>
+            </div>
+            <div class="pl-section-body" style="flex:1;min-height:0;padding:4px 4px;">
+                <div class="obj-list" id="obj-list" style="max-height:none;height:100%;"></div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- CANVAS -->
+    <div class="pl-canvas-wrap">
+        <canvas id="pl-canvas"></canvas>
+    </div>
+
+</div>
+
+<!-- ── STATUS BAR ───────────────────────────────────────────────── -->
+<footer class="pl-status">
+    <span id="pl-status-msg">Listo — Arrastra para crear, clic para seleccionar</span>
+    <span id="ed-status" style="color:#fca5a5;"></span>
+    <span id="pl-zoom-info">100%</span>
+</footer>
+
+<script type="module" src="planta.js"></script>
+</body>
+</html>

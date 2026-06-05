@@ -1,0 +1,85 @@
+/* ── LAYOUT PRINCIPAL ────────────────────────────────────────────────────── */
+.sga-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* El contenido principal ocupa todo el espacio restante */
+.sga-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--sga-sidebar-w);
+    min-height: 100vh;
+}
+
+/* Área de contenido de página — sin padding propio, cada página gestiona el suyo */
+.sga-content {
+    flex: 1;
+}
+
+/* ── TIPOGRAFÍA DE PÁGINA ────────────────────────────────────────────────── */
+.sga-page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--sga-primary);
+    margin-bottom: 4px;
+}
+
+.sga-page-description {
+    font-size: .875rem;
+    color: var(--sga-text-muted);
+    margin-bottom: 24px;
+}
+
+/* ── GRIDS GENÉRICOS ─────────────────────────────────────────────────────── */
+.sga-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+/* ── UTILIDADES DE ESPACIADO ─────────────────────────────────────────────── */
+.sga-mt-sm { margin-top: var(--sga-sp-sm); }
+.sga-mt-md { margin-top: var(--sga-sp-md); }
+.sga-mt-lg { margin-top: var(--sga-sp-lg); }
+.sga-mb-sm { margin-bottom: var(--sga-sp-sm); }
+.sga-mb-md { margin-bottom: var(--sga-sp-md); }
+.sga-mb-lg { margin-bottom: var(--sga-sp-lg); }
+.sga-gap-sm { gap: var(--sga-sp-sm); }
+.sga-gap-md { gap: var(--sga-sp-md); }
+
+/* ── UTILIDADES DE TEXTO ─────────────────────────────────────────────────── */
+.sga-text-muted   { color: var(--sga-text-muted); }
+.sga-text-primary { color: var(--sga-primary); }
+.sga-text-success { color: var(--sga-success); }
+.sga-text-danger  { color: var(--sga-danger); }
+.sga-text-warning { color: var(--sga-warning); }
+.sga-text-right   { text-align: right; }
+.sga-text-center  { text-align: center; }
+.sga-fw-bold      { font-weight: 700; }
+.sga-fw-medium    { font-weight: 500; }
+
+/* ── UTILIDADES FLEX ─────────────────────────────────────────────────────── */
+.sga-flex         { display: flex; }
+.sga-flex-col     { display: flex; flex-direction: column; }
+.sga-flex-center  { display: flex; align-items: center; justify-content: center; }
+.sga-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.sga-flex-wrap    { flex-wrap: wrap; }
+.sga-flex-1       { flex: 1; min-width: 0; }
+
+/* ── SEPARADOR VISUAL ────────────────────────────────────────────────────── */
+.sga-divider {
+    border: none;
+    border-top: 1px solid var(--sga-border);
+    margin: var(--sga-sp-md) 0;
+}
+
+/* ── BREAKPOINTS DOCUMENTADOS ────────────────────────────────────────────── */
+/*
+  --bp-mobile:  600px   (≤600px: móvil)
+  --bp-tablet:  900px   (601–900px: tablet, sidebar drawer)
+  --bp-desktop: 901px+  (>900px: sidebar fija)
+  --bp-wide:    1400px  (container máximo)
+*/

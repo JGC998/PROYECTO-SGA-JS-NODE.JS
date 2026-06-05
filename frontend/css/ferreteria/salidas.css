@@ -8,51 +8,50 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: white;
+    background: var(--sga-surface);
     padding: 15px 25px;
-    border-radius: 10px;
+    border-radius: var(--sga-radius);
     margin-bottom: 25px;
-    border-left: 5px solid #f59e0b;
-    /* Naranja de atención */
+    border-left: 5px solid var(--sga-warning);
 }
 
 .toolbar h1 {
     margin: 0;
     font-size: 1.4rem;
-    color: #1e3a8a;
+    color: var(--sga-primary);
 }
 
 .btn-tool {
     padding: 10px 20px;
     border: none;
-    border-radius: 6px;
-    background: #1e3a8a;
-    color: white;
+    border-radius: var(--sga-radius-sm);
+    background: var(--sga-primary);
+    color: var(--sga-surface);
     font-weight: bold;
     cursor: pointer;
 }
 
 .btn-danger {
-    background: #ef4444;
+    background: var(--sga-danger);
     margin-left: 10px;
 }
 
 .form-section {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
     padding: 20px;
     margin-bottom: 25px;
 }
 
 .form-section legend {
     font-weight: bold;
-    color: #1e3a8a;
+    color: var(--sga-primary);
     padding: 0 10px;
 }
 
 .highlight-exit {
-    border-top: 4px solid #f59e0b;
+    border-top: 4px solid var(--sga-warning);
 }
 
 .form-grid,
@@ -78,28 +77,28 @@
 label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #4b5563;
+    color: var(--sga-text-muted);
     margin-bottom: 5px;
 }
 
 input {
     padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
 }
 
 .readonly-input {
-    background: #f3f4f6;
-    border-color: #e5e7eb;
+    background: var(--sga-surface-alt);
+    border-color: var(--sga-border-light);
 }
 
 .btn-add {
     margin-top: 15px;
     padding: 10px 20px;
-    background: #10b981;
-    color: white;
+    background: var(--sga-success);
+    color: var(--sga-surface);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--sga-radius-sm);
     cursor: pointer;
     font-weight: bold;
 }
@@ -107,27 +106,27 @@ input {
 .preview-table-wrapper table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
     overflow: hidden;
     margin-top: 10px;
 }
 
 th {
-    background: #f8f9fa;
+    background: var(--sga-surface-alt);
     padding: 12px;
     text-align: left;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid var(--sga-border);
 }
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--sga-border-light);
     font-size: 0.9rem;
 }
 
 .placeholder-row {
     text-align: center;
-    color: #9ca3af;
+    color: var(--sga-text-muted);
     font-style: italic;
 }

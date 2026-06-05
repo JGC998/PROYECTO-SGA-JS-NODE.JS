@@ -8,9 +8,11 @@ document.getElementById('btn-poner-cero').addEventListener('click', async () => 
         const res = await SGA.ponerCeroCarrusel.poner();
         document.getElementById('resultado').textContent = res.message || 'Carrusel puesto a cero correctamente.';
         document.getElementById('resultado').className = 'resultado ok';
-    } catch {
-        document.getElementById('resultado').textContent = 'Error al poner el carrusel a cero.';
-        document.getElementById('resultado').className = 'resultado error';
+    } catch (err) {
+        const msg = err.pendiente ? err.message : 'Error al poner el carrusel a cero.';
+        const cls = err.pendiente ? 'resultado pendiente' : 'resultado error';
+        document.getElementById('resultado').textContent = msg;
+        document.getElementById('resultado').className = cls;
     } finally {
         btn.textContent = 'Poner a cero';
         btn.disabled = false;

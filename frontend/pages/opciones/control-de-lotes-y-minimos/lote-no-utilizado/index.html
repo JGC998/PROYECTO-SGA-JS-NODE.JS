@@ -1,66 +1,99 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Lote NO utilizado por Cliente y Artículo</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Lote NO Utilizado por Cliente y Artículo</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/control-de-lotes-y-minimos/lote-no-utilizado/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>🏷️ Lote NO utilizado por Cliente y Artículo</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Control de Lotes y Mínimos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Lote NO Utilizado</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary" id="btn-nuevo">Nueva fila</button>
-                <button class="btn-tool secondary" id="btn-guardar">Guardar</button>
-                <button class="btn-tool secondary">Importar</button>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar">Actualizar (F5)</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-nuevo">Nueva fila</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-guardar">Guardar</button>
+                <button class="sga-btn sga-btn-secondary sga-btn-sm">Importar</button>
             </div>
         </header>
 
-        <div class="filter-bar">
-            <label>Código cliente:</label>
-            <input type="text" class="input-code" id="f-cliente">
-            <button class="btn-browse">...</button>
-            <input type="text" class="input-desc" readonly>
-        </div>
-        <div class="filter-bar">
-            <label>Artículo:</label>
-            <input type="text" class="input-code" id="f-articulo">
-            <button class="btn-browse">...</button>
-        </div>
+        <div class="sga-content">
+            <main class="ln-inner">
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="col-num">#</th>
-                        <th>Cliente</th>
-                        <th>Nombre de cliente</th>
-                        <th>Artículo</th>
-                        <th>Nombre de artículo</th>
-                        <th>Lote a excluir</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-lnoutilizado">
-                    <tr class="placeholder-row">
-                        <td colspan="6">Pulse Actualizar para cargar los datos.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                <div class="ln-page-header">
+                    <h1 class="sga-page-title">Lote NO Utilizado por Cliente y Artículo</h1>
+                    <p class="sga-page-description">Lotes · SGA LIN</p>
+                </div>
 
-    <script src="../../../../js/navegacion.js"></script>
+                <div class="filter-bar">
+                    <label>Código cliente:</label>
+                    <input type="text" class="sga-input input-code" id="f-cliente">
+                    <button class="btn-browse">...</button>
+                    <input type="text" class="sga-input input-desc" readonly>
+                </div>
+                <div class="filter-bar">
+                    <label>Artículo:</label>
+                    <input type="text" class="sga-input input-code" id="f-articulo">
+                    <button class="btn-browse">...</button>
+                </div>
+
+                <div class="ln-table-card">
+                <div class="table-wrapper" id="lnoutilizado-table-wrapper" aria-live="polite" aria-atomic="false">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-num">#</th>
+                                <th>Cliente</th>
+                                <th>Nombre de cliente</th>
+                                <th>Artículo</th>
+                                <th>Nombre de artículo</th>
+                                <th>Lote a excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-lnoutilizado">
+                            <tr class="placeholder-row">
+                                <td colspan="6">Pulse Actualizar para cargar los datos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div><!-- /.ln-table-card -->
+
+            </main>
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/api.js"></script>
     <script src="../../../../js/opciones/control-de-lotes-y-minimos/lote-no-utilizado.js"></script>
 </body>
 
 </html>
-

@@ -1,154 +1,44 @@
-.container {
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+/* Módulo: Operarios — estilos específicos (globales en components.css) */
 
-/* Cabecera */
-.section-header {
+.op-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 15px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.section-header h1 {
-    margin: 0;
-    color: #1e3a8a;
-    font-size: 1.8rem;
-}
+.op-page-header { display: flex; flex-direction: column; gap: 2px; }
 
-.section-header p {
-    margin: 5px 0 0;
-    color: #6b7280;
-}
-
-/* Botones de herramientas */
-.btn-tool {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: 0.2s;
-}
-
-.btn-tool.primary {
-    background: #1e3a8a;
-    color: white;
-}
-
-.btn-tool.secondary {
-    background: #e5e7eb;
-    color: #374151;
-}
-
-.btn-tool:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* Resumen rápido */
-.status-summary {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 25px;
-    background: #f9fafb;
-    padding: 15px 25px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
-
-.status-item .label {
-    color: #6b7280;
-    font-size: 0.85rem;
-    margin-right: 8px;
-}
-
-.status-item .count {
-    font-weight: bold;
-    color: #1e3a8a;
-    font-size: 1.1rem;
-}
-
-.status-item .count.success {
-    color: #10b981;
-}
-
-/* Tabla */
-.table-wrapper {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+.op-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
     overflow: hidden;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
 }
 
-th {
-    background: #f8f9fa;
-    padding: 15px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: #1e3a8a;
-    border-bottom: 2px solid #edf2f7;
+.op-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
 }
-
-td {
-    padding: 15px;
-    border-bottom: 1px solid #f1f5f9;
-    font-size: 0.95rem;
-    color: #374151;
-}
-
-tr:hover {
-    background: #f9fbff;
-}
-
-/* Badges de estado */
-.badge {
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.badge.active {
-    background: #d1fae5;
-    color: #065f46;
-}
-
-.badge.inactive {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-/* Buscador */
-.search-bar {
-    width: 100%;
-    padding: 12px 20px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-size: 1rem;
-}
-
-.btn-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: transform 0.2s;
-}
-
-.btn-icon:hover {
-    transform: scale(1.2);
-}
+.op-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

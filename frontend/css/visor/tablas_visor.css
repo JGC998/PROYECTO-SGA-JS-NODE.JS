@@ -1,70 +1,44 @@
-.container {
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+/* Módulo: Clientes (visor) — estilos específicos (globales en components.css) */
 
-.visor-header {
+.cli-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #059669;
-    /* Verde Visor */
-    padding-bottom: 10px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.visor-header h1 {
-    color: #065f46;
-    margin: 0;
-    font-size: 1.6rem;
-}
+.cli-page-header { display: flex; flex-direction: column; gap: 2px; }
 
-.btn-export {
-    padding: 8px 15px;
-    background: #059669;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-}
-
-.table-wrapper {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+.cli-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
     overflow: hidden;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
 }
 
-th {
-    background: #f0fdf4;
-    padding: 12px;
-    text-align: left;
-    color: #065f46;
-    border-bottom: 2px solid #bcf0da;
-    font-size: 0.85rem;
+.cli-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
 }
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 0.9rem;
-}
-
-tr:hover {
-    background: #f9fafb;
-}
+.cli-search:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }

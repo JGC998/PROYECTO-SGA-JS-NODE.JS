@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <li><a href="${root}pages/visor/index.html">Visor</a></li>
                     <li><a href="${root}pages/informes/index.html">Informes</a></li>
                     <li><a href="${root}pages/util/index.html">Útil</a></li>
+                    <li><a href="${root}pages/almacen/index.html">&#127963; Almacén 3D</a></li>
                     <li><a href="${root}pages/acerca_de/index.html">Acerca de...</a></li>
                 </ul>
             </div>

@@ -1,0 +1,103 @@
+/* Módulo: Usuarios del Sistema — estilos específicos (globales en components.css) */
+
+.usu-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.usu-page-header { display: flex; flex-direction: column; gap: 2px; }
+
+.usu-filter-bar {
+    background: var(--sga-surface);
+    padding: 14px 18px;
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+}
+
+.usu-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--sga-sp-md);
+    align-items: start;
+}
+
+.usu-table-card {
+    background: var(--sga-surface);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    box-sizing: border-box;
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+.search-bar:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+.form-panel {
+    background: var(--sga-surface);
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius);
+    box-shadow: var(--sga-shadow);
+    overflow: hidden;
+}
+
+.form-panel h3 {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: var(--sga-text-sm);
+    font-weight: 700;
+    color: var(--sga-primary);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    background: var(--sga-surface-alt);
+    border-bottom: 1px solid var(--sga-border);
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 16px;
+    margin-bottom: 12px;
+}
+
+.form-row:first-of-type { margin-top: 16px; }
+
+.form-row label {
+    font-size: var(--sga-text-xs);
+    font-weight: 600;
+    color: var(--sga-text-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.form-row input {
+    padding: 5px 8px;
+    border: 1px solid var(--sga-border);
+    border-radius: var(--sga-radius-sm);
+    font-size: var(--sga-text-sm);
+    font-family: var(--sga-font);
+    color: var(--sga-text);
+    background: var(--sga-surface);
+    transition: border-color var(--sga-transition);
+}
+.form-row input:focus { outline: none; border-color: var(--sga-accent); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+
+.form-actions { display: flex; gap: 8px; padding: 12px 16px 16px; }
+
+@media (max-width: 768px) {
+    .usu-main-layout { grid-template-columns: 1fr; }
+}

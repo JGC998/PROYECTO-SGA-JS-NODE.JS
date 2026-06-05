@@ -1,289 +1,161 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Expediciones desde Pedido</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
+    <title>SGA LIN — Expediciones</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
     <link rel="stylesheet" href="../../../../css/opciones/logistica-y-pedidos/expediciones/index.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
 
-        <!-- Toolbar principal compartida -->
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>📦 Expediciones desde Pedido</h1>
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Logística y Pedidos</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Expediciones desde Pedido</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool secondary">Anular sel.</button>
-                <button class="btn-tool secondary">Sel. todo</button>
-                <button class="btn-tool">🖨️ Imprimir picking</button>
-                <button class="btn-tool">🔄 Reposiciones</button>
-                <div class="btn-dropdown">
-                    <button class="btn-tool">📋 Informe ▾</button>
-                </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-exportar">
+                    📤 Exportar CSV
+                </button>
             </div>
         </header>
 
-        <!-- Navegación por pestañas -->
-        <nav class="tab-nav">
-            <button class="tab-btn active" data-tab="pedidos-cliente">Pedidos de cliente</button>
-            <button class="tab-btn" data-tab="pedidos-proveedor">Pedidos a proveedor</button>
-            <button class="tab-btn" data-tab="inventarios">Inventarios</button>
-            <button class="tab-btn" data-tab="ordenes-fab">Órdenes fabricación</button>
-            <button class="tab-btn" data-tab="reposicion">Reposición mercancía</button>
-            <button class="tab-btn" data-tab="cambios">Cambios de destino</button>
-        </nav>
+        <div class="sga-content">
+            <div class="ep-inner">
 
-        <!-- ==================== TAB 1: PEDIDOS DE CLIENTE ==================== -->
-        <div class="tab-panel active" id="tab-pedidos-cliente">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <input type="text" class="input-sm" placeholder="Buscar albarán...">
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <button class="btn-sub">Mostrar finalizados</button>
-                    <button class="btn-sub">Abrir pick.</button>
-                    <button class="btn-sub">Eti. resumen</button>
-                    <button class="btn-sub">Eti. palet</button>
-                    <button class="btn-sub">Eti. Excel</button>
-                    <button class="btn-sub">Abrir alb.</button>
-                    <button class="btn-sub">Picking conjunto</button>
-                    <span class="year-badge">2026</span>
+                <!-- CABECERA -->
+                <div class="ep-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Expediciones desde Pedido</h1>
+                        <p class="sga-page-description">Tablero operativo de expediciones · SGA LIN</p>
+                    </div>
                 </div>
-                <div class="subtoolbar-row filters">
-                    <select class="filter-select">
-                        <option>Todos los pedidos</option>
-                        <option>Pendientes</option>
-                        <option>Finalizados</option>
-                    </select>
-                    <select class="filter-select">
-                        <option>Todos los pedidos</option>
-                        <option>Con picking</option>
-                        <option>Sin picking</option>
-                    </select>
-                    <button class="btn-filter">Pedidos sin asignar</button>
-                    <button class="btn-filter">Gestión de rutas</button>
-                    <button class="btn-filter">Manifiesto de carga</button>
-                    <button class="btn-filter">No agencia</button>
+
+                <!-- FILTROS -->
+                <div class="ep-filters">
+                    <div class="ep-filters-row">
+                        <span class="ep-date-label">Desde</span>
+                        <input type="date" id="ep-f-desde" class="sga-input ep-date-input" aria-label="Fecha desde">
+                        <span class="ep-date-label">Hasta</span>
+                        <input type="date" id="ep-f-hasta" class="sga-input ep-date-input" aria-label="Fecha hasta">
+                        <input type="text" id="ep-f-buscar" class="sga-input ep-search-input"
+                               placeholder="Albarán, cliente…" autocomplete="off" aria-label="Buscar expedición">
+                        <select id="ep-f-status" class="sga-select ep-status-select" aria-label="Estado">
+                            <option value="todos">Todos los estados</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="parcial">Parcial</option>
+                            <option value="preparado">Con picking</option>
+                        </select>
+                        <div class="ep-quick-btns">
+                            <button class="ep-quick-btn" data-days="0" aria-label="Hoy">Hoy</button>
+                            <button class="ep-quick-btn" data-days="7" aria-label="Últimos 7 días">7d</button>
+                            <button class="ep-quick-btn ep-quick-btn--active" data-days="30" aria-label="Últimos 30 días">30d</button>
+                            <button class="ep-quick-btn" data-days="90" aria-label="Últimos 90 días">90d</button>
+                        </div>
+                        <button class="ep-btn-buscar" id="ep-btn-buscar" type="button">Buscar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Albarán</th>
-                            <th>Gr</th>
-                            <th>Exped.</th>
-                            <th>Cliente</th>
-                            <th>Cen</th>
-                            <th>Agencia</th>
-                            <th>Nombre de cliente</th>
-                            <th>Pick.</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="11">No hay pedidos de cliente para mostrar.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
-        <!-- ==================== TAB 2: PEDIDOS A PROVEEDOR ==================== -->
-        <div class="tab-panel" id="tab-pedidos-proveedor">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <button class="btn-sub">Actualizar proveedores</button>
-                    <input type="text" class="input-sm" placeholder="Buscar...">
-                    <select class="filter-select-sm">
-                        <option>Todos</option>
-                    </select>
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <button class="btn-sub">Mos. fin.</button>
-                    <button class="btn-sub">Finalizar</button>
-                    <button class="btn-sub">Pendiente</button>
-                    <button class="btn-sub danger">Borrar no enviados</button>
+                <!-- CONTADORES -->
+                <div class="ep-counters" role="status" aria-live="polite" aria-atomic="true">
+                    <div class="ep-counter ep-counter--total">
+                        <span class="ep-counter__val" id="ep-cnt-total">—</span>
+                        <span class="ep-counter__label">Total</span>
+                    </div>
+                    <div class="ep-counter ep-counter--pend">
+                        <span class="ep-counter__val" id="ep-cnt-pend">—</span>
+                        <span class="ep-counter__label">Pendientes</span>
+                    </div>
+                    <div class="ep-counter ep-counter--parcial">
+                        <span class="ep-counter__val" id="ep-cnt-parcial">—</span>
+                        <span class="ep-counter__label">Parciales</span>
+                    </div>
+                    <div class="ep-counter ep-counter--prep">
+                        <span class="ep-counter__val" id="ep-cnt-prep">—</span>
+                        <span class="ep-counter__label">Con picking</span>
+                    </div>
                 </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Documento</th>
-                            <th>Proveedor</th>
-                            <th>Cen</th>
-                            <th>Nombre de proveedor</th>
-                            <th>Pick</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="8">No hay pedidos a proveedor para mostrar.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
-        <!-- ==================== TAB 3: INVENTARIOS ==================== -->
-        <div class="tab-panel" id="tab-inventarios">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <button class="btn-sub">Inventario completo</button>
-                    <button class="btn-sub">Inventario por pasillos</button>
-                    <button class="btn-sub">Inventario rotativo</button>
-                    <button class="btn-sub">Unificar inventarios</button>
-                    <button class="btn-sub">Cambiar fecha</button>
+                <!-- KPI STRIP: métricas de albaranes -->
+                <div class="ep-kpi-strip" id="ep-kpi-strip" aria-live="polite" hidden></div>
+
+                <!-- AVISO LÍMITE 500 -->
+                <div class="ep-limit-notice" id="ep-limit-notice" role="alert" hidden>
+                    <span>⚠</span>
+                    <span>Mostrando las primeras 500 líneas. Amplía los filtros de fecha o usa el buscador para acotar resultados.</span>
                 </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Inventario</th>
-                            <th>Fecha</th>
-                            <th>PDA</th>
-                            <th>Tipo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="6">No hay inventarios registrados.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
-        <!-- ==================== TAB 4: ÓRDENES FABRICACIÓN ==================== -->
-        <div class="tab-panel" id="tab-ordenes-fab">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <input type="text" class="input-sm" placeholder="Buscar orden...">
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <button class="btn-sub">Mos. fin.</button>
-                    <button class="btn-sub">Finalizar</button>
-                    <button class="btn-sub">Pendiente</button>
-                </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Orden</th>
-                            <th>Fabricante</th>
-                            <th>Ped. fec.</th>
-                            <th>S</th>
-                            <th>Nombre de fabricante</th>
-                            <th>Ser.</th>
-                            <th>Pick</th>
-                            <th>Fecha</th>
-                            <th>PDA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="11">No hay órdenes de fabricación para mostrar.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <!-- WORKSPACE -->
+                <div class="ep-workspace">
 
-        <!-- ==================== TAB 5: REPOSICIÓN MERCANCÍA ==================== -->
-        <div class="tab-panel" id="tab-reposicion">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <label class="inline-label">P:</label>
-                    <input type="text" class="input-xs" placeholder="">
-                </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Fecha</th>
-                            <th>Artículo</th>
-                            <th>Nombre de artículo</th>
-                            <th>Ubicación</th>
-                            <th>Bultos</th>
-                            <th>Unidades</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="8">No hay reposiciones de mercancía pendientes.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <!-- LISTA -->
+                    <div class="ep-list-col">
+                        <div class="ep-list" id="ep-list" aria-live="polite" aria-atomic="false">
+                            <div class="ep-placeholder" id="ep-placeholder">
+                                <span class="ep-placeholder-icon">🚛</span>
+                                Cargando expediciones…
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- ==================== TAB 6: CAMBIOS DE DESTINO ==================== -->
-        <div class="tab-panel" id="tab-cambios">
-            <div class="subtoolbar">
-                <div class="subtoolbar-row">
-                    <button class="btn-sub">Actualizar proveedores</button>
-                    <input type="text" class="input-sm" placeholder="Buscar...">
-                    <select class="filter-select-sm">
-                        <option>Todos</option>
-                    </select>
-                    <button class="btn-sub">📲 Enviar a PDA</button>
-                    <button class="btn-sub">Mos. fin.</button>
-                    <button class="btn-sub">Finalizar</button>
-                    <button class="btn-sub">Pendiente</button>
-                    <button class="btn-sub danger">Borrar no enviados</button>
-                </div>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-check"><input type="checkbox"></th>
-                            <th>S</th>
-                            <th>Albarán</th>
-                            <th>Proveedor</th>
-                            <th>Cen</th>
-                            <th>Cód. cli. / Nombre cliente</th>
-                            <th>Pick</th>
-                            <th>Fecha</th>
-                            <th>Ped.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="placeholder-row">
-                            <td colspan="9">No hay cambios de destino registrados.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <!-- PANEL DETALLE -->
+                    <aside class="ep-panel" id="ep-panel" aria-label="Detalle de expedición">
 
-    </main>
+                        <div class="ep-panel-header">
+                            <span class="ep-panel-title" id="ep-panel-title">Detalle</span>
+                            <button class="ep-panel-close" id="ep-panel-close" aria-label="Cerrar panel">×</button>
+                        </div>
 
-    <script src="../../../../js/navegacion.js"></script>
+                        <div class="ep-panel-empty" id="ep-panel-empty">
+                            <span class="ep-panel-empty-icon">📋</span>
+                            Selecciona un albarán para ver el detalle de sus líneas.
+                        </div>
+
+                        <div class="ep-panel-meta" id="ep-panel-meta" hidden></div>
+
+                        <div class="ep-panel-body" id="ep-panel-body" hidden></div>
+
+                    </aside>
+
+                </div><!-- /.ep-workspace -->
+
+            </div><!-- /.ep-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <!-- Backdrop overlay tablet/móvil -->
+    <div class="ep-panel-backdrop" id="ep-panel-backdrop"></div>
+
     <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
     <script src="../../../../js/opciones/logistica-y-pedidos/expediciones.js"></script>
+
 </body>
 
 </html>
-

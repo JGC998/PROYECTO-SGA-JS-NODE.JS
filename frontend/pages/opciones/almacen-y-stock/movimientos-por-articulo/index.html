@@ -1,126 +1,184 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA LIN - Movimientos por Artículo</title>
-    <link rel="stylesheet" href="../../../../css/navegacion.css">
-    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/movimientos-por-articulo/index.css">
+    <title>SGA LIN — Movimientos por Artículo</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/movimientos-por-articulo/mv.css">
 </head>
 
-<body>
+<body class="sga-layout">
 
-    <main class="container">
-        <header class="page-toolbar">
-            <div class="toolbar-left">
-                <h1>Movimientos por Artículo</h1>
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main">
+
+        <header class="sga-header">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Movimientos por Artículo</span>
+                </nav>
             </div>
-            <div class="toolbar-actions">
-                <button class="btn-tool" id="btn-actualizar">Actualizar (F5)</button>
-                <button class="btn-tool secondary" id="btn-exportar">Exportar a CSV</button>
-            </div>
+            <div class="sga-header-right"></div>
         </header>
 
-        <div class="filter-panel">
-            <div class="filter-row">
-                <div class="filter-group">
-                    <label>Ubicación:</label>
-                    <input type="text" class="input-sm" id="f-ubicacion">
-                    <input type="text" class="input-sm">
-                    <label>P:</label><input type="text" class="input-xs" id="f-p">
-                    <label>L:</label><input type="text" class="input-xs" id="f-l">
-                    <select class="input-xs-sel"><option></option></select>
-                    <label>X:</label><input type="text" class="input-xs" id="f-x">
-                    <label>Y:</label><input type="text" class="input-xs" id="f-y">
+        <div class="sga-content">
+            <div class="mv-inner">
+
+                <!-- CABECERA -->
+                <div class="mv-header-row">
+                    <div>
+                        <h1 class="sga-page-title">Movimientos por Artículo</h1>
+                        <p class="sga-page-description">Timeline de trazabilidad operativa · SGA LIN</p>
+                    </div>
+                    <div class="mv-header-actions">
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-mv-exportar"
+                                disabled title="Carga movimientos para exportar">Exportar CSV</button>
+                    </div>
                 </div>
-                <div class="filter-group right">
-                    <label>Código de cliente:</label>
-                    <input type="text" class="input-sm" id="f-cliente">
-                    <input type="text" class="input-desc" readonly id="f-cliente-nombre">
+
+                <!-- FILTROS -->
+                <div class="mv-filter-bar" id="mv-filters">
+
+                    <div class="mv-filter-primary">
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-articulo">Artículo</label>
+                            <input type="text" id="mv-f-articulo"
+                                   class="sga-input mv-f-art"
+                                   placeholder="Código…" autocomplete="off">
+                        </div>
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-lote">Lote</label>
+                            <input type="text" id="mv-f-lote"
+                                   class="sga-input mv-f-lote"
+                                   placeholder="Lote…" autocomplete="off">
+                        </div>
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-ubicacion">Ubicación</label>
+                            <input type="text" id="mv-f-ubicacion"
+                                   class="sga-input mv-f-ubi"
+                                   placeholder="UBI…" autocomplete="off">
+                        </div>
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-tipo">Tipo</label>
+                            <select id="mv-f-tipo" class="sga-select mv-f-tipo">
+                                <option value="">Todos</option>
+                                <option value="PC">Picking cliente</option>
+                                <option value="RG">Regularización</option>
+                                <option value="PP">Preparación interna</option>
+                            </select>
+                        </div>
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-desde">Desde</label>
+                            <input type="date" id="mv-f-desde"
+                                   class="sga-input mv-f-date">
+                        </div>
+
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-hasta">Hasta</label>
+                            <input type="date" id="mv-f-hasta"
+                                   class="sga-input mv-f-date">
+                        </div>
+
+                        <div class="mv-filter-actions">
+                            <button class="sga-btn sga-btn-primary sga-btn-sm" id="btn-mv-buscar">
+                                Buscar
+                            </button>
+                            <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-mv-limpiar">
+                                Limpiar
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="mv-filter-secondary">
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-cliente">Tercero (cliente/proveedor)</label>
+                            <input type="text" id="mv-f-cliente"
+                                   class="sga-input mv-f-cli"
+                                   placeholder="Código…" autocomplete="off">
+                        </div>
+                        <div class="mv-filter-group">
+                            <label class="mv-filter-label" for="mv-f-terminal">Operario / Terminal</label>
+                            <input type="text" id="mv-f-terminal"
+                                   class="sga-input mv-f-ter"
+                                   placeholder="Terminal…" autocomplete="off">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="filter-row">
-                <label>Artículo:</label>
-                <input type="text" class="input-sm" id="f-articulo">
-                <button class="btn-browse">...</button>
-                <input type="text" class="input-desc" readonly id="f-articulo-nombre">
-                <label>Uds/cajas:</label><input type="number" class="input-xs" value="0" id="f-uds-cajas">
-                <label>Uds/palet:</label><input type="number" class="input-xs" value="0" id="f-uds-palet">
-                <label class="checkbox-label"><input type="checkbox" id="f-historico"> Histórico</label>
-                <label class="checkbox-label"><input type="checkbox" id="f-agrupado"> Agrupado</label>
-            </div>
+                <!-- WORKSPACE: TIMELINE + PANEL DETALLE -->
+                <div class="mv-workspace">
 
-            <div class="filter-row">
-                <label>Lote:</label>
-                <input type="text" class="input-sm" id="f-lote">
-                <label>Periodo:</label>
-                <input type="date" class="input-date" id="f-fecha-desde">
-                <input type="date" class="input-date" id="f-fecha-hasta">
-                <label>Movimiento:</label>
-                <select class="select-filter" id="f-movimiento">
-                    <option value="">Todos</option>
-                    <option value="E">Entrada</option>
-                    <option value="S">Salida</option>
-                    <option value="T">Traspaso</option>
-                    <option value="R">Regularización</option>
-                    <option value="P">Picking</option>
-                </select>
-            </div>
+                    <!-- Timeline -->
+                    <div class="mv-timeline-col">
+                        <div id="mv-timeline" aria-live="polite" aria-atomic="false">
+                            <div class="mv-placeholder" id="mv-placeholder">
+                                <span class="mv-placeholder-icon">🔍</span>
+                                Introduce un artículo u otros filtros y pulsa <strong>Buscar</strong>
+                                para ver el timeline de movimientos.
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="filter-row">
-                <label>Subfamilia:</label>
-                <input type="text" class="input-sm" id="f-subfamilia">
-                <button class="btn-browse">...</button>
-                <input type="text" class="input-desc" readonly id="f-subfamilia-nombre">
-            </div>
-        </div>
+                    <!-- Panel detalle -->
+                    <aside class="mv-panel" id="mv-panel" aria-label="Detalle del movimiento">
+                        <button class="mv-panel-close" id="btn-mv-panel-close"
+                                aria-label="Cerrar panel detalle">×</button>
+                        <div class="mv-panel-empty" id="mv-panel-empty">
+                            <span class="mv-panel-empty-icon">📋</span>
+                            Selecciona un movimiento del timeline para ver su detalle completo.
+                        </div>
+                        <div class="mv-panel-body" id="mv-panel-body" hidden>
+                            <!-- Rellenado por JS al seleccionar un movimiento -->
+                        </div>
+                    </aside>
 
-        <div class="table-wrapper">
-            <table id="tabla-movimientos">
-                <thead>
-                    <tr>
-                        <th class="col-star">*</th>
-                        <th>Empresa</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Tipo</th>
-                        <th>Serie</th>
-                        <th>Número</th>
-                        <th>Picking / Nº palet</th>
-                        <th>Ubicación</th>
-                        <th>Etiqueta</th>
-                        <th>Cantidad</th>
-                        <th>Stock</th>
-                        <th>Lote</th>
-                        <th>Terminal</th>
-                        <th>Caja</th>
-                        <th>Palet</th>
-                        <th>Tercero</th>
-                        <th>Centro</th>
-                        <th>Nombre de tercero / Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-movimientos">
-                    <tr class="placeholder-row">
-                        <td colspan="19">Introduzca los filtros y pulse Actualizar para cargar los movimientos.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                </div>
 
-        <footer class="page-footer">
-            <div class="footer-info">
-                <span id="total-registros">0 registros</span>
-            </div>
-        </footer>
-    </main>
+                <!-- Backdrop para overlay en tablet/móvil -->
+                <div class="mv-panel-backdrop" id="mv-panel-backdrop"></div>
 
-    <script src="../../../../js/navegacion.js"></script>
+                <!-- RESUMEN -->
+                <div class="mv-summary" id="mv-summary" hidden
+                     role="status" aria-live="polite">
+                    <span id="mv-summary-text"></span>
+                </div>
+
+            </div><!-- /.mv-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
     <script src="../../../../js/api.js"></script>
-    <script src="../../../../js/opciones/almacen-y-stock/movimientos-por-articulo.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/movimientos-por-articulo-mv.js"></script>
+
 </body>
 
 </html>
-

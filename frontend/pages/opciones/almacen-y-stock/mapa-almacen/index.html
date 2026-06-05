@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA LIN — Mapa Aéreo del Almacén</title>
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/layout.css">
+    <link rel="stylesheet" href="../../../../css/sidebar.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
+    <link rel="stylesheet" href="../../../../css/buttons.css">
+    <link rel="stylesheet" href="../../../../css/animations.css">
+    <link rel="stylesheet" href="../../../../css/components.css">
+    <link rel="stylesheet" href="../../../../css/forms.css">
+    <link rel="stylesheet" href="../../../../css/badges.css">
+    <link rel="stylesheet" href="../../../../css/responsive.css">
+    <link rel="stylesheet" href="../../../../css/opciones/almacen-y-stock/mapa-almacen/index.css">
+</head>
+
+<body class="sga-layout" id="mapaBody">
+
+    <!-- sidebar.js inyecta <aside class="sga-sidebar"> aquí -->
+
+    <div class="sga-main" id="sgaMain">
+
+        <header class="sga-header" id="mapaHeader">
+            <div class="sga-header-left">
+                <button class="sga-hamburger" aria-label="Abrir menú">☰</button>
+                <nav class="sga-breadcrumb">
+                    <a href="../../../../index.html">Inicio</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../../index.html">Opciones</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <a href="../index.html">Almacén y Stock</a>
+                    <span class="sga-breadcrumb-sep">›</span>
+                    <span class="sga-breadcrumb-current">Mapa Aéreo</span>
+                </nav>
+            </div>
+            <div class="sga-header-right">
+                <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-actualizar-mapa">
+                    ↺ Actualizar
+                </button>
+                <button class="sga-btn sga-btn-primary sga-btn-sm" id="btn-expandir">
+                    ⛶ Pantalla amplia
+                </button>
+            </div>
+        </header>
+
+        <div class="sga-content">
+            <div class="ma-inner">
+
+                <!-- CABECERA DE PÁGINA -->
+                <div class="ma-page-header">
+                    <div>
+                        <h1 class="sga-page-title">Mapa Aéreo del Almacén</h1>
+                        <p class="sga-page-description">Vista planta · SGA LIN</p>
+                    </div>
+                    <div class="ma-page-header-actions" id="btn-salir-amplia-wrap" hidden>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-salir-amplia">
+                            ✕ Salir de pantalla amplia
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BARRA DE HERRAMIENTAS -->
+                <div class="ma-toolbar">
+
+                    <!-- Búsqueda global -->
+                    <div class="ma-search-wrap">
+                        <label class="sga-label" for="ma-search">Buscar</label>
+                        <input type="text" id="ma-search" class="sga-input ma-search-input"
+                               placeholder="Ubicación, artículo o lote…" autocomplete="off">
+                        <button class="sga-btn sga-btn-primary sga-btn-sm" id="btn-buscar-mapa">Buscar</button>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-limpiar-busqueda" hidden>✕</button>
+                    </div>
+
+                    <!-- Filtros de estado -->
+                    <div class="ma-filters-wrap">
+                        <span class="sga-label">Filtrar:</span>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-con-mercancia"> Solo con mercancía
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-libres"> Solo libres
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-picking"> Picking
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-paletizadas"> Paletizadas
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-multiple"> Múltiple
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-stock-bajo"> Stock bajo
+                        </label>
+                        <label class="ma-filter-chip">
+                            <input type="checkbox" id="f-incidencias"> Incidencias
+                        </label>
+                    </div>
+
+                    <!-- Controles de zoom -->
+                    <div class="ma-zoom-wrap">
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm ma-zoom-btn" id="btn-zoom-out"
+                                title="Alejar">−</button>
+                        <span class="ma-zoom-label" id="ma-zoom-label">100%</span>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm ma-zoom-btn" id="btn-zoom-in"
+                                title="Acercar">+</button>
+                        <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-centrar"
+                                title="Centrar mapa">⊙ Centrar</button>
+                    </div>
+
+                </div><!-- /.ma-toolbar -->
+
+                <!-- ZONA PRINCIPAL: MAPA + PANEL DETALLE -->
+                <div class="ma-workspace" id="maWorkspace">
+
+                    <!-- CONTENEDOR DEL MAPA SVG -->
+                    <div class="ma-map-container" id="maMapContainer">
+
+                        <!-- Estado de carga -->
+                        <div class="ma-loading" id="maLoading">
+                            <div class="ma-loading-spinner"></div>
+                            <p>Cargando datos del almacén…</p>
+                        </div>
+
+                        <!-- Mensaje de error -->
+                        <div class="ma-error" id="maError" hidden>
+                            <span class="ma-error-icon">⚠</span>
+                            <p id="maErrorMsg">No se pudieron cargar los datos del almacén.</p>
+                            <button class="sga-btn sga-btn-secondary sga-btn-sm" id="btn-reintentar">
+                                Reintentar
+                            </button>
+                        </div>
+
+                        <!-- SVG del mapa — generado dinámicamente -->
+                        <svg id="maSvg" class="ma-svg" viewBox="0 0 1000 700"
+                             role="img" aria-label="Mapa aéreo del almacén"></svg>
+
+                    </div><!-- /.ma-map-container -->
+
+                    <!-- PANEL LATERAL DE DETALLE -->
+                    <aside class="ma-detail" id="maDetail" hidden="hidden">
+                        <div class="ma-detail-header">
+                            <span class="ma-detail-title" id="maDetailTitle">Detalle</span>
+                            <button class="ma-detail-close" id="maDetailClose" aria-label="Cerrar">✕</button>
+                        </div>
+                        <div class="ma-detail-body" id="maDetailBody">
+                            <!-- Inyectado por mapa-almacen.js -->
+                        </div>
+                    </aside>
+
+                    <!-- Backdrop móvil -->
+                    <div class="ma-detail-backdrop" id="maDetailBackdrop" hidden></div>
+
+                </div><!-- /.ma-workspace -->
+
+                <!-- LEYENDA -->
+                <div class="ma-legend">
+                    <span class="ma-legend-title">Leyenda:</span>
+                    <span class="ma-legend-item">
+                        <span class="ma-legend-dot ma-legend-dot--libre"></span> Libre
+                    </span>
+                    <span class="ma-legend-item">
+                        <span class="ma-legend-dot ma-legend-dot--ocupada"></span> Ocupada
+                    </span>
+                    <span class="ma-legend-item">
+                        <span class="ma-legend-dot ma-legend-dot--bajo"></span> Stock bajo
+                    </span>
+                    <span class="ma-legend-item">
+                        <span class="ma-legend-dot ma-legend-dot--incidencia"></span> Incidencia
+                    </span>
+                    <span class="ma-legend-item">
+                        <span class="ma-legend-dot ma-legend-dot--deshabilitada"></span> Deshabilitada
+                    </span>
+                </div>
+
+                <!-- BARRA DE ESTADO -->
+                <div class="ma-statusbar" role="status" aria-live="polite">
+                    <span id="ma-count">—</span>
+                    <span id="ma-timestamp"></span>
+                </div>
+
+            </div><!-- /.ma-inner -->
+        </div><!-- /.sga-content -->
+
+    </div><!-- /.sga-main -->
+
+    <script src="../../../../js/api.js"></script>
+    <script src="../../../../js/ui/sidebar.js"></script>
+    <script src="../../../../js/ui/layout.js"></script>
+    <script src="../../../../js/opciones/almacen-y-stock/mapa-almacen.js"></script>
+
+</body>
+
+</html>

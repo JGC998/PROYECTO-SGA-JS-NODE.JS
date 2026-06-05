@@ -1,0 +1,59 @@
+/* Módulo: Borrar Picking — estilos específicos (globales en components.css) */
+
+/* .action-panel, .action-block, .action-row, .input-code, .btn-tool, .resultado en components.css */
+
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sga-sp-sm);
+    flex-wrap: wrap;
+}
+.action-row label {
+    min-width: 160px;
+    font-weight: 500;
+    font-size: var(--sga-text-base);
+    color: var(--sga-text);
+}
+
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    background: var(--sga-danger);
+    color: #fff;
+    border: none;
+    border-radius: var(--sga-radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: var(--sga-text-base);
+    font-family: var(--sga-font);
+    transition: opacity var(--sga-transition);
+}
+.btn-danger:hover    { opacity: .88; }
+.btn-danger:disabled { opacity: .6; cursor: not-allowed; }
+
+.resultado.ok {
+    display: block;
+    background: var(--sga-success-bg);
+    color: var(--sga-success);
+    border: 1px solid var(--sga-success-bg);
+    border-radius: var(--sga-radius-sm);
+    padding: 8px 14px;
+    font-size: var(--sga-text-base);
+    animation: sga-fadein .18s ease both;
+}
+.resultado.error {
+    display: block;
+    background: var(--sga-danger-bg);
+    color: var(--sga-danger);
+    border: 1px solid var(--sga-danger-bg);
+    border-radius: var(--sga-radius-sm);
+    padding: 8px 14px;
+    font-size: var(--sga-text-base);
+    animation: sga-fadein .18s ease both;
+}
+
+@media (max-width: 768px) {
+    .action-row { flex-direction: column; align-items: flex-start; }
+}

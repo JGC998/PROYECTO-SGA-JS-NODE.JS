@@ -1,4 +1,8 @@
-const API = 'http://localhost:3000';
+const API = '';
+
+function _apiKey() {
+    try { return localStorage.getItem('sga-api-key') || ''; } catch { return ''; }
+}
 
 async function _get(path) {
     const res = await fetch(`${API}${path}`);
@@ -6,13 +10,35 @@ async function _get(path) {
     return res.json();
 }
 
+async function _patch(path, body) {
+    const key = _apiKey();
+    const headers = { 'Content-Type': 'application/json' };
+    if (key) headers['x-api-key'] = key;
+    const res = await fetch(`${API}${path}`, { method: 'PATCH', headers, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(`PATCH ${path} → ${res.status}`);
+    return res.json();
+}
+
 async function _post(path, body) {
+    const key = _apiKey();
+    const headers = { 'Content-Type': 'application/json' };
+    if (key) headers['x-api-key'] = key;
     const res = await fetch(`${API}${path}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(body)
     });
-    if (!res.ok) throw new Error(`POST ${path} → ${res.status}`);
+    if (!res.ok) {
+        let msg = `POST ${path} → ${res.status}`;
+        try {
+            const data = await res.json();
+            if (data.message) msg = data.message;
+        } catch (_) { /* respuesta sin JSON */ }
+        const err = new Error(msg);
+        err.status = res.status;
+        err.pendiente = res.status === 501;
+        throw err;
+    }
     return res.json();
 }
 
@@ -22,12 +48,14 @@ const SGA = {
         get: cod => _get(`/articulos/${encodeURIComponent(cod)}`),
     },
     proveedores: {
-        list: () => _get('/proveedores'),
-        get: cod => _get(`/proveedores/${encodeURIComponent(cod)}`),
+        list:   ()         => _get(`/proveedores`),
+        get:    cod        => _get(`/proveedores/${encodeURIComponent(cod)}`),
+        update: (cod, data) => _patch(`/proveedores/${encodeURIComponent(cod)}`, data),
     },
     clientes: {
-        list: () => _get('/clientes'),
-        get: cod => _get(`/clientes/${encodeURIComponent(cod)}`),
+        list:   ()          => _get(`/clientes`),
+        get:    cod         => _get(`/clientes/${encodeURIComponent(cod)}`),
+        update: (cod, data) => _patch(`/clientes/${encodeURIComponent(cod)}`, data),
     },
     operarios: {
         list: () => _get('/operarios'),
@@ -38,8 +66,9 @@ const SGA = {
         save: data => _post('/almacenes', data),
     },
     ubicaciones: {
-        list: (params = {}) => _get('/ubicaciones?' + new URLSearchParams(params)),
-        save: data => _post('/ubicaciones', data),
+        list:      (params = {}) => _get('/ubicaciones?' + new URLSearchParams(params)),
+        filtrosPyl: ()           => _get('/ubicaciones/filtros-pyl'),
+        save:      data          => _post('/ubicaciones', data),
     },
     stock: {
         get: cod => _get(`/stock/${encodeURIComponent(cod)}`),
@@ -47,19 +76,13 @@ const SGA = {
     movimientos: {
         list: (params = {}) => _get('/movimientos-por-articulo?' + new URLSearchParams(params)),
     },
-    articulosPorUbicacion: {
-        list: (params = {}) => _get('/articulos-por-ubicacion?' + new URLSearchParams(params)),
-    },
-    articulosSinReposicion: {
-        list: () => _get('/articulos-sin-reposicion'),
-        save: data => _post('/articulos-sin-reposicion', data),
-    },
     consultaStock: {
         list: (params = {}) => _get('/consulta-de-stock?' + new URLSearchParams(params)),
     },
     minimosMaximos: {
         list: (params = {}) => _get('/minimos-maximos?' + new URLSearchParams(params)),
         save: filas => _post('/minimos-maximos', filas),
+        delete: articulo => fetch('/minimos-maximos/' + encodeURIComponent(articulo), { method: 'DELETE' }).then(r => r.json()),
     },
     subfamilias: {
         list: () => _get('/subfamilias'),
@@ -72,6 +95,7 @@ const SGA = {
     loteExclusivo: {
         list: (params = {}) => _get('/lote-exclusivo?' + new URLSearchParams(params)),
         save: filas => _post('/lote-exclusivo', filas),
+        delete: id => fetch('/lote-exclusivo/' + id, { method: 'DELETE' }).then(r => r.json()),
     },
     loteMinimo: {
         list: (params = {}) => _get('/lote-minimo?' + new URLSearchParams(params)),
@@ -83,6 +107,8 @@ const SGA = {
     },
     loteCuarentena: {
         list: (params = {}) => _get('/lote-cuarentena?' + new URLSearchParams(params)),
+        save: filas => _post('/lote-cuarentena', filas),
+        delete: id => fetch('/lote-cuarentena/' + id, { method: 'DELETE' }).then(r => r.json()),
     },
     terminales: {
         list: () => _get('/terminales-pda'),
@@ -90,6 +116,9 @@ const SGA = {
     },
     entradas: {
         save: data => _post('/entrada', data),
+    },
+    entradaMercancia: {
+        save: data => _post('/entrada-mercancia', data),
     },
     salidas: {
         save: data => _post('/salida', data),
@@ -108,12 +137,24 @@ const SGA = {
     expediciones: {
         list: (params = {}) => _get('/expediciones?' + new URLSearchParams(params)),
     },
+    picking: {
+        list:         (params = {}) => _get('/picking?' + new URLSearchParams(params)),
+        confirmar:    body => _post('/picking/confirmar',    body),
+        desconfirmar: body => _post('/picking/desconfirmar', body),
+    },
     situacionPedidos: {
         list: (params = {}) => _get('/situacion-pedidos-venta?' + new URLSearchParams(params)),
     },
     usuarios: {
-        list: (params = {}) => _get('/usuarios?' + new URLSearchParams(params)),
-        save: data => _post('/usuarios', data),
+        list:   (params = {}) => _get('/usuarios?' + new URLSearchParams(params)),
+        save:   data => _post('/usuarios', data),
+        delete: cod  => {
+            const key = _apiKey();
+            const headers = {};
+            if (key) headers['x-api-key'] = key;
+            return fetch(`/operarios/${encodeURIComponent(cod)}`, { method: 'DELETE', headers })
+                .then(r => { if (!r.ok) throw new Error(`DELETE /operarios → ${r.status}`); return r.json(); });
+        },
     },
     configuracionEmpresa: {
         get: () => _get('/configuracion-empresa'),
@@ -146,9 +187,23 @@ const SGA = {
         proveedoresActividad: (p={}) => _get('/estadisticas/proveedores-actividad?' + new URLSearchParams(p)),
         articulosAnalisis:    (p={}) => _get('/estadisticas/articulos-analisis?'  + new URLSearchParams(p)),
     },
+    dashboard: {
+        get: (desde, hasta) => {
+            const p = new URLSearchParams();
+            if (desde) p.set('desde', desde);
+            if (hasta) p.set('hasta', hasta);
+            return _get('/estadisticas/dashboard?' + p);
+        },
+        alertas: () => _get('/estadisticas/alertas'),
+    },
     traspasoInventario: {
         traspasar: data => _post('/traspasar-inventarios', data),
         importarRegularizaciones: data => _post('/importar-regularizaciones', data),
         asignarFechaStock: data => _post('/asignar-fecha-stock-inicial', data),
+    },
+    mapaAlmacen: {
+        ubicaciones:    ()         => _get('/ubicaciones/todas'),
+        stock:          ()         => _get('/consulta-de-stock?existencias=1&limit=9999'),
+        minimosMaximos: ()         => _get('/minimos-maximos'),
     },
 };
