@@ -101,7 +101,7 @@ async function _getDbStruct() {
     try {
         const { getPool } = require('../db');
         const pool = await getPool();
-        const r = await pool.request().query('SELECT RTRIM(UBICODUBI) AS ubicacion FROM UBICACION');
+        const r = await pool.request().query('SELECT RTRIM(UBICODUBI) AS ubicacion, RTRIM(UBIETI) AS etiqueta FROM UBICACION WHERE UBIETI IS NOT NULL AND LTRIM(RTRIM(UBIETI)) <> \'\'');
         if (r.recordset.length) return _parseUbicaciones(r.recordset);
     } catch { /* BD no disponible */ }
     const fallback = readJson(path.join(DATA_DIR, 'ubicaciones.json'))
