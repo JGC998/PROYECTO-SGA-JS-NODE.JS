@@ -20,6 +20,7 @@ const { Router } = require('express');
 const path  = require('path');
 const fs    = require('fs');
 const os    = require('os');    // CODE-03: mover require al top
+const { getPool } = require('../db');
 const { serverError } = require('../middleware/error');
 const { requireAuth, requireAuthSse } = require('../middleware/auth');
 
